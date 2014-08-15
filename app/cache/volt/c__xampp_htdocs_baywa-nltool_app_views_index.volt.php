@@ -14,8 +14,11 @@
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 		 <?php echo $this->tag->getTitle(); ?>
         <?php echo $this->tag->stylesheetLink('css/normalize.css'); ?>
-        <?php echo $this->tag->stylesheetLink('css/main.css'); ?>        
-		<?php echo $this->tag->javascriptInclude('js/vendor/modernizr-2.6.2.min.js'); ?>        
+		<?php echo $this->tag->stylesheetLink('css/bootstrap.css'); ?>
+        <?php echo $this->tag->stylesheetLink('css/main.css'); ?>     
+		<?php echo $this->tag->javascriptInclude('js/vendor/modernizr-2.6.2.min.js'); ?>     
+		<script data-main="js/plugins" src="js/require.js"></script>
+		
         
     </head>
     <body>
@@ -29,11 +32,7 @@
         <?php echo $this->getContent(); ?>
         
 		</div>
-		<?php echo $this->tag->javascriptInclude('http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'); ?>        
-        
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
-		<?php echo $this->tag->javascriptInclude('js/plugins.js'); ?>        
-		<?php echo $this->tag->javascriptInclude('js/main.js'); ?>        
+		
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
             (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=

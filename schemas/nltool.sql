@@ -18,8 +18,8 @@ CREATE TABLE fe_users (
 	last_name varchar(255) COLLATE utf8_general_ci NOT NULL,
 	email varchar(255) COLLATE utf8_general_ci NOT NULL,
 	phone varchar(255) COLLATE utf8_general_ci NOT NULL,
-    address varchar(40) COLLATE utf8_general_ci NOT NULL,
-    city  varchar(40) COLLATE utf8_general_ci NOT NULL,
+    address varchar(255) COLLATE utf8_general_ci NOT NULL,
+    city  varchar(255) COLLATE utf8_general_ci NOT NULL,
 	userrole int(11) DEFAULT '0' NOT NULL,
 	usergroup int(11) DEFAULT '0' NOT NULL,
 	superuser tinyint(4) DEFAULT '0' NOT NULL,
@@ -33,4 +33,3 @@ INSERT INTO fe_users VALUES (1,0,NOW(),NOW(),0,0,0,'denkfabrik','$2y$12$8erToAD9
 UNLOCK TABLES;
 
 
-DROP TABLE IF EXISTS mailobject

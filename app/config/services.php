@@ -11,6 +11,10 @@ use Phalcon\Mvc\Model\Metadata\Memory as MemoryMetaDataAdapter;
 use Phalcon\Session\Adapter\Files as SessionAdapter;
 use Phalcon\Cache\Backend\File as FileCache;
 use Phalcon\Mvc\Dispatcher as MvcDispatcher;
+use nltool\Notifications\Checker as NotificationsChecker;
+
+use nltool\Auth\Auth;
+use nltool\Acl\Acl;
 
 
 
@@ -49,6 +53,9 @@ $di->set(
                 "compileAlways"     => $config->application->debug
             )
         );
+		$volt->getCompiler()->addFunction('tr', function ($key) {
+			return "nltool\Controllers\ControllerBase::translate({$key})";
+		});
 
         $volt->getCompiler()->addFunction('number_format', function($resolvedArgs) {
             return 'number_format(' . $resolvedArgs . ')';
@@ -138,18 +145,7 @@ $di->set(
     true
 );
 
-/**
- * Start the session the first time some component request the session service
- */
-$di->set(
-    'session',
-    function () {
-        $session = new SessionAdapter();
-        $session->start();
-        return $session;
-    },
-    true
-);
+
 
 /**
  * Router
@@ -157,9 +153,9 @@ $di->set(
 $di->set(
     'router',
     function () {
-        return include APP_PATH . "/app/config/routes.php";
-    },
-    true
+	include APP_PATH . "/app/config/routes.php";
+        return $router;
+    }
 );
 
 /**
@@ -168,48 +164,55 @@ $di->set(
 $di->set('config', $config);
 
 /**
- * Register the flash service with the Twitter Bootstrap classes
- */
-$di->set(
-    'flash',
-    function () {
-        return new Phalcon\Flash\Direct(array(
-           'error'   => 'alert alert-danger',
-           'success' => 'alert alert-success',
-           'notice'  => 'alert alert-info',
-        ));
-    }
-);
+* Register the flash service with custom CSS classes
+*/
+$di->set('flash', function(){
+   return new Phalcon\Flash\Direct(array(
+	   'error' => 'alert alert-error',
+	   'success' => 'alert alert-success',
+	   'notice' => 'alert alert-info',
+	   'loggedin'=>'alert alert-loggedin'
+   ));
+});
 
-/**
- * Register the session flash service with the Twitter Bootstrap classes
- */
-$di->set(
-    'flashSession',
-    function () {
-        return new Phalcon\Flash\Session(array(
-            'error'   => 'alert alert-danger',
-            'success' => 'alert alert-success',
-            'notice'  => 'alert alert-info',
-        ));
-    }
-);
+$di->set('flashSession',
+         function(){
+         $flash = new \Phalcon\Flash\Session(
+                    array(
+                        'error' => 'alert alert-danger',
+                        'success' => 'alert alert-success',
+                        'notice' => 'alert alert-info',
+                        'warning' => 'alert alert-warning',
+                    )
+                );
+          return $flash;
+});
 
-$di->set(
+/*$di->set(
     'dispatcher',
     function () {
         $dispatcher = new MvcDispatcher();
         $dispatcher->setDefaultNamespace('nltool\Controllers');
         return $dispatcher;
     }
-);
+);*/
+
+$di->set('security', function(){
+
+    $security = new Phalcon\Security();
+
+    //Set the password hashing factor to 12 rounds
+    $security->setWorkFactor(12);
+
+    return $security;
+}, true);
+
 
 $di->set('session', function() {
     $session = new Phalcon\Session\Adapter\Files();
     $session->start();
     return $session;
 });
-
 /**
  * View cache
  */
@@ -259,4 +262,15 @@ $di->set(
         }
     }
 );
+/**
+ * Real-Time notifications checker
+ */
+$di->set(
+    'notifications',
+    function () {
+        return new NotificationsChecker();
+    },
+    true
+);
 
+ 

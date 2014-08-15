@@ -14,8 +14,11 @@
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 		 {{ get_title() }}
         {{ stylesheet_link('css/normalize.css') }}
-        {{ stylesheet_link('css/main.css') }}        
-		{{ javascript_include('js/vendor/modernizr-2.6.2.min.js') }}        
+		{{ stylesheet_link('css/bootstrap.css') }}
+        {{ stylesheet_link('css/main.css') }}     
+		{{ javascript_include('js/vendor/modernizr-2.6.2.min.js') }}     
+		<script data-main="js/plugins" src="js/require.js"></script>
+		
         
     </head>
     <body>
@@ -29,11 +32,7 @@
         {{content()}}
         
 		</div>
-		{{ javascript_include('http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js') }}        
-        
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
-		{{ javascript_include('js/plugins.js') }}        
-		{{ javascript_include('js/main.js') }}        
+		
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
             (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=

@@ -7,7 +7,7 @@ return new \Phalcon\Config(array(
         'host'     => 'localhost',
         'username' => 'root',
         'password' => '',
-        'dbname'   => 'baywa-nltool',
+        'dbname'   => 'bayw-nltool',
         'charset'  => 'utf8'
     ),
     'application' => array(
@@ -16,23 +16,29 @@ return new \Phalcon\Config(array(
         'viewsDir'       => APP_PATH . '/app/views/',
         'pluginsDir'     => APP_PATH . '/app/plugins/',
         'libraryDir'     => APP_PATH . '/app/library/',
+		'messagesDir'     => APP_PATH . '/app/messages/',
+		'appsDir' => APP_PATH.'/app/',
         'development'    => array(
             'staticBaseUri' => '/baywa-nltool/',
             'baseUri'       => '/baywa-nltool/'
         ),
         'production'     => array(
-            'staticBaseUri' => '/',
-            'baseUri'       => '/'
+            'staticBaseUri' => '/baywa-nltool/',
+            'baseUri'       => '/baywa-nltool/'
         ),
-        'debug'          => true
-    ),
-    
+        'debug'          => true,
+		'version' => '0.1 Alpha'
+    ),    
     'smtp'        => array(
         'host'     => "",
         'port'     => 25,
         'security' => "tls",
         'username' => "",
         'password' => ""
-    )
+    ),
+	'languages'=>array(
+		'de' => 'Deutsch',
+		'en' => 'English'
+	)
     
 ));

@@ -4,6 +4,53 @@
 $router = new Phalcon\Mvc\Router(false);
 
 $router->add(
+	'/{language:[a-z]{2}}/:controller[/]{0,1}', 
+	array(
+	'language' => 1,
+	'controller' => 2,
+	'action' => "index",
+	'namespace'  => 'nltool\Controllers',
+))->setName("index-call");
+
+$router->add(
+    '/',
+    array(
+       'controller' => 'index',
+       'action'     => 'index',
+		'namespace'  => 'nltool\Controllers',
+    )
+);
+
+$router->add(
+    '/session/index/',
+    array(
+       'controller' => 'session',
+       'action'     => 'index',
+		'namespace'  => 'nltool\Controllers',
+    )
+);
+
+$router->add(
+    '/session/start/',
+    array(
+       'controller' => 'session',
+       'action'     => 'start',
+		'namespace'  => 'nltool\Controllers',
+    )
+);
+
+
+
+/*$router->add(
+    '/session/:action[/]{0,1}',
+    array(
+       'controller' => 'session',
+       'action'     => 1
+    )
+);*/
+
+/*
+$router->add(
     '/sitemap',
     array(
        'controller' => 'sitemap',
@@ -60,7 +107,7 @@ $router->add(
 );
 
 $router->add(
-    '/compose',
+    '/compose/',
     array(
        'controller' => 'compose',
        'action'     => 'index'
@@ -345,6 +392,8 @@ $router->add(
        'controller' => 'index',
        'action'     => 'index'
     )
-);
+);*/
 
+
+$router->handle();
 return $router;

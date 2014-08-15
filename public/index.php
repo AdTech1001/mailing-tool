@@ -48,7 +48,8 @@ try {
      */
     $application = new Phalcon\Mvc\Application($di);	
 	echo $application->handle()->getContent();
-} catch (Exception $e) {
-	var_dump($e);
-    echo 'Sorry, an error has ocurred :(';
+} catch (Phalcon\Exception $e) {
+	echo $e->getMessage();
+} catch (PDOException $e){
+	echo $e->getMessage();
 }

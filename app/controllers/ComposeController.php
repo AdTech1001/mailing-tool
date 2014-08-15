@@ -2,14 +2,14 @@
 
 namespace nltool\Controllers;
 
-use Phalcon\Mvc\Controller;
+
 
 /**
  * Class IndexController
  *
  * @package baywa-nltool\Controllers
  */
-class ComposeController extends Controller
+class ComposeController extends ControllerBase
 {
 
     /**
@@ -17,7 +17,11 @@ class ComposeController extends Controller
      */
     public function indexAction()
     {
-        $this->flashSession->error('Page not found: ' . $this->escaper->escapeHtml($this->router->getRewriteUri()));
-        echo('Composing a Newsletter');
+        //$this->flashSession->error('Page not found: ' . $this->escaper->escapeHtml($this->router->getRewriteUri()));
+        
+		
+		
+		
+		
     }
 }

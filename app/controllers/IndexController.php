@@ -1,23 +1,56 @@
 <?php
-
 namespace nltool\Controllers;
-
-use Phalcon\Mvc\Controller;
 
 /**
  * Class IndexController
  *
  * @package baywa-nltool\Controllers
  */
-class IndexController extends Controller
+
+class IndexController extends ControllerBase
+
 {
+	private $_loginForm;
+	
+	public function initialize()
+	{
+		$session=$this->session;
+		
+	$this->_loginForm = new LoginForm();
+	 $this->view->setTemplateAfter('main');
+	 
+	}
 
     /**
      * @return \Phalcon\Http\ResponseInterface
      */
     public function indexAction()
     {
-        $this->flashSession->error('Page not found: ' . $this->escaper->escapeHtml($this->router->getRewriteUri()));
-        echo('<h1>Hello</h1>');
+		
+		
+		$auth = $this->session->get('auth');
+		
+		if(!$auth){			
+			$this->dispatcher->forward(array(
+            "controller" => "index",
+            "action" => "login"
+        ));
+		}else{
+			$this->flashSession->success('Willkommen '.$auth['username']);
+		}
+		
+        
+        
     }
+	
+	/**
+     * @return \Phalcon\Http\ResponseInterface
+     */
+    public function loginAction()
+	{
+		
+		$this->view->form = $this->_loginForm;
+	}
+	  
+	
 }
