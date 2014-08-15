@@ -36,7 +36,7 @@ class IndexController extends ControllerBase
             "action" => "login"
         ));
 		}else{
-			$this->flashSession->success('Willkommen '.$auth['username']);
+			//$this->flashSession->success('Willkommen '.$auth['username']);
 		}
 		
         

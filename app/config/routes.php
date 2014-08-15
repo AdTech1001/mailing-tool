@@ -1,7 +1,7 @@
 <?php
 
 
-$router = new Phalcon\Mvc\Router(false);
+$router = new Phalcon\Mvc\Router(true);
 
 $router->add(
 	'/{language:[a-z]{2}}/:controller[/]{0,1}', 

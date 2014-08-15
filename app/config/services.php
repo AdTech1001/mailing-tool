@@ -274,3 +274,11 @@ $di->set(
 );
 
  
+$di->set('auth', function () {
+    return new Auth();
+});
+
+$di->set('acl', function(){
+	return new Acl();
+});
+

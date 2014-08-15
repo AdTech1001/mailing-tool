@@ -17,7 +17,7 @@
 		{{ stylesheet_link('css/bootstrap.css') }}
         {{ stylesheet_link('css/main.css') }}     
 		{{ javascript_include('js/vendor/modernizr-2.6.2.min.js') }}     
-		<script data-main="js/plugins" src="js/require.js"></script>
+		<script data-main="/baywa-nltool/js/plugins" src="/baywa-nltool/js/require.js"></script>
 		
         
     </head>

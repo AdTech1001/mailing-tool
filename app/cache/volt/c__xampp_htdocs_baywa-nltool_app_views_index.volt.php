@@ -17,7 +17,7 @@
 		<?php echo $this->tag->stylesheetLink('css/bootstrap.css'); ?>
         <?php echo $this->tag->stylesheetLink('css/main.css'); ?>     
 		<?php echo $this->tag->javascriptInclude('js/vendor/modernizr-2.6.2.min.js'); ?>     
-		<script data-main="js/plugins" src="js/require.js"></script>
+		<script data-main="/baywa-nltool/js/plugins" src="/baywa-nltool/js/require.js"></script>
 		
         
     </head>
