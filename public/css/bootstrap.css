@@ -29,7 +29,7 @@ dfn {
 }
 h1 {
   margin: .67em 0;
-  font-size: 2em;
+  font-size: 1.5em;
 }
 mark {
   color: #000;
@@ -325,7 +325,7 @@ h6,
 .h5,
 .h6 {
   font-family: inherit;
-  font-weight: 500;
+  font-weight: bold;
   line-height: 1.1;
   
 }
@@ -403,9 +403,9 @@ h6 .small,
 .h6 .small {
   font-size: 75%;
 }
-h1,
+/*h1,
 .h1 {
-  font-size: 36px;
+  font-size: px;
 }
 h2,
 .h2 {
@@ -426,7 +426,7 @@ h5,
 h6,
 .h6 {
   font-size: 12px;
-}
+}*/
 p {
   margin: 0 0 10px;
 }

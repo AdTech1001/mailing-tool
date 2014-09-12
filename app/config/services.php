@@ -37,56 +37,9 @@ $di->set(
     true
 );
 
-/**
- * Setting up volt
- */
-$di->set(
-    'volt',
-    function ($view, $di) use ($config) {
 
-        $volt = new Volt($view, $di);
 
-        $volt->setOptions(
-            array(
-                "compiledPath"      => APP_PATH . "/app/cache/volt/",
-                "compiledSeparator" => "_",
-                "compileAlways"     => $config->application->debug
-            )
-        );
-		$volt->getCompiler()->addFunction('tr', function ($key) {
-			return "nltool\Controllers\ControllerBase::translate({$key})";
-		});
 
-        $volt->getCompiler()->addFunction('number_format', function($resolvedArgs) {
-            return 'number_format(' . $resolvedArgs . ')';
-        });
-
-        return $volt;
-    },
-    true
-);
-
-/**
- * Setting up the view component
- */
-$di->set(
-    'view',
-    function () use ($config) {
-
-        $view = new View();
-
-        $view->setViewsDir($config->application->viewsDir);
-
-        $view->registerEngines(
-            array(
-                ".volt" => 'volt'
-            )
-        );
-
-        return $view;
-    },
-    true
-);
 
 /**
  * Database connection is created based in the parameters defined in the configuration file

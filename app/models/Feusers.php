@@ -262,5 +262,11 @@ class Feusers extends \Phalcon\Mvc\Model{
             return false;
         }
     }
+	
+	public function initialize(){
+		$this->hasOne('profileid', 'nltool\Models\Profiles', 'uid', array(
+            'alias' => 'profile'
+        ));
+	}
 }
 

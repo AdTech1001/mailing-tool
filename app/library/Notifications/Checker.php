@@ -1,50 +1,30 @@
 <?php
 namespace nltool\Notifications;
 
-use nltool\Models\EventNotifications;
+use nltool\Models\Notifications;
 use Phalcon\Di\Injectable;
 
 class Checker extends Injectable
 {
 
     /**
-     * Check whether there are unread notifications or not
+     * Check for Notifications
      *
      * @return boolean
      */
     public function has()
     {
-        $usersId = $this->session->get('identity');
-        if (!$usersId) {
+        $userid = $this->session->get('auth');
+        if (!$userid) {
             return false;
         }
 
-        $number = ActivityNotifications::count(array(
-            'users_id = ?0 AND was_read = "N"',
-            'bind' => array($usersId)
+        $number = Notifications::count(array(
+            'userid = ?0 AND read = 0',
+            'bind' => array($userid)
         ));
 
         return $number > 0;
-    }
-
-     /**
-     * Check whether there are unread notifications or not
-     *
-     * @return integer
-     */
-    public function getNumber()
-    {
-        $usersId = $this->session->get('identity');
-        if (!$usersId) {
-            return 0;
-        }
-
-        $number = ActivityNotifications::count(array(
-            'users_id = ?0 AND was_read = "N"',
-            'bind' => array($usersId)
-        ));
-
-        return $number;
-    }
+    }     
 
 }

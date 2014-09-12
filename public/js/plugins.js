@@ -10,13 +10,27 @@ require.config({
         // js/lib/jquery-1.9.0.js, relative to
         // the HTML page.
         jquery: 'jquery-1.10.2.min',
+		jqueryui:'jquery-ui.min',
+		jqueryaddress:'jquery.address',
 		main: 'main',
-		bootstrap: 'bootstrap.min'
+		bootstrap: 'bootstrap.min',
+		jsplumb:'jquery.jsPlumb-1.6.4',
+		plumbscript:'automationWorkflowModule',
+		mailobjectsUpdate: 'mailobjectsUpdate'
 		
     }
 });
 
 require(['jquery'], function( jQuery ) {
-    require(['main']);
+	require(['jqueryui']);
+	require(['jqueryaddress'],function(){
+		require(['main']);
+	});
+    
 	require(['bootstrap']);
+	
+	
+	
+	
 });
+

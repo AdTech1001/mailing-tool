@@ -20,24 +20,66 @@ class Permissions extends Model
      *
      * @var integer
      */
-    public $profilesId;
+    public $pid;
+	
+	/**
+     *
+     * @var integer
+     */
+    public $deleted;
+	
+	/**
+     *
+     * @var integer
+     */
+    public $hidden;
+	
+	/**
+     *
+     * @var integer
+     */
+    public $crdate;
+	
+	/**
+     *
+     * @var integer
+     */
+    public $tstamp;
+	
+	/**
+     *
+     * @var integer
+     */
+    public $cruser_id;
+	
+	/**
+     *
+     * @var integer
+     */
+    public $profileid;
 
+	/**
+     *
+     * @var integer
+     */
+    public $resourceid;
+	
     /**
      *
      * @var string
      */
-    public $resource;
+    public $resourceaction;
 
-    /**
-     *
-     * @var string
-     */
-    public $action;
+    
 
     public function initialize()
     {
-        $this->belongsTo('profilesId', 'Vokuro\Models\Profiles', 'id', array(
-            'alias' => 'profile'
+        $this->belongsTo('profileid', 'nltool\Models\Profiles', 'uid', array(
+            'alias' => 'profiles'
+        ));
+		
+		$this->hasOne('resourceid', 'nltool\Models\Resources', 'uid', array(
+            'alias' => 'resource'
         ));
     }
 }

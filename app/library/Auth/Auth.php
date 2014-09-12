@@ -2,10 +2,12 @@
 namespace nltool\Auth;
 
 use Phalcon\Mvc\User\Component;
-use nltool\Models\Feusers;
+use nltool\Models\Feusers,
+	nltool\Models\SuccessLogins,
+	nltool\Models\FailedLogins,
+	nltool\Modules\Modules\Frontend\Controllers\ControllerBase as controllerBase;
 //use nltool\Models\RememberTokens;
-//use nltool\Models\SuccessLogins;
-//use nltool\Models\FailedLogins;
+
 
 /**
  * Vokuro\Auth\Auth
@@ -21,50 +23,91 @@ class Auth extends Component
      * @return boolan
      */
     public function check($credentials)
-    {
+    {	
+		
 
         // Check if the user exist
-        $user = Feusers::findFirstByEmail($credentials['email']);
+        $user = Feusers::findFirstByEmail($credentials['username']);
         if ($user == false) {
             $this->registerUserThrottling(0);
             throw new Exception('Wrong email/password combination');
         }
 
         // Check the password
-        if (!$this->security->checkHash($credentials['password'], $user->password)) {
-            $this->registerUserThrottling($user->uid);
-            throw new Exception('Wrong email/password combination');
-        }
-
-        // Check if the user was flagged
-        $this->checkUserFlags($user);
-
-        // Register the successful login
-        $this->saveSuccessLogin($user);
-
-        // Check if the remember me was selected
-        if (isset($credentials['remember'])) {
-            $this->createRememberEnviroment($user);
-        }
-
-        $this->session->set('auth-identity', array(
-            'uid' => $user->uid,
-            'username' => $user->username
+		//$this->security->checkHash($credentials['password'], $user->password)
+        if ($this->checkPassword($user->password,$credentials['password'])) {
             
+			$this->_registerSession($user);
+					
+            $this->flashSession->success(controllerBase::translate('welcome').' '.$user->username);
+				
+				
+                //Forward to the 'invoices' controller if the user is valid
+				
+            
+				
+			// Check if the user was flagged
+			$this->checkUserFlags($user);
+
+			// Register the successful login
+			$this->saveSuccessLogin($user);
+
+			// Check if the remember me was selected
+			if (isset($credentials['remember'])) {
+				$this->createRememberEnviroment($user);
+			}
+
+			
+			$this->response->redirect(""); 
+			$this->view->disable(); 
+		}else{
+			$this->registerUserThrottling($user->uid);
+			$this->flash->error('Wrong email/password');
+            //throw new Exception('Wrong email/password combination');
+		}
+
+        
+    }
+	
+	private function _registerSession($user)
+    {
+        $this->session->set('auth', array(
+            'uid' => $user->uid,            
+			'username' => $user->username,
+			'identity' => true,
+			'superuser' =>$user->superuser,
+			'profile' =>$user->getProfile()->title,
+			'usergroup' =>$user->usergroup,
         ));
     }
+	
+	private function checkPassword($hash, $password) {
+	
+    // first 29 characters include algorithm, cost and salt
+    // let's call it $full_salt
+    $full_salt = substr($hash, 0, 29);
+ 
+    // run the hash function on $password
+    $new_hash = crypt($password, $full_salt);
+ 
+    // returns true or false
+    return ($hash == $new_hash);
+	}
 
     /**
      * Creates the remember me environment settings the related cookies and generating tokens
      *
-     * @param Vokuro\Models\Users $user
+     * @param nltool\Models\Feusers $user
      */
     public function saveSuccessLogin($user)
     {
         $successLogin = new SuccessLogins();
-        $successLogin->usersId = $user->uid;
-        $successLogin->ipAddress = $this->request->getClientAddress();
-        $successLogin->userAgent = $this->request->getUserAgent();
+        $successLogin->userid = $user->uid;
+        $successLogin->ipaddress = $this->request->getClientAddress();
+        $successLogin->useragent = $this->request->getUserAgent();
+		
+		$successLogin->crdate = time();
+		$successLogin->useragent = $_SERVER['HTTP_USER_AGENT'];
         if (!$successLogin->save()) {
             $messages = $successLogin->getMessages();
             throw new Exception($messages[0]);
@@ -75,18 +118,21 @@ class Auth extends Component
      * Implements login throttling
      * Reduces the efectiveness of brute force attacks
      *
-     * @param int $userId
+     * @param int $userid
      */
-    public function registerUserThrottling($userId)
+    public function registerUserThrottling($userid)
     {
+		
         $failedLogin = new FailedLogins();
-        $failedLogin->usersId = $userId;
-        $failedLogin->ipAddress = $this->request->getClientAddress();
+        $failedLogin->userid = $userid;		
+        $failedLogin->ipaddress = $this->request->getClientAddress();
         $failedLogin->attempted = time();
-        $failedLogin->save();
-
+		$failedLogin->crdate = time();
+		$failedLogin->useragent = $_SERVER['HTTP_USER_AGENT'];
+		
+		
         $attempts = FailedLogins::count(array(
-            'ipAddress = ?0 AND attempted >= ?1',
+            'ipaddress = ?0 AND attempted >= ?1',
             'bind' => array(
                 $this->request->getClientAddress(),
                 time() - 3600 * 6
@@ -150,7 +196,7 @@ class Auth extends Component
         $userId = $this->cookies->get('RMU')->getValue();
         $cookieToken = $this->cookies->get('RMT')->getValue();
 
-        $user = Users::findFirstById($userId);
+        $user = Feusers::findFirstById($userId);
         if ($user) {
 
             $userAgent = $this->request->getUserAgent();
@@ -174,9 +220,9 @@ class Auth extends Component
                         $this->checkUserFlags($user);
 
                         // Register identity
-                        $this->session->set('auth-identity', array(
-                            'id' => $user->id,
-                            'name' => $user->name,
+                        $this->session->set('auth', array(
+                            'uid' => $user->id,
+                            'username' => $user->name,
                             'profile' => $user->profile->name
                         ));
 
@@ -198,21 +244,15 @@ class Auth extends Component
     /**
      * Checks if the user is banned/inactive/suspended
      *
-     * @param Vokuro\Models\Users $user
+     * @param Vokuro\Models\Feusers $user
      */
-    public function checkUserFlags(Users $user)
+    public function checkUserFlags(Feusers $user)
     {
-        if ($user->active != 'Y') {
+        if ($user->hidden != 0) {
             throw new Exception('The user is inactive');
         }
 
-        if ($user->banned != 'N') {
-            throw new Exception('The user is banned');
-        }
-
-        if ($user->suspended != 'N') {
-            throw new Exception('The user is suspended');
-        }
+        
     }
 
     /**
@@ -222,7 +262,7 @@ class Auth extends Component
      */
     public function getIdentity()
     {
-        return $this->session->get('auth-identity');
+        return $this->session->get('auth');
     }
 
     /**
@@ -232,7 +272,7 @@ class Auth extends Component
      */
     public function getName()
     {
-        $identity = $this->session->get('auth-identity');
+        $identity = $this->session->get('auth');
         return $identity['name'];
     }
 
@@ -248,7 +288,7 @@ class Auth extends Component
             $this->cookies->get('RMT')->delete();
         }
 
-        $this->session->remove('auth-identity');
+        $this->session->remove('auth');
     }
 
     /**
@@ -258,38 +298,19 @@ class Auth extends Component
      */
     public function authUserById($id)
     {
-        $user = Users::findFirstById($id);
+        $user = Feusers::findFirstById($id);
         if ($user == false) {
             throw new Exception('The user does not exist');
         }
 
         $this->checkUserFlags($user);
 
-        $this->session->set('auth-identity', array(
-            'id' => $user->id,
-            'name' => $user->name,
+        $this->session->set('auth', array(
+            'uid' => $user->id,
+            'username' => $user->name,
             'profile' => $user->profile->name
         ));
     }
 
-    /**
-     * Get the entity related to user in the active identity
-     *
-     * @return \Vokuro\Models\Users
-     */
-    public function getUser()
-    {
-        $identity = $this->session->get('auth-identity');
-        if (isset($identity['id'])) {
-
-            $user = Users::findFirstById($identity['id']);
-            if ($user == false) {
-                throw new Exception('The user does not exist');
-            }
-
-            return $user;
-        }
-
-        return false;
-    }
+    
 }

@@ -27,7 +27,7 @@ $config = include APP_PATH . "/app/config/config.php";
 /**
  * Include the loader
  */
-require APP_PATH . "/app/config/loader.php";
+//require APP_PATH . "/app/config/loader.php";
 
 
 
@@ -42,11 +42,12 @@ try {
      * Include the application services
      */
     require APP_PATH . "/app/config/services.php";
-
+	
     /**
      * Handle the request
      */
     $application = new Phalcon\Mvc\Application($di);	
+	require APP_PATH . '/app/config/modules.php';
 	echo $application->handle()->getContent();
 } catch (Phalcon\Exception $e) {
 	echo $e->getMessage();

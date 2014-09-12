@@ -1,5 +1,6 @@
 <?php
 namespace nltool\Models;
+use Phalcon\Mvc\Model;
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -10,8 +11,73 @@ namespace nltool\Models;
  *
  * @author Philipp-PC
  */
-class Mailobjects {
-	//put your code here
+class Mailobjects extends Model{
+	 /**
+     *
+     * @var integer
+     */
+    public $uid;
+
+    /**
+     *
+     * @var integer
+     */
+    public $pid=0;
+	
+	/**
+     *
+     * @var integer
+     */
+    public $deleted=0;
+	
+	/**
+     *
+     * @var integer
+     */
+    public $hidden=0;
+	
+	/**
+     *
+     * @var integer
+     */
+    public $crdate;
+	
+	/**
+     *
+     * @var integer
+     */
+    public $tstamp;
+	
+	/**
+     *
+     * @var integer
+     */
+    public $cruser_id;
+	
+	/**
+     *
+     * @var integer
+     */
+    public $usergroup;
+	
+	/**
+     *
+     * @var integer
+     */
+    public $campaign=0;
+	
+	/**
+     *
+     * @var integer
+     */
+    public $origuid=0;
+	
+	/**
+     *
+     * @var integer
+     */
+    public $templateuid;
+	
 }
 
 ?>

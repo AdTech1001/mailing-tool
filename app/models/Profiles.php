@@ -10,31 +10,70 @@ use Phalcon\Mvc\Model;
 class Profiles extends Model
 {
 
-    /**
-     * ID
+  /**
+     *
      * @var integer
      */
     public $uid;
 
     /**
-     * Name
+     *
+     * @var integer
+     */
+    public $pid;
+	
+	/**
+     *
+     * @var integer
+     */
+    public $deleted;
+	
+	/**
+     *
+     * @var integer
+     */
+    public $hidden;
+	
+	/**
+     *
+     * @var integer
+     */
+    public $crdate;
+	
+	/**
+     *
+     * @var integer
+     */
+    public $tstamp;
+	
+	/**
+     *
+     * @var integer
+     */
+    public $cruser_id;
+	
+		
+    /**
+     *
      * @var string
      */
     public $title;
+
+    
 
     /**
      * Define relationships to Users and Permissions
      */
     public function initialize()
     {
-        $this->hasMany('id', 'nltool\Models\Feusers', 'profilesId', array(
-            'alias' => 'users',
+        $this->hasMany('uid', 'nltool\Models\Feusers', 'profileid', array(
+            'alias' => 'feusers',
             'foreignKey' => array(
                 'message' => 'Profile cannot be deleted because it\'s used on Users'
             )
         ));
 
-        $this->hasMany('id', 'Vokuro\Models\Permissions', 'profilesId', array(
+        $this->hasMany('uid', 'nltool\Models\Permissions', 'profileid', array(
             'alias' => 'permissions'
         ));
     }

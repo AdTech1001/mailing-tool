@@ -1,11 +1,12 @@
 <?php
 namespace nltool\Acl;
 
-use Phalcon\Mvc\User\Component;
-use Phalcon\Acl\Adapter\Memory as AclMemory;
-use Phalcon\Acl\Role as AclRole;
-use Phalcon\Acl\Resource as AclResource;
-use nltool\Models\Profiles;
+use Phalcon\Mvc\User\Component,
+Phalcon\Acl\Adapter\Memory as AclMemory,
+Phalcon\Acl\Role as AclRole,
+Phalcon\Acl\Resource as AclResource,
+nltool\Models\Profiles as Profiles,
+nltool\Models\Resources as Resources;
 
 /**
  * nltest\Acl\Acl
@@ -21,7 +22,7 @@ class Acl extends Component
     private $acl;
 
     /**
-     * The filepath of the ACL cache file from APP_DIR
+     * The filepath of the ACL cache file from $this->config->application->appsDir
      *
      * @var string
      */
@@ -33,25 +34,55 @@ class Acl extends Component
      * @var array
      */
     private $privateResources = array(
-        'feusers' => array(
+        'backend' => array(
             'index',
-            'search',
-            'edit',
             'create',
-            'delete',
-            'changePassword'
+            'retrieve',
+            'update',
+            'delete'
+            
         ),
-        'profiles' => array(
-            'index',
-            'search',
-            'edit',
+		'index' => array(    
+			'index',
             'create',
+            'retrieve',
+            'update',
+            'delete'
+            
+        ),
+        'compose' => array(
+            'index',
+            'create',
+            'retrieve',
+            'update',
             'delete'
         ),
-        'permissions' => array(
-            'index'
-        )
+		'notifications' => array(
+            'index',
+            'create',
+            'retrieve',
+            'update',
+            'delete'
+        ),
+		'feusers' => array(
+            'index',
+            'create',
+            'retrieve',
+            'update',
+            'delete'
+        ),
+		'session'=>array()
     );
+	
+	private $publicResources = array(
+		'index' => array(
+			 'index'
+		),
+		'session' => array(
+			'index',
+			'start'
+		)
+	);
 
     /**
      * Human-readable descriptions of the actions used in {@see $privateResources}
@@ -59,12 +90,12 @@ class Acl extends Component
      * @var array
      */
     private $actionDescriptions = array(
-        'index' => 'Access',
-        'search' => 'Search',
+        'index' => 'Access',        
         'create' => 'Create',
-        'edit' => 'Edit',
-        'delete' => 'Delete',
-        'changePassword' => 'Change password'
+		'retrieve' => 'List',
+        'update' => 'Edit',
+        'delete' => 'Delete'
+        
     );
 
     /**
@@ -75,6 +106,7 @@ class Acl extends Component
      */
     public function isPrivate($controllerName)
     {
+		
         return isset($this->privateResources[$controllerName]);
     }
 
@@ -88,6 +120,7 @@ class Acl extends Component
      */
     public function isAllowed($profile, $controller, $action)
     {
+		
         return $this->getAcl()->isAllowed($profile, $controller, $action);
     }
 
@@ -105,7 +138,7 @@ class Acl extends Component
 
         // Check if the ACL is in APC
         if (function_exists('apc_fetch')) {
-            $acl = apc_fetch('vokuro-acl');
+            $acl = apc_fetch('nltool-acl');
             if (is_object($acl)) {
                 $this->acl = $acl;
                 return $acl;
@@ -113,13 +146,13 @@ class Acl extends Component
         }
 
         // Check if the ACL is already generated
-        if (!file_exists(APP_DIR . $this->filePath)) {
+        if (!file_exists($this->config->application->appsDir . $this->filePath)) {
             $this->acl = $this->rebuild();
             return $this->acl;
         }
 
         // Get the ACL from the data file
-        $data = file_get_contents(APP_DIR . $this->filePath);
+        $data = file_get_contents($this->config->application->appsDir . $this->filePath);
         $this->acl = unserialize($data);
 
         // Store the ACL in APC
@@ -130,30 +163,9 @@ class Acl extends Component
         return $this->acl;
     }
 
-    /**
-     * Returns the permissions assigned to a profile
-     *
-     * @param Profiles $profile
-     * @return array
-     */
-    public function getPermissions(Profiles $profile)
-    {
-        $permissions = array();
-        foreach ($profile->getPermissions() as $permission) {
-            $permissions[$permission->resource . '.' . $permission->action] = true;
-        }
-        return $permissions;
-    }
+    
 
-    /**
-     * Returns all the resoruces and their actions available in the application
-     *
-     * @return array
-     */
-    public function getResources()
-    {
-        return $this->privateResources;
-    }
+    
 
     /**
      * Returns the action description according to its simplified name
@@ -180,33 +192,61 @@ class Acl extends Component
         $acl = new AclMemory();
 
         $acl->setDefaultAction(\Phalcon\Acl::DENY);
-
+		
         // Register roles
-        $profiles = Profiles::find('active = "Y"');
-
+        $profiles = Profiles::find('deleted = 0 AND hidden=0');
+		
         foreach ($profiles as $profile) {
-            $acl->addRole(new AclRole($profile->name));
+			
+            $acl->addRole(new AclRole($profile->title));
         }
 
         foreach ($this->privateResources as $resource => $actions) {
             $acl->addResource(new AclResource($resource), $actions);
         }
+		 foreach ($this->publicResources as $resource => $actions) {
+            $acl->addResource(new AclResource($resource), $actions);
+        }
 
         // Grant acess to private area to role Users
+		
         foreach ($profiles as $profile) {
-
-            // Grant permissions in "permissions" model
+            
             foreach ($profile->getPermissions() as $permission) {
-                $acl->allow($profile->name, $permission->resource, $permission->action);
+				$resource=$permission->getResource();	
+				
+				
+				$acl->addResource(new AclResource($resource->title), $permission->resourceaction);
+				$acl->allow($profile->title, $resource->title, $permission->resourceaction);
+				
+				foreach($this->privateResources as $privateResources => $actions){
+					$acl->allow($profile->title, $privateResources, $actions);
+				}
+				
+				foreach($this->publicResources as $publicresource => $actions){
+					$acl->allow($profile->title, $publicresource, '*');
+				}
+                
             }
 
             // Always grant these permissions
-            $acl->allow($profile->name, 'users', 'changePassword');
+            
         }
+		$roles = array(			
+			'guests' => new AclRole('Guests')
+		);
+		foreach ($roles as $role) {
+			$acl->addRole($role);
+		}
+		foreach ($roles as $role) {
+		foreach ($this->publicResources as $resource => $actions) {
+			$acl->allow($role->getName(), $resource, '*');
+		}
+	}
 
-        if (touch(APP_DIR . $this->filePath) && is_writable(APP_DIR . $this->filePath)) {
+        if (touch($this->config->application->appsDir . $this->filePath) && is_writable($this->config->application->appsDir . $this->filePath)) {
 
-            file_put_contents(APP_DIR . $this->filePath, serialize($acl));
+            file_put_contents($this->config->application->appsDir . $this->filePath, serialize($acl));
 
             // Store the ACL in APC
             if (function_exists('apc_store')) {
@@ -214,7 +254,7 @@ class Acl extends Component
             }
         } else {
             $this->flash->error(
-                'The user does not have write permissions to create the ACL list at ' . APP_DIR . $this->filePath
+                'The user does not have write permissions to create the ACL list at ' . $this->config->application->appsDir . $this->filePath
             );
         }
 
