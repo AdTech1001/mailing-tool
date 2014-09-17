@@ -1,14 +1,17 @@
 <?php
 namespace nltool\Models;
-
 use Phalcon\Mvc\Model;
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
 /**
- * Permissions
- * Stores the permissions by profile
+ * Description of Mailobjects
+ *
+ * @author Philipp-PC
  */
-class Templateobjects extends Model
-{
+class Mailobjects extends Model{
 	 /**
      *
      * @var integer
@@ -56,28 +59,38 @@ class Templateobjects extends Model
      * @var integer
      */
     public $usergroup;
-
-	/**
-     *
-     * @var string
-     */
-    public $title;
-	
-    /**
-     *
-     * @var string
-     */
-    public $sourcecode;
-	
-	/**
-     *
-     * @var string
-     */
-    public $templatefilepath;
 	
 	/**
      *
      * @var integer
      */
-    public $templatetype;
+    public $campaign=0;
+	
+	/**
+     *
+     * @var integer
+     */
+    public $origuid=0;
+	
+	/**
+     *
+     * @var integer
+     */
+    public $templateuid;
+	
+	/**
+     *
+     * @var integer
+     */
+    public $contenttype;
+	
+	/**
+     *
+     * @var string
+     */
+    public $sourcecode;
+	
+	
 }
+
+

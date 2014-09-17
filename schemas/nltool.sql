@@ -298,6 +298,27 @@ CREATE TABLE templateobjects (
 	usergroup int(11) DEFAULT '0' NOT NULL,	
 	sourcecode mediumtext,
 	templatefilepath varchar(255) COLLATE utf8_general_ci NOT NULL,
+	templatetype tinyint(4) DEFAULT '0' NOT NULL,
+  PRIMARY KEY (uid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+DROP TABLE IF EXISTS contentobjects;
+CREATE TABLE contentobjects (
+	uid int(11) NOT NULL auto_increment,
+	pid int(11) DEFAULT '0' NOT NULL,
+	tstamp int(11) DEFAULT '0' NOT NULL,
+	crdate int(11) DEFAULT '0' NOT NULL,
+	cruser_id int(11) DEFAULT '0' NOT NULL,
+	deleted tinyint(4) DEFAULT '0' NOT NULL,
+	hidden tinyint(4) DEFAULT '0' NOT NULL,
+	title varchar(255) COLLATE utf8_general_ci NOT NULL,	
+	campaign int(11) DEFAULT '0' NOT NULL,	
+	origuid int(11) DEFAULT '0' NOT NULL,	
+	usergroup int(11) DEFAULT '0' NOT NULL,	
+	templateuid int(11) DEFAULT '0' NOT NULL,	
+	contenttype int(11) DEFAULT '0' NOT NULL,	
+	sourcecode mediumtext,
+	contentposition int(11) DEFAULT '0' NOT NULL,	
   PRIMARY KEY (uid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 

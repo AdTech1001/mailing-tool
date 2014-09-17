@@ -9,6 +9,25 @@ function init(jQuery){
 		requireControllerPlugins();
 	}
 	
+	jQuery('#addImage').click(function(e){
+		e.stopPropagation();
+		jQuery("#addImageDialog").trigger('click');
+		
+	});
+	
+	jQuery('#templateCarousel li').click(function(){
+		
+		if(jQuery(this).hasClass('active')){
+			jQuery(this).removeClass('active');
+			jQuery('[name="templateobject"').val(0);
+		}else{
+			var templateobject=jQuery(this).attr('data-uid');
+			jQuery(this).addClass('active');
+			jQuery('[name="templateobject"').val(templateobject);
+		}
+		
+	});
+	
 }
 
 

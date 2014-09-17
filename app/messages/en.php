@@ -36,13 +36,17 @@ $messages = array(
 	"startCampaign" => "starting point",
 	"templateNameLabel" => "template title",
 	"templateSourceLabel" => "source code",
-	"templateFilepathLabel" => "file URL",
+	"templateFilepathLabel" => "add thumbnail",
 	"selectTemplateLabel" => "Please select a template",
 	"nameLabel" => "title",
 	"dropImageText" => "drag & drop images",
 	"inputTextText" => "click to insert plain text",
 	"inputHtmlText" => "click to insert html",
-	"dropContentElementsText" => "drag & drop content elements"
+	"dropContentElementsText" => "drag & drop content elements",
+	"templateTypeLabel" => "template type",
+	"templateTypeMail" => "mail template",
+	"templateTypeContent" => "content element template",
+	"pleaseSelect" => "please select"
 	
 	
 );

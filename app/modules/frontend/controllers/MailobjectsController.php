@@ -30,23 +30,26 @@ class MailobjectsController extends ControllerBase
      * @return \Phalcon\Http\ResponseInterface
      */
     public function createAction()
-    {
+    {		
+         $templateobjects = Templateobjects::find(array(
+			"conditions" => "templatetype = ?1",
+			"bind" => array(1 => '0')
+			));
+		 $environment= $this->config['application']['debug'] ? 'development' : 'production';
+		$thumbnailSm=array();
+		foreach($templateobjects as $templateobject){
+			$thumbnailSmArray=explode('_',$templateobject->templatefilepath);
+			$fileType=explode('.',$thumbnailSmArray[2]);
+			$baseUri=$this->config['application'][$environment]['staticBaseUri'];
+			$thumbnailSm[$templateobject->uid]=$baseUri.$thumbnailSmArray[0].'_'.$thumbnailSmArray[1].'_'.'S.'.$fileType[1];
+		}
 		
-         $templateobjects = Templateobjects::find();
-
-        
-        $this->view->templateobjects = $templateobjects;
-        
-		
-
-        
-		
-		
-		
-		
+        $this->view->templateobjects = $templateobjects;  		
+		$this->view->templateobjectsthumbs = $thumbnailSm;  		
     }
 	
-	function updateAction(){
+	function updateAction()
+	{
 		$this->assets            
             ->addJs('js/vendor/mailobjectsInit.js');
 		//$this->view->setVar('language',);
@@ -71,7 +74,7 @@ class MailobjectsController extends ControllerBase
 				if($templateUid !=0){
 				$this->flash->success("successfully created");
 				$mainTemplate='../app/modules/frontend/templates/main.volt';
-				$templateFile=  '../app/modules/frontend/templates/template_'.$templateUid.'.volt';
+				$templateFile=  '../app/modules/frontend/templates/template_mail_'.$templateUid.'.volt';
 				$generatedMailformFile='../public/mails/mailobject_'.$mailObject->uid.'.html';
 				$bodyRaw=file_get_contents($templateFile);
 				$body=$this->editRenderMailVars($bodyRaw);
@@ -100,7 +103,7 @@ class MailobjectsController extends ControllerBase
 			$textInputs['html']=isset($_POST['edit_html']) ? $_POST['edit_html'] : array();
 			
 			$generatedMailformFile='../public/mails/mailobject_'.$mailObjectUid.'.html';
-			$templateFile=  '../app/modules/frontend/templates/template_'.$mailobjectRecord->templateuid.'.volt';
+			$templateFile=  '../app/modules/frontend/templates/template_mail_'.$mailobjectRecord->templateuid.'.volt';
 			$mainTemplate='../app/modules/frontend/templates/main.volt';
 			$bodyRaw=file_get_contents($templateFile);
 			
@@ -121,7 +124,7 @@ class MailobjectsController extends ControllerBase
 			"bind" => array(1 => $mailObjectUid)
 			));
 			
-			$templateFile=  '../app/modules/frontend/templates/template_'.$mailobjectRecord->templateuid.'.volt';
+			$templateFile=  '../app/modules/frontend/templates/template_mail_'.$mailobjectRecord->templateuid.'.volt';
 			$bodyRaw=file_get_contents($templateFile);
 			$body=$this->editRenderMailVars($bodyRaw);
 			$this->view->setVar('compiledTemplatebodyRaw',$body);				
@@ -134,16 +137,15 @@ class MailobjectsController extends ControllerBase
 	}
 	
 	function editRenderMailVars($subject){
-		$search=array("{{image}}","{{text}}","{{html}}","{{contentElements}}");
+		$search=array("{{editable begin}}","{{editable end}}");
 		$imageText=$this->translate("dropImageText");
 		$textText=$this->translate("inputTextText");
 		$htmlText=$this->translate("inputHtmlText");
 		$contentText=$this->translate("dropContentElementsText");
 		$replace=array(			
-			'<input type="file" name="edit_image[]" class="editarea droparea image">'.$imageText,
-			'<textarea name="edit_text[]" class="editarea text" placeholder="'.$textText.'"></textarea>',
-			'<textarea name="edit_html[]" class="editarea html" placeholder="'.$htmlText.'"></textarea>',
-			$contentText.'<select multiple name="edit_content[]" class="editarea contentElements"></select>'
+			'<div class="editable">',
+			'</div>'
+			
 		);
 		$renderMailVars=str_replace($search, $replace, $subject);
 		return $renderMailVars;

@@ -37,12 +37,17 @@ $messages = array(
 	"startCampaign" => "Startpunkt",
 	"templateNameLabel" => "Template Bezeichnung",
 	"templateSourceLabel" => "Quelltext",
-	"templateFilepathLabel" => "Datei URL",
+	"templateFilepathLabel" => "Thumbnail hinzufügen",
 	"selectTemplateLabel" => "Bitte wählen Sie ein Template aus",
 	"nameLabel" => "Name",
 	"dropImageText" => "Drag & Drop Bild",
 	"inputTextText" => "Klicken, um Text einzugeben",
 	"inputHtmlText" => "Klicken, um HTML einzufügen",
-	"dropContentElementsText" => "Drag & Drop Inhaltselemente"
+	"dropContentElementsText" => "Drag & Drop Inhaltselemente",
+	"templateTypeLabel" => "Templatetyp",
+	"templateTypeMail" => "Mailtemplate",
+	"templateTypeContent" => "Template für Inhaltselement",
+	"pleaseSelect" => "Bitte auswählen"
+	
 );
 ?>

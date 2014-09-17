@@ -947,6 +947,46 @@ nav ul li a{
 #fileTollBar > div{
 	cursor:pointer;
 }
+
+#templateCarousel{
+	overflow-x:scroll;
+	margin-top:20px;
+	margin-bottom:20px;
+	padding-top:20px;
+	padding-bottom:20px;
+	padding-left:10px;
+	background:#e3e3e3;
+}
+
+#templateCarousel li{
+	float: left;
+	height: 250px;
+	overflow-y: scroll;
+	margin-right:50px;
+	cursor:pointer;
+}
+#templateCarousel li.active{
+	border:2px solid;
+}
+
+#templateCarousel li h5{
+	
+}
+#desktop{
+	position:relative;
+}
+#editFrame{
+	position:relative;
+	float:left;
+}
+.editable{
+	width:auto;
+}
+
+.editable:hover{
+	border: 1px dotted;	
+	padding: 10px;
+}
 @media (min-width: 768px) {
 	
 }

@@ -80,4 +80,4 @@ class Mailobjects extends Model{
 	
 }
 
-?>
+
