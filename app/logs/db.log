@@ -8137,3 +8137,650 @@
 [Wed, 17 Sep 14 10:50:42 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
 [Wed, 17 Sep 14 10:50:42 +0200][INFO] DESCRIBE `mailobjects`
 [Wed, 17 Sep 14 10:50:42 +0200][INFO] INSERT INTO `mailobjects` (`pid`, `tstamp`, `crdate`, `cruser_id`, `deleted`, `hidden`, `title`, `campaign`, `origuid`, `usergroup`, `templateuid`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+[Wed, 17 Sep 14 12:34:48 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 12:34:48 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 12:34:48 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 12:34:48 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 12:34:48 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 12:34:48 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 12:35:07 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 12:35:07 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 12:35:07 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 12:35:07 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 12:35:07 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 12:35:07 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 12:35:24 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 12:35:24 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 12:35:24 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 12:35:24 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 12:35:24 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 12:35:24 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 13:59:25 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 13:59:25 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 13:59:25 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 13:59:25 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 13:59:25 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 13:59:25 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 14:31:43 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 14:31:43 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 14:31:43 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 14:31:43 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 14:31:43 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 14:31:43 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 14:35:15 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 14:35:15 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 14:35:15 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 14:35:15 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 14:35:15 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 14:35:15 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 14:36:05 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 14:36:05 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 14:36:05 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 14:36:05 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 14:36:05 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 14:36:05 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 14:49:10 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 14:49:10 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 14:49:10 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 14:49:10 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 14:49:10 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 14:49:10 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 14:50:10 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 14:50:10 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 14:50:10 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 14:50:10 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 14:50:10 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 14:50:10 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 14:50:33 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 14:50:33 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 14:50:33 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 14:50:33 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 14:50:33 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 14:50:33 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 14:50:54 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 14:50:54 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 14:50:54 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 14:50:54 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 14:50:54 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 14:50:54 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 14:52:43 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 14:52:43 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 14:52:43 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 14:52:43 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 14:52:43 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 14:52:43 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 14:52:56 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 14:52:56 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 14:52:56 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 14:52:56 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 14:52:56 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 14:52:56 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 14:56:06 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 14:56:06 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 14:56:06 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 14:56:06 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 14:56:06 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 14:56:06 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 14:56:20 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 14:56:20 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 14:56:20 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 14:56:20 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 14:56:20 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 14:56:20 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 14:56:55 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 14:56:55 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 14:56:55 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 14:56:55 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 14:56:55 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 14:56:55 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 15:01:16 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 15:01:16 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 15:01:16 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 15:01:16 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 15:01:16 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 15:01:16 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 15:09:28 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 15:09:28 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 15:09:28 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 15:09:28 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 15:09:28 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 15:09:28 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 15:10:03 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 15:10:03 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 15:10:03 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 15:10:03 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 15:10:03 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 15:10:03 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 15:10:19 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 15:10:19 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 15:10:19 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 15:10:19 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 15:10:19 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 15:10:19 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 15:22:46 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 15:22:46 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 15:22:46 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 15:22:46 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 15:22:46 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 15:22:46 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 15:23:11 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 15:23:11 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 15:23:11 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 15:23:11 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 15:23:12 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 15:23:12 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 15:27:46 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 15:27:46 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 15:27:46 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 15:27:46 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 15:27:46 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 15:27:46 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 15:27:58 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 15:27:58 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 15:27:58 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 15:27:58 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 15:27:58 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 15:27:58 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 15:28:08 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 15:28:08 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 15:28:08 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 15:28:08 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 15:28:08 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 15:28:08 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 15:32:08 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 15:32:08 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 15:32:08 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 15:32:08 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 15:32:08 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 15:32:09 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 15:32:20 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 15:32:20 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 15:32:20 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 15:32:20 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 15:32:20 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 15:32:20 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 15:32:36 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 15:32:36 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 15:32:36 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 15:32:36 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 15:32:36 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 15:32:36 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 15:32:49 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 15:32:49 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 15:32:49 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 15:32:49 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 15:32:49 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 15:32:49 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 15:33:14 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 15:33:14 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 15:33:14 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 15:33:14 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 15:33:14 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 15:33:14 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 15:36:15 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 15:36:15 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 15:36:15 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 15:36:15 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 15:36:15 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 15:36:15 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 15:36:48 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 15:36:48 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 15:36:48 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 15:36:48 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 15:36:48 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 15:36:48 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 16:34:01 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 16:34:01 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 16:34:01 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 16:34:01 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 16:34:01 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 16:34:01 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 16:34:13 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 16:34:13 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 16:34:13 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 16:34:13 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 16:34:13 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 16:34:13 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 16:34:22 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 16:34:22 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 16:34:22 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 16:34:22 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 16:34:22 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 16:34:22 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 16:38:40 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 16:38:40 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 16:38:40 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 16:38:40 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 16:38:40 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 16:38:41 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 16:38:52 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 16:38:52 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 16:38:52 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 16:38:52 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 16:38:52 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 16:38:52 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 16:39:27 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 16:39:27 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 16:39:27 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 16:39:27 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 16:39:27 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 16:39:27 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 16:39:36 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 16:39:36 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 16:39:36 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 16:39:36 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 16:39:36 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 16:39:36 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 16:41:02 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 16:41:02 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 16:41:02 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 16:41:02 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 16:41:02 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 16:41:02 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 16:41:08 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 16:41:08 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 16:41:08 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 16:41:08 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 16:41:08 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 16:41:08 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 16:45:26 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 16:45:26 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 16:45:26 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 16:45:26 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 16:45:26 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 16:45:26 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 16:45:30 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 16:45:30 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 16:45:30 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 16:45:30 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 16:45:30 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 16:45:30 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 16:48:47 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 16:48:47 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 16:48:47 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 16:48:48 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 16:48:48 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 16:48:48 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 16:48:55 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 16:48:55 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 16:48:55 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 16:48:55 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 16:48:55 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 16:48:55 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 16:49:47 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 16:49:47 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 16:49:47 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 16:49:47 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 16:49:47 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 16:49:47 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 16:50:00 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 16:50:00 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 16:50:00 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 16:50:00 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 16:50:00 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 16:50:00 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 16:50:04 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 16:50:04 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 16:50:04 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 16:50:04 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 16:50:04 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 16:50:04 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 16:58:00 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 16:58:00 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 16:58:00 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 16:58:00 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 16:58:00 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 16:58:00 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 16:58:04 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 16:58:04 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 16:58:04 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 16:58:04 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 16:58:04 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 16:58:04 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 16:58:08 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 16:58:08 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 16:58:08 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 16:58:08 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 16:58:08 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 16:58:08 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 16:58:51 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 16:58:51 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 16:58:51 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 16:58:51 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 16:58:51 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 16:58:51 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 16:58:58 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 16:58:58 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 16:58:58 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 16:58:58 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 16:58:58 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 16:58:58 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 16:59:20 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 16:59:20 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 16:59:20 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 16:59:20 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 16:59:20 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 16:59:20 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 17:08:42 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 17:08:42 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 17:08:42 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 17:08:42 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 17:08:42 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 17:08:42 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 17:09:05 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 17:09:05 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 17:09:05 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 17:09:05 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 17:09:05 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 17:09:05 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Wed, 17 Sep 14 17:09:14 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Wed, 17 Sep 14 17:09:14 +0200][INFO] DESCRIBE `languages`
+[Wed, 17 Sep 14 17:09:14 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Wed, 17 Sep 14 17:09:14 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Wed, 17 Sep 14 17:09:14 +0200][INFO] DESCRIBE `mailobjects`
+[Wed, 17 Sep 14 17:09:14 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Thu, 18 Sep 14 09:07:48 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Thu, 18 Sep 14 09:07:49 +0200][INFO] DESCRIBE `languages`
+[Thu, 18 Sep 14 09:07:49 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Thu, 18 Sep 14 09:07:49 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='feusers'
+[Thu, 18 Sep 14 09:07:49 +0200][INFO] DESCRIBE `feusers`
+[Thu, 18 Sep 14 09:07:49 +0200][INFO] SELECT `feusers`.`uid`, `feusers`.`pid`, `feusers`.`tstamp`, `feusers`.`crdate`, `feusers`.`cruser_id`, `feusers`.`deleted`, `feusers`.`hidden`, `feusers`.`username`, `feusers`.`password`, `feusers`.`first_name`, `feusers`.`last_name`, `feusers`.`email`, `feusers`.`phone`, `feusers`.`address`, `feusers`.`city`, `feusers`.`profileid`, `feusers`.`usergroup`, `feusers`.`superuser`, `feusers`.`userlanguage` FROM `feusers` WHERE `feusers`.`email` = :0 LIMIT :2
+[Thu, 18 Sep 14 09:07:49 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='profiles'
+[Thu, 18 Sep 14 09:07:49 +0200][INFO] DESCRIBE `profiles`
+[Thu, 18 Sep 14 09:07:49 +0200][INFO] SELECT `profiles`.`uid`, `profiles`.`pid`, `profiles`.`tstamp`, `profiles`.`crdate`, `profiles`.`cruser_id`, `profiles`.`deleted`, `profiles`.`hidden`, `profiles`.`title` FROM `profiles` WHERE `profiles`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 09:07:49 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='success_logins'
+[Thu, 18 Sep 14 09:07:49 +0200][INFO] DESCRIBE `success_logins`
+[Thu, 18 Sep 14 09:07:49 +0200][INFO] INSERT INTO `success_logins` (`pid`, `tstamp`, `endsession`, `crdate`, `cruser_id`, `userid`, `ipaddress`, `attempted`, `useragent`) VALUES (?, ?, ?, ?, ?, ?, ?, null, ?)
+[Thu, 18 Sep 14 09:13:43 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Thu, 18 Sep 14 09:13:43 +0200][INFO] DESCRIBE `languages`
+[Thu, 18 Sep 14 09:13:43 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Thu, 18 Sep 14 09:13:43 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='templateobjects'
+[Thu, 18 Sep 14 09:13:43 +0200][INFO] DESCRIBE `templateobjects`
+[Thu, 18 Sep 14 09:13:43 +0200][INFO] SELECT `templateobjects`.`uid`, `templateobjects`.`pid`, `templateobjects`.`tstamp`, `templateobjects`.`crdate`, `templateobjects`.`cruser_id`, `templateobjects`.`deleted`, `templateobjects`.`hidden`, `templateobjects`.`title`, `templateobjects`.`usergroup`, `templateobjects`.`sourcecode`, `templateobjects`.`templatefilepath`, `templateobjects`.`templatetype` FROM `templateobjects` WHERE `templateobjects`.`templatetype` = :1
+[Thu, 18 Sep 14 09:13:49 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Thu, 18 Sep 14 09:13:49 +0200][INFO] DESCRIBE `languages`
+[Thu, 18 Sep 14 09:13:49 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Thu, 18 Sep 14 09:13:49 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Thu, 18 Sep 14 09:13:49 +0200][INFO] DESCRIBE `mailobjects`
+[Thu, 18 Sep 14 09:13:49 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Thu, 18 Sep 14 09:14:00 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Thu, 18 Sep 14 09:14:00 +0200][INFO] DESCRIBE `languages`
+[Thu, 18 Sep 14 09:14:01 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Thu, 18 Sep 14 09:14:01 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Thu, 18 Sep 14 09:14:01 +0200][INFO] DESCRIBE `mailobjects`
+[Thu, 18 Sep 14 09:14:01 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Thu, 18 Sep 14 09:14:16 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Thu, 18 Sep 14 09:14:16 +0200][INFO] DESCRIBE `languages`
+[Thu, 18 Sep 14 09:14:16 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Thu, 18 Sep 14 09:14:16 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Thu, 18 Sep 14 09:14:16 +0200][INFO] DESCRIBE `mailobjects`
+[Thu, 18 Sep 14 09:14:16 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Thu, 18 Sep 14 09:27:30 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Thu, 18 Sep 14 09:27:30 +0200][INFO] DESCRIBE `languages`
+[Thu, 18 Sep 14 09:27:30 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Thu, 18 Sep 14 09:27:30 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Thu, 18 Sep 14 09:27:30 +0200][INFO] DESCRIBE `mailobjects`
+[Thu, 18 Sep 14 09:27:30 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='profiles'
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] DESCRIBE `profiles`
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `profiles`.`uid`, `profiles`.`pid`, `profiles`.`tstamp`, `profiles`.`crdate`, `profiles`.`cruser_id`, `profiles`.`deleted`, `profiles`.`hidden`, `profiles`.`title` FROM `profiles` WHERE `profiles`.`deleted` = 0 AND `profiles`.`hidden` = 0
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='permissions'
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] DESCRIBE `permissions`
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `permissions`.`uid`, `permissions`.`pid`, `permissions`.`tstamp`, `permissions`.`crdate`, `permissions`.`cruser_id`, `permissions`.`deleted`, `permissions`.`hidden`, `permissions`.`profileid`, `permissions`.`resourceid`, `permissions`.`resourceaction` FROM `permissions` WHERE `permissions`.`profileid` = :0
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='resources'
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] DESCRIBE `resources`
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `resources`.`uid`, `resources`.`pid`, `resources`.`tstamp`, `resources`.`crdate`, `resources`.`cruser_id`, `resources`.`deleted`, `resources`.`hidden`, `resources`.`title` FROM `resources` WHERE `resources`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] DESCRIBE `languages`
+[Thu, 18 Sep 14 12:34:29 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Thu, 18 Sep 14 12:55:47 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Thu, 18 Sep 14 12:55:47 +0200][INFO] DESCRIBE `languages`
+[Thu, 18 Sep 14 12:55:47 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Thu, 18 Sep 14 12:55:49 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Thu, 18 Sep 14 12:55:49 +0200][INFO] DESCRIBE `languages`
+[Thu, 18 Sep 14 12:55:49 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Thu, 18 Sep 14 12:56:31 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Thu, 18 Sep 14 12:56:31 +0200][INFO] DESCRIBE `languages`
+[Thu, 18 Sep 14 12:56:31 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Thu, 18 Sep 14 12:56:31 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='templateobjects'
+[Thu, 18 Sep 14 12:56:31 +0200][INFO] DESCRIBE `templateobjects`
+[Thu, 18 Sep 14 12:56:31 +0200][INFO] INSERT INTO `templateobjects` (`pid`, `tstamp`, `crdate`, `cruser_id`, `deleted`, `hidden`, `title`, `usergroup`, `sourcecode`, `templatefilepath`, `templatetype`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+[Thu, 18 Sep 14 12:56:32 +0200][INFO] UPDATE `templateobjects` SET `pid` = ?, `tstamp` = ?, `crdate` = ?, `cruser_id` = ?, `deleted` = ?, `hidden` = ?, `title` = ?, `usergroup` = ?, `sourcecode` = ?, `templatefilepath` = ?, `templatetype` = ? WHERE `uid` = ?
+[Thu, 18 Sep 14 12:56:33 +0200][INFO] UPDATE `templateobjects` SET `pid` = ?, `tstamp` = ?, `crdate` = ?, `cruser_id` = ?, `deleted` = ?, `hidden` = ?, `title` = ?, `usergroup` = ?, `sourcecode` = ?, `templatefilepath` = ?, `templatetype` = ? WHERE `uid` = ?
+[Thu, 18 Sep 14 12:56:39 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Thu, 18 Sep 14 12:56:39 +0200][INFO] DESCRIBE `languages`
+[Thu, 18 Sep 14 12:56:39 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Thu, 18 Sep 14 12:56:39 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='templateobjects'
+[Thu, 18 Sep 14 12:56:39 +0200][INFO] DESCRIBE `templateobjects`
+[Thu, 18 Sep 14 12:56:39 +0200][INFO] SELECT `templateobjects`.`uid`, `templateobjects`.`pid`, `templateobjects`.`tstamp`, `templateobjects`.`crdate`, `templateobjects`.`cruser_id`, `templateobjects`.`deleted`, `templateobjects`.`hidden`, `templateobjects`.`title`, `templateobjects`.`usergroup`, `templateobjects`.`sourcecode`, `templateobjects`.`templatefilepath`, `templateobjects`.`templatetype` FROM `templateobjects` WHERE `templateobjects`.`templatetype` = :1
+[Thu, 18 Sep 14 12:56:40 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Thu, 18 Sep 14 12:56:40 +0200][INFO] DESCRIBE `languages`
+[Thu, 18 Sep 14 12:56:40 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Thu, 18 Sep 14 12:56:40 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='templateobjects'
+[Thu, 18 Sep 14 12:56:40 +0200][INFO] DESCRIBE `templateobjects`
+[Thu, 18 Sep 14 12:56:40 +0200][INFO] SELECT `templateobjects`.`uid`, `templateobjects`.`pid`, `templateobjects`.`tstamp`, `templateobjects`.`crdate`, `templateobjects`.`cruser_id`, `templateobjects`.`deleted`, `templateobjects`.`hidden`, `templateobjects`.`title`, `templateobjects`.`usergroup`, `templateobjects`.`sourcecode`, `templateobjects`.`templatefilepath`, `templateobjects`.`templatetype` FROM `templateobjects` WHERE `templateobjects`.`templatetype` = :1
+[Thu, 18 Sep 14 12:56:47 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Thu, 18 Sep 14 12:56:47 +0200][INFO] DESCRIBE `languages`
+[Thu, 18 Sep 14 12:56:47 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Thu, 18 Sep 14 12:56:47 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Thu, 18 Sep 14 12:56:47 +0200][INFO] DESCRIBE `mailobjects`
+[Thu, 18 Sep 14 12:56:47 +0200][INFO] INSERT INTO `mailobjects` (`pid`, `tstamp`, `crdate`, `cruser_id`, `deleted`, `hidden`, `title`, `campaign`, `origuid`, `usergroup`, `templateuid`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+[Thu, 18 Sep 14 13:53:54 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Thu, 18 Sep 14 13:53:54 +0200][INFO] DESCRIBE `languages`
+[Thu, 18 Sep 14 13:53:54 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Thu, 18 Sep 14 13:53:54 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Thu, 18 Sep 14 13:53:54 +0200][INFO] DESCRIBE `mailobjects`
+[Thu, 18 Sep 14 13:53:54 +0200][INFO] INSERT INTO `mailobjects` (`pid`, `tstamp`, `crdate`, `cruser_id`, `deleted`, `hidden`, `title`, `campaign`, `origuid`, `usergroup`, `templateuid`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+[Thu, 18 Sep 14 17:11:34 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Thu, 18 Sep 14 17:11:34 +0200][INFO] DESCRIBE `languages`
+[Thu, 18 Sep 14 17:11:34 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Thu, 18 Sep 14 17:11:34 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='templateobjects'
+[Thu, 18 Sep 14 17:11:34 +0200][INFO] DESCRIBE `templateobjects`
+[Thu, 18 Sep 14 17:11:34 +0200][INFO] SELECT `templateobjects`.`uid`, `templateobjects`.`pid`, `templateobjects`.`tstamp`, `templateobjects`.`crdate`, `templateobjects`.`cruser_id`, `templateobjects`.`deleted`, `templateobjects`.`hidden`, `templateobjects`.`title`, `templateobjects`.`usergroup`, `templateobjects`.`sourcecode`, `templateobjects`.`templatefilepath`, `templateobjects`.`templatetype` FROM `templateobjects` WHERE `templateobjects`.`templatetype` = :1
+[Thu, 18 Sep 14 17:11:42 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Thu, 18 Sep 14 17:11:42 +0200][INFO] DESCRIBE `languages`
+[Thu, 18 Sep 14 17:11:42 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Thu, 18 Sep 14 17:11:42 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Thu, 18 Sep 14 17:11:42 +0200][INFO] DESCRIBE `mailobjects`
+[Thu, 18 Sep 14 17:11:42 +0200][INFO] INSERT INTO `mailobjects` (`pid`, `tstamp`, `crdate`, `cruser_id`, `deleted`, `hidden`, `title`, `campaign`, `origuid`, `usergroup`, `templateuid`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+[Thu, 18 Sep 14 17:12:18 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Thu, 18 Sep 14 17:12:18 +0200][INFO] DESCRIBE `languages`
+[Thu, 18 Sep 14 17:12:18 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Thu, 18 Sep 14 17:12:18 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='templateobjects'
+[Thu, 18 Sep 14 17:12:18 +0200][INFO] DESCRIBE `templateobjects`
+[Thu, 18 Sep 14 17:12:18 +0200][INFO] SELECT `templateobjects`.`uid`, `templateobjects`.`pid`, `templateobjects`.`tstamp`, `templateobjects`.`crdate`, `templateobjects`.`cruser_id`, `templateobjects`.`deleted`, `templateobjects`.`hidden`, `templateobjects`.`title`, `templateobjects`.`usergroup`, `templateobjects`.`sourcecode`, `templateobjects`.`templatefilepath`, `templateobjects`.`templatetype` FROM `templateobjects` WHERE `templateobjects`.`templatetype` = :1
+[Thu, 18 Sep 14 17:12:29 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Thu, 18 Sep 14 17:12:29 +0200][INFO] DESCRIBE `languages`
+[Thu, 18 Sep 14 17:12:30 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Thu, 18 Sep 14 17:12:30 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Thu, 18 Sep 14 17:12:30 +0200][INFO] DESCRIBE `mailobjects`
+[Thu, 18 Sep 14 17:12:30 +0200][INFO] INSERT INTO `mailobjects` (`pid`, `tstamp`, `crdate`, `cruser_id`, `deleted`, `hidden`, `title`, `campaign`, `origuid`, `usergroup`, `templateuid`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+[Thu, 18 Sep 14 17:12:30 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='contentobjects'
+[Thu, 18 Sep 14 17:12:30 +0200][INFO] DESCRIBE `contentobjects`
+[Thu, 18 Sep 14 17:13:41 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Thu, 18 Sep 14 17:13:41 +0200][INFO] DESCRIBE `languages`
+[Thu, 18 Sep 14 17:13:41 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Thu, 18 Sep 14 17:13:41 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='templateobjects'
+[Thu, 18 Sep 14 17:13:41 +0200][INFO] DESCRIBE `templateobjects`
+[Thu, 18 Sep 14 17:13:42 +0200][INFO] SELECT `templateobjects`.`uid`, `templateobjects`.`pid`, `templateobjects`.`tstamp`, `templateobjects`.`crdate`, `templateobjects`.`cruser_id`, `templateobjects`.`deleted`, `templateobjects`.`hidden`, `templateobjects`.`title`, `templateobjects`.`usergroup`, `templateobjects`.`sourcecode`, `templateobjects`.`templatefilepath`, `templateobjects`.`templatetype` FROM `templateobjects` WHERE `templateobjects`.`templatetype` = :1
+[Thu, 18 Sep 14 17:13:48 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Thu, 18 Sep 14 17:13:48 +0200][INFO] DESCRIBE `languages`
+[Thu, 18 Sep 14 17:13:48 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Thu, 18 Sep 14 17:13:48 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Thu, 18 Sep 14 17:13:48 +0200][INFO] DESCRIBE `mailobjects`
+[Thu, 18 Sep 14 17:13:48 +0200][INFO] INSERT INTO `mailobjects` (`pid`, `tstamp`, `crdate`, `cruser_id`, `deleted`, `hidden`, `title`, `campaign`, `origuid`, `usergroup`, `templateuid`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+[Thu, 18 Sep 14 17:13:48 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='contentobjects'
+[Thu, 18 Sep 14 17:13:48 +0200][INFO] DESCRIBE `contentobjects`
+[Thu, 18 Sep 14 17:13:48 +0200][INFO] INSERT INTO `contentobjects` (`pid`, `tstamp`, `crdate`, `cruser_id`, `deleted`, `hidden`, `title`, `campaign`, `origuid`, `usergroup`, `templateuid`, `mailobjectuid`, `contenttype`, `sourcecode`, `templateposition`, `positionsorting`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+[Thu, 18 Sep 14 17:13:48 +0200][INFO] INSERT INTO `contentobjects` (`pid`, `tstamp`, `crdate`, `cruser_id`, `deleted`, `hidden`, `title`, `campaign`, `origuid`, `usergroup`, `templateuid`, `mailobjectuid`, `contenttype`, `sourcecode`, `templateposition`, `positionsorting`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+[Thu, 18 Sep 14 17:13:49 +0200][INFO] INSERT INTO `contentobjects` (`pid`, `tstamp`, `crdate`, `cruser_id`, `deleted`, `hidden`, `title`, `campaign`, `origuid`, `usergroup`, `templateuid`, `mailobjectuid`, `contenttype`, `sourcecode`, `templateposition`, `positionsorting`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+[Thu, 18 Sep 14 17:13:49 +0200][INFO] INSERT INTO `contentobjects` (`pid`, `tstamp`, `crdate`, `cruser_id`, `deleted`, `hidden`, `title`, `campaign`, `origuid`, `usergroup`, `templateuid`, `mailobjectuid`, `contenttype`, `sourcecode`, `templateposition`, `positionsorting`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+[Thu, 18 Sep 14 17:13:49 +0200][INFO] INSERT INTO `contentobjects` (`pid`, `tstamp`, `crdate`, `cruser_id`, `deleted`, `hidden`, `title`, `campaign`, `origuid`, `usergroup`, `templateuid`, `mailobjectuid`, `contenttype`, `sourcecode`, `templateposition`, `positionsorting`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+[Thu, 18 Sep 14 17:13:49 +0200][INFO] INSERT INTO `contentobjects` (`pid`, `tstamp`, `crdate`, `cruser_id`, `deleted`, `hidden`, `title`, `campaign`, `origuid`, `usergroup`, `templateuid`, `mailobjectuid`, `contenttype`, `sourcecode`, `templateposition`, `positionsorting`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+[Thu, 18 Sep 14 17:13:49 +0200][INFO] INSERT INTO `contentobjects` (`pid`, `tstamp`, `crdate`, `cruser_id`, `deleted`, `hidden`, `title`, `campaign`, `origuid`, `usergroup`, `templateuid`, `mailobjectuid`, `contenttype`, `sourcecode`, `templateposition`, `positionsorting`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+[Thu, 18 Sep 14 17:13:59 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Thu, 18 Sep 14 17:13:59 +0200][INFO] DESCRIBE `languages`
+[Thu, 18 Sep 14 17:13:59 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Thu, 18 Sep 14 17:13:59 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='templateobjects'
+[Thu, 18 Sep 14 17:13:59 +0200][INFO] DESCRIBE `templateobjects`
+[Thu, 18 Sep 14 17:13:59 +0200][INFO] SELECT `templateobjects`.`uid`, `templateobjects`.`pid`, `templateobjects`.`tstamp`, `templateobjects`.`crdate`, `templateobjects`.`cruser_id`, `templateobjects`.`deleted`, `templateobjects`.`hidden`, `templateobjects`.`title`, `templateobjects`.`usergroup`, `templateobjects`.`sourcecode`, `templateobjects`.`templatefilepath`, `templateobjects`.`templatetype` FROM `templateobjects` WHERE `templateobjects`.`templatetype` = :1
+[Thu, 18 Sep 14 17:14:04 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Thu, 18 Sep 14 17:14:04 +0200][INFO] DESCRIBE `languages`
+[Thu, 18 Sep 14 17:14:04 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Thu, 18 Sep 14 17:14:04 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Thu, 18 Sep 14 17:14:04 +0200][INFO] DESCRIBE `mailobjects`
+[Thu, 18 Sep 14 17:14:04 +0200][INFO] INSERT INTO `mailobjects` (`pid`, `tstamp`, `crdate`, `cruser_id`, `deleted`, `hidden`, `title`, `campaign`, `origuid`, `usergroup`, `templateuid`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+[Thu, 18 Sep 14 17:14:04 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='contentobjects'
+[Thu, 18 Sep 14 17:14:04 +0200][INFO] DESCRIBE `contentobjects`
+[Thu, 18 Sep 14 17:14:04 +0200][INFO] INSERT INTO `contentobjects` (`pid`, `tstamp`, `crdate`, `cruser_id`, `deleted`, `hidden`, `title`, `campaign`, `origuid`, `usergroup`, `templateuid`, `mailobjectuid`, `contenttype`, `sourcecode`, `templateposition`, `positionsorting`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+[Thu, 18 Sep 14 17:14:04 +0200][INFO] INSERT INTO `contentobjects` (`pid`, `tstamp`, `crdate`, `cruser_id`, `deleted`, `hidden`, `title`, `campaign`, `origuid`, `usergroup`, `templateuid`, `mailobjectuid`, `contenttype`, `sourcecode`, `templateposition`, `positionsorting`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+[Thu, 18 Sep 14 17:14:05 +0200][INFO] INSERT INTO `contentobjects` (`pid`, `tstamp`, `crdate`, `cruser_id`, `deleted`, `hidden`, `title`, `campaign`, `origuid`, `usergroup`, `templateuid`, `mailobjectuid`, `contenttype`, `sourcecode`, `templateposition`, `positionsorting`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+[Thu, 18 Sep 14 17:14:05 +0200][INFO] INSERT INTO `contentobjects` (`pid`, `tstamp`, `crdate`, `cruser_id`, `deleted`, `hidden`, `title`, `campaign`, `origuid`, `usergroup`, `templateuid`, `mailobjectuid`, `contenttype`, `sourcecode`, `templateposition`, `positionsorting`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+[Thu, 18 Sep 14 17:14:05 +0200][INFO] INSERT INTO `contentobjects` (`pid`, `tstamp`, `crdate`, `cruser_id`, `deleted`, `hidden`, `title`, `campaign`, `origuid`, `usergroup`, `templateuid`, `mailobjectuid`, `contenttype`, `sourcecode`, `templateposition`, `positionsorting`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+[Thu, 18 Sep 14 17:14:05 +0200][INFO] INSERT INTO `contentobjects` (`pid`, `tstamp`, `crdate`, `cruser_id`, `deleted`, `hidden`, `title`, `campaign`, `origuid`, `usergroup`, `templateuid`, `mailobjectuid`, `contenttype`, `sourcecode`, `templateposition`, `positionsorting`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+[Thu, 18 Sep 14 17:14:05 +0200][INFO] INSERT INTO `contentobjects` (`pid`, `tstamp`, `crdate`, `cruser_id`, `deleted`, `hidden`, `title`, `campaign`, `origuid`, `usergroup`, `templateuid`, `mailobjectuid`, `contenttype`, `sourcecode`, `templateposition`, `positionsorting`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+[Thu, 18 Sep 14 17:15:53 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Thu, 18 Sep 14 17:15:53 +0200][INFO] DESCRIBE `languages`
+[Thu, 18 Sep 14 17:15:53 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Thu, 18 Sep 14 17:15:53 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='templateobjects'
+[Thu, 18 Sep 14 17:15:53 +0200][INFO] DESCRIBE `templateobjects`
+[Thu, 18 Sep 14 17:15:53 +0200][INFO] SELECT `templateobjects`.`uid`, `templateobjects`.`pid`, `templateobjects`.`tstamp`, `templateobjects`.`crdate`, `templateobjects`.`cruser_id`, `templateobjects`.`deleted`, `templateobjects`.`hidden`, `templateobjects`.`title`, `templateobjects`.`usergroup`, `templateobjects`.`sourcecode`, `templateobjects`.`templatefilepath`, `templateobjects`.`templatetype` FROM `templateobjects` WHERE `templateobjects`.`templatetype` = :1
+[Thu, 18 Sep 14 17:16:39 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Thu, 18 Sep 14 17:16:39 +0200][INFO] DESCRIBE `languages`
+[Thu, 18 Sep 14 17:16:39 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Thu, 18 Sep 14 17:16:39 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Thu, 18 Sep 14 17:16:39 +0200][INFO] DESCRIBE `mailobjects`
+[Thu, 18 Sep 14 17:16:39 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Thu, 18 Sep 14 17:18:19 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Thu, 18 Sep 14 17:18:19 +0200][INFO] DESCRIBE `languages`
+[Thu, 18 Sep 14 17:18:19 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Thu, 18 Sep 14 17:18:19 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Thu, 18 Sep 14 17:18:19 +0200][INFO] DESCRIBE `mailobjects`
+[Thu, 18 Sep 14 17:18:19 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Thu, 18 Sep 14 17:18:30 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Thu, 18 Sep 14 17:18:30 +0200][INFO] DESCRIBE `languages`
+[Thu, 18 Sep 14 17:18:30 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Thu, 18 Sep 14 17:18:30 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Thu, 18 Sep 14 17:18:30 +0200][INFO] DESCRIBE `mailobjects`
+[Thu, 18 Sep 14 17:18:30 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Thu, 18 Sep 14 17:18:42 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Thu, 18 Sep 14 17:18:42 +0200][INFO] DESCRIBE `languages`
+[Thu, 18 Sep 14 17:18:42 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Thu, 18 Sep 14 17:18:42 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Thu, 18 Sep 14 17:18:42 +0200][INFO] DESCRIBE `mailobjects`
+[Thu, 18 Sep 14 17:18:42 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Thu, 18 Sep 14 17:19:34 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Thu, 18 Sep 14 17:19:34 +0200][INFO] DESCRIBE `languages`
+[Thu, 18 Sep 14 17:19:34 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Thu, 18 Sep 14 17:19:34 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Thu, 18 Sep 14 17:19:34 +0200][INFO] DESCRIBE `mailobjects`
+[Thu, 18 Sep 14 17:19:34 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Thu, 18 Sep 14 17:21:32 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Thu, 18 Sep 14 17:21:32 +0200][INFO] DESCRIBE `languages`
+[Thu, 18 Sep 14 17:21:32 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Thu, 18 Sep 14 17:21:32 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Thu, 18 Sep 14 17:21:32 +0200][INFO] DESCRIBE `mailobjects`
+[Thu, 18 Sep 14 17:21:32 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Thu, 18 Sep 14 17:21:32 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='contentobjects'
+[Thu, 18 Sep 14 17:21:32 +0200][INFO] DESCRIBE `contentobjects`
+[Thu, 18 Sep 14 17:21:32 +0200][INFO] SELECT `contentobjects`.`uid`, `contentobjects`.`pid`, `contentobjects`.`tstamp`, `contentobjects`.`crdate`, `contentobjects`.`cruser_id`, `contentobjects`.`deleted`, `contentobjects`.`hidden`, `contentobjects`.`title`, `contentobjects`.`campaign`, `contentobjects`.`origuid`, `contentobjects`.`usergroup`, `contentobjects`.`templateuid`, `contentobjects`.`mailobjectuid`, `contentobjects`.`contenttype`, `contentobjects`.`sourcecode`, `contentobjects`.`templateposition`, `contentobjects`.`positionsorting` FROM `contentobjects` WHERE `contentobjects`.`deleted` = :1 AND `contentobjects`.`hidden` = :1 AND `contentobjects`.`mailobjectuid` = :0 ORDER BY `contentobjects`.`templateposition` ASC, `contentobjects`.`positionsorting` ASC
+[Thu, 18 Sep 14 17:22:59 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Thu, 18 Sep 14 17:22:59 +0200][INFO] DESCRIBE `languages`
+[Thu, 18 Sep 14 17:22:59 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Thu, 18 Sep 14 17:22:59 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Thu, 18 Sep 14 17:22:59 +0200][INFO] DESCRIBE `mailobjects`
+[Thu, 18 Sep 14 17:22:59 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Thu, 18 Sep 14 17:22:59 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='contentobjects'
+[Thu, 18 Sep 14 17:22:59 +0200][INFO] DESCRIBE `contentobjects`
+[Thu, 18 Sep 14 17:22:59 +0200][INFO] SELECT `contentobjects`.`uid`, `contentobjects`.`pid`, `contentobjects`.`tstamp`, `contentobjects`.`crdate`, `contentobjects`.`cruser_id`, `contentobjects`.`deleted`, `contentobjects`.`hidden`, `contentobjects`.`title`, `contentobjects`.`campaign`, `contentobjects`.`origuid`, `contentobjects`.`usergroup`, `contentobjects`.`templateuid`, `contentobjects`.`mailobjectuid`, `contentobjects`.`contenttype`, `contentobjects`.`sourcecode`, `contentobjects`.`templateposition`, `contentobjects`.`positionsorting` FROM `contentobjects` WHERE `contentobjects`.`deleted` = :1 AND `contentobjects`.`hidden` = :2 AND `contentobjects`.`mailobjectuid` = :0 ORDER BY `contentobjects`.`templateposition` ASC, `contentobjects`.`positionsorting` ASC
+[Thu, 18 Sep 14 17:23:26 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Thu, 18 Sep 14 17:23:26 +0200][INFO] DESCRIBE `languages`
+[Thu, 18 Sep 14 17:23:26 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Thu, 18 Sep 14 17:23:26 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Thu, 18 Sep 14 17:23:26 +0200][INFO] DESCRIBE `mailobjects`
+[Thu, 18 Sep 14 17:23:26 +0200][INFO] SELECT `mailobjects`.`uid`, `mailobjects`.`pid`, `mailobjects`.`tstamp`, `mailobjects`.`crdate`, `mailobjects`.`cruser_id`, `mailobjects`.`deleted`, `mailobjects`.`hidden`, `mailobjects`.`title`, `mailobjects`.`campaign`, `mailobjects`.`origuid`, `mailobjects`.`usergroup`, `mailobjects`.`templateuid` FROM `mailobjects` WHERE `mailobjects`.`uid` = :1 LIMIT :2
+[Thu, 18 Sep 14 17:23:26 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='contentobjects'
+[Thu, 18 Sep 14 17:23:26 +0200][INFO] DESCRIBE `contentobjects`
+[Thu, 18 Sep 14 17:23:26 +0200][INFO] SELECT `contentobjects`.`uid`, `contentobjects`.`pid`, `contentobjects`.`tstamp`, `contentobjects`.`crdate`, `contentobjects`.`cruser_id`, `contentobjects`.`deleted`, `contentobjects`.`hidden`, `contentobjects`.`title`, `contentobjects`.`campaign`, `contentobjects`.`origuid`, `contentobjects`.`usergroup`, `contentobjects`.`templateuid`, `contentobjects`.`mailobjectuid`, `contentobjects`.`contenttype`, `contentobjects`.`sourcecode`, `contentobjects`.`templateposition`, `contentobjects`.`positionsorting` FROM `contentobjects` WHERE `contentobjects`.`deleted` = 0 AND `contentobjects`.`hidden` = 0 AND `contentobjects`.`mailobjectuid` = :0 ORDER BY `contentobjects`.`templateposition` ASC, `contentobjects`.`positionsorting` ASC
+[Thu, 18 Sep 14 17:40:15 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Thu, 18 Sep 14 17:40:15 +0200][INFO] DESCRIBE `languages`
+[Thu, 18 Sep 14 17:40:15 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Thu, 18 Sep 14 17:40:15 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='feusers'
+[Thu, 18 Sep 14 17:40:15 +0200][INFO] DESCRIBE `feusers`
+[Thu, 18 Sep 14 17:40:15 +0200][INFO] SELECT `feusers`.`uid`, `feusers`.`pid`, `feusers`.`tstamp`, `feusers`.`crdate`, `feusers`.`cruser_id`, `feusers`.`deleted`, `feusers`.`hidden`, `feusers`.`username`, `feusers`.`password`, `feusers`.`first_name`, `feusers`.`last_name`, `feusers`.`email`, `feusers`.`phone`, `feusers`.`address`, `feusers`.`city`, `feusers`.`profileid`, `feusers`.`usergroup`, `feusers`.`superuser`, `feusers`.`userlanguage` FROM `feusers` WHERE `feusers`.`email` = :0 LIMIT :2
+[Thu, 18 Sep 14 17:40:15 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='profiles'
+[Thu, 18 Sep 14 17:40:15 +0200][INFO] DESCRIBE `profiles`
+[Thu, 18 Sep 14 17:40:15 +0200][INFO] SELECT `profiles`.`uid`, `profiles`.`pid`, `profiles`.`tstamp`, `profiles`.`crdate`, `profiles`.`cruser_id`, `profiles`.`deleted`, `profiles`.`hidden`, `profiles`.`title` FROM `profiles` WHERE `profiles`.`uid` = :0 LIMIT :2
+[Thu, 18 Sep 14 17:40:15 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='success_logins'
+[Thu, 18 Sep 14 17:40:15 +0200][INFO] DESCRIBE `success_logins`
+[Thu, 18 Sep 14 17:40:15 +0200][INFO] INSERT INTO `success_logins` (`pid`, `tstamp`, `endsession`, `crdate`, `cruser_id`, `userid`, `ipaddress`, `attempted`, `useragent`) VALUES (?, ?, ?, ?, ?, ?, ?, null, ?)
+[Thu, 18 Sep 14 17:40:27 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Thu, 18 Sep 14 17:40:27 +0200][INFO] DESCRIBE `languages`
+[Thu, 18 Sep 14 17:40:27 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Thu, 18 Sep 14 17:40:27 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='templateobjects'
+[Thu, 18 Sep 14 17:40:27 +0200][INFO] DESCRIBE `templateobjects`
+[Thu, 18 Sep 14 17:40:27 +0200][INFO] SELECT `templateobjects`.`uid`, `templateobjects`.`pid`, `templateobjects`.`tstamp`, `templateobjects`.`crdate`, `templateobjects`.`cruser_id`, `templateobjects`.`deleted`, `templateobjects`.`hidden`, `templateobjects`.`title`, `templateobjects`.`usergroup`, `templateobjects`.`sourcecode`, `templateobjects`.`templatefilepath`, `templateobjects`.`templatetype` FROM `templateobjects` WHERE `templateobjects`.`templatetype` = :1
+[Thu, 18 Sep 14 17:40:36 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='languages'
+[Thu, 18 Sep 14 17:40:36 +0200][INFO] DESCRIBE `languages`
+[Thu, 18 Sep 14 17:40:36 +0200][INFO] SELECT `languages`.`uid`, `languages`.`pid`, `languages`.`tstamp`, `languages`.`crdate`, `languages`.`cruser_id`, `languages`.`deleted`, `languages`.`hidden`, `languages`.`title`, `languages`.`shorttitle` FROM `languages` WHERE `languages`.`deleted` = :deleted AND `languages`.`hidden` = :hidden
+[Thu, 18 Sep 14 17:40:36 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='mailobjects'
+[Thu, 18 Sep 14 17:40:36 +0200][INFO] DESCRIBE `mailobjects`
+[Thu, 18 Sep 14 17:40:36 +0200][INFO] INSERT INTO `mailobjects` (`pid`, `tstamp`, `crdate`, `cruser_id`, `deleted`, `hidden`, `title`, `campaign`, `origuid`, `usergroup`, `templateuid`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+[Thu, 18 Sep 14 17:40:36 +0200][INFO] SELECT IF(COUNT(*)>0, 1 , 0) FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_NAME`='contentobjects'
+[Thu, 18 Sep 14 17:40:36 +0200][INFO] DESCRIBE `contentobjects`
+[Thu, 18 Sep 14 17:40:36 +0200][INFO] INSERT INTO `contentobjects` (`pid`, `tstamp`, `crdate`, `cruser_id`, `deleted`, `hidden`, `title`, `campaign`, `origuid`, `usergroup`, `templateuid`, `mailobjectuid`, `contenttype`, `sourcecode`, `templateposition`, `positionsorting`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+[Thu, 18 Sep 14 17:40:36 +0200][INFO] INSERT INTO `contentobjects` (`pid`, `tstamp`, `crdate`, `cruser_id`, `deleted`, `hidden`, `title`, `campaign`, `origuid`, `usergroup`, `templateuid`, `mailobjectuid`, `contenttype`, `sourcecode`, `templateposition`, `positionsorting`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+[Thu, 18 Sep 14 17:40:36 +0200][INFO] INSERT INTO `contentobjects` (`pid`, `tstamp`, `crdate`, `cruser_id`, `deleted`, `hidden`, `title`, `campaign`, `origuid`, `usergroup`, `templateuid`, `mailobjectuid`, `contenttype`, `sourcecode`, `templateposition`, `positionsorting`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+[Thu, 18 Sep 14 17:40:36 +0200][INFO] INSERT INTO `contentobjects` (`pid`, `tstamp`, `crdate`, `cruser_id`, `deleted`, `hidden`, `title`, `campaign`, `origuid`, `usergroup`, `templateuid`, `mailobjectuid`, `contenttype`, `sourcecode`, `templateposition`, `positionsorting`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+[Thu, 18 Sep 14 17:40:36 +0200][INFO] INSERT INTO `contentobjects` (`pid`, `tstamp`, `crdate`, `cruser_id`, `deleted`, `hidden`, `title`, `campaign`, `origuid`, `usergroup`, `templateuid`, `mailobjectuid`, `contenttype`, `sourcecode`, `templateposition`, `positionsorting`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+[Thu, 18 Sep 14 17:40:37 +0200][INFO] INSERT INTO `contentobjects` (`pid`, `tstamp`, `crdate`, `cruser_id`, `deleted`, `hidden`, `title`, `campaign`, `origuid`, `usergroup`, `templateuid`, `mailobjectuid`, `contenttype`, `sourcecode`, `templateposition`, `positionsorting`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+[Thu, 18 Sep 14 17:40:37 +0200][INFO] INSERT INTO `contentobjects` (`pid`, `tstamp`, `crdate`, `cruser_id`, `deleted`, `hidden`, `title`, `campaign`, `origuid`, `usergroup`, `templateuid`, `mailobjectuid`, `contenttype`, `sourcecode`, `templateposition`, `positionsorting`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)

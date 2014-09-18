@@ -11,7 +11,7 @@ use Phalcon\Mvc\Model;
  *
  * @author Philipp-PC
  */
-class Mailobjects extends Model{
+class Contentobjects extends Model{
 	 /**
      *
      * @var integer
@@ -76,7 +76,7 @@ class Mailobjects extends Model{
      *
      * @var integer
      */
-    public $templateuid;
+    public $templateuid=0;
 	
 	/**
      *
@@ -90,6 +90,24 @@ class Mailobjects extends Model{
      */
     public $sourcecode;
 	
+	/**
+     *
+     * @var integer
+     */
+    public $templateposition=0;
+	
+	
+	/**
+     *
+     * @var integer
+     */
+    public $positionsorting=0;
+	
+	/**
+     *
+     * @var integer
+     */
+    public $mailobjectuid=0;
 	
 }
 

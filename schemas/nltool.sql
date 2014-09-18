@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS permissions (
 	resourceaction varchar(55) NOT NULL,
   PRIMARY KEY (uid),
   KEY profilesid (profileid)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
 
 
 LOCK TABLES permissions WRITE;
@@ -101,7 +101,12 @@ INSERT INTO permissions (uid, crdate, profileid, resourceid, resourceaction) VAL
 (42, NOW(), 1, 9, 'create'),
 (43, NOW(), 1, 9, 'retrieve'),
 (44, NOW(), 1, 9, 'update'),
-(45, NOW(), 1, 9, 'delete');
+(45, NOW(), 1, 9, 'delete'),
+(46, NOW(), 1, 10, 'index'),
+(47, NOW(), 1, 10, 'create'),
+(48, NOW(), 1, 10, 'retrieve'),
+(49, NOW(), 1, 10, 'update'),
+(50, NOW(), 1, 10, 'delete');
 UNLOCK TABLES;
 
 
@@ -120,7 +125,7 @@ CREATE TABLE IF NOT EXISTS resources(
 	hidden tinyint(4) DEFAULT '0' NOT NULL,
 	title varchar(255) NOT NULL,
 	PRIMARY KEY (uid)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 
 LOCK TABLES resources WRITE;
@@ -133,7 +138,8 @@ INSERT INTO resources (uid, crdate, title) VALUES
 (6, NOW(),'permissions'),
 (7, NOW(),'campaigns'),
 (8, NOW(),'mailobjects'),
-(9, NOW(),'templateobjects');
+(9, NOW(),'templateobjects'),
+(10, NOW(),'contentobjects');
 UNLOCK TABLES;
 -- --------------------------------------------------------
 
@@ -315,10 +321,12 @@ CREATE TABLE contentobjects (
 	campaign int(11) DEFAULT '0' NOT NULL,	
 	origuid int(11) DEFAULT '0' NOT NULL,	
 	usergroup int(11) DEFAULT '0' NOT NULL,	
+	mailobjectuid int(11) DEFAULT '0' NOT NULL,	
 	templateuid int(11) DEFAULT '0' NOT NULL,	
 	contenttype int(11) DEFAULT '0' NOT NULL,	
 	sourcecode mediumtext,
-	contentposition int(11) DEFAULT '0' NOT NULL,	
+	templateposition int(11) DEFAULT '0' NOT NULL,	
+	positionsorting int(11) DEFAULT '0' NOT NULL,	
   PRIMARY KEY (uid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 

@@ -78,6 +78,11 @@ class Mailobjects extends Model{
      */
     public $templateuid;
 	
+	 public function initialize()
+    {
+        $this->hasMany("uid", "nltool\Models\Contentobjects", "mailobjectuid",array('alias' => 'contentobjects'));
+    }
+	
 }
 
 

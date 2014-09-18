@@ -4,7 +4,7 @@
 <div id="fileTollBar"><div class="glyphicon glyphicon-floppy-save" id="mailobjectSave" data-controller="mailobject" data-action="create"><span class="itemLabel">{{ tr('save') }}</span></div></div>	
 {%- if session.get('auth') -%}
 <h1>{{tr('composeTitle')}}</h1>
-<form action="/baywa-nltool/{{language}}/mailobjects/update/" method="POST">
+<form action="/baywa-nltool/{{language}}/mailobjects/create/" method="POST">
 	<label>{{ tr('nameLabel')}}</label><br>
 	<input name="title" type="text" syle="width:400px;"><br><br>
 

@@ -7,8 +7,17 @@ jQuery('document').ready(function(){
 		jQuery(element).attr('contenteditable','true');
 	});
 	jQuery('#mailobjectUpdate').bind('click', 
+		
 		function(e){
+			var editElements='';
+			jQuery('.editable').each(function(index,element){
+				var content=jQuery(element).html();
+				content=(jQuery(element).html()).replace(/contenteditable="true"/g," ");
+				
+				editElements+='&contentElements[]='+encodeURIComponent(content)+'';
+			});
 			var formdata=jQuery('#editFrameForm').serialize();
+			formdata+=editElements;			
 			var mailobjectUid=jQuery('#mailobjectUid').val();
 			ajaxIt(baseController,baseAction,formdata,reloadFrame,mailobjectUid);
 		}
