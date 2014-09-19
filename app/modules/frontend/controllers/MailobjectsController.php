@@ -57,7 +57,7 @@ class MailobjectsController extends ControllerBase
 				$templateFile=  '../app/modules/frontend/templates/template_mail_'.$templateUid.'.volt';
 				$generatedMailFile='../public/mails/mailobject_'.$mailObject->uid.'.html';
 				$bodyRaw=file_get_contents($templateFile);
-				$body='';
+				
 				$basicContentElements=$this->getBasicContentElementsFromTemplate($bodyRaw);
 				foreach($basicContentElements as $cElCount => $basicContentElement){
 					$cElement=new Contentobjects();
@@ -77,7 +77,7 @@ class MailobjectsController extends ControllerBase
 					if (!$cElement->save()) {
 						$this->flash->error($cElement->getMessages());
 					}
-					$body.='<div class="editable"><div class="cElement">'.$basicContentElement.'</div></div>';
+					
 					
 				}
 				$bodyNice=$this->editRenderMailVars($bodyRaw);
@@ -117,6 +117,7 @@ class MailobjectsController extends ControllerBase
 	{
 		$this->assets            
             ->addJs('js/vendor/mailobjectsInit.js');
+		
 		//$this->view->setVar('language',);
 		if($this->request->isPost() && $this->dispatcher->getParam("uid")){
 			
@@ -130,14 +131,56 @@ class MailobjectsController extends ControllerBase
 			
 			$generatedMailformFile='../public/mails/mailobject_'.$mailObjectUid.'.html';
 			$templateFile=  '../app/modules/frontend/templates/template_mail_'.$mailobjectRecord->templateuid.'.volt';
-			$mainTemplate='../app/modules/frontend/templates/main.volt';
+			$mainTemplateFile='../app/modules/frontend/templates/main.volt';
 			$bodyRaw=file_get_contents($templateFile);
 			
 			if(is_array($contentElements)){
-				$body=$this->renderMailVars($bodyRaw,$contentElements);
+				foreach($contentElements as $position => $positionContents){
+					foreach($positionContents as $sorting => $cElement){
+						$contentobjectRecord=  Contentobjects::findFirst(array(
+							"conditions" => "deleted = 0 AND hidden =0 AND templateposition = ?1 AND positionsorting = ?2 AND mailobjectuid = ?3",
+							"bind" => array(
+								1 => $position,
+								2 => $sorting,
+								3 => $mailObjectUid
+								
+								)
+						));
+						
+						if($contentobjectRecord){
+							$contentobjectRecord->sourcecode=$cElement;
+							$contentobjectRecord->tstamp=time();
+							echo($contentobjectRecord->update());
+						}else{
+							$contentobjectRecord=new Contentobjects();
+							$contentobjectRecord->assign(array(
+								'crdate' => time(),
+								'tstamp' => time(),
+								'cruser_id' =>$this->session->get('auth')['uid'],
+								'usergroup' =>$this->session->get('auth')['usergroup'],
+								'contenttype' =>0,
+								'sourcecode'=> $cElement,
+								'templateposition'=> $position,
+								'positionsorting'=> $sorting,
+								'mailobjectuid' => $mailObjectUid,
+								'title'=> 'Basic Content Element '.$position.'.'.$sorting
+							));
+							if (!$contentobjectRecord->save()) {
+								$this->flash->error($cElement->getMessages());
+							}
+						}
+						
+					}
+				}
 			}
-			file_put_contents('../public/mails/test.html', $body);
-			$mail=$this->renderMain(file_get_contents($mainTemplate),$body);
+			
+			$contentObjects=Contentobjects::find(array(
+				"conditions" => "deleted=0 AND hidden=0 AND mailobjectuid = ?1",
+				"bind" => array(1 => $mailObjectUid)
+			));
+			$mailBody=$this->writeContentElements($bodyRaw, $contentObjects);
+			$mainTemplate=  file_get_contents($mainTemplateFile);
+			$mail=$this->renderMain($mainTemplate,$mailBody);
 			file_put_contents($generatedMailformFile, $mail);
 			$this->view->setVar('compiledTemplatebodyRaw',$bodyRaw);
 			$this->view->setVar('mailobjectuid',$mailObjectUid);
@@ -150,7 +193,7 @@ class MailobjectsController extends ControllerBase
 			"conditions" => "uid = ?1",
 			"bind" => array(1 => $mailObjectUid)
 			));
-			$mailobjectRecord->getContentobjects(array(
+			$contentObjects=$mailobjectRecord->getContentobjects(array(
 				"conditions" => "deleted = 0 AND hidden =0",
 				"order" => "templateposition ASC, positionsorting ASC"
 				
@@ -159,7 +202,7 @@ class MailobjectsController extends ControllerBase
 			
 			$templateFile=  '../app/modules/frontend/templates/template_mail_'.$mailobjectRecord->templateuid.'.volt';
 			$bodyRaw=file_get_contents($templateFile);
-			$body=$this->editRenderMailVars($bodyRaw);
+			$body=$this->writeContentElements($bodyRaw, $contentObjects);
 			$this->view->setVar('compiledTemplatebodyRaw',$body);				
 			$this->view->setVar('mailobjectuid',$mailObjectUid);
 			$this->view->setVar('source','http://localhost/baywa-nltool/public/mails/mailobject_'.$mailObjectUid.'.html');
@@ -167,6 +210,24 @@ class MailobjectsController extends ControllerBase
 		
 		
 		
+	}
+	
+	
+	function writeContentElements($bodyRaw,$contentObjects){
+		$contentPerPosition=array();
+		foreach($contentObjects as $contentObject){
+			if(isset($contentPerPosition[$contentObject->templateposition])){
+			$contentPerPosition[$contentObject->templateposition].=$contentObject->sourcecode;
+			}else{
+				$contentPerPosition[$contentObject->templateposition]=$contentObject->sourcecode;
+			}
+		}
+		foreach($contentPerPosition as $content){
+			$bodyRaw=preg_replace('/({{editable begin}})(.*)({{editable end}})/siU', '<div class="editable">' .$content.'</div>', $bodyRaw, 1, $count);
+		}
+		
+		
+		return $bodyRaw;
 	}
 	
 	function editRenderMailVars($subject){
@@ -193,9 +254,7 @@ class MailobjectsController extends ControllerBase
 	
 	function renderMailVars($subject,$contentObjects){		
 		$count=0;
-		/*TODO inhaltslemente verschachtelt nach cposition und csorting einsetzen
-		 * 
-		 */
+		
 		
 		foreach($inputs as $text){		
 			if($text != ''){

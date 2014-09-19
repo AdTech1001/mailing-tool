@@ -16,7 +16,8 @@ require.config({
 		bootstrap: 'bootstrap.min',
 		jsplumb:'jquery.jsPlumb-1.6.4',
 		plumbscript:'automationWorkflowModule',
-		mailobjectsUpdate: 'mailobjectsUpdate'
+		mailobjectsUpdate: 'mailobjectsUpdate',
+		tinymce:'tinymce.min'
 		
     }
 });

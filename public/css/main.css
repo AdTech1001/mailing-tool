@@ -984,8 +984,8 @@ nav ul li a{
 }
 
 .editable:hover{
-	border: 1px dotted;	
-	padding: 10px;
+	/*border: 1px dotted;	
+	padding: 10px;*/
 }
 @media (min-width: 768px) {
 	
