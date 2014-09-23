@@ -83,10 +83,14 @@ class MailobjectsController extends ControllerBase
 				$bodyNice=$this->editRenderMailVars($bodyRaw);
 				
 				file_put_contents($generatedMailFile, $bodyNice);
+				$this->response->redirect('mailobjects/update/'.$mailObject->uid.'/'); 
 				
 				}
 				
             }
+			
+			
+			
 			/*
 			 * TODO entweder Mailform wieder aufbauen oder zu UPDATE weiterleiten (eher letzteres)
 			 */
@@ -135,6 +139,7 @@ class MailobjectsController extends ControllerBase
 			$bodyRaw=file_get_contents($templateFile);
 			
 			if(is_array($contentElements)){
+				$updateTime=time();
 				foreach($contentElements as $position => $positionContents){
 					foreach($positionContents as $sorting => $cElement){
 						$contentobjectRecord=  Contentobjects::findFirst(array(
@@ -149,13 +154,13 @@ class MailobjectsController extends ControllerBase
 						
 						if($contentobjectRecord){
 							$contentobjectRecord->sourcecode=$cElement;
-							$contentobjectRecord->tstamp=time();
-							echo($contentobjectRecord->update());
+							$contentobjectRecord->tstamp=$updateTime;
+							$contentobjectRecord->update();
 						}else{
 							$contentobjectRecord=new Contentobjects();
 							$contentobjectRecord->assign(array(
-								'crdate' => time(),
-								'tstamp' => time(),
+								'crdate' => $updateTime,
+								'tstamp' => $updateTime,
 								'cruser_id' =>$this->session->get('auth')['uid'],
 								'usergroup' =>$this->session->get('auth')['usergroup'],
 								'contenttype' =>0,
@@ -172,6 +177,8 @@ class MailobjectsController extends ControllerBase
 						
 					}
 				}
+				
+				/*TODO UPDATE every cElemnent where tstamp < $updateTime !!!*/
 			}
 			
 			$contentObjects=Contentobjects::find(array(
@@ -200,9 +207,17 @@ class MailobjectsController extends ControllerBase
 			));
 			//$contentObjects=  Contentobjects::find();
 			
+			$availableContentObject=  Contentobjects::find(array(
+				"conditions" => "deleted = 0 AND hidden=0 AND usergroup=?1",
+				"bind" => array(1 => $this->session->get('auth')['usergroup'])
+				
+			));
+			
+			
 			$templateFile=  '../app/modules/frontend/templates/template_mail_'.$mailobjectRecord->templateuid.'.volt';
 			$bodyRaw=file_get_contents($templateFile);
 			$body=$this->writeContentElements($bodyRaw, $contentObjects);
+			$this->view->cElements=$availableContentObject;
 			$this->view->setVar('compiledTemplatebodyRaw',$body);				
 			$this->view->setVar('mailobjectuid',$mailObjectUid);
 			$this->view->setVar('source','http://localhost/baywa-nltool/public/mails/mailobject_'.$mailObjectUid.'.html');

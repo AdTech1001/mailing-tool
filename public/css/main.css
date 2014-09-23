@@ -916,7 +916,7 @@ nav ul li a{
 	right:0px;
 	height:100%;
 	padding-top:45px;
-	width:150px;
+	width:350px;
 	text-align:center;
 }
 
@@ -925,6 +925,36 @@ nav ul li a{
 	margin:0px auto 15px auto;
 	position:relative;
 }
+.cElementThumbWrapper{
+	max-width:320px;
+	margin-left:auto;
+	margin-right:auto;
+	overflow: hidden;
+	margin-bottom:20px;
+	height:200px;
+	width:200px;
+}
+
+#campaignCreateElements .cElementThumb{
+	/*zoom: 0.3;*/
+	
+
+}
+#editFrame .cElement{
+	
+}
+
+.cElement:hover{
+
+	cursor:move;
+}
+.ui-state-hover{
+	-webkit-box-shadow: 3px 6px 10px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 3px 6px 10px 0px rgba(0,0,0,0.75);
+	box-shadow: 3px 6px 10px 0px rgba(0,0,0,0.75);
+	cursor:pointer;
+}
+
 #loadingimg, #tooltipOverlay{
 	position:absolute;
 	top:50%;
@@ -937,15 +967,16 @@ nav ul li a{
 	display:none;
 	color:#fff;	
 }
-#fileTollBar{
+#fileToolBar{
 	display:inline-block;
 	float:right;
 	font-size:16px;
 	margin-bottom:20px;
 	width:150px;
 }
-#fileTollBar > div{
+#fileToolBar > div{
 	cursor:pointer;
+	margin-left:20px;
 }
 
 #templateCarousel{
@@ -987,6 +1018,8 @@ nav ul li a{
 	/*border: 1px dotted;	
 	padding: 10px;*/
 }
+
+
 @media (min-width: 768px) {
 	
 }

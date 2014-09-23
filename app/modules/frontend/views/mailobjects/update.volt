@@ -4,7 +4,12 @@
 {{ content() }}
 {%- if session.get('auth') -%}
 <div class="container">
-<div id="fileTollBar"><div class="glyphicon glyphicon-floppy-save" id="mailobjectUpdate" data-controller="mailobject" data-action="update"><span class="itemLabel">{{ tr('save') }}</span></div></div>		
+<div id="fileToolBar">
+	<div class="glyphicon glyphicon-edit" id="mailobjectEditMode" data-controller="mailobject" data-action="update"><span class="itemLabel">{{ tr('edit') }}</span>
+	</div>
+	<div class="glyphicon glyphicon-floppy-save" id="mailobjectUpdate" data-controller="mailobject" data-action="update"><span class="itemLabel">{{ tr('save') }}</span>
+	</div>
+</div>		
 	<div id="tooltipOverlay" class="hidden">
 		<form id="contentElements">
 			<label>tr('contentTypeLabel')</label><br>
@@ -38,7 +43,17 @@
 	</div>
 	<div id="campaignCreateElements">
 		
-		</div>	
+		{% for cElement in cElements %}
+		{%- if cElement.sourcecode != '' -%}
+		<div class="cElementThumbWrapper"><span>{{ cElement.title }}</span>
+			<div class="cElementThumb">
+				{{ cElement.sourcecode }}
+			</div>
+		</div>
+		{% endif %}
+        {% endfor %}
+		
+	</div>	
 	<div class="clearfix"></div>
 </div>
 	
