@@ -4,11 +4,16 @@
 {{ content() }}
 {%- if session.get('auth') -%}
 <div class="container">
+<div id="menuWrapper" class="clearfix">
+	<div id="activityModeBar"><h1>{{ tr('activeModeTitle') }}</h1><h2 class="mode active">{{ tr('mailUpdateModeArrange') }}</h2><div class="mode glyphicon glyphicon-retweet"></div><h2 class="mode inactive">{{ tr('mailUpdateModeEdit') }}</h2>
+			
+		</div>
 <div id="fileToolBar">
-	<div class="glyphicon glyphicon-edit" id="mailobjectEditMode" data-controller="mailobject" data-action="update"><span class="itemLabel">{{ tr('edit') }}</span>
+	<div class="glyphicon glyphicon-edit" id="mailobjectEditMode" data-controller="mailobject" data-action="update" title="{{ tr('edit') }}">
 	</div>
-	<div class="glyphicon glyphicon-floppy-save" id="mailobjectUpdate" data-controller="mailobject" data-action="update"><span class="itemLabel">{{ tr('save') }}</span>
+	<div class="glyphicon glyphicon-floppy-save" id="mailobjectUpdate" data-controller="mailobject" data-action="update" title="{{ tr('save') }}">
 	</div>
+</div>	
 </div>		
 	<div id="tooltipOverlay" class="hidden">
 		<form id="contentElements">
@@ -42,23 +47,49 @@
 	
 	</div>
 	<div id="campaignCreateElements">
-		
-		{% for cElement in cElements %}
-		{%- if cElement.sourcecode != '' -%}
-		<div class="cElementThumbWrapper"><span>{{ cElement.title }}</span>
-			<div class="cElementThumb">
-				{{ cElement.sourcecode }}
+		<div id="templatedCElements">
+			<h3>{{ tr('templatedCElementsTitle') }}</h3>
+			{% for templatedCElement in templatedCElements %}
+			{%- if templatedCElement.sourcecode != '' -%}
+			<div class="cElementThumbWrapper"><span>{{ templatedCElement.title }}</span>
+				<div class="cElementThumb">
+					{{ image(templatedCElement.templatefilepath) }}
+					
+					{{ templatedCElement.sourcecode }}
+					
+				</div>
 			</div>
+			{% endif %}
+			{% endfor %}
 		</div>
-		{% endif %}
-        {% endfor %}
-		
+		<div id="dynamicCElements">
+			<h3>{{ tr('dynamicCElementsTitle') }}</h3>
+			
+			<div class="cElementThumbWrapper"><span>currently none available</span>
+				<div class="cElementThumb">
+			
+				</div>
+			</div>
+			
+		</div>
+		<div id="recentCElements">
+			<h3>{{ tr('recentCElementsTitle') }}</h3>
+			{% for cElement in cElements %}
+			{%- if cElement.sourcecode != '' -%}
+			<div class="cElementThumbWrapper"><span>{{ cElement.title }}</span>
+				<div class="cElementThumb">
+					{{ cElement.sourcecode }}
+				</div>
+			</div>
+			{% endif %}
+			{% endfor %}
+		</div>
 	</div>	
 	<div class="clearfix"></div>
 </div>
 	
 </div>	
-<div id="viewFrame">
+<div id="viewFrame" style="display:none">
 	<iframe id="mailobjectFrame" style="border:1px solid; background:#e3e3e3;width:80%; min-height:100%;" src="{{ source }}" ></iframe>
 </div>
 {% endif %}

@@ -38,7 +38,9 @@ $di->set(
 );
 
 
-
+$di->set('modelsManager', function() {
+      return new Phalcon\Mvc\Model\Manager();
+ });
 
 
 /**

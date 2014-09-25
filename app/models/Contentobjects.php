@@ -1,13 +1,10 @@
 <?php
 namespace nltool\Models;
 use Phalcon\Mvc\Model;
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 
 /**
- * Description of Mailobjects
+ * Description of Contentobjects
  *
  * @author Philipp-PC
  */
@@ -110,5 +107,3 @@ class Contentobjects extends Model{
     public $mailobjectuid=0;
 	
 }
-
-

@@ -83,6 +83,7 @@ class MailobjectsController extends ControllerBase
 				$bodyNice=$this->editRenderMailVars($bodyRaw);
 				
 				file_put_contents($generatedMailFile, $bodyNice);
+				
 				$this->response->redirect('mailobjects/update/'.$mailObject->uid.'/'); 
 				
 				}
@@ -91,9 +92,7 @@ class MailobjectsController extends ControllerBase
 			
 			
 			
-			/*
-			 * TODO entweder Mailform wieder aufbauen oder zu UPDATE weiterleiten (eher letzteres)
-			 */
+			
 		}else{
 		
 		
@@ -178,7 +177,13 @@ class MailobjectsController extends ControllerBase
 					}
 				}
 				
-				/*TODO UPDATE every cElemnent where tstamp < $updateTime !!!*/
+				/* Deleting all entries, which are not current */
+				 $query=$this->modelsManager->createQuery( "UPDATE nltool\Models\Contentobjects SET deleted=1, hidden=1 WHERE tstamp < :updateTime: AND mailobjectuid = :mailobjectuid:");
+				
+				  $query->execute(array(
+					 'updateTime' => $updateTime,
+					  'mailobjectuid' => $mailObjectUid
+				   ));
 			}
 			
 			$contentObjects=Contentobjects::find(array(
@@ -205,7 +210,10 @@ class MailobjectsController extends ControllerBase
 				"order" => "templateposition ASC, positionsorting ASC"
 				
 			));
-			//$contentObjects=  Contentobjects::find();
+			$templatedContentObjects=  Templateobjects::find(array(
+					"conditions" => "deleted = 0 AND hidden=0 AND usergroup=?1 AND templatetype = 1",
+					"bind" => array(1 => $this->session->get('auth')['usergroup'])
+					));
 			
 			$availableContentObject=  Contentobjects::find(array(
 				"conditions" => "deleted = 0 AND hidden=0 AND usergroup=?1",
@@ -217,6 +225,7 @@ class MailobjectsController extends ControllerBase
 			$templateFile=  '../app/modules/frontend/templates/template_mail_'.$mailobjectRecord->templateuid.'.volt';
 			$bodyRaw=file_get_contents($templateFile);
 			$body=$this->writeContentElements($bodyRaw, $contentObjects);
+			$this->view->templatedCElements =$templatedContentObjects;
 			$this->view->cElements=$availableContentObject;
 			$this->view->setVar('compiledTemplatebodyRaw',$body);				
 			$this->view->setVar('mailobjectuid',$mailObjectUid);

@@ -109,8 +109,13 @@ class TemplateobjectsController extends ControllerBase
 						$counter++;
 				}
 				
-				$html=preg_replace('~<(?:!DOCTYPE|/?(?:html))[^>]*>\s*~i', '', $dom->saveHTML($dom->documentElement));
-                              
+				
+				if($_POST['templatetype'] == 1){
+					$html=preg_replace('~<(?:!DOCTYPE|/?(?:html|body))[^>]*>\s*~i', '', $dom->saveHTML($dom->documentElement));
+					$html='<div class="cElement">'.$html.'</div>';
+				}else{
+					$html=preg_replace('~<(?:!DOCTYPE|/?(?:html))[^>]*>\s*~i', '', $dom->saveHTML($dom->documentElement));
+				}
 				$templateObject->sourcecode=$html;
 				$templateObject->update();
 				file_put_contents($generatedTemplateFileName,$html);

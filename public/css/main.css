@@ -915,9 +915,17 @@ nav ul li a{
 	top:0px;
 	right:0px;
 	height:100%;
-	padding-top:45px;
+	padding-top:0;
 	width:350px;
-	text-align:center;
+	
+	overflow-y:scroll;
+	-webkit-box-shadow: inset 3px 0px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: inset 3px 0px 5px 0px rgba(0,0,0,0.75);
+box-shadow: inset 3px 0px 5px 0px rgba(0,0,0,0.75);
+}
+
+#campaignCreateElements h3{
+	margin-left:10px;
 }
 
 #campaignCreateElements .window{
@@ -926,34 +934,43 @@ nav ul li a{
 	position:relative;
 }
 .cElementThumbWrapper{
-	max-width:320px;
+	
 	margin-left:auto;
 	margin-right:auto;
 	overflow: hidden;
 	margin-bottom:20px;
 	height:200px;
-	width:200px;
+	width:320px;
+	border:#fff 1px solid;
+	padding:10px;
 }
 
-#campaignCreateElements .cElementThumb{
+#templatedCElements .cElement{
 	/*zoom: 0.3;*/
-	
+	display:none;
 
 }
 #editFrame .cElement{
 	
 }
 
-.cElement:hover{
+#editFrame .cElement{
+	
+}
+
+.cElement:hover, .ui-draggable-handle:hover, .cElement a:hover{
 
 	cursor:move;
 }
+
+
 .ui-state-hover{
 	-webkit-box-shadow: 3px 6px 10px 0px rgba(0,0,0,0.75);
 	-moz-box-shadow: 3px 6px 10px 0px rgba(0,0,0,0.75);
 	box-shadow: 3px 6px 10px 0px rgba(0,0,0,0.75);
 	cursor:pointer;
 }
+
 
 #loadingimg, #tooltipOverlay{
 	position:absolute;
@@ -967,12 +984,22 @@ nav ul li a{
 	display:none;
 	color:#fff;	
 }
-#fileToolBar{
+#menuWrapper{
+	position:relative;
+	margin-bottom:10px;
+}
+#activityModeBar{
 	display:inline-block;
-	float:right;
+	float:left;
+}
+
+#fileToolBar{	
 	font-size:16px;
-	margin-bottom:20px;
+	
 	width:150px;
+	position:absolute;
+	bottom:0px;
+	right:0px;
 }
 #fileToolBar > div{
 	cursor:pointer;
@@ -1005,10 +1032,12 @@ nav ul li a{
 }
 #desktop{
 	position:relative;
+	background:#e3e3e3
 }
 #editFrame{
 	position:relative;
 	float:left;
+	margin:20px;
 }
 .editable{
 	width:auto;
@@ -1019,7 +1048,15 @@ nav ul li a{
 	padding: 10px;*/
 }
 
+h2.mode, div.mode{
+	display:inline-block;
+	margin-right: 30px;
+}
 
+h2.mode.active{
+	text-decoration: underline;
+	color:#01994e;
+}
 @media (min-width: 768px) {
 	
 }

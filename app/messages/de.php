@@ -47,7 +47,15 @@ $messages = array(
 	"templateTypeLabel" => "Templatetyp",
 	"templateTypeMail" => "Mailtemplate",
 	"templateTypeContent" => "Template für Inhaltselement",
-	"pleaseSelect" => "Bitte auswählen"
+	"pleaseSelect" => "Bitte auswählen",
+	"templatedCElementsTitle"=> "Vorlagen für Inhaltselemente",
+	"recentCElementsTitle" => "zuletzt verwendete Inhaltselemente",
+	"dynamicCElementsTitle" => "dynamische Inhaltslemente",
+	"edit" => "Bearbeiten",
+	"save" => "Speichern",
+	"mailUpdateModeArrange" => "Elemente per Drag & Drop anordnen",
+	"mailUpdateModeEdit" => "Inhalte bearbeiten",
+	"activeModeTitle" => "Aktiver Modus:"
 	
 );
 ?>
