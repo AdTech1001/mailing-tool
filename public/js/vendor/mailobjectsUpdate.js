@@ -72,9 +72,53 @@ jQuery('document').ready(function(){
 			revert: 'invalid' 
 	});
 	
+	jQuery('#editFrame .editable .cElement').mouseenter(function(e){		
+		var elementToDelete=jQuery(this);
+		var templateposition=jQuery('.editable').index(jQuery(this).parent());
+		var positionsorting=jQuery(this).index();		
+		jQuery(this).append(jQuery('#deleteOverlay'));
+		jQuery('#deleteOverlay').removeClass('hidden').click(function(e){
+			
+			jQuery(elementToDelete).remove();
+		var formdata=jQuery('#editFrameForm').serialize();
+			formdata+='&templateposition='+templateposition+'&positionsorting='+positionsorting;			
+			
+			ajaxIt('contentobjects','delete',formdata,reloadFrame);
+		});
+	});
+	
+	jQuery('#editFrame .cElement').mouseleave(function(e){
+		jQuery('body').append(jQuery('#deleteOverlay'));
+		jQuery('#deleteOverlay').addClass('hidden').off('click');
+		
+	});
 	
 	
-	jQuery('.editable')
+	
+	var modeAcvtivateFunction=function(e){
+		e.stopPropagation()
+		var modeToActivate=jQuery(this).attr('data-mode');
+		switch(modeToActivate){
+			case 'edit':
+				jQuery('#mailobjectEditMode').trigger('click');
+				break;
+			case 'arrange':
+				jQuery('#mailobjectEditMode').trigger('click');
+				break;
+		}
+		
+		var currentActive=jQuery('#activeMode span');
+		
+		jQuery('#inactiveMode').append(currentActive);
+		jQuery(currentActive).removeClass('active').addClass('inactive').click(modeAcvtivateFunction);
+		jQuery(this).removeClass('inactive').addClass('active');
+		
+		jQuery('#activeMode').html(jQuery(this));
+		jQuery(this).off( "click");
+	};
+	
+	jQuery('#inactiveMode span').click(modeAcvtivateFunction);
+	
 	
 	jQuery('.editable').droppable({
       activeClass: "ui-state-default",
@@ -130,7 +174,9 @@ jQuery('document').ready(function(){
 	
 	
 	
-	jQuery('#mailobjectEditMode').click(function(){
+	jQuery('#mailobjectEditMode').click(function(e){
+		e.stopPropagation();
+		console.log(jQuery(this).hasClass('active'));
 		if(jQuery(this).hasClass('active')){
 			tinymce.remove("#editFrame div.editable");
 			jQuery('#editFrame table').removeClass('mce-item-table');

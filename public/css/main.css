@@ -984,6 +984,24 @@ box-shadow: inset 3px 0px 5px 0px rgba(0,0,0,0.75);
 	display:none;
 	color:#fff;	
 }
+#deleteOverlay{
+	position:absolute;
+	top:-5px;
+	right:-5px;
+	z-index: 999;
+	background:#e3e3e3;
+	height:20px;
+	width:20px;
+	padding-left:1px;
+	padding-top:1px;
+	font-weight:bold;
+	border:#01994e 1px solid;
+	border-radius:10px;
+	cursor:pointer;
+}
+
+
+
 #menuWrapper{
 	position:relative;
 	margin-bottom:10px;
@@ -1048,13 +1066,27 @@ box-shadow: inset 3px 0px 5px 0px rgba(0,0,0,0.75);
 	padding: 10px;*/
 }
 
-h2.mode, div.mode{
+#activityModeBar h2,  div.mode{
 	display:inline-block;
 	margin-right: 30px;
+	
 }
-
-h2.mode.active{
+h2 .mode{
+	font-size:1.2em;
+}
+h2 .mode.active{
 	text-decoration: underline;
+	color:#01994e;
+}
+#inactiveMode span:hover{
+ cursor:pointer;
+ text-decoration: underline;
+ color:#01994e;
+}
+#mailobjectEditMode{
+	color:#4d4d4d;
+}
+#mailobjectEditMode.active{
 	color:#01994e;
 }
 @media (min-width: 768px) {

@@ -26,5 +26,28 @@ class ContentobjectsController extends ControllerBase
 			
 		}
 	}
+	
+	public function deleteAction(){
+		if($this->request->isPost()){
+			$contentobjectRecord=  Contentobjects::findFirst(array(
+				"conditions" => "deleted = 0 AND hidden =0 AND templateposition = ?1 AND positionsorting = ?2 AND mailobjectuid = ?3",
+							"bind" => array(
+								1 => $_POST['templateposition'],
+								2 => $_POST['positionsorting'],
+								3 => $_POST['mailobjectUid']
+								
+								)
+			));
+			if($contentobjectRecord){
+				$contentobjectRecord->deleted=1;
+				$contentobjectRecord->hidden=1;
+				$contentobjectRecord->tstamp=time();
+				$contentobjectRecord->update();
+			
+			}			
+			$this->view->disable();
+		}
+		
+	}
 
 }

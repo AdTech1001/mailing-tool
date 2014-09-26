@@ -188,7 +188,8 @@ class MailobjectsController extends ControllerBase
 			
 			$contentObjects=Contentobjects::find(array(
 				"conditions" => "deleted=0 AND hidden=0 AND mailobjectuid = ?1",
-				"bind" => array(1 => $mailObjectUid)
+				"bind" => array(1 => $mailObjectUid),
+				"order" => "templateposition ASC, positionsorting ASC"
 			));
 			$mailBody=$this->writeContentElements($bodyRaw, $contentObjects);
 			$mainTemplate=  file_get_contents($mainTemplateFile);
@@ -235,6 +236,8 @@ class MailobjectsController extends ControllerBase
 		
 		
 	}
+	
+	
 	
 	
 	function writeContentElements($bodyRaw,$contentObjects){

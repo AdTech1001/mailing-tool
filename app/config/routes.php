@@ -55,10 +55,10 @@ $router->add(
 
 
 $router->add(
-	'/:controller{>2}/:action[/]{0,1}', 
+	'/contentobjects/:action[/]{0,1}', 
 	array(	
-		'controller' => 1,
-		'action' => 2,
+		'controller' => 'contentobjects',
+		'action' => 1,
 		'module'=>'frontend',
 		'namespace'  => 'nltool\Modules\Modules\Frontend\Controllers',
 	)
