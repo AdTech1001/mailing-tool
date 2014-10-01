@@ -1,6 +1,6 @@
 var instance;
 var newElementCounter=0;
-
+var activeElement;
 var exampleDropOptions = {
 				tolerance:"touch",
 				hoverClass:"dropHover",
@@ -163,14 +163,23 @@ function Save() {
 
 var selectMailobject=function (data){
 	var jsObject = JSON.parse( data );
-	var selectString='<label>Bitte wählen Sie ein Mailobjekt aus</label><br><select name="mailobject">';
+	var selectString='<select id="mailobjectSelect">';
 	for(var i=0;i<jsObject.length;i++){
 		selectString+='<option value="'+jsObject[i].uid+'">'+jsObject[i].title+' | '+jsObject[i].date+'</option>';
-	}
+}
 	selectString+='</select>';
-	jQuery('#allPurposeLayer').html(selectString).removeClass('hidden');
+	jQuery('#selectWrapper').html(selectString);
+	jQuery('#allPurposeLayer').removeClass('hidden');
 	
 };
+
+jQuery('#allPurposeLayer button.ok').click(function(e){
+	var elementDefinition=jQuery(activeElement).parent().find('input');	
+	jQuery(elementDefinition[0]).val(jQuery('#allPurposeLayer select').val());
+	
+	jQuery(activeElement).html(jQuery('#allPurposeLayer select')[0].selectedOptions[0].innerHTML);
+	jQuery('#allPurposeLayer').addClass('hidden');
+});
 
 jsPlumb.ready(function() {
 	jsPlumb.setContainer(jQuery("#automationWorkspace"));
@@ -267,6 +276,7 @@ jQuery( "#automationWorkspace" ).droppable({
 				 jQuery('#'+newElementId+' a').click(function(e)
 				{
 					e.preventDefault();
+					activeElement=jQuery(this);
 					ajaxIt('mailobjects','','',selectMailobject);										
 				});
 			break;
@@ -317,7 +327,11 @@ var showTitleInput=function(showElement){
 			
 		});
 		
-		jQuery('button.ok').click(function(e){
+		
+				
+};
+
+jQuery('#confirmTitleInputTemplate button.ok').click(function(e){
 			e.stopPropagation();
 			console.log(showElement);
 			jQuery(showElement).html(jQuery('#titleInput').val());
@@ -326,9 +340,7 @@ var showTitleInput=function(showElement){
 			
 		});
 		
-		jQuery('button.abort').click(function(){closeTitleInput();});
-				
-};
+jQuery('#confirmTitleInputTemplate button.abort').click(function(){closeTitleInput();});
 
 var closeTitleInput=function(destroyEl){
 	jQuery('#titleInput').unbind('keyup');

@@ -60,7 +60,8 @@ $messages = array(
 	"mailUpdateModeArrange" => "Elemente per Drag & Drop anordnen",
 	"mailUpdateModeEdit" => "Inhalte bearbeiten",
 	"activeModeTitle" => "Aktiver Modus:",
-	"mailObjectsIndexTitle" => "Ihre verfügbaren Mailings und Newsletter"
+	"mailObjectsIndexTitle" => "Ihre verfügbaren Mailings und Newsletter",
+	"selectMailobjectLabel"=>"Bitte wählen Sie ein Mailobjekt aus"
 	
 );
 ?>
