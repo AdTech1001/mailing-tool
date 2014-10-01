@@ -161,6 +161,17 @@ function Save() {
  console.log(Objs);
 }
 
+var selectMailobject=function (data){
+	var jsObject = JSON.parse( data );
+	var selectString='<label>Bitte wählen Sie ein Mailobjekt aus</label><br><select name="mailobject">';
+	for(var i=0;i<jsObject.length;i++){
+		selectString+='<option value="'+jsObject[i].uid+'">'+jsObject[i].title+' | '+jsObject[i].date+'</option>';
+	}
+	selectString+='</select>';
+	jQuery('#allPurposeLayer').html(selectString).removeClass('hidden');
+	
+};
+
 jsPlumb.ready(function() {
 	jsPlumb.setContainer(jQuery("#automationWorkspace"));
 	
@@ -196,10 +207,10 @@ jsPlumb.ready(function() {
 });
 
 jQuery( ".window" ).draggable({
-      appendToType: "#automationWorkspace",
-      helper: "clone",
-      containment: "#automationWorkspace"
-      
+    appendTo: "#automationWorkspace",
+    helper: "clone",
+    containment: "#automationWorkspace",	  
+	zIndex:999      
 });
 
 jQuery( "#automationWorkspace" ).droppable({
@@ -207,23 +218,24 @@ jQuery( "#automationWorkspace" ).droppable({
       	
       	if(!jQuery(ui.draggable).hasClass('jsplumbified')){
       	newElementCounter++;
-      	var newElement=jQuery(ui.draggable).clone();
+		
+      	var newElement=jQuery(ui.helper).clone();
          jQuery(this).append(newElement);
          
-         jQuery(newElement).css('top', ui.position.top);
-		 jQuery(newElement).css('right', (-1*ui.position.left));
+         jQuery(newElement).css('top', ui.offsetTop);
+		 jQuery(newElement).css('right', (ui.offsetLeft));
 		 jQuery(newElement).removeClass('ui-draggable');		 		 
 		 jQuery(newElement).addClass('jsplumbified');
-		 jQuery(newElement).css('position','absolute');		 
+		 jQuery(newElement).css('position','absolute');
 		 /* Wahrscheinliuch ID notwendig für dragging*/
 		var elController=jQuery(newElement).attr('data-controller');
+		
 		switch(elController){
-			case 'sendobject':
+			case 'sendoutobject':
 			instance.addEndpoint(jQuery(newElement), mainflowConnector);
 			instance.addEndpoint(jQuery(newElement), mainflowConnectorTarget);
-			instance.addEndpoint(jQuery(newElement), mailTemplateConnectorTarget);
-			
-			instance.addEndpoint(jQuery(newElement), sendDateConnectorTargert);
+			instance.addEndpoint(jQuery(newElement), mailTemplateConnectorTarget);			
+			instance.addEndpoint(jQuery(newElement), sendDateConnectorTargert);			
 			break;
 			case 'senddate':
 			instance.addEndpoint(jQuery(newElement), sendDateConnectorSource);
@@ -244,19 +256,45 @@ jQuery( "#automationWorkspace" ).droppable({
 			
 			 
 		}
+		
 		 
 		 
-		 var newElementId=jQuery(newElement).attr('id');
-		 
+		var newElementId=jQuery(newElement).attr('id');		
          instance.draggable(jQuery('#'+newElementId));
-         
+		 
+		 switch(elController){
+			case 'sendoutobject':
+				 jQuery('#'+newElementId+' a').click(function(e)
+				{
+					e.preventDefault();
+					ajaxIt('mailobjects','','',selectMailobject);										
+				});
+			break;
+			case 'senddate':
+			
+			break;
+			case "dummy":
+			
+			break;
+			case "addresses":
+			
+			break;			
+			
+			default:
+			
+			break;
+			
+			 
+		}
+		 
+        
          var label = jQuery("#"+newElementId+".jsplumbified .itemLabel");
-         if(elController != 'dummy'){
+         /*if(elController !== 'dummy'){
 			instance.on(label, "click", function(e) {
 				e.stopPropagation();
 				showTitleInput(label);				
 			});
-		}
+		}*/
       	}
       	
        }
@@ -271,7 +309,7 @@ var showTitleInput=function(showElement){
 		jQuery('#tooltipOverlay').append(confirmTitleInputTemplate).show();
 		jQuery('#titleInput').bind('keyup',function(e) {
 			e.stopPropagation();	
-			if(e.keyCode == 13) {
+			if(e.keyCode === 13) {
 				jQuery(showElement).html(jQuery('#titleInput').val());		
 				closeTitleInput(jQuery(this));
 							
@@ -288,9 +326,9 @@ var showTitleInput=function(showElement){
 			
 		});
 		
-		jQuery('button.abort').click(function(){closeTitleInput()});
+		jQuery('button.abort').click(function(){closeTitleInput();});
 				
-}
+};
 
 var closeTitleInput=function(destroyEl){
 	jQuery('#titleInput').unbind('keyup');
@@ -303,4 +341,11 @@ var closeTitleInput=function(destroyEl){
 		
 		
 		
-}
+};
+
+
+jQuery('document').ready(function(){
+	jQuery('.window a').click(function(e){
+		e.preventDefault();
+	});
+});

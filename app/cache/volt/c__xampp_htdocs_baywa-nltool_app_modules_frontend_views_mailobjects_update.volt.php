@@ -70,5 +70,5 @@
 <div id="viewFrame" style="display:none">
 	<iframe id="mailobjectFrame" style="border:1px solid; background:#e3e3e3;width:80%; min-height:100%;" src="<?php echo $source; ?>" ></iframe>
 </div>
-<div id="deleteOverlay" class="hidden" title="tr('delete')"><span class='glyphicon glyphicon-remove'></span></div>
+<div id="deleteOverlay" class="hidden" title="<?php echo nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('delete'); ?> "><span class='glyphicon glyphicon-remove'></span></div>
 <?php } ?>

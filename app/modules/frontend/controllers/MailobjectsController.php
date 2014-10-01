@@ -19,10 +19,38 @@ class MailobjectsController extends ControllerBase
      */
     public function indexAction()
     {
-        
-        
+		if($this->request->isPost()){
+			$mailobjects=Mailobjects::find(array(
+				"conditions" => "deleted=0 AND hidden=0 AND usergroup = ?1",
+				"bind" => array(1 => $this->session->get('auth')['usergroup']),
+				"order" => "tstamp DESC"
+			));
+			$mailobjectsArray=array();
+			foreach($mailobjects as $mailobject){
+				$mailobjctsArray[]=array(
+					'uid'=>$mailobject->uid,
+					'title'=>$mailobject->title,
+					'date' =>date('d.m.Y',$mailobject->tstamp)
+				);
+						
+			}
+			$returnJson=json_encode($mailobjctsArray);
+			echo($returnJson);
+			die();
+		}else{
+        $environment= $this->config['application']['debug'] ? 'development' : 'production';
+		$baseUri=$this->config['application'][$environment]['staticBaseUri'];
+		$path=$baseUri.$this->view->language.'/mailobjects/update/';
+		$mailobjects=Mailobjects::find(array(
+				"conditions" => "deleted=0 AND hidden=0 AND usergroup = ?1",
+				"bind" => array(1 => $this->session->get('auth')['usergroup']),
+				"order" => "tstamp DESC"
+			));
 		
+		$this->view->setVar('mailobjects',$mailobjects);
+		$this->view->setVar('path',$path);
 		
+		}
 		
 		
     }

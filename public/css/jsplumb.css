@@ -185,7 +185,7 @@ body {
 
 a, a:visited {
     text-decoration:none;
-    color:black;
+    color:#01994e;
     border-radius:0.2em;
     -webkit-transition: color 0.15s ease-in;
     -moz-transition: color 0.15s ease-in;

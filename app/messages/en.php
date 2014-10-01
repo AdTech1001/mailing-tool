@@ -22,9 +22,12 @@ $messages = array(
 	"content"=>"Content",
 	"contentCreate"=> "create new content",
 	"contentRetrieve" => "manage content",
-	"contentTemplates"=> "manage content layouts",
-	"contentInterfaces"=> "content interfaces",
+	"contentobjectsTemplates"=> "manage content layouts",
+	"contentobjectsInterfaces"=> "content interfaces",
 	"campaignCreateTitle"=>"create new campaign",
+	"mailobjects"=>"Mailings/Newsletter",
+	"mailobjectsCreate"=> "neues Mailing/Newsletter erstellen",
+	"mailobjectsRetrieve" => "Mailings/Newsletter verwalten",	
 	"unnamedCampaign" => "untitled campaign",
 	"addConditions" => "add conditions",
 	"createSendObject" => "create new mailing",
@@ -33,6 +36,7 @@ $messages = array(
 	"addMail" => "add mail template",
 	"ok" => "ok",
 	"abort" => "abort",
+	"delete" => "delete",
 	"startCampaign" => "starting point",
 	"templateNameLabel" => "template title",
 	"templateSourceLabel" => "source code",
@@ -54,7 +58,8 @@ $messages = array(
 	"save" => "save",
 	"mailUpdateModeArrange" => "drag & drop to arrange",
 	"mailUpdateModeEdit" => "edit content",
-	"activeModeTitle" => "active mode:"
+	"activeModeTitle" => "active mode:",
+	"mailObjectsIndexTitle" => "available mails and newsletters"
 	
 	
 );

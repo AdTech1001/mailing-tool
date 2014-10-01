@@ -62,7 +62,7 @@ class ControllerBase extends Controller
 		$this->view->setVar('language', $lang);
 		$this->view->setVar('baseurl', $baseUrl);
 		$this->view->setVar('languages_available', $languagesAvailable);
-		$this->view->setVar('docs_root', 'http://localhost/'.$lang.'/compose/');
+		$this->view->setVar('docs_root', 'http://localhost/'.$baseUrl.$lang);
 		
 		
 		
@@ -86,7 +86,7 @@ class ControllerBase extends Controller
 
 			$lang = $this->getUriParameter('language');
         	$lang = ($lang) ? $lang : 'en';
-
+			
 			$key = preg_replace(
 				'/[^a-zA-Z0-9\_]/',
 				'',

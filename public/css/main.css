@@ -915,7 +915,7 @@ nav ul li a{
 	top:0px;
 	right:0px;
 	height:100%;
-	padding-top:0;
+	padding-top:20px;
 	width:350px;
 	
 	overflow-y:scroll;
@@ -962,6 +962,9 @@ box-shadow: inset 3px 0px 5px 0px rgba(0,0,0,0.75);
 
 	cursor:move;
 }
+.mce-content-body .cElement:hover, .mce-content-body .ui-draggable-handle:hover, .mce-content-body .cElement a:hover{
+	cursor:text !important;
+}
 
 
 .ui-state-hover{
@@ -972,18 +975,23 @@ box-shadow: inset 3px 0px 5px 0px rgba(0,0,0,0.75);
 }
 
 
-#loadingimg, #tooltipOverlay{
+#loadingimg, #tooltipOverlay,#allPurposeLayer{
 	position:absolute;
 	top:50%;
 	left:50%;
 	padding:20px;
-	z-index: 999;
+	z-index: 1011;
 	background:#e5e5e5;
 	border:#01994e 1px solid;
 	box-shadow: 0px 0px 10px #000;
 	display:none;
 	color:#fff;	
 }
+#allPurposeLayer{
+	width:700px;
+	display:block;
+}
+
 #deleteOverlay{
 	position:absolute;
 	top:-5px;
@@ -998,8 +1006,20 @@ box-shadow: inset 3px 0px 5px 0px rgba(0,0,0,0.75);
 	border:#01994e 1px solid;
 	border-radius:10px;
 	cursor:pointer;
+	line-height:1em;
+	text-align: left;
 }
 
+.listviewList li{
+	background:#e3e3e3;
+	width:400px;
+	padding:5px;	
+	
+}
+.listviewList li a{
+	font-size:1.3em;
+	
+}
 
 
 #menuWrapper{

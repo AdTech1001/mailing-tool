@@ -1,5 +1,6 @@
 var reloadFrame=function(){
-	document.getElementById('mailobjectFrame').src += '';	
+		location.reload()
+	//document.getElementById('mailobjectFrame').src += '';	
 };
 
 var pollForTinymce=function(){
