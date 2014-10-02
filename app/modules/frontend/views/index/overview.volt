@@ -5,11 +5,11 @@
 		{{ content() }}
 		<h1>{{tr('actionTitle')}}</h1>
 		<div class="module_el">
-			<h2>{{ link_to(language~'/campaigns/create/', '<span class="glyphicon glyphicon-envelope"></span> '~tr('campaign'), 'title': tr('campaign')) }}
+			<h2>{{ link_to(language~'/campaignobjects/create/', '<span class="glyphicon glyphicon-envelope"></span> '~tr('campaign'), 'title': tr('campaign')) }}
 			</h2>
 			<ul>
-			<li>{{ link_to(language~'/campaigns/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('campaignCreate'), 'title': tr('campaignCreate')) }}</li>
-			<li>{{ link_to(language~'/campaigns/retrieve/', '<span class="glyphicon glyphicon-pencil"></span> '~tr('campaignRetrieve'), 'title': tr('campaignRetrieve')) }}</li>
+			<li>{{ link_to(language~'/campaignobjects/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('campaignCreate'), 'title': tr('campaignCreate')) }}</li>
+			<li>{{ link_to(language~'/campaignobjects/retrieve/', '<span class="glyphicon glyphicon-pencil"></span> '~tr('campaignRetrieve'), 'title': tr('campaignRetrieve')) }}</li>
 			</ul>
 		</div>
 		<div class="module_el">
@@ -25,7 +25,7 @@
 			</h2>
 			<ul>
 			<li>{{ link_to(language~'/contentobjects/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('contentobjectsCreate'), 'title': tr('contentobjectsCreate')) }}</li>
-			<li>{{ link_to(language~'/contenobjectst/index/', '<span class="glyphicon glyphicon-pencil"></span> '~tr('contentobjectsRetrieve'), 'title': tr('contentobjectsRetrieve')) }}</li>
+			<li>{{ link_to(language~'/contentobjects/index/', '<span class="glyphicon glyphicon-pencil"></span> '~tr('contentobjectsRetrieve'), 'title': tr('contentobjectsRetrieve')) }}</li>
 			<li>{{ link_to(language~'/contentobjects/templates/', '<span class="glyphicon glyphicon-pencil"></span> '~tr('contentobjectsTemplates'), 'title': tr('contentobjectsTemplates')) }}</li>
 			</ul>
 		</div>

@@ -61,7 +61,20 @@ $messages = array(
 	"mailUpdateModeEdit" => "Inhalte bearbeiten",
 	"activeModeTitle" => "Aktiver Modus:",
 	"mailObjectsIndexTitle" => "Ihre verfügbaren Mailings und Newsletter",
-	"selectMailobjectLabel"=>"Bitte wählen Sie ein Mailobjekt aus"
+	"selectMailobjectLabel"=>"Bitte wählen Sie ein Mailobjekt aus",
+	"addConfigurationobject"=>"Konfiguration",
+	"confTitleLabel" => "Name",
+	"confSendermailLabel" =>"Absender Email",
+	"confSendernameLabel" => "Absender Name",
+	"confAnswermailLabel" => "Antwort Email",
+	"confAnswernameLabel" => "Antwort Name",
+	"confReturnpathLabel" => "Retourpfad (Email)",
+	"confOrganisationLabel" => "Organisation",
+	"confhtmlplainLabel" => "HTML, Plaintext, beides",
+	"confTitle" => "Konfiguration anlegen",
+	"html" => "HTML",
+	"plain" => "Plaintext",
+	"both" => "beides"
 	
 );
 ?>

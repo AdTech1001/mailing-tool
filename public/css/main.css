@@ -975,7 +975,7 @@ box-shadow: inset 3px 0px 5px 0px rgba(0,0,0,0.75);
 }
 
 
-#loadingimg, #tooltipOverlay,#allPurposeLayer{
+#loadingimg, #tooltipOverlay,.allPurposeLayer{
 	position:absolute;
 	top:50%;
 	left:50%;
@@ -987,7 +987,7 @@ box-shadow: inset 3px 0px 5px 0px rgba(0,0,0,0.75);
 	display:none;
 	color:#fff;	
 }
-#allPurposeLayer{
+.allPurposeLayer{
 	width:500px;
 	height:200px;
 	display:block;

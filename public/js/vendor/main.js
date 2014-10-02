@@ -38,6 +38,9 @@ var requireControllerPlugins=function(){
 			require([requirePlugins[0]],function(jsPlumb){
 				require([requirePlugins[1]]);
 			});
+			for(var i=2; i<requirePlugins.length; i++){
+				require([requirePlugins[i]]);
+			}
 		}else{
 			for(var i=0; i<requirePlugins.length; i++){
 				require([requirePlugins[i]]);

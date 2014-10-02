@@ -2,7 +2,7 @@
 {{ content() }}
 <div class="container">
 	{%- if session.get('auth') -%}
-<div id="fileTollBar"><div class="glyphicon glyphicon-floppy-save" id="mailobjectSave" data-controller="mailobject" data-action="create"><span class="itemLabel">{{ tr('save') }}</span></div></div>	
+<div id="fileTollBar"><div class="glyphicon glyphicon-floppy-save" id="mailobjectsSave" data-controller="mailobjects" data-action="create"><span class="itemLabel">{{ tr('save') }}</span></div></div>	
 
 <h1>{{tr('composeTitle')}}</h1>
 <form action="/baywa-nltool/{{language}}/mailobjects/create/" method="POST">

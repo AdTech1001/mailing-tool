@@ -17,7 +17,8 @@ require.config({
 		jsplumb:'jquery.jsPlumb-1.6.4',
 		plumbscript:'automationWorkflowModule',
 		mailobjectsUpdate: 'mailobjectsUpdate',
-		tinymce:'tinymce.min'
+		tinymce:'tinymce.min',
+		datetimepicker:'jquery.datetimepicker'
 		
     }
 });

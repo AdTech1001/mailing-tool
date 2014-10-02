@@ -26,7 +26,7 @@ $router->add(
 		'action' => "update",
 		'uid' => 2,
 		'module'=>'frontend',
-		'namespace'  => 'nltool\Modules\Modules\Frontend\Controllers',
+		'namespace'  => 'nltool\Modules\Modules\Frontend\Controllers'
 	)
 );
 
@@ -37,8 +37,18 @@ $router->add(
 		'action' => "update",
 		'uid' => 1,
 		'module'=>'frontend',
-		'namespace'  => 'nltool\Modules\Modules\Frontend\Controllers',
+		'namespace'  => 'nltool\Modules\Modules\Frontend\Controllers'
 	)
+);
+
+$router->add(
+		'/configurationsobjects/create[/]{0,1}',
+		array(
+		'controller' => "configurationsobjects",
+		'action' => "create",		
+		'module'=>'frontend',
+		'namespace'  => 'nltool\Modules\Modules\Frontend\Controllers'
+		)
 );
 
 $router->add(

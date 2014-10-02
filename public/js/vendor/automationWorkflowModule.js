@@ -1,6 +1,7 @@
 var instance;
 var newElementCounter=0;
 var activeElement;
+var lang;
 var exampleDropOptions = {
 				tolerance:"touch",
 				hoverClass:"dropHover",
@@ -13,14 +14,14 @@ var connectorPaintStyle = {
 		outlineColor:"white",
 		outlineWidth:2
 	};			
-var example3Color = "rgba(12,43,61,0.5)";
+var color1 = "#e32c3a";
 var mainflowConnector = {
 	endpoint:["Dot", {radius:13} ],
 	anchor:"Right",
-	paintStyle:{ fillStyle:example3Color, opacity:0.5 },
+	paintStyle:{ fillStyle:color1, opacity:0.5 },
 	isSource:true,
-	scope:'grey',
-	connectorStyle:connectorPaintStyle,
+	scope:'red',
+	connectorStyle:{ strokeStyle:color1, lineWidth:3 },
 	connector : [ "Flowchart", { stub:[40, 60], gap:10, cornerRadius:5, alwaysRespectStubs:true } ],
 	isTarget:false,
 	dropOptions : exampleDropOptions,
@@ -35,10 +36,10 @@ var mainflowConnector = {
 var mainflowConnectorTarget = {
 	endpoint:["Dot", {radius:13} ],
 	anchor:"Left",
-	paintStyle:{ fillStyle:example3Color, opacity:0.5 },
+	paintStyle:{ fillStyle:color1, opacity:0.5 },
 	isSource:false,
-	scope:'grey',
-	connectorStyle:connectorPaintStyle,
+	scope:'red',
+	connectorStyle:{ strokeStyle:color1, lineWidth:3 },
 	connector : [ "Flowchart", { stub:[40, 60], gap:10, cornerRadius:5, alwaysRespectStubs:true } ],
 	isTarget:true,
 	dropOptions : exampleDropOptions,
@@ -52,7 +53,7 @@ var mainflowConnectorTarget = {
 
 
 			
-var color2 = "#316b31";
+var color2 = "#009650";
 var sendDateConnectorSource = {
 	endpoint:["Dot", { radius:11 }],
 	paintStyle:{ fillStyle:color2 },
@@ -79,27 +80,27 @@ var sendDateConnectorTargert = {
 };			
 
 
-var color3 = "#ff0000";
-var mailTemplateConnectorSource = {
+var color3 = "#6d6e72";
+var addressesConnectorSource = {
 	endpoint:["Rectangle", { width:10, height:8 } ],
 	paintStyle:{ fillStyle:color3 },
 	anchor:"Top",
 	isSource:true,
-	scope:"red",
-	connectorStyle:{ strokeStyle:color3, lineWidth:6 },
+	scope:"grey",
+	connectorStyle:{ strokeStyle:color3, lineWidth:3 },
 	connector : [ "Flowchart", { stub:[40, 60], gap:10, cornerRadius:5, alwaysRespectStubs:true } ],
 	maxConnections:1,
 	isTarget:false
 	
 };
 
-var mailTemplateConnectorTarget = {
-	endpoint:["Rectangle", { width:15, height:15 } ],
+var addressesConnectorTarget = {
+	endpoint:["Rectangle", { width:15, height:20 } ],
 	paintStyle:{ fillStyle:color3 },
-	anchor:"BottomLeft",
+	anchor:"Bottom",
 	isSource:false,
-	scope:"red",
-	connectorStyle:{ strokeStyle:color3, lineWidth:6 },
+	scope:"grey",
+	connectorStyle:{ strokeStyle:color3, lineWidth:3 },
 	connector : [ "Flowchart", { stub:[40, 60], gap:10, cornerRadius:5, alwaysRespectStubs:true } ],
 	maxConnections:1,
 	isTarget:true
@@ -108,11 +109,7 @@ var mailTemplateConnectorTarget = {
 			
 
 jQuery('#campaignSave').click(function(e){
-	e.stopPropagation();
-	var fullCampaign=jQuery('#automationWorkflowForm').serialize();
-	
-	
-	
+	e.stopPropagation();	
 	Save();
 	
 });
@@ -153,6 +150,8 @@ var IterateConnections= function (){
 
 
 function Save() {
+	var fullCampaign=jQuery('#automationWorkflowForm').serialize();	
+	console.log(fullCampaign);	
     console.log(connections);
     Objs = [];
     jQuery('.jsplumbified').each(function() {
@@ -169,17 +168,41 @@ var selectMailobject=function (data){
 }
 	selectString+='</select>';
 	jQuery('#selectWrapper').html(selectString);
-	jQuery('#allPurposeLayer').removeClass('hidden');
+	jQuery('#mailobjectSelect').removeClass('hidden');
 	
 };
 
-jQuery('#allPurposeLayer button.ok').click(function(e){
+jQuery('#mailobjectSelect button.ok').click(function(e){
 	var elementDefinition=jQuery(activeElement).parent().find('input');	
-	jQuery(elementDefinition[0]).val(jQuery('#allPurposeLayer select').val());
+	jQuery(elementDefinition[0]).val(jQuery('#mailobjectSelect select').val());
 	
-	jQuery(activeElement).html(jQuery('#allPurposeLayer select')[0].selectedOptions[0].innerHTML);
-	jQuery('#allPurposeLayer').addClass('hidden');
+	jQuery(activeElement).html(jQuery('#mailobjectSelect select')[0].selectedOptions[0].innerHTML.split(' | ')[0]);
+	jQuery('#mailobjectSelect').addClass('hidden');
 });
+
+jQuery('#mailobjectSelect button.abort').click(function(e){
+	jQuery('#mailobjectSelect').addClass('hidden');
+});
+
+var setsendDate=function(){
+	jQuery('#sendoutDatePicker').removeClass('hidden');
+	jQuery('#datepicker').datetimepicker({
+		lang:lang
+	});
+};
+
+jQuery('#sendoutDatePicker button.ok').click(function(e){
+	var elementDefinition=jQuery(activeElement).parent().find('input');	
+	var sendoutDate=jQuery('#sendoutDatePicker input').val();
+	jQuery(elementDefinition[0]).val(sendoutDate);
+	jQuery(activeElement).html(sendoutDate);
+	jQuery("#sendoutDatePicker").addClass('hidden');
+});
+
+jQuery('#sendoutDatePicker button.abort').click(function(e){
+	jQuery("#sendoutDatePicker").addClass('hidden');
+});
+
 
 jsPlumb.ready(function() {
 	jsPlumb.setContainer(jQuery("#automationWorkspace"));
@@ -243,7 +266,7 @@ jQuery( "#automationWorkspace" ).droppable({
 			case 'sendoutobject':
 			instance.addEndpoint(jQuery(newElement), mainflowConnector);
 			instance.addEndpoint(jQuery(newElement), mainflowConnectorTarget);
-			instance.addEndpoint(jQuery(newElement), mailTemplateConnectorTarget);			
+			instance.addEndpoint(jQuery(newElement), addressesConnectorTarget);			
 			instance.addEndpoint(jQuery(newElement), sendDateConnectorTargert);			
 			break;
 			case 'senddate':
@@ -253,7 +276,7 @@ jQuery( "#automationWorkspace" ).droppable({
 			instance.addEndpoint(jQuery(newElement), mainflowConnector);
 			break;
 			case "addresses":
-			instance.addEndpoint(jQuery(newElement), mainflowConnector);
+			instance.addEndpoint(jQuery(newElement), addressesConnectorSource);
 			break;
 			case "mailobject":
 			instance.addEndpoint(jQuery(newElement), mailTemplateConnectorSource);
@@ -281,6 +304,11 @@ jQuery( "#automationWorkspace" ).droppable({
 				});
 			break;
 			case 'senddate':
+				jQuery('#'+newElementId+' a').click(function(e){
+					e.preventDefault();
+					activeElement=jQuery(this);
+					setsendDate();
+				});
 			
 			break;
 			case "dummy":
@@ -357,6 +385,7 @@ var closeTitleInput=function(destroyEl){
 
 
 jQuery('document').ready(function(){
+	lang=jQuery('#language').val();
 	jQuery('.window a').click(function(e){
 		e.preventDefault();
 	});

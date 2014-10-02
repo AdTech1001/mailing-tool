@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS permissions (
 	resourceaction varchar(55) NOT NULL,
   PRIMARY KEY (uid),
   KEY profilesid (profileid)
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
 
 
 LOCK TABLES permissions WRITE;
@@ -106,7 +106,17 @@ INSERT INTO permissions (uid, crdate, profileid, resourceid, resourceaction) VAL
 (47, NOW(), 1, 10, 'create'),
 (48, NOW(), 1, 10, 'retrieve'),
 (49, NOW(), 1, 10, 'update'),
-(50, NOW(), 1, 10, 'delete');
+(50, NOW(), 1, 10, 'delete'),
+(51, NOW(), 1, 11, 'index'),
+(52, NOW(), 1, 11, 'create'),
+(53, NOW(), 1, 11, 'retrieve'),
+(54, NOW(), 1, 11, 'update'),
+(55, NOW(), 1, 11, 'delete'),
+(56, NOW(), 1, 12, 'index'),
+(57, NOW(), 1, 12, 'create'),
+(58, NOW(), 1, 12, 'retrieve'),
+(59, NOW(), 1, 12, 'update'),
+(60, NOW(), 1, 12, 'delete');
 UNLOCK TABLES;
 
 
@@ -125,7 +135,7 @@ CREATE TABLE IF NOT EXISTS resources(
 	hidden tinyint(4) DEFAULT '0' NOT NULL,
 	title varchar(255) NOT NULL,
 	PRIMARY KEY (uid)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 
 LOCK TABLES resources WRITE;
@@ -136,10 +146,12 @@ INSERT INTO resources (uid, crdate, title) VALUES
 (4, NOW(),'feusers'),
 (5, NOW(),'languages'),
 (6, NOW(),'permissions'),
-(7, NOW(),'campaigns'),
+(7, NOW(),'campaignobjects'),
 (8, NOW(),'mailobjects'),
 (9, NOW(),'templateobjects'),
-(10, NOW(),'contentobjects');
+(10, NOW(),'contentobjects'),
+(11, NOW(),'configurationobjects'),
+(12, NOW(),'sendoutobjects');
 UNLOCK TABLES;
 -- --------------------------------------------------------
 
@@ -258,8 +270,8 @@ CREATE TABLE IF NOT EXISTS `success_logins` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-DROP TABLE IF EXISTS campaigns;
-CREATE TABLE campaigns (
+DROP TABLE IF EXISTS campaignobjects;
+CREATE TABLE campaignobjects (
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 	tstamp int(11) DEFAULT '0' NOT NULL,
@@ -269,6 +281,7 @@ CREATE TABLE campaigns (
 	hidden tinyint(4) DEFAULT '0' NOT NULL,
 	title varchar(255) COLLATE utf8_general_ci NOT NULL,	
 	usergroup int(11) DEFAULT '0' NOT NULL,	
+	automationgraphstring mediumtext,
   PRIMARY KEY (uid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -332,8 +345,8 @@ CREATE TABLE contentobjects (
 
 
 
-DROP TABLE IF EXISTS sendoutobject;
-CREATE TABLE sendoutobject (
+DROP TABLE IF EXISTS sendoutobjects;
+CREATE TABLE sendoutobjects (
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,	
 	tstamp int(11) DEFAULT '0' NOT NULL,
@@ -341,19 +354,43 @@ CREATE TABLE sendoutobject (
 	cruser_id int(11) DEFAULT '0' NOT NULL,
 	deleted tinyint(4) DEFAULT '0' NOT NULL,
 	hidden tinyint(4) DEFAULT '0' NOT NULL,
-	campaignuid tinyint(4) DEFAULT '0' NOT NULL,
-	mailobjectuid tinyint(4) DEFAULT '0' NOT NULL,
+	usergroup int(11) DEFAULT '0' NOT NULL,
+	campaignuid int(11) DEFAULT '0' NOT NULL,
+	mailobjectuid int(11) DEFAULT '0' NOT NULL,
+	configurationuid int(11) DEFAULT '0' NOT NULL,
+	subject varchar(255) COLLATE utf8_general_ci NOT NULL,	
 	PRIMARY KEY (uid),
 	KEY campaignuid (campaignuid),
 	KEY mailobjectuid (mailobjectuid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 
+DROP TABLE IF EXISTS configurationobjects;
+CREATE TABLE configurationobjects (
+	uid int(11) NOT NULL auto_increment,
+	pid int(11) DEFAULT '0' NOT NULL,	
+	tstamp int(11) DEFAULT '0' NOT NULL,
+	crdate int(11) DEFAULT '0' NOT NULL,
+	usergroup int(11) DEFAULT '0' NOT NULL,
+	cruser_id int(11) DEFAULT '0' NOT NULL,
+	deleted tinyint(4) DEFAULT '0' NOT NULL,
+	hidden tinyint(4) DEFAULT '0' NOT NULL,
+	title varchar(255) COLLATE utf8_general_ci NOT NULL,	
+	sendermail varchar(255) COLLATE utf8_general_ci NOT NULL,	
+	sendername varchar(255) COLLATE utf8_general_ci NOT NULL,	
+	answermail varchar(255) COLLATE utf8_general_ci NOT NULL,	
+	answername varchar(255) COLLATE utf8_general_ci NOT NULL,	
+	returnpath varchar(255) COLLATE utf8_general_ci NOT NULL,	
+	organisation varchar(255) COLLATE utf8_general_ci NOT NULL,	
+	htmlplain tinyint(4) DEFAULT '0' NOT NULL,
+	PRIMARY KEY (uid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 
 
-DROP TABLE IF EXISTS automationobject;
-CREATE TABLE automationobject (
+
+DROP TABLE IF EXISTS automationobjects;
+CREATE TABLE automationobjects (
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 	tstamp int(11) DEFAULT '0' NOT NULL,
@@ -361,8 +398,53 @@ CREATE TABLE automationobject (
 	cruser_id int(11) DEFAULT '0' NOT NULL,
 	deleted tinyint(4) DEFAULT '0' NOT NULL,
 	hidden tinyint(4) DEFAULT '0' NOT NULL,	
+	usergroup int(11) DEFAULT '0' NOT NULL,
 	campaignid int(11) DEFAULT '0' NOT NULL,	
 	title varchar(255) COLLATE utf8_general_ci NOT NULL,	
 	automationgraphstring varchar(255) COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (uid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+DROP TABLE IF EXISTS segmentobjects;
+CREATE TABLE segmentobjects (
+	uid int(11) NOT NULL auto_increment,
+	pid int(11) DEFAULT '0' NOT NULL,
+	tstamp int(11) DEFAULT '0' NOT NULL,
+	crdate int(11) DEFAULT '0' NOT NULL,
+	cruser_id int(11) DEFAULT '0' NOT NULL,
+	deleted tinyint(4) DEFAULT '0' NOT NULL,
+	hidden tinyint(4) DEFAULT '0' NOT NULL,	
+	usergroup int(11) DEFAULT '0' NOT NULL,
+	campaignid int(11) DEFAULT '0' NOT NULL,	
+	title varchar(255) COLLATE utf8_general_ci NOT NULL,	
+	hashtags varchar(255) COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (uid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+
+DROP TABLE IF EXISTS addresses;
+CREATE TABLE addresses (
+	uid int(11) NOT NULL auto_increment,
+	pid int(11) DEFAULT '0' NOT NULL,
+	tstamp int(11) DEFAULT '0' NOT NULL,
+	crdate int(11) DEFAULT '0' NOT NULL,
+	cruser_id int(11) DEFAULT '0' NOT NULL,
+	deleted tinyint(4) DEFAULT '0' NOT NULL,
+	hidden tinyint(4) DEFAULT '0' NOT NULL,
+	usergroup int(11) DEFAULT '0' NOT NULL,	
+	first_name varchar(255) COLLATE utf8_general_ci NOT NULL,
+	last_name varchar(255) COLLATE utf8_general_ci NOT NULL,
+	email varchar(255) COLLATE utf8_general_ci NOT NULL,
+	phone varchar(255) COLLATE utf8_general_ci NOT NULL,
+    address varchar(255) COLLATE utf8_general_ci NOT NULL,
+    city  varchar(255) COLLATE utf8_general_ci NOT NULL,	
+	segmentobjects int(11) DEFAULT '0' NOT NULL,		
+	userlanguage int(11) DEFAULT '0' NOT NULL,
+	gender tinyint(4) DEFAULT '0' NOT NULL,
+	formal tinyint(4) DEFAULT '1' NOT NULL,
+	hashtags varchar(255) COLLATE utf8_general_ci NOT NULL,
+	itemsource  varchar(255) COLLATE utf8_general_ci NOT NULL,	
+	hasprofile tinyint(4) DEFAULT '1' NOT NULL,
+  PRIMARY KEY (uid),
+	KEY segmentobjects (segmentobjects)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
