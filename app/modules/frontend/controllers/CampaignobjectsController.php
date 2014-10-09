@@ -53,6 +53,7 @@ class CampaignobjectsController extends ControllerBase
 					$sendoutobject=new Sendoutobjects();
 					$rawdate=$rawArray['tstamp'];
 					/*TODO DATE zerpflücken*/
+					$dateArr=explode(' ',$rawdate);
 					$sendoutobject->assign(array(
 						'pid'=>0,
 						'crdate' => $time,
