@@ -1,6 +1,7 @@
 <?php
 namespace nltool\Models;
 use Phalcon\Mvc\Model;
+	
 
 
 /**
@@ -9,5 +10,7 @@ use Phalcon\Mvc\Model;
  * @author Philipp-PC
  */
 class Configurationobjects extends Model{
+	
+	
 	
 }

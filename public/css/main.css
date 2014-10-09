@@ -989,7 +989,7 @@ box-shadow: inset 3px 0px 5px 0px rgba(0,0,0,0.75);
 }
 .allPurposeLayer{
 	width:500px;
-	height:200px;
+	
 	display:block;
 	margin-left:-250px;
 	margin-top:-100px;
@@ -1112,6 +1112,16 @@ h2 .mode.active{
 #mailobjectEditMode.active{
 	color:#01994e;
 }
+
+.sendoutobject .info{
+	position: absolute;
+	top: -2px;
+	right: -2px;
+}
+.sendoutobject .info:hover{
+	cursor:pointer;
+}
+
 @media (min-width: 768px) {
 	
 }

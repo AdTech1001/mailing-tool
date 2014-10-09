@@ -20,6 +20,7 @@ return new \Phalcon\Config(array(
 		'messagesDir'     => APP_PATH . '/app/messages/',
 		'frontendDir'     => APP_PATH . '/app/modules/frontend/',
 		'frontendControllersDir'     => APP_PATH . '/app/modules/frontend/controllers',
+		'formsDir'     => APP_PATH . '/app/forms',
 		'backendDir'     => APP_PATH . '/app/modules/backend/',
 		'backendControllersDir'     => APP_PATH . '/app/modules/backend/controllers',
 		'appsDir' => APP_PATH.'/app/',

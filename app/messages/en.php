@@ -73,7 +73,9 @@ $messages = array(
 	"confTitle" => "create configuration",
 	"html" => "HTML",
 	"plain" => "plaintext",
-	"both" => "both"
+	"both" => "both",
+	"configurationobjectsIndexTitle" => "available configurations",
+	"sendoutDateLabel"=> "sendout date"
 	
 	
 );

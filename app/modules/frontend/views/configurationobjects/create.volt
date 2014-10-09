@@ -5,7 +5,7 @@
 <div id="fileTollBar"><div class="glyphicon glyphicon-floppy-save" id="configurationobjectsSave" data-controller="configurationsobjects" data-action="create"><span class="itemLabel">{{ tr('save') }}</span></div></div>	
 
 <h1>{{tr('confTitle')}}</h1>
-{{ form('configurationsobjects/save', 'method': 'post') }}
+{{ form(language~'/configurationobjects/create/', 'method': 'post') }}
 
 	<label>{{ tr('confTitleLabel') }}</label><br>
     {{ text_field("title", "size": 32) }}

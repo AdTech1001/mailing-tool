@@ -1,6 +1,6 @@
 <header>
 	<div id="logo">
-		{{image('images/logo.png')}}
+		<a href="{{ baseurl }}" title="Home">{{image('images/logo.png')}}</a>
 	</div>
 	{%- if session.get('auth') -%}
 	<nav class="navbar navbar-reverse" role="navigation">
@@ -14,9 +14,7 @@
 			
 			<li class="notification-container">
 				{{- link_to('notifications', '<span class="glyphicon glyphicon-globe"></span>', 'title': 'Notifications') -}}
-				{#%- if notifications.has() -%}
-				<span class="notification-counter">{{ notifications.getNumber() }}</span>
-				{#%- endif -%}
+				
 			</li>
 			
 
@@ -45,10 +43,11 @@
 
 			<li>{{ link_to('help', '<span class="glyphicon glyphicon-question-sign"></span>', 'title': 'Help') }}</li>
 
-			{#%- if session.get('auth') -%#}
+			
+			<li>{{ link_to('', '<span class="glyphicon glyphicon-home"></span>', 'title': 'Home') }}</li>
 			<li>{{ link_to('settings', '<span class="glyphicon glyphicon-cog"></span>', 'title': 'Settings') }}</li>
 			<li>{{ link_to('session/logout/', '<span class="glyphicon glyphicon-off"></span>', 'title': 'Logout') }}</li>
-			{#%- endif -%#}
+			
 		  </ul>
 
 			

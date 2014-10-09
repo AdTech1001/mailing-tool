@@ -80,6 +80,35 @@ var sendDateConnectorTargert = {
 };			
 
 
+var color4 = "#61baff";
+var configurationConnectorSource = {
+	endpoint:["Dot", { radius:10 }],
+	paintStyle:{ fillStyle:color4 },
+	isSource:true,
+	scope:"blue",
+	connectorStyle:{ strokeStyle:color4, lineWidth:6 },
+	connector : [ "Flowchart", { stub:[40, 60], gap:10, cornerRadius:5, alwaysRespectStubs:true } ],
+	maxConnections:1,
+	isTarget:false
+	
+};	
+		
+var configurationConnectorTargert = {
+	endpoint:["Dot", { radius:10 }],
+	paintStyle:{ fillStyle:color4 },
+	anchor:"BottomRight",
+	isSource:false,
+	scope:"blue",
+	connectorStyle:{ strokeStyle:color4, lineWidth:6 },
+	connector: ["Bezier", { curviness:63 } ],
+	maxConnections:1,
+	isTarget:true,
+	dropOptions : exampleDropOptions
+};	
+
+
+
+
 var color3 = "#6d6e72";
 var addressesConnectorSource = {
 	endpoint:["Rectangle", { width:10, height:8 } ],
@@ -148,17 +177,53 @@ var IterateConnections= function (){
       return list;
     }
 
-
+var elementsPathArr=[];
 function Save() {
-	var fullCampaign=jQuery('#automationWorkflowForm').serialize();	
-	console.log(fullCampaign);	
-    console.log(connections);
+	var campaignTitle=jQuery('#automationWorkflowForm').serialize();	
+	var firstConn=instance.getConnections({scope:'red',source:'startpoint'});
+	elementsPathArr=[];
+	if(firstConn.length>0){
+	getPath(firstConn[0].targetId);		
+	}else{
+		alert('Please connect the start point.');
+	}
+	var saveStrng='';
+	var objects='';
+	for(var i=0; i<elementsPathArr.length; i++ ){
+		var confValues=jQuery('#'+elementsPathArr+' input');
+		console.log(confValues);
+		var elementItself=jQuery('#'+elementsPathArr).outerHTML;
+		var elementJson='{"mailobjectuid":'+jQuery(confValues[0]).val()+',"configurationuid":'+jQuery(confValues[1]).val()+',"tstamp":"'+jQuery(confValues[2]).val()+'"}';
+		objects+='&campaignobjectelements[]='+elementItself;
+		
+		saveStrng+='&sendoutobjects[]='+elementJson;
+	}
+	
+	ajaxIt('campaignobjects','create',campaignTitle+saveStrng+objects,dummyEmpty);	
+	
+    /*jQuery('.jsplumbified.sendoutobject').each(function(index,element){
+		var elementId=jQuery(element).attr('id');
+		var sendoutObjectsConnections=instance.getConnections({scope:'*',target:elementId});
+		
+	});
     Objs = [];
     jQuery('.jsplumbified').each(function() {
         Objs.push({id:jQuery(this).attr('id'), html:jQuery(this).html(),left:jQuery(this).css('left'),top:jQuery(this).css('top'),width:jQuery(this).css('width'),height:jQuery(this).css('height')});
-    });
- console.log(Objs);
+    });		*/
 }
+
+function getPath(sendoutObject){
+	elementsPathArr.push(sendoutObject);
+	console.log(sendoutObject);
+	var nextElement=instance.getConnections({scope:'red',source:sendoutObject, target:'*'});
+	
+	if(nextElement.length >0){
+		getPath(nextElement[0].targetId);
+	}
+}
+
+
+
 
 var selectMailobject=function (data){
 	var jsObject = JSON.parse( data );
@@ -167,15 +232,19 @@ var selectMailobject=function (data){
 		selectString+='<option value="'+jsObject[i].uid+'">'+jsObject[i].title+' | '+jsObject[i].date+'</option>';
 }
 	selectString+='</select>';
-	jQuery('#selectWrapper').html(selectString);
-	jQuery('#mailobjectSelect').removeClass('hidden');
+	jQuery('#mailobjectSelectWrapper').html(selectString);
+	ajaxIt('configurationobjects','','',selectConfigurationobject);										
 	
 };
 
+
 jQuery('#mailobjectSelect button.ok').click(function(e){
-	var elementDefinition=jQuery(activeElement).parent().find('input');	
-	jQuery(elementDefinition[0]).val(jQuery('#mailobjectSelect select').val());
-	
+	var elementDefinition=jQuery(activeElement).parent().find('input');		
+	console.log(jQuery('#configurationobjectSelect select').val());
+	jQuery(activeElement).parent().parent().append('<div class="info glyphicon glyphicon-info-sign"></div>')
+	jQuery(elementDefinition[0]).val(jQuery('#mailobjectSelect').val());
+	jQuery(elementDefinition[1]).val(jQuery('#configurationobjectSelect').val());
+	jQuery(elementDefinition[2]).val(jQuery('#datepicker').val());
 	jQuery(activeElement).html(jQuery('#mailobjectSelect select')[0].selectedOptions[0].innerHTML.split(' | ')[0]);
 	jQuery('#mailobjectSelect').addClass('hidden');
 });
@@ -184,24 +253,41 @@ jQuery('#mailobjectSelect button.abort').click(function(e){
 	jQuery('#mailobjectSelect').addClass('hidden');
 });
 
-var setsendDate=function(){
-	jQuery('#sendoutDatePicker').removeClass('hidden');
+
+var selectConfigurationobject= function(data){
+	var jsObject= JSON.parse(data);
+	var selectString='<select id="configurationobjectSelect">';
+	for(var i=0;i<jsObject.length;i++){
+		selectString+='<option value="'+jsObject[i].uid+'">'+jsObject[i].title+' | '+jsObject[i].date+'</option>';
+	}
+	selectString+='</select>';
+	jQuery('#configurationobjectSelectWrapper').html(selectString);
+	jQuery('#mailobjectSelect').removeClass('hidden');
 	jQuery('#datepicker').datetimepicker({
 		lang:lang
 	});
+	
 };
 
-jQuery('#sendoutDatePicker button.ok').click(function(e){
+/*jQuery('#configurationobjectSelect button.ok').click(function(e){
 	var elementDefinition=jQuery(activeElement).parent().find('input');	
-	var sendoutDate=jQuery('#sendoutDatePicker input').val();
-	jQuery(elementDefinition[0]).val(sendoutDate);
-	jQuery(activeElement).html(sendoutDate);
-	jQuery("#sendoutDatePicker").addClass('hidden');
+	jQuery(elementDefinition[0]).val(jQuery('#configurationobjectSelect select').val());
+	
+	jQuery(activeElement).html(jQuery('#configurationobjectSelect select')[0].selectedOptions[0].innerHTML.split(' | ')[0]);
+	jQuery('#configurationobjectSelect').addClass('hidden');
 });
 
-jQuery('#sendoutDatePicker button.abort').click(function(e){
-	jQuery("#sendoutDatePicker").addClass('hidden');
-});
+jQuery('#configurationobjectSelect button.abort').click(function(e){
+	jQuery('#configurationobjectSelect').addClass('hidden');
+});*/
+
+
+
+
+
+var assembleSendoutobjectConf=function(activeElement){
+	ajaxIt('mailobjects','','',selectMailobject);					
+}
 
 
 jsPlumb.ready(function() {
@@ -235,10 +321,12 @@ jsPlumb.ready(function() {
 				updateConnections(info.connection, true);
 			});
 	
+	instance.addEndpoint(jQuery('#startpoint'), mainflowConnector);
+	instance.draggable(jQuery('#startpoint'));
 	
 });
 
-jQuery( ".window" ).draggable({
+jQuery( "#campaignCreateElements .window" ).draggable({
     appendTo: "#automationWorkspace",
     helper: "clone",
     containment: "#automationWorkspace",	  
@@ -265,21 +353,19 @@ jQuery( "#automationWorkspace" ).droppable({
 		switch(elController){
 			case 'sendoutobject':
 			instance.addEndpoint(jQuery(newElement), mainflowConnector);
-			instance.addEndpoint(jQuery(newElement), mainflowConnectorTarget);
-			instance.addEndpoint(jQuery(newElement), addressesConnectorTarget);			
-			instance.addEndpoint(jQuery(newElement), sendDateConnectorTargert);			
+			instance.addEndpoint(jQuery(newElement), mainflowConnectorTarget);						
 			break;
 			case 'senddate':
 			instance.addEndpoint(jQuery(newElement), sendDateConnectorSource);
-			break;
-			case "dummy":
-			instance.addEndpoint(jQuery(newElement), mainflowConnector);
-			break;
+			break;			
 			case "addresses":
 			instance.addEndpoint(jQuery(newElement), addressesConnectorSource);
 			break;
 			case "mailobject":
 			instance.addEndpoint(jQuery(newElement), mailTemplateConnectorSource);
+			break;
+			case "configurationobject":
+				instance.addEndpoint(jQuery(newElement), configurationConnectorSource);
 			break;
 			
 			default:
@@ -300,28 +386,10 @@ jQuery( "#automationWorkspace" ).droppable({
 				{
 					e.preventDefault();
 					activeElement=jQuery(this);
-					ajaxIt('mailobjects','','',selectMailobject);										
+					assembleSendoutobjectConf(activeElement);
 				});
 			break;
-			case 'senddate':
-				jQuery('#'+newElementId+' a').click(function(e){
-					e.preventDefault();
-					activeElement=jQuery(this);
-					setsendDate();
-				});
-			
-			break;
-			case "dummy":
-			
-			break;
-			case "addresses":
-			
-			break;			
-			
-			default:
-			
-			break;
-			
+												
 			 
 		}
 		 

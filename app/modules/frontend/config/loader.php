@@ -9,6 +9,7 @@ $loader = new \Phalcon\Loader();
 $loader->registerNamespaces(
     array(
 		'nltool\Models'        => $this->config->application->modelsDir,
+		'nltool\Forms'        => $this->config->application->formsDir,		
 		'nltool\Controllers'   => $this->config->application->controllersDir,
 		'nltool\Modules\Modules\Frontend'=>$this->config->application->frontendDir,
 		'nltool\Modules\Modules\Frontend\Controllers'=>$this->config->application->frontendControllersDir,

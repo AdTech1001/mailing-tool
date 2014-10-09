@@ -41,11 +41,13 @@ $router->add(
 	)
 );
 
+
+
 $router->add(
-		'/configurationsobjects/create[/]{0,1}',
+		'/configurationobjects/:action[/]{0,1}',
 		array(
-		'controller' => "configurationsobjects",
-		'action' => "create",		
+		'controller' => "configurationobjects",
+		'action' => 1,		
 		'module'=>'frontend',
 		'namespace'  => 'nltool\Modules\Modules\Frontend\Controllers'
 		)
@@ -62,12 +64,34 @@ $router->add(
 	)
 );
 
+$router->add(
+	'/{language:[a-z]{2}}/configurationobjects/update/:int[/]{0,1}', 
+	array(
+		'language' => 1,
+		'controller' => "configurationobjects",
+		'action' => "update",
+		'uid' => 2,
+		'module'=>'frontend',
+		'namespace'  => 'nltool\Modules\Modules\Frontend\Controllers'
+	)
+);
+
 
 
 $router->add(
 	'/contentobjects/:action[/]{0,1}', 
 	array(	
 		'controller' => 'contentobjects',
+		'action' => 1,
+		'module'=>'frontend',
+		'namespace'  => 'nltool\Modules\Modules\Frontend\Controllers',
+	)
+);
+
+$router->add(
+	'/campaignobjects/:action[/]{0,1}', 
+	array(	
+		'controller' => 'campaignobjects',
 		'action' => 1,
 		'module'=>'frontend',
 		'namespace'  => 'nltool\Modules\Modules\Frontend\Controllers',

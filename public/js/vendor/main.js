@@ -68,13 +68,13 @@ var dummyEmpty=function(){
 };
 
 var ajaxIt=function(controller,action,formdata,successhandler, parameters){
-	 parameters = typeof parameters !== 'undefined' ? parameters : '';
+	 parameters = typeof parameters !== 'undefined' ? '/'+parameters : '';
 	if(successhandler != dummyEmpty){
 	jQuery('#loadingimg').show();
 	}
 
 	jQuery.ajax({
-		url: '/baywa-nltool/'+controller+'/'+action+'/'+parameters,
+		url: '/baywa-nltool/'+controller+'/'+action+parameters,
 		cache: false,
 		async: true,
 		data: formdata,   
