@@ -27,7 +27,7 @@ $this->config = include APP_PATH . "/app/config/config.php";
 	/**
 	 * Include the loader
 	 */
-		require	APP_PATH . "/app/config/loader.php";
+		require	APP_PATH . "/app/modules/fontend/config/loader.php";
 		
         
     }
