@@ -12,7 +12,7 @@
 */
 
 error_reporting(E_ALL);
-echo('HELLAs');
+
 if (!isset($_GET['_url'])) {
     $_GET['_url'] = '/';
 }

@@ -29,10 +29,10 @@ return new \Phalcon\Config(array(
             'baseUri'       => '/baywa-nltool/'
         ),
         'production'     => array(
-            'staticBaseUri' => '/baywa-nltool/',
-            'baseUri'       => '/baywa-nltool/'
+            'staticBaseUri' => '/',
+            'baseUri'       => '/'
         ),
-        'debug'          => true,
+        'debug'          => false,
 		'version' => '0.1 Alpha'
     ),    
     'smtp'        => array(
