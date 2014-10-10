@@ -16,7 +16,75 @@
 	<input type="text" id="datepicker"><br>
 	<br><button class="ok">{{ tr('ok') }}</button><button class="abort">{{ tr('abort') }}</button>
 </div>
-
+<div id="conditionsModelerSelect" class="allPurposeLayer hidden">
+	<label>{{ tr('segmentConditions') }}</label>
+	<div id="conditionWrapper">
+		<table>
+			<thead>
+				<td>{{tr('junktor')}}</td>
+				<td>{{tr('basecondition')}}</td>
+				<td>{{tr('operator')}}</td>
+				<td>{{tr('condition')}}</td>
+			</thead>
+		<tbody>
+			<tr class="conditionRow">
+				<td>
+					<select name="junctor0[]" class="junctor0 hidden">
+						<option value='0'>{{ tr('and') }}</option>
+						<option value='1'>{{ tr('or') }}</option>
+						<option value='2'>{{ tr('xor') }}</option>
+					</select>
+					<select name="junctor1[]" class="junctor1">
+						<option value='0'>{{ tr('if') }}</option>
+						<option value='1'>{{ tr('ifnot') }}</option>
+					</select>
+				</td>
+				<td>
+					<select name="baseArgument[]" class="baseArgument">
+						<option value='0'>{{ tr('field') }}</option>
+						<option value='1'>{{ tr('action') }}</option>
+					</select>
+					<select name="fields[]" class="fields hidden">
+						<option value='0'>{{ tr('gender') }}</option>
+						<option value='1'>{{ tr('firstname') }}</option>
+						<option value='2'>{{ tr('lastname') }}</option>
+						<option value='3'>{{ tr('email') }}</option>
+						<option value='4'>{{ tr('zip') }}</option>
+						<option value='5'>{{ tr('region') }}</option>
+						<option value='6'>{{ tr('place') }}</option>
+						<option value='7'>{{ tr('state') }}</option>
+						<option value='8'>{{ tr('organisation') }}</option>
+						<option value='9'>{{ tr('subscription') }}</option>
+						<option value='10'>{{ tr('clickprofile') }}</option>
+					</select>
+				</td>
+				<td>
+					<select name="operator[]" class="fieldOperators hidden">
+						<option value='0'>{{ tr('equals') }}</option>
+						<option value='1'>{{ tr('contains') }}</option>
+						<option value='2'>{{ tr('largerthan') }}</option>
+						<option value='3'>{{ tr('largerequal') }}</option>
+						<option value='4'>{{ tr('lowerthan') }}</option>
+						<option value='5'>{{ tr('lowerequal') }}</option>
+					</select>
+					<select name="operator[]" class="actionOperators hidden">
+						<option value='0'>{{ tr('hasOpened') }}</option>
+						<option value='1'>{{ tr('hasClicked') }}</option>						
+					</select>
+				</td>
+				<td>
+					<input type="text" name="fieldconditions[]" class="fieldconditions hidden">
+					<button class="hidden" title="{{ tr('selectLink') }}"><span class="glyphicon glyphicon-link"></span></button>
+					<input type="hidden" name="clickconditions[]" class="clickconditions hidden">
+				</td>
+				<td>
+					<button title="{{ tr('addConditionRow') }}"><span class="glyphicon glyphicon-plus-sign"></span></button>
+				</td>
+			</tr>
+		</tbody>
+		</table>
+	</div>
+</div>
 
 
 <div class="container">	
@@ -41,8 +109,8 @@
 		</div>
 	</div>
     
-    <div class="window" data-controller="automation" data-action="add"><div class="glyphicon glyphicon-random"><br><span class="itemLabel">{{ tr('addConditions') }}</span></div></div>
-    
+    <div class="window" data-controller="conditionobjects" data-action="add"><div class="glyphicon glyphicon-random"><br><span class="itemLabel">{{ link_to(language~'/conditionobjects/create/', tr('addConditions'),'class':'itemLabel'  )}}</span></div></div>
+    <div class="window" data-controller="abtest" data-action="add"><div class="glyphicon glyphicon-transfer"><br><span class="itemLabel">{{ link_to(language~'/conditionobjects/create/', tr('abtest'),'class':'itemLabel'  )}}</span></div></div>
 </div> 	
 </div>
 

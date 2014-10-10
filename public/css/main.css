@@ -994,6 +994,21 @@ box-shadow: inset 3px 0px 5px 0px rgba(0,0,0,0.75);
 	margin-left:-250px;
 	margin-top:-100px;
 }
+#conditionsModelerSelect{
+	width:600px;
+	padding:10px;
+}
+#conditionsModelerSelect table{
+	width: 100%;
+}
+
+#conditionsModelerSelect button{
+	width:25px;
+	height:25px;
+	background:none;
+	border:1px solid #fff;
+	padding-top:3px;
+}
 
 #deleteOverlay{
 	position:absolute;

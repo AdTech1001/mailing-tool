@@ -81,7 +81,7 @@ var sendDateConnectorTargert = {
 
 
 var color4 = "#61baff";
-var configurationConnectorSource = {
+var conditionConnectorSource = {
 	endpoint:["Dot", { radius:10 }],
 	paintStyle:{ fillStyle:color4 },
 	isSource:true,
@@ -93,10 +93,10 @@ var configurationConnectorSource = {
 	
 };	
 		
-var configurationConnectorTargert = {
+var conditionConnectorTargert = {
 	endpoint:["Dot", { radius:10 }],
 	paintStyle:{ fillStyle:color4 },
-	anchor:"BottomRight",
+	anchor:"Top",
 	isSource:false,
 	scope:"blue",
 	connectorStyle:{ strokeStyle:color4, lineWidth:6 },
@@ -189,6 +189,7 @@ function Save() {
 	}
 	var saveStrng='';
 	var objects='';
+	console.log(connections);
 	for(var i=0; i<elementsPathArr.length; i++ ){
 		var confValues=jQuery('#'+elementsPathArr+' input');
 		console.log(confValues);
@@ -289,6 +290,10 @@ var assembleSendoutobjectConf=function(activeElement){
 	ajaxIt('mailobjects','','',selectMailobject);					
 }
 
+var conditionModeler=function(activeElement){
+	jQuery('#conditionsModelerSelect').removeClass('hidden');		
+}
+
 
 jsPlumb.ready(function() {
 	jsPlumb.setContainer(jQuery("#automationWorkspace"));
@@ -354,6 +359,7 @@ jQuery( "#automationWorkspace" ).droppable({
 			case 'sendoutobject':
 			instance.addEndpoint(jQuery(newElement), mainflowConnector);
 			instance.addEndpoint(jQuery(newElement), mainflowConnectorTarget);						
+			instance.addEndpoint(jQuery(newElement), conditionConnectorTargert);									
 			break;
 			case 'senddate':
 			instance.addEndpoint(jQuery(newElement), sendDateConnectorSource);
@@ -364,8 +370,8 @@ jQuery( "#automationWorkspace" ).droppable({
 			case "mailobject":
 			instance.addEndpoint(jQuery(newElement), mailTemplateConnectorSource);
 			break;
-			case "configurationobject":
-				instance.addEndpoint(jQuery(newElement), configurationConnectorSource);
+			case "conditionobjects":
+				instance.addEndpoint(jQuery(newElement), conditionConnectorSource);
 			break;
 			
 			default:
@@ -387,6 +393,14 @@ jQuery( "#automationWorkspace" ).droppable({
 					e.preventDefault();
 					activeElement=jQuery(this);
 					assembleSendoutobjectConf(activeElement);
+				});
+			break;
+			case 'conditionobjects':
+				jQuery('#'+newElementId+' a').click(function(e)
+				{
+					e.preventDefault();
+					activeElement=jQuery(this);
+					conditionModeler(activeElement);
 				});
 			break;
 												
