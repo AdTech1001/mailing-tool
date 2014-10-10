@@ -18,6 +18,7 @@
 </div>
 <div id="conditionsModelerSelect" class="allPurposeLayer hidden">
 	<label>{{ tr('segmentConditions') }}</label>
+	<form id="conditionsForm"> 
 	<div id="conditionWrapper">
 		<table>
 			<thead>
@@ -27,7 +28,8 @@
 				<td>{{tr('condition')}}</td>
 			</thead>
 		<tbody>
-			<tr class="conditionRow">
+		
+			<tr id="conditionRow_1" class="conditionRow">
 				<td>
 					<select name="junctor0[]" class="junctor0 hidden">
 						<option value='0'>{{ tr('and') }}</option>
@@ -41,8 +43,9 @@
 				</td>
 				<td>
 					<select name="baseArgument[]" class="baseArgument">
-						<option value='0'>{{ tr('field') }}</option>
-						<option value='1'>{{ tr('action') }}</option>
+						<option value='0'>{{ tr('pleaseSelect') }}</option>
+						<option value='1'>{{ tr('field') }}</option>						
+						<option value='2'>{{ tr('action') }}</option>
 					</select>
 					<select name="fields[]" class="fields hidden">
 						<option value='0'>{{ tr('gender') }}</option>
@@ -74,15 +77,18 @@
 				</td>
 				<td>
 					<input type="text" name="fieldconditions[]" class="fieldconditions hidden">
-					<button class="hidden" title="{{ tr('selectLink') }}"><span class="glyphicon glyphicon-link"></span></button>
+					<button class="clickconditions hidden" title="{{ tr('selectLink') }}"><span class="glyphicon glyphicon-link"></span></button>
 					<input type="hidden" name="clickconditions[]" class="clickconditions hidden">
 				</td>
 				<td>
-					<button title="{{ tr('addConditionRow') }}"><span class="glyphicon glyphicon-plus-sign"></span></button>
+					<button title="{{ tr('addConditionRow') }}" id="addCondition"><span class="glyphicon glyphicon-plus-sign"></span></button>
 				</td>
 			</tr>
+			
 		</tbody>
 		</table>
+		</form>
+		<br><button class="ok">{{ tr('ok') }}</button><button class="abort">{{ tr('abort') }}</button>
 	</div>
 </div>
 

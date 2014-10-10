@@ -11,7 +11,11 @@ class LoginForm extends Form {
 
 public function initialize()
 {
-$this->setAction('/baywa-nltool/session/start/');
+	
+$environment= $this->config['application']['debug'] ? 'development' : 'production';
+$baseUri=$this->config['application'][$environment]['staticBaseUri'];
+
+$this->setAction($baseUri.'session/start/');
 $username = new Text('username');
 $username->addValidator(new PresenceOf(array (
     'message' => 'Can\'t be empty'

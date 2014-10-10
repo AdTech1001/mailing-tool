@@ -1002,7 +1002,7 @@ box-shadow: inset 3px 0px 5px 0px rgba(0,0,0,0.75);
 	width: 100%;
 }
 
-#conditionsModelerSelect button{
+#conditionsModelerSelect .conditionRow button{
 	width:25px;
 	height:25px;
 	background:none;

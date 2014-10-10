@@ -288,12 +288,42 @@ jQuery('#configurationobjectSelect button.abort').click(function(e){
 
 var assembleSendoutobjectConf=function(activeElement){
 	ajaxIt('mailobjects','','',selectMailobject);					
-}
+};
 
 var conditionModeler=function(activeElement){
+	var conditionsBlueprint=jQuery('#conditionRow_1')[0].outerHTML;	
+	var rowId='conditionRow_1';
 	jQuery('#conditionsModelerSelect').removeClass('hidden');		
-}
+	jQuery('#addCondition').click(function(e){
+		console.log(conditionsBlueprint);
+		e.preventDefault();
+		jQuery('#conditionWrapper table tbody').append(conditionsBlueprint);
+	});
+	addRowEvents(rowId);
+	
+};
 
+var addRowEvents=function(rowId){
+	jQuery('#'+rowId+' select.baseArgument').change(function(e){
+		console.log(jQuery(this).val());
+		switch(jQuery(this).val()){
+			case "1":
+			jQuery('#'+rowId+' select.actionOperators').addClass('hidden');
+			jQuery('#'+rowId+' select.fields').removeClass('hidden');
+			jQuery('#'+rowId+' select.fieldOperators').removeClass('hidden');
+			jQuery('#'+rowId+' .fieldconditions').removeClass('hidden');
+			jQuery('#'+rowId+' .clickconditions').addClass('hidden');						
+			break;
+			case "2":
+			jQuery('#'+rowId+' select.actionOperators').removeClass('hidden');
+			jQuery('#'+rowId+' select.fields').addClass('hidden');
+			jQuery('#'+rowId+' select.fieldOperators').addClass('hidden');
+			jQuery('#'+rowId+' .fieldconditions').addClass('hidden');
+			jQuery('#'+rowId+' .clickconditions').removeClass('hidden');
+			break;
+		}
+	});
+};
 
 jsPlumb.ready(function() {
 	jsPlumb.setContainer(jQuery("#automationWorkspace"));
