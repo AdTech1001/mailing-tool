@@ -1,4 +1,4 @@
-{% include 'partials/flash-messages.volt' %}
+{% include 'partials\flash-messages.volt' %}
 <div class="container">
 	{{ content() }}
 <h1>{{tr('loginTitle')}}</h1>
