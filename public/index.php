@@ -23,7 +23,7 @@ define('APP_PATH', realpath('..'));
  * Read the configuration
  */
 $config = include APP_PATH . "/app/config/config.php";
-if(!$config->application->debug){
+if($config->application->debug){
 $config['database']= array(
         'adapter'  => 'Mysql',
         'host'     => 'localhost',
