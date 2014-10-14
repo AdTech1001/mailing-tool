@@ -1,4 +1,4 @@
-{% include 'partials\flash-messages.volt' %}
+{% include 'partials/flash-messages.volt' %}
 <div class="container">
 	{% include 'partials\function-menu.volt' %}
 	<div class="desktop">

@@ -1,6 +1,6 @@
 <?php use Phalcon\Tag as Tag ?>
 
-{% include 'partials\flash-messages.volt' %}
+{% include 'partials/flash-messages.volt' %}
 {{ content() }}
 {%- if session.get('auth') -%}
 <div class="container">

@@ -1,5 +1,5 @@
 
-{% include 'partials\flash-messages.volt' %}
+{% include 'partials/flash-messages.volt' %}
 {{ content() }}
 <div class="container">	
 {%- if session.get('auth') -%}

@@ -1,5 +1,5 @@
 
-{% include 'partials\flash-messages.volt' %}
+{% include 'partials/flash-messages.volt' %}
 {{ content() }}
 
 <div id="confirmTitleInputTemplate" class="hidden"><input type="text" id="titleInput" name="title"><br><button class="ok">{{ tr('ok') }}</button><button class="abort">{{ tr('abort') }}</button></div>
