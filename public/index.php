@@ -23,7 +23,25 @@ define('APP_PATH', realpath('..'));
  * Read the configuration
  */
 $config = include APP_PATH . "/app/config/config.php";
-
+if($config->application->debug){
+$config['database']= array(
+        'adapter'  => 'Mysql',
+        'host'     => 'localhost',
+        'username' => 'root',
+        'password' => '',
+        'dbname'   => 'bayw-nltool',
+        'charset'  => 'utf8'
+    );
+}else{
+	$config['database']= array(
+        'adapter'  => 'Mysql',
+        'host'     => 'nltool.mysql.eu1.frbit.com',
+        'username' => 'nltool',
+        'password' => 'wrC9vof4PDhkdU2O',
+        'dbname'   => 'nltool',
+        'charset'  => 'utf8'
+    );
+}
 /**
  * Include the loader
  */

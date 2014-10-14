@@ -23,7 +23,6 @@ class Module implements ModuleDefinitionInterface
  */
 $this->config = include APP_PATH . "/app/config/config.php";
 
-
 	/**
 	 * Include the loader
 	 */

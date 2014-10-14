@@ -2,6 +2,7 @@
 namespace nltool\Modules\Modules\Frontend\Controllers;
 use nltool\Models\Mailobjects as Mailobjects,
 	nltool\Models\Campaignobjects as Campaignobjects,
+	nltool\Models\Contentobjects as Contenobjects,
 	nltool\Models\Sendoutobjects as Sendoutobjects;
 
 /**
@@ -28,7 +29,10 @@ class CampaignobjectsController extends ControllerBase
 	public function createAction()
 	{
 		 if($this->request->isPost()){
-				$time=time();
+			 $jsonArr=json_decode($this->request->getPost('sendoutobjects')[0]);
+			 
+			 die($jsonArr->html);
+				/*$time=time();
 				$automationgraphstring='';
 				foreach($this->request->getPost('campaignobjectelements') as $campaignobjectElements){
 					$automationgraphstring+=$campaignobjectElements;
@@ -53,7 +57,7 @@ class CampaignobjectsController extends ControllerBase
 					$sendoutobject=new Sendoutobjects();
 					$rawdate=$rawArray['tstamp'];
 					/*TODO DATE zerpflücken*/
-					$dateArr=explode(' ',$rawdate);
+					/*$dateArr=explode(' ',$rawdate);
 					$sendoutobject->assign(array(
 						'pid'=>0,
 						'crdate' => $time,
@@ -69,7 +73,7 @@ class CampaignobjectsController extends ControllerBase
 						$this->flash->error($cElement->getMessages());
 					}
 					
-				}
+				}*/
 				
 				
 		 }else{

@@ -995,8 +995,9 @@ box-shadow: inset 3px 0px 5px 0px rgba(0,0,0,0.75);
 	margin-top:-100px;
 }
 #conditionsModelerSelect{
-	width:600px;
+	width:750px;
 	padding:10px;
+	margin-left:-350px;
 }
 #conditionsModelerSelect table{
 	width: 100%;

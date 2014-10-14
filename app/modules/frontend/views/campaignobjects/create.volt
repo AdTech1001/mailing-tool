@@ -18,8 +18,9 @@
 </div>
 <div id="conditionsModelerSelect" class="allPurposeLayer hidden">
 	<label>{{ tr('segmentConditions') }}</label>
-	<form id="conditionsForm"> 
+	
 	<div id="conditionWrapper">
+		<form id="conditionsForm"> 
 		<table>
 			<thead>
 				<td>{{tr('junktor')}}</td>
@@ -109,13 +110,13 @@
 	
 	<div class="window sendoutobject" data-controller="sendoutobject" data-action="create">
 		<div class="glyphicon glyphicon-envelope"><br>{{ link_to(language~'/sendoutobject/create/', tr('createSendObject'),'class':'itemLabel'  )}}
-			<input type='hidden' value='0' name="mailobject" >
-			<input type='hidden' value='0' name="configurationobject" >
-			<input type='hidden' value='0' name="date" >
+			<input type="hidden" value="0" name="mailobject" >
+			<input type="hidden" value="0" name="configurationobject" >
+			<input type="hidden" value="0" name="date" >
 		</div>
 	</div>
     
-    <div class="window" data-controller="conditionobjects" data-action="add"><div class="glyphicon glyphicon-random"><br><span class="itemLabel">{{ link_to(language~'/conditionobjects/create/', tr('addConditions'),'class':'itemLabel'  )}}</span></div></div>
+    <div class="window" data-controller="conditionobjects" data-action="add"><div class="glyphicon glyphicon-random"><div class="hidden"></div><br><span class="itemLabel">{{ link_to(language~'/conditionobjects/create/', tr('addConditions'),'class':'itemLabel'  )}}</span></div></div>
     <div class="window" data-controller="abtest" data-action="add"><div class="glyphicon glyphicon-transfer"><br><span class="itemLabel">{{ link_to(language~'/conditionobjects/create/', tr('abtest'),'class':'itemLabel'  )}}</span></div></div>
 </div> 	
 </div>

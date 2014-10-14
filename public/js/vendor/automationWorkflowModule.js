@@ -180,6 +180,8 @@ var IterateConnections= function (){
 var elementsPathArr=[];
 function Save() {
 	var campaignTitle=jQuery('#automationWorkflowForm').serialize();	
+	var conditions=jQuery('#conditionsForm').serialize();
+	
 	var firstConn=instance.getConnections({scope:'red',source:'startpoint'});
 	elementsPathArr=[];
 	if(firstConn.length>0){
@@ -189,12 +191,13 @@ function Save() {
 	}
 	var saveStrng='';
 	var objects='';
-	console.log(connections);
+		
 	for(var i=0; i<elementsPathArr.length; i++ ){
-		var confValues=jQuery('#'+elementsPathArr+' input');
-		console.log(confValues);
-		var elementItself=jQuery('#'+elementsPathArr).outerHTML;
-		var elementJson='{"mailobjectuid":'+jQuery(confValues[0]).val()+',"configurationuid":'+jQuery(confValues[1]).val()+',"tstamp":"'+jQuery(confValues[2]).val()+'"}';
+		var confValues=jQuery('#'+elementsPathArr[i]+' input');
+		
+		var elementItself=JSON.stringify(jQuery('#'+elementsPathArr[i])[0].outerHTML);
+		
+		var elementJson='{"id":"'+elementsPathArr[i]+'","mailobjectuid":'+jQuery(confValues[0]).val()+',"configurationuid":'+jQuery(confValues[1]).val()+',"tstamp":"'+jQuery(confValues[2]).val()+'","position":{"left":'+jQuery('#'+elementsPathArr[i]).position().left+',"top":'+jQuery('#'+elementsPathArr[i]).position().top+'},"html":'+elementItself+'}';
 		objects+='&campaignobjectelements[]='+elementItself;
 		
 		saveStrng+='&sendoutobjects[]='+elementJson;
@@ -214,8 +217,7 @@ function Save() {
 }
 
 function getPath(sendoutObject){
-	elementsPathArr.push(sendoutObject);
-	console.log(sendoutObject);
+	elementsPathArr.push(sendoutObject);	
 	var nextElement=instance.getConnections({scope:'red',source:sendoutObject, target:'*'});
 	
 	if(nextElement.length >0){
@@ -228,7 +230,7 @@ function getPath(sendoutObject){
 
 var selectMailobject=function (data){
 	var jsObject = JSON.parse( data );
-	var selectString='<select id="mailobjectSelect">';
+	var selectString='<select id="mailobjectSelectElements">';
 	for(var i=0;i<jsObject.length;i++){
 		selectString+='<option value="'+jsObject[i].uid+'">'+jsObject[i].title+' | '+jsObject[i].date+'</option>';
 }
@@ -241,11 +243,11 @@ var selectMailobject=function (data){
 
 jQuery('#mailobjectSelect button.ok').click(function(e){
 	var elementDefinition=jQuery(activeElement).parent().find('input');		
-	console.log(jQuery('#configurationobjectSelect select').val());
-	jQuery(activeElement).parent().parent().append('<div class="info glyphicon glyphicon-info-sign"></div>')
-	jQuery(elementDefinition[0]).val(jQuery('#mailobjectSelect').val());
+
+	jQuery(elementDefinition[0]).val(jQuery('#mailobjectSelectElements').val());
 	jQuery(elementDefinition[1]).val(jQuery('#configurationobjectSelect').val());
 	jQuery(elementDefinition[2]).val(jQuery('#datepicker').val());
+	jQuery(activeElement).parent().parent().append('<div class="info glyphicon glyphicon-info-sign"></div>');
 	jQuery(activeElement).html(jQuery('#mailobjectSelect select')[0].selectedOptions[0].innerHTML.split(' | ')[0]);
 	jQuery('#mailobjectSelect').addClass('hidden');
 });
@@ -290,36 +292,80 @@ var assembleSendoutobjectConf=function(activeElement){
 	ajaxIt('mailobjects','','',selectMailobject);					
 };
 
-var conditionModeler=function(activeElement){
-	var conditionsBlueprint=jQuery('#conditionRow_1')[0].outerHTML;	
-	var rowId='conditionRow_1';
+var conditionRowCounter=1;
+var conditionsFormBlueprint=jQuery('#conditionsForm')[0].outerHTML;
+var conditionsBlueprint=jQuery('#conditionRow_1')[0].outerHTML;	
+var conditionModeler=function(activeElement){	
+	
+	var actElId=jQuery(activeElement).parent().parent().parent().attr('id');
+	if(jQuery('#'+actElId+' div.hidden').html() != ''){
+		jQuery('#conditionsForm').html(jQuery('#'+actElId+' div.hidden').html());
+		
+		conditionRowCounter=jQuery('#conditionWrapper table tbody tr:last-child').attr('id').split('_')[1];
+	}
+	var rowId='conditionRow_'+conditionRowCounter;
 	jQuery('#conditionsModelerSelect').removeClass('hidden');		
-	jQuery('#addCondition').click(function(e){
-		console.log(conditionsBlueprint);
+	jQuery('#conditionWrapper').on('click','#addCondition',function(e){	
+		
+		conditionRowCounter++;
+		rowId='conditionRow_'+conditionRowCounter;
 		e.preventDefault();
-		jQuery('#conditionWrapper table tbody').append(conditionsBlueprint);
+		jQuery('#addCondition').remove();
+		jQuery('#conditionWrapper table tbody').append(conditionsBlueprint);		
+		jQuery('#conditionWrapper table tbody tr:last-child').attr({'id':rowId});
+		jQuery('#conditionWrapper table tbody tr:last-child .junctor0').removeClass('hidden');
+		addRowEvents(rowId);
 	});
-	addRowEvents(rowId);
+	for(var i=1; i<=conditionRowCounter; i++){
+		addRowEvents('conditionRow_'+i);
+	}
 	
 };
 
+jQuery('#conditionsModelerSelect button.ok').click(function(e){
+	jQuery('#conditionWrapper').off('click');
+	e.preventDefault();
+	conditionRowCounter=1;
+	console.log(jQuery(activeElement));
+	var actElId=jQuery(activeElement).parent().parent().parent().attr('id');
+	jQuery('#'+actElId+' div.hidden').html(jQuery('#conditionsForm').html());
+	
+	jQuery('#conditionsForm').remove();
+	jQuery('#conditionWrapper').prepend(conditionsFormBlueprint);
+	jQuery('#conditionsModelerSelect').addClass('hidden');
+});
+
 var addRowEvents=function(rowId){
-	jQuery('#'+rowId+' select.baseArgument').change(function(e){
-		console.log(jQuery(this).val());
+	
+	jQuery('#conditionsForm #'+rowId+' select').change(function(e){
+		var selectIndex=jQuery(this)[0].selectedIndex;	
+		jQuery(this).children().each(function(index,el){
+			if(index===selectIndex){
+				jQuery(el).attr({'selected':'selected'});
+			}else{
+				jQuery(el).removeAttr('selected');
+			}
+		});
+	});
+	jQuery('#conditionsForm #'+rowId+' input').change(function(e){
+		jQuery(this).attr({'value':jQuery(this).val()});
+	});
+	jQuery('#conditionsForm #'+rowId+' select.baseArgument').change(function(e){
+		
 		switch(jQuery(this).val()){
 			case "1":
-			jQuery('#'+rowId+' select.actionOperators').addClass('hidden');
-			jQuery('#'+rowId+' select.fields').removeClass('hidden');
-			jQuery('#'+rowId+' select.fieldOperators').removeClass('hidden');
-			jQuery('#'+rowId+' .fieldconditions').removeClass('hidden');
-			jQuery('#'+rowId+' .clickconditions').addClass('hidden');						
+			jQuery('#conditionsForm #'+rowId+' select.actionOperators').addClass('hidden');
+			jQuery('#conditionsForm #'+rowId+' select.fields').removeClass('hidden');
+			jQuery('#conditionsForm #'+rowId+' select.fieldOperators').removeClass('hidden');
+			jQuery('#conditionsForm #'+rowId+' .fieldconditions').removeClass('hidden');
+			jQuery('#conditionsForm #'+rowId+' .clickconditions').addClass('hidden');						
 			break;
 			case "2":
-			jQuery('#'+rowId+' select.actionOperators').removeClass('hidden');
-			jQuery('#'+rowId+' select.fields').addClass('hidden');
-			jQuery('#'+rowId+' select.fieldOperators').addClass('hidden');
-			jQuery('#'+rowId+' .fieldconditions').addClass('hidden');
-			jQuery('#'+rowId+' .clickconditions').removeClass('hidden');
+			jQuery('#conditionsForm #'+rowId+' select.actionOperators').removeClass('hidden');
+			jQuery('#conditionsForm #'+rowId+' select.fields').addClass('hidden');
+			jQuery('#conditionsForm #'+rowId+' select.fieldOperators').addClass('hidden');
+			jQuery('#conditionsForm #'+rowId+' .fieldconditions').addClass('hidden');
+			jQuery('#conditionsForm #'+rowId+' .clickconditions').removeClass('hidden');
 			break;
 		}
 	});
