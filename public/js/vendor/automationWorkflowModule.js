@@ -32,6 +32,67 @@ var mainflowConnector = {
 		alert("Cannot drop connection " + info.connection.id + " : maxConnections has been reached on Endpoint " + info.endpoint.id);
 	}
 };
+var mainflowConnector1 = {
+	endpoint:["Dot", {radius:13} ],
+	anchor:"Right",
+	paintStyle:{ fillStyle:color1, opacity:0.5 },
+	isSource:true,
+	scope:'red',
+	connectorStyle:{ strokeStyle:color1, lineWidth:3 },
+	connector : [ "Flowchart", { stub:[40, 60], gap:10, cornerRadius:5, alwaysRespectStubs:true } ],
+	isTarget:false,
+	connectorOverlays : [
+			["Label", {													   					
+				cssClass:"l1 component label",
+				label : "Wenn Bedingung erfüllt", 
+				location:0.7,
+				id:"label",
+				events:{
+					"click":function(label, evt) {
+						alert("clicked on label for connection " + label.component.id);
+					}
+				}
+			}]
+	],
+	dropOptions : exampleDropOptions,
+	beforeDetach:function(conn) { 
+		return confirm("Detach connection?"); 
+	},
+	onMaxConnections:function(info) {
+		alert("Cannot drop connection " + info.connection.id + " : maxConnections has been reached on Endpoint " + info.endpoint.id);
+	}
+};
+
+var mainflowConnector2 = {
+	endpoint:["Dot", {radius:13} ],
+	anchor:"Bottom",
+	paintStyle:{ fillStyle:color1, opacity:0.5 },
+	isSource:true,
+	scope:'red',
+	connectorStyle:{ strokeStyle:color1, lineWidth:3 },
+	connector : [ "Flowchart", { stub:[40, 60], gap:10, cornerRadius:5, alwaysRespectStubs:true } ],
+	connectorOverlays : [
+			["Label", {													   					
+				cssClass:"l1 component label",
+				label : "alle anderen", 
+				location:0.7,
+				id:"label",
+				events:{
+					"click":function(label, evt) {
+						alert("clicked on label for connection " + label.component.id);
+					}
+				}
+			}]
+	],
+	isTarget:false,
+	dropOptions : exampleDropOptions,
+	beforeDetach:function(conn) { 
+		return confirm("Detach connection?"); 
+	},
+	onMaxConnections:function(info) {
+		alert("Cannot drop connection " + info.connection.id + " : maxConnections has been reached on Endpoint " + info.endpoint.id);
+	}
+};
 
 var mainflowConnectorTarget = {
 	endpoint:["Dot", {radius:13} ],
@@ -55,6 +116,7 @@ var mainflowConnectorTarget = {
 			
 var color2 = "#009650";
 var sendDateConnectorSource = {
+	anchor:"Right",
 	endpoint:["Dot", { radius:11 }],
 	paintStyle:{ fillStyle:color2 },
 	isSource:true,
@@ -66,10 +128,10 @@ var sendDateConnectorSource = {
 	
 };	
 		
-var sendDateConnectorTargert = {
+var sendDateConnectorTarget = {
 	endpoint:["Dot", { radius:11 }],
 	paintStyle:{ fillStyle:color2 },
-	anchor:"Top",
+	anchor:"Left",
 	isSource:false,
 	scope:"green",
 	connectorStyle:{ strokeStyle:color2, lineWidth:6 },
@@ -93,7 +155,7 @@ var conditionConnectorSource = {
 	
 };	
 		
-var conditionConnectorTargert = {
+var conditionConnectorTarget = {
 	endpoint:["Dot", { radius:10 }],
 	paintStyle:{ fillStyle:color4 },
 	anchor:"Top",
@@ -180,7 +242,7 @@ var IterateConnections= function (){
 var elementsPathArr=[];
 function Save() {
 	var campaignTitle=jQuery('#automationWorkflowForm').serialize();	
-	var conditions=jQuery('#conditionsForm').serialize();
+	//var conditions=jQuery('#conditionsForm').serialize();
 	
 	var firstConn=instance.getConnections({scope:'red',source:'startpoint'});
 	elementsPathArr=[];
@@ -191,7 +253,7 @@ function Save() {
 	}
 	var saveStrng='';
 	var objects='';
-		
+		console.log(elementsPathArr);
 	for(var i=0; i<elementsPathArr.length; i++ ){
 		var confValues=jQuery('#'+elementsPathArr[i]+' input');
 		
@@ -200,7 +262,7 @@ function Save() {
 		var elementJson='{"id":"'+elementsPathArr[i]+'","mailobjectuid":'+jQuery(confValues[0]).val()+',"configurationuid":'+jQuery(confValues[1]).val()+',"tstamp":"'+jQuery(confValues[2]).val()+'","position":{"left":'+jQuery('#'+elementsPathArr[i]).position().left+',"top":'+jQuery('#'+elementsPathArr[i]).position().top+'},"html":'+elementItself+'}';
 		objects+='&campaignobjectelements[]='+elementItself;
 		
-		saveStrng+='&sendoutobjects[]='+elementJson;
+		saveStrng+='&connections[]='+elementJson;
 	}
 	
 	ajaxIt('campaignobjects','create',campaignTitle+saveStrng+objects,dummyEmpty);	
@@ -216,12 +278,23 @@ function Save() {
     });		*/
 }
 
+function getSplitTargets(split){
+	var splitTargets=instance.getConnections({scope:'red',source:split, target:'*'});
+	return splitTargets;
+}
+
 function getPath(sendoutObject){
 	elementsPathArr.push(sendoutObject);	
-	var nextElement=instance.getConnections({scope:'red',source:sendoutObject, target:'*'});
+	var nextElement=instance.getConnections({scope:'green',source:sendoutObject, target:'*'});
 	
 	if(nextElement.length >0){
-		getPath(nextElement[0].targetId);
+		var splitTargets=getSplitTargets(nextElement[0].targetId);
+		if(splitTargets.length >0){
+			for(var i=0; i<splitTargets.length; i++){
+				/*Recursion is dead, long live recursion*/
+				getPath(splitTargets[i].targetId);
+			}
+		}
 	}
 }
 
@@ -433,9 +506,9 @@ jQuery( "#automationWorkspace" ).droppable({
 		
 		switch(elController){
 			case 'sendoutobject':
-			instance.addEndpoint(jQuery(newElement), mainflowConnector);
+			instance.addEndpoint(jQuery(newElement), sendDateConnectorSource);
 			instance.addEndpoint(jQuery(newElement), mainflowConnectorTarget);						
-			instance.addEndpoint(jQuery(newElement), conditionConnectorTargert);									
+			instance.addEndpoint(jQuery(newElement), conditionConnectorTarget);									
 			break;
 			case 'senddate':
 			instance.addEndpoint(jQuery(newElement), sendDateConnectorSource);
@@ -449,7 +522,11 @@ jQuery( "#automationWorkspace" ).droppable({
 			case "conditionobjects":
 				instance.addEndpoint(jQuery(newElement), conditionConnectorSource);
 			break;
-			
+			case "automationbjects":
+				instance.addEndpoint(jQuery(newElement), sendDateConnectorTarget);
+				instance.addEndpoint(jQuery(newElement), mainflowConnector);
+				instance.addEndpoint(jQuery(newElement), mainflowConnector2);
+			break;
 			default:
 			
 			break;

@@ -26,7 +26,7 @@ class SessionController extends ControllerBase
 
 	public function startAction()
 	{
-		$request=$this->request;
+		
 		if ($this->request->isPost()) {
 			try {				
 				$this->auth->check(array(
@@ -34,6 +34,7 @@ class SessionController extends ControllerBase
 					'password' => $this->request->getPost('password')
 
 				));
+				mail('schreiber@meetbiz.de','test','dings: '.$this->auth->check);
                 $this->response->redirect(""); 
 				$this->view->disable();                            
 			} catch (AuthException $e) {

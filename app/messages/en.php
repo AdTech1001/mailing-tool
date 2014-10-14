@@ -108,7 +108,8 @@ $messages = array(
 	"hasOpened" => "has opened",
 	"hasClicked" => "has clicked",
 	"selectLink" => "select link",
-	"addConditionRow" => "add conditions"
+	"addConditionRow" => "add conditions",
+	"addAutomation" => "add split"
 	
 	
 );

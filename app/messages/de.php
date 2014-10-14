@@ -109,7 +109,8 @@ $messages = array(
 	"hasOpened" => "hat geöffnet",
 	"hasClicked" => "hat geklickt",
 	"selectLink" => "Link auswählen",
-	"addConditionRow" => "neue Bedingung hinzufügen"
+	"addConditionRow" => "neue Bedingung hinzufügen",
+	"addAutomation" => "Weiche hinzufügen"
 	
 	
 );

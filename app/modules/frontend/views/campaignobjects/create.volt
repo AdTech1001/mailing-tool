@@ -116,8 +116,10 @@
 		</div>
 	</div>
     
-    <div class="window" data-controller="conditionobjects" data-action="add"><div class="glyphicon glyphicon-random"><div class="hidden"></div><br><span class="itemLabel">{{ link_to(language~'/conditionobjects/create/', tr('addConditions'),'class':'itemLabel'  )}}</span></div></div>
+    <div class="window" data-controller="conditionobjects" data-action="add"><div class="glyphicon glyphicon-sort-by-attributes-alt"><div class="hidden"></div><br><span class="itemLabel">{{ link_to(language~'/conditionobjects/create/', tr('addConditions'),'class':'itemLabel'  )}}</span></div></div>
     <div class="window" data-controller="abtest" data-action="add"><div class="glyphicon glyphicon-transfer"><br><span class="itemLabel">{{ link_to(language~'/conditionobjects/create/', tr('abtest'),'class':'itemLabel'  )}}</span></div></div>
+	<div class="window" data-controller="automationbjects" data-action="add"><div class="glyphicon glyphicon-random"><div class="hidden"></div><br><span class="itemLabel">{{ link_to(language~'/automationobjects/create/', tr('addAutomation'),'class':'itemLabel'  )}}</span></div></div>
+	
 </div> 	
 </div>
 
