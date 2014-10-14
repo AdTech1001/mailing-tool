@@ -13,7 +13,7 @@ public function initialize()
 {
 	
 $environment= $this->config['application']['debug'] ? 'development' : 'production';
-echo($environment);
+
 $baseUri=$this->config['application'][$environment]['staticBaseUri'];
 
 $this->setAction($baseUri.'session/start/');
