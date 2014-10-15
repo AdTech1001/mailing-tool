@@ -229,10 +229,14 @@ var IterateConnections= function (){
     }
 
 var elementsPathArr=[];
+function dummyTest(data){
+	jQuery('#automationWorkspace').html(decodeURI(data));
+	
+}
 function Save() {
 	var campaignTitle=jQuery('#automationWorkflowForm').serialize();	
 	//var conditions=jQuery('#conditionsForm').serialize();
-	console.log(JSON.stringify(connections));
+	console.log(connections);
 	var firstConn=instance.getConnections({scope:'red',source:'startpoint'});
 	elementsPathArr=[];
 	if(firstConn.length>0){
@@ -242,19 +246,32 @@ function Save() {
 	}
 	var saveStrng='';
 	var objects='';
-		
+	var sendoutobjectelements='';
+	
+	
+	jQuery('.window.jsplumbified').each(function(index,element){
+		if(jQuery(element).attr('id')!=='startpoint'){
+			objects+=encodeURI(jQuery(element)[0].outerHTML);
+		}
+	});
 	for(var i=0; i<elementsPathArr.length; i++ ){
 		var confValues=jQuery('#'+elementsPathArr[i]+' input');
 		
-		var elementItself=JSON.stringify(jQuery('#'+elementsPathArr[i])[0].outerHTML);
+		//var elementItself=JSON.stringify(jQuery('#'+elementsPathArr[i])[0].outerHTML);
 		var conditionsJson=getSendoutObjectConditions(elementsPathArr[i]);
-		var elementJson='{"id":"'+elementsPathArr[i]+'","mailobjectuid":'+jQuery(confValues[0]).val()+',"configurationuid":'+jQuery(confValues[1]).val()+',"tstamp":"'+jQuery(confValues[2]).val()+'","position":{"left":'+jQuery('#'+elementsPathArr[i]).position().left+',"top":'+jQuery('#'+elementsPathArr[i]).position().top+'},"html":'+elementItself+', "conditions":'+conditionsJson+'}';
-		objects+='&campaignobjectelements[]='+elementJson;
+		var elementJson='{"id":"'+elementsPathArr[i]+'","mailobjectuid":'+jQuery(confValues[0]).val()+',"configurationuid":'+jQuery(confValues[1]).val()+',"tstamp":"'+jQuery(confValues[2]).val()+'","position":{"left":'+jQuery('#'+elementsPathArr[i]).position().left+',"top":'+jQuery('#'+elementsPathArr[i]).position().top+'}, "conditions":'+conditionsJson+'}';
+		sendoutobjectelements+='&sendoutobjectelements[]='+elementJson;
 		
 
 	}
+	var connJson='{[';
 	
-	ajaxIt('campaignobjects','create',campaignTitle+objects,dummyEmpty);	
+	for(var j=0; j<connections.length; j++){
+		
+		connJson+='{"source":"'+connections[j].sourceId+'","target":"'+connections[j].targetId+'"},';
+	}
+	connJson=connJson.substring(0,connJson.length-1)+']}';
+	ajaxIt('campaignobjects','create',campaignTitle+'&htmlobjects='+objects+sendoutobjectelements+'&connections='+connJson,dummyEmpty);	
 	
     /*jQuery('.jsplumbified.sendoutobject').each(function(index,element){
 		var elementId=jQuery(element).attr('id');
@@ -268,28 +285,40 @@ function Save() {
 }
 function getSendoutObjectConditions(sendoutObjectId){
 	var splitTargets=instance.getConnections({scope:'*',source:'*', target:sendoutObjectId});
-	var conditions=[];
+	
+	var conditions='[';
 	for(var i=0; i<splitTargets.length;i++){
-		var condVals=JSON.stringify(jQuery('#'+splitTargets[i]+' form').serialize());
-		var elItself=JSON.stringify(jQuery('#'+splitTargets[i])[0].outerHTML);
-		var condJson='{"condValues":'+condVals+',"html":'+elItself+'}';
-		conditions.push(condJson);
+		if(splitTargets[i].sourceId !== 'startpoint'){
+		var condVals=JSON.stringify(jQuery('#'+splitTargets[i].sourceId+' form').serializeArray());
+		
+		var elItself=JSON.stringify(jQuery('#'+splitTargets[i].sourceId)[0].outerHTML);
+		 conditions+='{"condValues":'+condVals+'},';
+		
+		}
+		
 	}
-	return contidions;
+	if(conditions.length > 1){
+	conditions=conditions.substring(0,conditions.length-1)+']';
+	}else{
+		conditions+=']';
+	}
+	return conditions;
 }
 function getSplitTargets(split){
-	var splitTargets=instance.getConnections({scope:['red','green'],source:split, target:'*'});
+	var splitTargets=instance.getConnections({scope:['red','green'],source:split, target:'*'},true);
 	return splitTargets;
 }
 
 function getPath(sendoutObject){
 	elementsPathArr.push(sendoutObject);	
-	var nextElement=instance.getConnections({scope:['green','red'],source:sendoutObject, target:'*'});
+	var nextElement=instance.getConnections({scope:['grey'],source:sendoutObject, target:'*'});
 	
 	if(nextElement.length >0){
 		var splitTargets=getSplitTargets(nextElement[0].targetId);
+		
 		if(splitTargets.length >0){
 			for(var i=0; i<splitTargets.length; i++){
+				
 				/*Recursion is dead, long live recursion*/
 				getPath(splitTargets[i].targetId);
 			}

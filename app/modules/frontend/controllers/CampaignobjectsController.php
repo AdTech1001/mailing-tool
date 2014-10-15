@@ -1,8 +1,7 @@
 <?php
 namespace nltool\Modules\Modules\Frontend\Controllers;
 use nltool\Models\Mailobjects as Mailobjects,
-	nltool\Models\Campaignobjects as Campaignobjects,
-	nltool\Models\Contentobjects as Contenobjects,
+	nltool\Models\Campaignobjects as Campaignobjects,	
 	nltool\Models\Sendoutobjects as Sendoutobjects;
 
 /**
@@ -29,15 +28,15 @@ class CampaignobjectsController extends ControllerBase
 	public function createAction()
 	{
 		 if($this->request->isPost()){
-			 $jsonArr=json_decode($this->request->getPost('sendoutobjects')[0]);
 			 
-			 die($jsonArr->html);
-				/*$time=time();
-				$automationgraphstring='';
-				foreach($this->request->getPost('campaignobjectelements') as $campaignobjectElements){
-					$automationgraphstring+=$campaignobjectElements;
-				}
-				$campaignobjectRecord=new Contentobjects();
+				$sendoutObjectsArray=array();
+				$automationgraphString=$this->request->getPost('htmlobjects');
+				$time=time();
+				$counter=0;
+				//die($automationgraphString);
+				
+				
+				$campaignobjectRecord=new Campaignobjects();
 				$campaignobjectRecord->assign(array(
 					'pid'=>0,
 					'crdate' => $time,
@@ -46,18 +45,20 @@ class CampaignobjectsController extends ControllerBase
 					'usergroup' =>$this->session->get('auth')['usergroup'],
 					'deleted' =>0,
 					'hidden' => 0,
-					'title'=>$this->request->getPost('title','striptags'),
-					'automationgraphstring' =>$automationgraphstring
+					'title'=>$this->request->getPost('title','striptags')== '' ? 'no name' : $this->request->getPost('title','striptags'),
+					'connections'=>$this->request->getPost('connections','striptags'),
+					'automationgraphstring' =>$automationgraphString
 				));
 				if (!$campaignobjectRecord->save()) {
-					$this->flash->error($cElement->getMessages());
+					$this->flash->error($campaignobjectRecord->getMessages());
 				}
-				foreach($this->request->getPost('sendoutobjects') as $sendoutobjectElements){
+				
+				foreach($this->request->getPost('campaignobjectelements') as $sendoutobjectElements){
 					$rawArray=json_decode($sendoutobjectElements);
 					$sendoutobject=new Sendoutobjects();
 					$rawdate=$rawArray['tstamp'];
 					/*TODO DATE zerpflücken*/
-					/*$dateArr=explode(' ',$rawdate);
+					$dateArr=explode(' ',$rawdate);
 					$sendoutobject->assign(array(
 						'pid'=>0,
 						'crdate' => $time,
@@ -66,14 +67,14 @@ class CampaignobjectsController extends ControllerBase
 						'usergroup' =>$this->session->get('auth')['usergroup'],
 						'deleted' =>0,
 						'hidden' => 0,
-						'title'=>$this->request->getPost('title','striptags'),
-						'automationgraphstring' =>$automationgraphstring
+						'campaignuid'=>$campaignobjectRecord->uid,						
+						'mailobjectuid'=>$this->request->getPost()
 					));
 					if (!$campaignobjectRecord->save()) {
 						$this->flash->error($cElement->getMessages());
 					}
 					
-				}*/
+				}
 				
 				
 		 }else{

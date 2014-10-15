@@ -69,7 +69,7 @@
 					
 				</td>
 				<td>
-					<input type="text" name="fieldconditions[]" class="fieldconditions hidden">
+					<input type="text" name="fieldconditions[]" class="fieldconditions">
 					
 				</td>
 				<td>
@@ -141,7 +141,7 @@
 </div>
 <form id="automationWorkflowForm">
 	
-	<label>{{tr('campaignCreateTitle')}}</label> <input type="text" value="" placeholder="{{tr('unnamedCampaign')}}" name="wkTitle">
+	<label>{{tr('campaignCreateTitle')}}</label> <input type="text" value="" placeholder="{{tr('unnamedCampaign')}}" name="title">
 </form>	
 <div class="demo flowchart-demo automationWorkspace" id="automationWorkspace">
 	        <div class="window jsplumbified" id="startpoint" data-controller="dummy" data-action="start"><div class="glyphicon glyphicon-play"><br><span class="itemLabel">{{ tr('startCampaign') }}</span></div></div>
