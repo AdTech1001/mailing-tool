@@ -15,6 +15,7 @@ var connectorPaintStyle = {
 		outlineWidth:2
 	};			
 var color1 = "#e32c3a";
+var color2 = "#009650";
 var mainflowConnector = {
 	endpoint:["Dot", {radius:13} ],
 	anchor:"Right",
@@ -24,36 +25,6 @@ var mainflowConnector = {
 	connectorStyle:{ strokeStyle:color1, lineWidth:3 },
 	connector : [ "Flowchart", { stub:[40, 60], gap:10, cornerRadius:5, alwaysRespectStubs:true } ],
 	isTarget:false,
-	dropOptions : exampleDropOptions,
-	beforeDetach:function(conn) { 
-		return confirm("Detach connection?"); 
-	},
-	onMaxConnections:function(info) {
-		alert("Cannot drop connection " + info.connection.id + " : maxConnections has been reached on Endpoint " + info.endpoint.id);
-	}
-};
-var mainflowConnector1 = {
-	endpoint:["Dot", {radius:13} ],
-	anchor:"Right",
-	paintStyle:{ fillStyle:color1, opacity:0.5 },
-	isSource:true,
-	scope:'red',
-	connectorStyle:{ strokeStyle:color1, lineWidth:3 },
-	connector : [ "Flowchart", { stub:[40, 60], gap:10, cornerRadius:5, alwaysRespectStubs:true } ],
-	isTarget:false,
-	connectorOverlays : [
-			["Label", {													   					
-				cssClass:"l1 component label",
-				label : "Wenn Bedingung erfüllt", 
-				location:0.7,
-				id:"label",
-				events:{
-					"click":function(label, evt) {
-						alert("clicked on label for connection " + label.component.id);
-					}
-				}
-			}]
-	],
 	dropOptions : exampleDropOptions,
 	beforeDetach:function(conn) { 
 		return confirm("Detach connection?"); 
@@ -95,11 +66,15 @@ var mainflowConnector2 = {
 };
 
 var mainflowConnectorTarget = {
-	endpoint:["Dot", {radius:13} ],
-	anchor:"Left",
-	paintStyle:{ fillStyle:color1, opacity:0.5 },
+	endpoint:["Dot", {radius:20} ],
+	anchor:"Top",
+	paintStyle:{gradient:{
+      stops:[[0,color2],[0.5,color2], [0.5,color1], [1,color1]],
+		
+			  
+    }},
 	isSource:false,
-	scope:'red',
+	scope:'red green',
 	connectorStyle:{ strokeStyle:color1, lineWidth:3 },
 	connector : [ "Flowchart", { stub:[40, 60], gap:10, cornerRadius:5, alwaysRespectStubs:true } ],
 	isTarget:true,
@@ -114,13 +89,26 @@ var mainflowConnectorTarget = {
 
 
 			
-var color2 = "#009650";
+
 var sendDateConnectorSource = {
 	anchor:"Right",
 	endpoint:["Dot", { radius:11 }],
 	paintStyle:{ fillStyle:color2 },
 	isSource:true,
 	scope:"green",
+	connectorOverlays : [
+			["Label", {													   					
+				cssClass:"l1 component label",
+				label : "Bedingungen erfüllt", 
+				location:0.7,
+				id:"label",
+				events:{
+					"click":function(label, evt) {
+						alert("clicked on label for connection " + label.component.id);
+					}
+				}
+			}]
+	],
 	connectorStyle:{ strokeStyle:color2, lineWidth:6 },
 	connector : [ "Flowchart", { stub:[40, 60], gap:10, cornerRadius:5, alwaysRespectStubs:true } ],
 	maxConnections:1,
@@ -146,6 +134,7 @@ var color4 = "#61baff";
 var conditionConnectorSource = {
 	endpoint:["Dot", { radius:10 }],
 	paintStyle:{ fillStyle:color4 },
+	anchor:"Right",
 	isSource:true,
 	scope:"blue",
 	connectorStyle:{ strokeStyle:color4, lineWidth:6 },
@@ -158,7 +147,7 @@ var conditionConnectorSource = {
 var conditionConnectorTarget = {
 	endpoint:["Dot", { radius:10 }],
 	paintStyle:{ fillStyle:color4 },
-	anchor:"Top",
+	anchor:"Left",
 	isSource:false,
 	scope:"blue",
 	connectorStyle:{ strokeStyle:color4, lineWidth:6 },
@@ -172,10 +161,10 @@ var conditionConnectorTarget = {
 
 
 var color3 = "#6d6e72";
-var addressesConnectorSource = {
-	endpoint:["Rectangle", { width:10, height:8 } ],
+var splitConnectorSource = {
+	endpoint:["Rectangle", { width:15, height:20 } ],
 	paintStyle:{ fillStyle:color3 },
-	anchor:"Top",
+	anchor:"Right",
 	isSource:true,
 	scope:"grey",
 	connectorStyle:{ strokeStyle:color3, lineWidth:3 },
@@ -185,10 +174,10 @@ var addressesConnectorSource = {
 	
 };
 
-var addressesConnectorTarget = {
+var splitConnectorTarget = {
 	endpoint:["Rectangle", { width:15, height:20 } ],
 	paintStyle:{ fillStyle:color3 },
-	anchor:"Bottom",
+	anchor:"Left",
 	isSource:false,
 	scope:"grey",
 	connectorStyle:{ strokeStyle:color3, lineWidth:3 },
@@ -243,7 +232,7 @@ var elementsPathArr=[];
 function Save() {
 	var campaignTitle=jQuery('#automationWorkflowForm').serialize();	
 	//var conditions=jQuery('#conditionsForm').serialize();
-	
+	console.log(JSON.stringify(connections));
 	var firstConn=instance.getConnections({scope:'red',source:'startpoint'});
 	elementsPathArr=[];
 	if(firstConn.length>0){
@@ -253,19 +242,19 @@ function Save() {
 	}
 	var saveStrng='';
 	var objects='';
-		console.log(elementsPathArr);
+		
 	for(var i=0; i<elementsPathArr.length; i++ ){
 		var confValues=jQuery('#'+elementsPathArr[i]+' input');
 		
 		var elementItself=JSON.stringify(jQuery('#'+elementsPathArr[i])[0].outerHTML);
+		var conditionsJson=getSendoutObjectConditions(elementsPathArr[i]);
+		var elementJson='{"id":"'+elementsPathArr[i]+'","mailobjectuid":'+jQuery(confValues[0]).val()+',"configurationuid":'+jQuery(confValues[1]).val()+',"tstamp":"'+jQuery(confValues[2]).val()+'","position":{"left":'+jQuery('#'+elementsPathArr[i]).position().left+',"top":'+jQuery('#'+elementsPathArr[i]).position().top+'},"html":'+elementItself+', "conditions":'+conditionsJson+'}';
+		objects+='&campaignobjectelements[]='+elementJson;
 		
-		var elementJson='{"id":"'+elementsPathArr[i]+'","mailobjectuid":'+jQuery(confValues[0]).val()+',"configurationuid":'+jQuery(confValues[1]).val()+',"tstamp":"'+jQuery(confValues[2]).val()+'","position":{"left":'+jQuery('#'+elementsPathArr[i]).position().left+',"top":'+jQuery('#'+elementsPathArr[i]).position().top+'},"html":'+elementItself+'}';
-		objects+='&campaignobjectelements[]='+elementItself;
-		
-		saveStrng+='&connections[]='+elementJson;
+
 	}
 	
-	ajaxIt('campaignobjects','create',campaignTitle+saveStrng+objects,dummyEmpty);	
+	ajaxIt('campaignobjects','create',campaignTitle+objects,dummyEmpty);	
 	
     /*jQuery('.jsplumbified.sendoutobject').each(function(index,element){
 		var elementId=jQuery(element).attr('id');
@@ -277,15 +266,25 @@ function Save() {
         Objs.push({id:jQuery(this).attr('id'), html:jQuery(this).html(),left:jQuery(this).css('left'),top:jQuery(this).css('top'),width:jQuery(this).css('width'),height:jQuery(this).css('height')});
     });		*/
 }
-
+function getSendoutObjectConditions(sendoutObjectId){
+	var splitTargets=instance.getConnections({scope:'*',source:'*', target:sendoutObjectId});
+	var conditions=[];
+	for(var i=0; i<splitTargets.length;i++){
+		var condVals=JSON.stringify(jQuery('#'+splitTargets[i]+' form').serialize());
+		var elItself=JSON.stringify(jQuery('#'+splitTargets[i])[0].outerHTML);
+		var condJson='{"condValues":'+condVals+',"html":'+elItself+'}';
+		conditions.push(condJson);
+	}
+	return contidions;
+}
 function getSplitTargets(split){
-	var splitTargets=instance.getConnections({scope:'red',source:split, target:'*'});
+	var splitTargets=instance.getConnections({scope:['red','green'],source:split, target:'*'});
 	return splitTargets;
 }
 
 function getPath(sendoutObject){
 	elementsPathArr.push(sendoutObject);	
-	var nextElement=instance.getConnections({scope:'green',source:sendoutObject, target:'*'});
+	var nextElement=instance.getConnections({scope:['green','red'],source:sendoutObject, target:'*'});
 	
 	if(nextElement.length >0){
 		var splitTargets=getSplitTargets(nextElement[0].targetId);
@@ -367,50 +366,62 @@ var assembleSendoutobjectConf=function(activeElement){
 
 var conditionRowCounter=1;
 var conditionsFormBlueprint=jQuery('#conditionsForm')[0].outerHTML;
-var conditionsBlueprint=jQuery('#conditionRow_1')[0].outerHTML;	
-var conditionModeler=function(activeElement){	
-	
+var conditionsBlueprint=jQuery('#conditionsRow_1')[0].outerHTML;	
+var splitFormBlueprint=jQuery('#splitForm')[0].outerHTML;
+var splitBlueprint=jQuery('#splitRow_1')[0].outerHTML;	
+var conditionModeler=function(activeElement,splitCond){	
+	var appendRow=conditionsBlueprint;
+	if(splitCond=='split'){
+		appendRow=splitBlueprint;
+	}
 	var actElId=jQuery(activeElement).parent().parent().parent().attr('id');
 	if(jQuery('#'+actElId+' div.hidden').html() != ''){
-		jQuery('#conditionsForm').html(jQuery('#'+actElId+' div.hidden').html());
+		jQuery('#'+splitCond+'Form').html(jQuery('#'+actElId+' div.hidden').html());
 		
-		conditionRowCounter=jQuery('#conditionWrapper table tbody tr:last-child').attr('id').split('_')[1];
+		conditionRowCounter=jQuery('#'+splitCond+'Wrapper table tbody tr:last-child').attr('id').split('_')[1];
 	}
-	var rowId='conditionRow_'+conditionRowCounter;
-	jQuery('#conditionsModelerSelect').removeClass('hidden');		
-	jQuery('#conditionWrapper').on('click','#addCondition',function(e){	
-		
-		conditionRowCounter++;
-		rowId='conditionRow_'+conditionRowCounter;
+	var rowId=splitCond+'Row_'+conditionRowCounter;
+	jQuery('#'+splitCond+'ModelerSelect').removeClass('hidden');		
+	
+	jQuery('#'+splitCond+'Wrapper').on('click','#add'+splitCond,function(e){	
 		e.preventDefault();
-		jQuery('#addCondition').remove();
-		jQuery('#conditionWrapper table tbody').append(conditionsBlueprint);		
-		jQuery('#conditionWrapper table tbody tr:last-child').attr({'id':rowId});
-		jQuery('#conditionWrapper table tbody tr:last-child .junctor0').removeClass('hidden');
-		addRowEvents(rowId);
+		conditionRowCounter++;
+		rowId=splitCond+'Row_'+conditionRowCounter;
+		
+		jQuery('#add'+splitCond).remove();
+		jQuery('#'+splitCond+'Wrapper table tbody').append(appendRow);		
+		jQuery('#'+splitCond+'Wrapper table tbody tr:last-child').attr({'id':rowId});
+		jQuery('#'+splitCond+'Wrapper table tbody tr:last-child .junctor0').removeClass('hidden');
+		addRowEvents(rowId, splitCond);
 	});
 	for(var i=1; i<=conditionRowCounter; i++){
-		addRowEvents('conditionRow_'+i);
+		addRowEvents(splitCond+'Row_'+i, splitCond);
 	}
 	
 };
 
-jQuery('#conditionsModelerSelect button.ok').click(function(e){
-	jQuery('#conditionWrapper').off('click');
+jQuery('#conditionsModelerSelect button.ok, #splitModelerSelect button.ok').click(function(e){
+	var splitCond='conditions';
+	var prependRow=conditionsFormBlueprint;
+	if(jQuery(this).hasClass('split')){
+		splitCond='split';
+		prependRow=splitFormBlueprint
+	}
+	jQuery('#'+splitCond+'Wrapper').off('click');
 	e.preventDefault();
 	conditionRowCounter=1;
-	console.log(jQuery(activeElement));
-	var actElId=jQuery(activeElement).parent().parent().parent().attr('id');
-	jQuery('#'+actElId+' div.hidden').html(jQuery('#conditionsForm').html());
 	
-	jQuery('#conditionsForm').remove();
-	jQuery('#conditionWrapper').prepend(conditionsFormBlueprint);
-	jQuery('#conditionsModelerSelect').addClass('hidden');
+	var actElId=jQuery(activeElement).parent().parent().parent().attr('id');
+	jQuery('#'+actElId+' form.hidden').html(jQuery('#'+splitCond+'Form').html());
+	
+	jQuery('#'+splitCond+'Form').remove();
+	jQuery('#'+splitCond+'Wrapper').prepend(prependRow);
+	jQuery('#'+splitCond+'ModelerSelect').addClass('hidden');
 });
 
-var addRowEvents=function(rowId){
+var addRowEvents=function(rowId, splitCond){
 	
-	jQuery('#conditionsForm #'+rowId+' select').change(function(e){
+	jQuery('#'+splitCond+'Form #'+rowId+' select').change(function(e){
 		var selectIndex=jQuery(this)[0].selectedIndex;	
 		jQuery(this).children().each(function(index,el){
 			if(index===selectIndex){
@@ -420,25 +431,25 @@ var addRowEvents=function(rowId){
 			}
 		});
 	});
-	jQuery('#conditionsForm #'+rowId+' input').change(function(e){
+	jQuery('#'+splitCond+'Form #'+rowId+' input').change(function(e){
 		jQuery(this).attr({'value':jQuery(this).val()});
 	});
-	jQuery('#conditionsForm #'+rowId+' select.baseArgument').change(function(e){
+	jQuery('#'+splitCond+'Form #'+rowId+' select.baseArgument').change(function(e){
 		
 		switch(jQuery(this).val()){
 			case "1":
-			jQuery('#conditionsForm #'+rowId+' select.actionOperators').addClass('hidden');
-			jQuery('#conditionsForm #'+rowId+' select.fields').removeClass('hidden');
-			jQuery('#conditionsForm #'+rowId+' select.fieldOperators').removeClass('hidden');
-			jQuery('#conditionsForm #'+rowId+' .fieldconditions').removeClass('hidden');
-			jQuery('#conditionsForm #'+rowId+' .clickconditions').addClass('hidden');						
+			jQuery('#'+splitCond+'Form #'+rowId+' select.actionOperators').addClass('hidden');
+			jQuery('#'+splitCond+'Form #'+rowId+' select.fields').removeClass('hidden');
+			jQuery('#'+splitCond+'Form #'+rowId+' select.fieldOperators').removeClass('hidden');
+			jQuery('#'+splitCond+'Form #'+rowId+' .fieldconditions').removeClass('hidden');
+			jQuery('#'+splitCond+'Form #'+rowId+' .clickconditions').addClass('hidden');						
 			break;
 			case "2":
-			jQuery('#conditionsForm #'+rowId+' select.actionOperators').removeClass('hidden');
-			jQuery('#conditionsForm #'+rowId+' select.fields').addClass('hidden');
-			jQuery('#conditionsForm #'+rowId+' select.fieldOperators').addClass('hidden');
-			jQuery('#conditionsForm #'+rowId+' .fieldconditions').addClass('hidden');
-			jQuery('#conditionsForm #'+rowId+' .clickconditions').removeClass('hidden');
+			jQuery('#'+splitCond+'Form #'+rowId+' select.actionOperators').removeClass('hidden');
+			jQuery('#'+splitCond+'Form #'+rowId+' select.fields').addClass('hidden');
+			jQuery('#'+splitCond+'Form #'+rowId+' select.fieldOperators').addClass('hidden');
+			jQuery('#'+splitCond+'Form #'+rowId+' .fieldconditions').addClass('hidden');
+			jQuery('#'+splitCond+'Form #'+rowId+' .clickconditions').removeClass('hidden');
 			break;
 		}
 	});
@@ -460,7 +471,7 @@ jsPlumb.ready(function() {
 		instance.repaintEverything();
 			updateConnections(info.connection, false);
 		//jsPlumb.connect({source:info.source, target:info.target})
-   		console.log(jQuery("#"+info.source.id).attr('data-controller')+' -> '+jQuery("#"+info.source.id).attr('data-action'));
+   		
    		
 	});
 	
@@ -506,7 +517,7 @@ jQuery( "#automationWorkspace" ).droppable({
 		
 		switch(elController){
 			case 'sendoutobject':
-			instance.addEndpoint(jQuery(newElement), sendDateConnectorSource);
+			instance.addEndpoint(jQuery(newElement), splitConnectorSource);
 			instance.addEndpoint(jQuery(newElement), mainflowConnectorTarget);						
 			instance.addEndpoint(jQuery(newElement), conditionConnectorTarget);									
 			break;
@@ -523,8 +534,8 @@ jQuery( "#automationWorkspace" ).droppable({
 				instance.addEndpoint(jQuery(newElement), conditionConnectorSource);
 			break;
 			case "automationbjects":
-				instance.addEndpoint(jQuery(newElement), sendDateConnectorTarget);
-				instance.addEndpoint(jQuery(newElement), mainflowConnector);
+				instance.addEndpoint(jQuery(newElement), splitConnectorTarget);
+				instance.addEndpoint(jQuery(newElement), sendDateConnectorSource);
 				instance.addEndpoint(jQuery(newElement), mainflowConnector2);
 			break;
 			default:
@@ -553,9 +564,17 @@ jQuery( "#automationWorkspace" ).droppable({
 				{
 					e.preventDefault();
 					activeElement=jQuery(this);
-					conditionModeler(activeElement);
+					conditionModeler(activeElement,'conditions');
 				});
 			break;
+			case 'automationbjects':
+				jQuery('#'+newElementId+' a').click(function(e)
+				{
+					e.preventDefault();
+					activeElement=jQuery(this);
+					conditionModeler(activeElement,'split');
+				});
+				break;
 												
 			 
 		}
@@ -596,7 +615,7 @@ var showTitleInput=function(showElement){
 
 jQuery('#confirmTitleInputTemplate button.ok').click(function(e){
 			e.stopPropagation();
-			console.log(showElement);
+			
 			jQuery(showElement).html(jQuery('#titleInput').val());
 		
 			closeTitleInput(jQuery(this));

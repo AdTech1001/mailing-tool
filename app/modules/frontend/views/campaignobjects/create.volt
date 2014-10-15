@@ -19,7 +19,7 @@
 <div id="conditionsModelerSelect" class="allPurposeLayer hidden">
 	<label>{{ tr('segmentConditions') }}</label>
 	
-	<div id="conditionWrapper">
+	<div id="conditionsWrapper">
 		<form id="conditionsForm"> 
 		<table>
 			<thead>
@@ -30,7 +30,7 @@
 			</thead>
 		<tbody>
 		
-			<tr id="conditionRow_1" class="conditionRow">
+			<tr id="conditionsRow_1" class="conditionsRow">
 				<td>
 					<select name="junctor0[]" class="junctor0 hidden">
 						<option value='0'>{{ tr('and') }}</option>
@@ -42,13 +42,8 @@
 						<option value='1'>{{ tr('ifnot') }}</option>
 					</select>
 				</td>
-				<td>
-					<select name="baseArgument[]" class="baseArgument">
-						<option value='0'>{{ tr('pleaseSelect') }}</option>
-						<option value='1'>{{ tr('field') }}</option>						
-						<option value='2'>{{ tr('action') }}</option>
-					</select>
-					<select name="fields[]" class="fields hidden">
+				<td>					
+					<select name="fields[]" class="fields">
 						<option value='0'>{{ tr('gender') }}</option>
 						<option value='1'>{{ tr('firstname') }}</option>
 						<option value='2'>{{ tr('lastname') }}</option>
@@ -63,7 +58,7 @@
 					</select>
 				</td>
 				<td>
-					<select name="operator[]" class="fieldOperators hidden">
+					<select name="operator[]" class="fieldOperators">
 						<option value='0'>{{ tr('equals') }}</option>
 						<option value='1'>{{ tr('contains') }}</option>
 						<option value='2'>{{ tr('largerthan') }}</option>
@@ -71,25 +66,70 @@
 						<option value='4'>{{ tr('lowerthan') }}</option>
 						<option value='5'>{{ tr('lowerequal') }}</option>
 					</select>
-					<select name="operator[]" class="actionOperators hidden">
-						<option value='0'>{{ tr('hasOpened') }}</option>
-						<option value='1'>{{ tr('hasClicked') }}</option>						
-					</select>
+					
 				</td>
 				<td>
 					<input type="text" name="fieldconditions[]" class="fieldconditions hidden">
-					<button class="clickconditions hidden" title="{{ tr('selectLink') }}"><span class="glyphicon glyphicon-link"></span></button>
-					<input type="hidden" name="clickconditions[]" class="clickconditions hidden">
+					
 				</td>
 				<td>
-					<button title="{{ tr('addConditionRow') }}" id="addCondition"><span class="glyphicon glyphicon-plus-sign"></span></button>
+					<button title="{{ tr('addConditionRow') }}" id="addconditions"><span class="glyphicon glyphicon-plus-sign"></span></button>
 				</td>
 			</tr>
 			
 		</tbody>
 		</table>
 		</form>
-		<br><button class="ok">{{ tr('ok') }}</button><button class="abort">{{ tr('abort') }}</button>
+		<br><button class="ok conditions">{{ tr('ok') }}</button><button class="abort conditions">{{ tr('abort') }}</button>
+	</div>
+</div>
+<div id="splitModelerSelect" class="allPurposeLayer hidden">
+	<label>{{ tr('segmentConditions') }}</label>
+	
+	<div id="splitWrapper">
+		<form id="splitForm"> 
+		<table>
+			<thead>
+				<td>{{tr('junktor')}}</td>
+				
+				<td>{{tr('operator')}}</td>
+				<td>{{tr('condition')}}</td>
+			</thead>
+		<tbody>
+		
+			<tr id="splitRow_1" class="splitRow">
+				<td>
+					<select name="junctor0[]" class="junctor0 hidden">
+						<option value='0'>{{ tr('and') }}</option>
+						<option value='1'>{{ tr('or') }}</option>
+						<option value='2'>{{ tr('xor') }}</option>
+					</select>
+					<select name="junctor1[]" class="junctor1">
+						<option value='0'>{{ tr('if') }}</option>
+						<option value='1'>{{ tr('ifnot') }}</option>
+					</select>
+				</td>
+				
+				<td>
+					
+					<select name="operator[]" class="actionOperators">
+						<option value='0'>{{ tr('hasOpened') }}</option>
+						<option value='1'>{{ tr('hasClicked') }}</option>						
+					</select>
+				</td>
+				<td>					
+					<button class="clickconditions" title="{{ tr('selectLink') }}"><span class="glyphicon glyphicon-link"></span></button>
+					<input type="hidden" name="clickconditions[]" class="clickconditions hidden">
+				</td>
+				<td>
+					<button title="{{ tr('addConditionRow') }}" id="addsplit"><span class="glyphicon glyphicon-plus-sign"></span></button>
+				</td>
+			</tr>
+			
+		</tbody>
+		</table>
+		</form>
+		<br><button class="ok split">{{ tr('ok') }}</button><button class="abort split">{{ tr('abort') }}</button>
 	</div>
 </div>
 
@@ -116,10 +156,11 @@
 		</div>
 	</div>
     
-    <div class="window" data-controller="conditionobjects" data-action="add"><div class="glyphicon glyphicon-sort-by-attributes-alt"><div class="hidden"></div><br><span class="itemLabel">{{ link_to(language~'/conditionobjects/create/', tr('addConditions'),'class':'itemLabel'  )}}</span></div></div>
+    <div class="window" data-controller="conditionobjects" data-action="add"><div class="glyphicon glyphicon-sort-by-attributes-alt"><form class="hidden"></form><br><span class="itemLabel">{{ link_to(language~'/conditionobjects/create/', tr('addConditions'),'class':'itemLabel'  )}}</span></div></div>
     <div class="window" data-controller="abtest" data-action="add"><div class="glyphicon glyphicon-transfer"><br><span class="itemLabel">{{ link_to(language~'/conditionobjects/create/', tr('abtest'),'class':'itemLabel'  )}}</span></div></div>
-	<div class="window" data-controller="automationbjects" data-action="add"><div class="glyphicon glyphicon-random"><div class="hidden"></div><br><span class="itemLabel">{{ link_to(language~'/automationobjects/create/', tr('addAutomation'),'class':'itemLabel'  )}}</span></div></div>
-	
+	<div class="window" data-controller="automationbjects" data-action="add"><div class="glyphicon glyphicon-random"><form class="hidden"></form><br><span class="itemLabel">{{ link_to(language~'/automationobjects/create/', tr('addAutomation'),'class':'itemLabel'  )}}</span></div></div>
+
+
 </div> 	
 </div>
 
