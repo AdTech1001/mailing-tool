@@ -19,7 +19,22 @@ class CampaignobjectsController extends ControllerBase
     {
         //$this->flashSession->error('Page not found: ' . $this->escaper->escapeHtml($this->router->getRewriteUri()));
         
-		
+		if($this->request->isPost() && $this->request->getPost('campaignobjectuid')!=0){
+			
+			$campaignobject = Campaignobjects::findFirst(array(
+			"conditions" => "uid = ?1",
+			"bind" => array(1 => $this->request->getPost('campaignobjectuid'))
+			));
+			
+			$campaignobjectJson=
+					'{"uid":'.$campaignobject->uid.',
+					"title":"'.$campaignobject->title.'",
+				"automationgraphstring":"'.rawurlencode($campaignobject->automationgraphstring).'",
+				"connections":'.$campaignobject->connections.'}';
+			
+			die($campaignobjectJson);
+			
+		}
 		
 		
 		
@@ -27,14 +42,11 @@ class CampaignobjectsController extends ControllerBase
 	
 	public function createAction()
 	{
-		 if($this->request->isPost()){
+		 if($this->request->isPost() && $this->request->getPost('campaignobjectuid')==0 ){
 			 
-				$sendoutObjectsArray=array();
-				$automationgraphString=$this->request->getPost('htmlobjects');
-				$time=time();
-				$counter=0;
-				//die($automationgraphString);
 				
+				$automationgraphString=$this->request->getPost('htmlobjects');
+				$time=time();												
 				
 				$campaignobjectRecord=new Campaignobjects();
 				$campaignobjectRecord->assign(array(
@@ -53,30 +65,40 @@ class CampaignobjectsController extends ControllerBase
 					$this->flash->error($campaignobjectRecord->getMessages());
 				}
 				//TODO Conditions für Sendoutobjects ablegen
-				foreach($this->request->getPost('campaignobjectelements') as $sendoutobjectElements){
-					$rawArray=json_decode($sendoutobjectElements);
+				foreach($this->request->getPost('sendoutobjectelements') as $sendoutobjectElements){
+					$rawArray=json_decode($sendoutobjectElements,true);
 					$sendoutobject=new Sendoutobjects();
 					$rawdate=$rawArray['tstamp'];
-					/*TODO DATE zerpflücken*/
+					
 					$dateArr=explode(' ',$rawdate);
+					$dateTimeArr=explode(':',$rawdate[1]);
+					$dateDataArr=explode('/',$rawdate[0]);
 					$sendoutobject->assign(array(
 						'pid'=>0,
 						'crdate' => $time,
-						'tstamp' => $date,
+						'tstamp' => mktime($dateTimeArr[0],$dateTimeArr[1],0,$dateDataArr[1],$dateDataArr[2],$dateDataArr[0]),
 						'cruser_id' =>$this->session->get('auth')['uid'],
 						'usergroup' =>$this->session->get('auth')['usergroup'],
 						'deleted' =>0,
 						'hidden' => 0,
 						'campaignuid'=>$campaignobjectRecord->uid,						
-						'mailobjectuid'=>$this->request->getPost()
+						'mailobjectuid'=>$rawArray['mailobjectuid'],
+						'configurationuid'=>$rawArray['configurationuid'],
+						'subject'=>$rawArray['subject']
+							
 					));
 					
 					
+				}
+				if(!$sendoutobject->save()){
+					$this->flash->error($sendoutobject->getMessages());
 				}
 				die($campaignobjectRecord->uid);
 				
 				$this->view->disable();                       
 				
+		 }elseif($this->request->isPost() && $this->request->getPost('campaignobjectuid')!=0 ){
+			 /*UPDATE FUNCTIONality*/
 		 }else{
 			$this->assets->addJs('js/vendor/campaignInit.js');
 			$this->assets->addCss('css/jquery.datetimepicker.css');

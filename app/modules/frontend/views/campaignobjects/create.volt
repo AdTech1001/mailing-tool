@@ -12,10 +12,22 @@
 	<div id="configurationobjectSelectWrapper">
 		
 	</div><br>
-	<label>{{ tr('sendoutDateLabel')}}</label><br>
+	<label>{{ tr('sendoutSubject')}}</label><br>
 	<input type="text" id="subject"><br>
 	<label>{{ tr('sendoutDateLabel')}}</label><br>
-	<input type="text" id="datepicker"><br>
+	<input type="text" id="datepicker"><br><br>
+	<label>{{ tr('abtest')}}</label><br>
+	 <span class="glyphicon glyphicon-transfer"></span> <input type="checkbox" id="abtestChecker"><br>
+	<div id="btestForm" class="hidden">
+		<label>{{ tr('selectMailobjectLabelB')}}</label><br>
+	<div id="configurationobjectSelectWrapperB">
+		
+	</div><br>
+	<label>{{ tr('sendoutSubjectB')}}</label><br>
+	<input type="text" id="subjectB"><br>
+	<label>{{ tr('sendoutDateLabelB')}}</label><br>
+	<input type="text" id="datepickerB"><br>
+	</div>
 	<br><button class="ok">{{ tr('ok') }}</button><button class="abort">{{ tr('abort') }}</button>
 </div>
 <div id="linkSelect" class="allPurposeLayer hidden">
@@ -179,6 +191,9 @@
 			<input type="hidden" value="0" name="configurationobject" >			
 			<input type="hidden" value="0" name="date" >
 			<input type="hidden" value="0" name="subject" >
+			<input type="hidden" value="0" name="configurationobjectB" >			
+			<input type="hidden" value="0" name="dateB" >
+			<input type="hidden" value="0" name="subjectB" >
 		</div>
 	</div>
     

@@ -239,6 +239,13 @@ function campaignCreateCallback(data){
 		jQuery("[name='campaignobjectuid']").val(data);
 	}
 }
+function loadInitialize(campaignuid){
+	ajaxIt('campaignobjects','index','&campaignobjectuid='+campaignuid,Load);	
+}
+function Load(data){
+	
+}
+
 function Save() {
 	var campaignTitle=jQuery('#automationWorkflowForm').serialize();	
 	//var conditions=jQuery('#conditionsForm').serialize();
@@ -360,7 +367,10 @@ jQuery('#mailobjectSelect button.ok').click(function(e){
 	jQuery(elementDefinition[0]).val(jQuery('#mailobjectSelectElements').val());
 	jQuery(elementDefinition[1]).val(jQuery('#configurationobjectSelect').val());
 	jQuery(elementDefinition[2]).val(jQuery('#datepicker').val());
-	jQuery(elementDefinition[2]).val(jQuery('#subject').val());
+	jQuery(elementDefinition[3]).val(jQuery('#subject').val());
+	jQuery(elementDefinition[4]).val(jQuery('#configurationobjectSelectB').val());
+	jQuery(elementDefinition[5]).val(jQuery('#datepickerB').val());
+	jQuery(elementDefinition[6]).val(jQuery('#subjectB').val());
 	jQuery(activeElement).parent().parent().append('<div class="info glyphicon glyphicon-info-sign"></div>');
 	jQuery(activeElement).html(jQuery('#mailobjectSelect select')[0].selectedOptions[0].innerHTML.split(' | ')[0]);
 	jQuery('#mailobjectSelect').addClass('hidden');
@@ -377,11 +387,19 @@ var selectConfigurationobject= function(data){
 	for(var i=0;i<jsObject.length;i++){
 		selectString+='<option value="'+jsObject[i].uid+'">'+jsObject[i].title+' | '+jsObject[i].date+'</option>';
 	}
+	var selectStringB='<select id="configurationobjectSelectB">';
+	for(var i=0;i<jsObject.length;i++){
+		selectStringB+='<option value="'+jsObject[i].uid+'">'+jsObject[i].title+' | '+jsObject[i].date+'</option>';
+	}
 	selectString+='</select>';
 	jQuery('#configurationobjectSelectWrapper').html(selectString);
+	jQuery('#configurationobjectSelectWrapperB').html(selectStringB);	
 	jQuery('#mailobjectSelect').removeClass('hidden');
-	jQuery('#datepicker').datetimepicker({
+	jQuery('#datepicker,#datepickerB').datetimepicker({
 		lang:lang
+	});
+	jQuery('#abtestChecker').change(function(e){
+		jQuery('#btestForm').toggleClass('hidden');
 	});
 	
 };
@@ -530,6 +548,10 @@ jsPlumb.ready(function() {
 	
 	instance.addEndpoint(jQuery('#startpoint'), mainflowConnector);
 	instance.draggable(jQuery('#startpoint'));
+	
+	if(jQuery('[name="campaignobjectuid"]').val()!='0'){
+		loadInitialize(jQuery('[name="campaignobjectuid"]').val());
+	}
 	
 });
 
