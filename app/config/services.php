@@ -84,7 +84,7 @@ $di->set(
 /**
  * If the configuration specify the use of metadata adapter use it or use memory otherwise
  */
-$di->set(
+/*$di->set(
     'modelsMetadata',
     function () use ($config) {
 
@@ -98,7 +98,7 @@ $di->set(
 
     },
     true
-);
+);*/
 
 
 
@@ -180,14 +180,16 @@ $di->set(
             return new Phalcon\Cache\Backend\Memory($frontCache);
         } else {
             //Cache data for one day by default
-            $frontCache = new \Phalcon\Cache\Frontend\Output(array(
+			$frontCache = new \Phalcon\Cache\Frontend\None();
+            return new Phalcon\Cache\Backend\Memory($frontCache);
+            /*$frontCache = new \Phalcon\Cache\Frontend\Output(array(
                 "lifetime" => 86400 * 30
             ));
 
             return new FileCache($frontCache, array(
                 "cacheDir" => APP_PATH . "/app/cache/views/",
                 "prefix"   => "nltool-cache-"
-            ));
+            ));*/
         }
     }
 );

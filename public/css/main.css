@@ -999,6 +999,9 @@ box-shadow: inset 3px 0px 5px 0px rgba(0,0,0,0.75);
 	padding:10px;
 	margin-left:-350px;
 }
+.allPurposeLayer table td{
+	padding:5px;
+}
 #conditionsModelerSelect table{
 	width: 100%;
 }

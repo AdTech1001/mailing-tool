@@ -16,6 +16,18 @@
 	<input type="text" id="datepicker"><br>
 	<br><button class="ok">{{ tr('ok') }}</button><button class="abort">{{ tr('abort') }}</button>
 </div>
+<div id="linkSelect" class="allPurposeLayer hidden">
+	<label>{{ tr('linkSelect') }}</label>
+	<select name="links" >
+		<option value='0'><a href="#">Link 1</a></option>
+		<option value='1'><a href="#">Link 2</a></option>
+		<option value='3'><a href="#">Link 3</a></option>
+		<option value='4'><a href="#">Link 4</a></option>
+		<option value='5'><a href="#">Link 5</a></option>
+		<option value='6'><a href="#">Link 6</a></option>
+		
+	</select>
+</div>
 <div id="conditionsModelerSelect" class="allPurposeLayer hidden">
 	<label>{{ tr('segmentConditions') }}</label>
 	
@@ -93,7 +105,8 @@
 				<td>{{tr('junktor')}}</td>
 				
 				<td>{{tr('operator')}}</td>
-				<td>{{tr('condition')}}</td>
+				
+				<td><span class="glyphicon glyphicon-link"></span></td>
 			</thead>
 		<tbody>
 		
@@ -118,8 +131,17 @@
 					</select>
 				</td>
 				<td>					
-					<button class="clickconditions" title="{{ tr('selectLink') }}"><span class="glyphicon glyphicon-link"></span></button>
-					<input type="hidden" name="clickconditions[]" class="clickconditions hidden">
+					
+					<select name="links[]" >
+		<option value='0'><a href="#">Link 1</a></option>
+		<option value='1'><a href="#">Link 2</a></option>
+		<option value='3'><a href="#">Link 3</a></option>
+		<option value='4'><a href="#">Link 4</a></option>
+		<option value='5'><a href="#">Link 5</a></option>
+		<option value='6'><a href="#">Link 6</a></option>
+		
+	</select>
+			
 				</td>
 				<td>
 					<button title="{{ tr('addConditionRow') }}" id="addsplit"><span class="glyphicon glyphicon-plus-sign"></span></button>
@@ -142,6 +164,7 @@
 <form id="automationWorkflowForm">
 	
 	<label>{{tr('campaignCreateTitle')}}</label> <input type="text" value="" placeholder="{{tr('unnamedCampaign')}}" name="title">
+	<input type="hidden" value="0" name="campaignobjectuid">
 </form>	
 <div class="demo flowchart-demo automationWorkspace" id="automationWorkspace">
 	        <div class="window jsplumbified" id="startpoint" data-controller="dummy" data-action="start"><div class="glyphicon glyphicon-play"><br><span class="itemLabel">{{ tr('startCampaign') }}</span></div></div>
@@ -157,7 +180,7 @@
 	</div>
     
     <div class="window" data-controller="conditionobjects" data-action="add"><div class="glyphicon glyphicon-sort-by-attributes-alt"><form class="hidden"></form><br><span class="itemLabel">{{ link_to(language~'/conditionobjects/create/', tr('addConditions'),'class':'itemLabel'  )}}</span></div></div>
-    <div class="window" data-controller="abtest" data-action="add"><div class="glyphicon glyphicon-transfer"><br><span class="itemLabel">{{ link_to(language~'/conditionobjects/create/', tr('abtest'),'class':'itemLabel'  )}}</span></div></div>
+    
 	<div class="window" data-controller="automationbjects" data-action="add"><div class="glyphicon glyphicon-random"><form class="hidden"></form><br><span class="itemLabel">{{ link_to(language~'/automationobjects/create/', tr('addAutomation'),'class':'itemLabel'  )}}</span></div></div>
 
 

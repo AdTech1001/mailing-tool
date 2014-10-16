@@ -233,6 +233,12 @@ function dummyTest(data){
 	jQuery('#automationWorkspace').html(decodeURI(data));
 	
 }
+
+function campaignCreateCallback(data){
+	if(data){
+		jquery('campaignobjectuid')
+	}
+}
 function Save() {
 	var campaignTitle=jQuery('#automationWorkflowForm').serialize();	
 	//var conditions=jQuery('#conditionsForm').serialize();
@@ -271,7 +277,7 @@ function Save() {
 		connJson+='{"source":"'+connections[j].sourceId+'","target":"'+connections[j].targetId+'"},';
 	}
 	connJson=connJson.substring(0,connJson.length-1)+']}';
-	ajaxIt('campaignobjects','create',campaignTitle+'&htmlobjects='+objects+sendoutobjectelements+'&connections='+connJson,dummyEmpty);	
+	ajaxIt('campaignobjects','create',campaignTitle+'&htmlobjects='+objects+sendoutobjectelements+'&connections='+connJson,campaignCreateCallback);	
 	
     /*jQuery('.jsplumbified.sendoutobject').each(function(index,element){
 		var elementId=jQuery(element).attr('id');
