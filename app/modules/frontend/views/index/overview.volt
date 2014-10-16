@@ -1,6 +1,5 @@
 {% include 'partials/flash-messages.volt' %}
-<div class="container">
-	{% include 'partials\function-menu.volt' %}
+<div class="container">	
 	<div class="desktop">
 		{{ content() }}
 		<h1>{{tr('actionTitle')}}</h1>

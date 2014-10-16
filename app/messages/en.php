@@ -76,6 +76,7 @@ $messages = array(
 	"both" => "both",
 	"configurationobjectsIndexTitle" => "available configurations",
 	"sendoutDateLabel"=> "sendout date",
+	"sendoutSubject" => "Subject",
 	"abtest" => "A/B - test",
 	"junktor" => "connector",
 	"basecondition" => "argument",

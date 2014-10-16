@@ -31,6 +31,18 @@ $router->add(
 );
 
 $router->add(
+	'/{language:[a-z]{2}}/campaignobjects/update/:int[/]{0,1}', 
+	array(
+		'language' => 1,
+		'controller' => "campaignobjects",
+		'action' => "update",
+		'uid' => 2,
+		'module'=>'frontend',
+		'namespace'  => 'nltool\Modules\Modules\Frontend\Controllers'
+	)
+);
+
+$router->add(
 	'/mailobjects/update/:int[/]{0,1}', 
 	array(	
 		'controller' => "mailobjects",

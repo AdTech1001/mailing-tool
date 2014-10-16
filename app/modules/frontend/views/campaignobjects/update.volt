@@ -13,8 +13,6 @@
 		
 	</div><br>
 	<label>{{ tr('sendoutDateLabel')}}</label><br>
-	<input type="text" id="subject"><br>
-	<label>{{ tr('sendoutDateLabel')}}</label><br>
 	<input type="text" id="datepicker"><br>
 	<br><button class="ok">{{ tr('ok') }}</button><button class="abort">{{ tr('abort') }}</button>
 </div>
@@ -166,7 +164,7 @@
 <form id="automationWorkflowForm">
 	
 	<label>{{tr('campaignCreateTitle')}}</label> <input type="text" value="" placeholder="{{tr('unnamedCampaign')}}" name="title">
-	<input type="hidden" value="0" name="campaignobjectuid">
+	<input type="hidden" value="{{ campaignobjectUid }}" name="campaignobjectuid">
 </form>	
 <div class="demo flowchart-demo automationWorkspace" id="automationWorkspace">
 	        <div class="window jsplumbified" id="startpoint" data-controller="dummy" data-action="start"><div class="glyphicon glyphicon-play"><br><span class="itemLabel">{{ tr('startCampaign') }}</span></div></div>
@@ -176,9 +174,8 @@
 	<div class="window sendoutobject" data-controller="sendoutobject" data-action="create">
 		<div class="glyphicon glyphicon-envelope"><br>{{ link_to(language~'/sendoutobject/create/', tr('createSendObject'),'class':'itemLabel'  )}}
 			<input type="hidden" value="0" name="mailobject" >
-			<input type="hidden" value="0" name="configurationobject" >			
+			<input type="hidden" value="0" name="configurationobject" >
 			<input type="hidden" value="0" name="date" >
-			<input type="hidden" value="0" name="subject" >
 		</div>
 	</div>
     

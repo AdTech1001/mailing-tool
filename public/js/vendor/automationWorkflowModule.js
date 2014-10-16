@@ -236,7 +236,7 @@ function dummyTest(data){
 
 function campaignCreateCallback(data){
 	if(data){
-		jquery('campaignobjectuid')
+		jQuery("[name='campaignobjectuid']").val(data);
 	}
 }
 function Save() {
@@ -277,7 +277,13 @@ function Save() {
 		connJson+='{"source":"'+connections[j].sourceId+'","target":"'+connections[j].targetId+'"},';
 	}
 	connJson=connJson.substring(0,connJson.length-1)+']}';
-	ajaxIt('campaignobjects','create',campaignTitle+'&htmlobjects='+objects+sendoutobjectelements+'&connections='+connJson,campaignCreateCallback);	
+	var action='update';
+	if(jQuery("[name='campaignobjectuid']").val()=='0'){
+		action='create';
+	}
+	
+	console.log(action);
+	ajaxIt('campaignobjects',action,campaignTitle+'&htmlobjects='+objects+sendoutobjectelements+'&connections='+connJson,campaignCreateCallback);	
 	
     /*jQuery('.jsplumbified.sendoutobject').each(function(index,element){
 		var elementId=jQuery(element).attr('id');
@@ -354,6 +360,7 @@ jQuery('#mailobjectSelect button.ok').click(function(e){
 	jQuery(elementDefinition[0]).val(jQuery('#mailobjectSelectElements').val());
 	jQuery(elementDefinition[1]).val(jQuery('#configurationobjectSelect').val());
 	jQuery(elementDefinition[2]).val(jQuery('#datepicker').val());
+	jQuery(elementDefinition[2]).val(jQuery('#subject').val());
 	jQuery(activeElement).parent().parent().append('<div class="info glyphicon glyphicon-info-sign"></div>');
 	jQuery(activeElement).html(jQuery('#mailobjectSelect select')[0].selectedOptions[0].innerHTML.split(' | ')[0]);
 	jQuery('#mailobjectSelect').addClass('hidden');

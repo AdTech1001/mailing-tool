@@ -77,6 +77,7 @@ $messages = array(
 	"both" => "beides",
 	"configurationobjectsIndexTitle" => "verfügbare Konfigurationen",
 	"sendoutDateLabel" => "Versanddatum",
+	"sendoutSubject" => "Betreff",
 	"abtest" => "A/B Test",
 	"junktor" => "Verknüpfung",
 	"basecondition" => "Argument",

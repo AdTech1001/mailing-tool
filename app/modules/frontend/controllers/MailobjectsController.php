@@ -225,7 +225,10 @@ class MailobjectsController extends ControllerBase
 			file_put_contents($generatedMailformFile, $mail);
 			$this->view->setVar('compiledTemplatebodyRaw',$bodyRaw);
 			$this->view->setVar('mailobjectuid',$mailObjectUid);
-			$this->view->setVar('source','http://localhost/baywa-nltool/public/mails/mailobject_'.$mailObjectUid.'.html');
+			$environment= $this->config['application']['debug'] ? 'development' : 'production';
+			$baseUri=$this->config['application'][$environment]['staticBaseUri'];
+			$path=$baseUri.$this->view->language;
+			$this->view->setVar('source',$path.$mailObjectUid.'.html');
 			$this->view->disable();
 			
 		}else{			
@@ -258,7 +261,10 @@ class MailobjectsController extends ControllerBase
 			$this->view->cElements=$availableContentObject;
 			$this->view->setVar('compiledTemplatebodyRaw',$body);				
 			$this->view->setVar('mailobjectuid',$mailObjectUid);
-			$this->view->setVar('source','http://localhost/baywa-nltool/public/mails/mailobject_'.$mailObjectUid.'.html');
+			$environment= $this->config['application']['debug'] ? 'development' : 'production';
+			$baseUri=$this->config['application'][$environment]['staticBaseUri'];
+			$path=$baseUri.$this->view->language;
+			$this->view->setVar('source',$path.$mailObjectUid.'.html');
 		}
 		
 		

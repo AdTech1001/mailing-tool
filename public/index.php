@@ -37,7 +37,7 @@ $config['database']= array(
         'adapter'  => 'Mysql',
         'host'     => 'nltool.mysql.eu1.frbit.com',
         'username' => 'nltool',
-        'password' => 'wrC9vof4PDhkdU2O',
+        'password' => 'CT7WnO8qobDDUwW8',
         'dbname'   => 'nltool',
         'charset'  => 'utf8'
     );

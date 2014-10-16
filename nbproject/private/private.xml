@@ -1,4 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
+        <file>file:/C:/xampp/htdocs/baywa-nltool/app/modules/frontend/controllers/MailobjectsController.php</file>
+        <file>file:/C:/xampp/htdocs/baywa-nltool/app/modules/frontend/views/mailobjects/index.volt</file>
+        <file>file:/C:/xampp/htdocs/baywa-nltool/public/js/vendor/mailobjectsUpdate.js</file>
+        <file>file:/C:/xampp/htdocs/baywa-nltool/app/modules/frontend/controllers/TemplateobjectsController.php</file>
+        <file>file:/C:/xampp/htdocs/baywa-nltool/app/modules/frontend/controllers/ContentobjectsController.php</file>
+        <file>file:/C:/xampp/htdocs/baywa-nltool/app/modules/frontend/controllers/CampaignobjectsController.php</file>
+        <file>file:/C:/xampp/htdocs/baywa-nltool/app/modules/frontend/views/campaignobjects/create.volt</file>
+        <file>file:/C:/xampp/htdocs/baywa-nltool/public/js/vendor/automationWorkflowModule.js</file>
+        <file>file:/C:/xampp/htdocs/baywa-nltool/app/modules/frontend/views/index/overview.volt</file>
+        <file>file:/C:/xampp/htdocs/baywa-nltool/app/modules/frontend/controllers/IndexController.php</file>
+        <file>file:/C:/xampp/htdocs/baywa-nltool/app/config/services.php</file>
+        <file>file:/C:/xampp/htdocs/baywa-nltool/app/modules/frontend/config/loader.php</file>
+        <file>file:/C:/xampp/htdocs/baywa-nltool/app/config/modules.php</file>
+        <file>file:/C:/xampp/htdocs/baywa-nltool/app/config/config.php</file>
+        <file>file:/C:/xampp/htdocs/baywa-nltool/public/index.php</file>
+    </open-files>
 </project-private>

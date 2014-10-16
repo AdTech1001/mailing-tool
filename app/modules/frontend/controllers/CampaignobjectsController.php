@@ -52,7 +52,7 @@ class CampaignobjectsController extends ControllerBase
 				if (!$campaignobjectRecord->save()) {
 					$this->flash->error($campaignobjectRecord->getMessages());
 				}
-				
+				//TODO Conditions für Sendoutobjects ablegen
 				foreach($this->request->getPost('campaignobjectelements') as $sendoutobjectElements){
 					$rawArray=json_decode($sendoutobjectElements);
 					$sendoutobject=new Sendoutobjects();
@@ -70,17 +70,25 @@ class CampaignobjectsController extends ControllerBase
 						'campaignuid'=>$campaignobjectRecord->uid,						
 						'mailobjectuid'=>$this->request->getPost()
 					));
-					if (!$campaignobjectRecord->save()) {
-						$this->flash->error($cElement->getMessages());
-					}
+					
 					
 				}
+				die($campaignobjectRecord->uid);
 				
+				$this->view->disable();                       
 				
 		 }else{
 			$this->assets->addJs('js/vendor/campaignInit.js');
 			$this->assets->addCss('css/jquery.datetimepicker.css');
 			$this->view->setVar('lang',$this->view->language);
 		 }
+	}
+	
+	public function updateAction(){
+		$campaignObjectuid=$this->dispatcher->getParam("uid");
+		$this->view->setVar('campaignobjectUid',$campaignObjectuid);
+		$this->assets->addJs('js/vendor/campaignInit.js');
+			$this->assets->addCss('css/jquery.datetimepicker.css');
+			$this->view->setVar('lang',$this->view->language);
 	}
 }
