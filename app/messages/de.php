@@ -116,8 +116,16 @@ $messages = array(
 	"hasClicked" => "hat geklickt",
 	"selectLink" => "Link auswählen",
 	"addConditionRow" => "neue Bedingung hinzufügen",
-	"addAutomation" => "Weiche hinzufügen"
-	
+	"addAutomation" => "Weiche hinzufügen",
+	"noNotifications" => "Glückwunsch, gegenwärtig liegen keine Benachrichtigungen oder Aufgaben vor",
+	"notificationsIndexTitle" => "Task- und Benachrichtigungscenter",
+	"templateobjectsCreate" => "Vorlagen erstellen",
+	"templateobjects" => "Vorlagen",
+	"templateobjectsRetrieve" => "Vorlagen verwalten",
+	"configurationobjectsCreate" => "Konfigurationen anlegen",
+	"configurationobjects" => "Konfigurationen",
+	"configurationobjectsRetrieve" => "Konfigurationen verwalten",
+	"templateobjectsIndexTitle" => "Vorlagen"
 	
 );
 ?>

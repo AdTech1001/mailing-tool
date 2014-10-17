@@ -15,9 +15,18 @@ class TemplateobjectsController extends ControllerBase
     public function indexAction()
     {
         
-        
+        $templateobjects=Templateobjects::find(array(
+				"conditions" => "deleted=0 AND hidden=0 AND usergroup = ?1",
+				"bind" => array(1 => $this->session->get('auth')['usergroup']),
+				"order" => "tstamp DESC"
+			));
 		
+		$environment= $this->config['application']['debug'] ? 'development' : 'production';
+		$baseUri=$this->config['application'][$environment]['staticBaseUri'];
+		$path=$baseUri.$this->view->language.'/configurationobjects/update/';
 		
+		$this->view->setVar('configurationobjects',$templateobjects);
+		$this->view->setVar('path',$path);
 		
 		
     }
@@ -27,7 +36,10 @@ class TemplateobjectsController extends ControllerBase
 		$compiled= $compiler->parse($file);*/
 		//echo('<iframe src="http://localhost/baywa-nltool/public/templates/newsletterMainTemplate.volt.php"></iframe>');
 	
-		
+		$baseUri=$this->config['application'][$environment]['staticBaseUri'];
+			$path=$baseUri.$this->view->language;
+			$this->view->setVar('source',$path.$mailObjectUid.'.html');						
+			$this->view->setVar('path','/'.$path);	
 		if($this->request->isPost()){
 			$time=time();
 			$environment= $this->config['application']['debug'] ? 'development' : 'production';

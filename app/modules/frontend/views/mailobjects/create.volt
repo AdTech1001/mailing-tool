@@ -5,7 +5,7 @@
 <div id="fileTollBar"><div class="glyphicon glyphicon-floppy-save" id="mailobjectsSave" data-controller="mailobjects" data-action="create"><span class="itemLabel">{{ tr('save') }}</span></div></div>	
 
 <h1>{{tr('composeTitle')}}</h1>
-<form action="/baywa-nltool/{{language}}/mailobjects/create/" method="POST">
+<form action="{{path}}/mailobjects/create/" method="POST">
 	<label>{{ tr('nameLabel')}}</label><br>
 	<input name="title" type="text" syle="width:400px;"><br><br>
 
@@ -13,7 +13,7 @@
 		
 {% for templateobject in templateobjects %}
 <li data-uid="{{ templateobject.uid }}"><h3>{{ templateobject.title }}</h3><br>
-	<img src="{{ templateobjectsthumbs[templateobject.uid] }}">
+	<img src="{{baseurl}}{{ templateobjectsthumbs[templateobject.uid] }}">
 	
 </li>
     

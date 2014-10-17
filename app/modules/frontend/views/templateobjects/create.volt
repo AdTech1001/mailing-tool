@@ -3,7 +3,7 @@
 {{ content() }}
 {%- if session.get('auth') -%}
 <div class="container">
-<form id="templateobjectCreateForm" action="/baywa-nltool/{{language}}/templateobjects/create/" method="POST" enctype="multipart/form-data">
+<form id="templateobjectCreateForm" action="{{path}}/templateobjects/create/" method="POST" enctype="multipart/form-data">
 	<label>{{ tr('templateNameLabel')}}</label><br>
 	<input name="title" type="text" style="width:400px;"><br><br>
 	<label>{{ tr('templateTypeLabel')}}</label><br>

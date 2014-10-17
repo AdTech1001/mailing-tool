@@ -115,7 +115,16 @@ $messages = array(
 	"hasClicked" => "has clicked",
 	"selectLink" => "select link",
 	"addConditionRow" => "add conditions",
-	"addAutomation" => "add split"
+	"addAutomation" => "add split",
+	"noNotifications" => "congratulations, no current tasks or notifications",
+	"notificationsIndexTitle" => "task and notification center",
+	"templateobjectsCreate" => "create templates",
+	"templateobjects" => "templates",
+	"templateobjectsRetrieve" => "manage templates",
+	"configurationobjectsCreate" => "create configurations",
+	"configurationobjects" => "configurations",
+	"configurationobjectsRetrieve" => "manage configurations",
+	"templateobjectsIndexTitle" => "templates"
 	
 	
 );

@@ -129,16 +129,20 @@ class MailobjectsController extends ControllerBase
 				"bind" => array(1 => '0')
 				));
 			$environment= $this->config['application']['debug'] ? 'development' : 'production';
+			$baseUri=$this->config['application'][$environment]['staticBaseUri'];
+			$this->view->setVar('baseurl','http://'.$this->request->getHttpHost());
 			$thumbnailSm=array();
 			foreach($templateobjects as $templateobject){
 				$thumbnailSmArray=explode('_',$templateobject->templatefilepath);
 				$fileType=explode('.',$thumbnailSmArray[2]);
-				$baseUri=$this->config['application'][$environment]['staticBaseUri'];
+				
 				$thumbnailSm[$templateobject->uid]=$baseUri.$thumbnailSmArray[0].'_'.$thumbnailSmArray[1].'_'.'S.'.$fileType[1];
 			}
 
 			$this->view->templateobjects = $templateobjects;  		
 			$this->view->templateobjectsthumbs = $thumbnailSm;  		
+			$path=$baseUri.$this->view->language;								
+			$this->view->setVar('path',$path);			
 		
 		}
 		
@@ -264,7 +268,8 @@ class MailobjectsController extends ControllerBase
 			$environment= $this->config['application']['debug'] ? 'development' : 'production';
 			$baseUri=$this->config['application'][$environment]['staticBaseUri'];
 			$path=$baseUri.$this->view->language;
-			$this->view->setVar('source',$path.$mailObjectUid.'.html');
+			$this->view->setVar('source',$path.$mailObjectUid.'.html');						
+			$this->view->setVar('path',$path.'/mailobjects/update/');			
 		}
 		
 		
@@ -287,7 +292,7 @@ class MailobjectsController extends ControllerBase
 			$bodyRaw=preg_replace('/({{editable begin}})(.*)({{editable end}})/siU', '<div class="editable">' .$content.'</div>', $bodyRaw, 1, $count);
 		}
 		
-		
+		$bodyRaw=preg_replace('/({{editable begin}})(.*)({{editable end}})/siU', '<div class="editable"></div>', $bodyRaw);
 		return $bodyRaw;
 	}
 	
