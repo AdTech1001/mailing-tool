@@ -1,6 +1,7 @@
 
+{% include 'partials/flash-messages.volt' %}
+{{ content() }}
 <div class="container">
-	{{ content() }}
 {%- if session.get('auth') -%}
 <h1>{{tr('templateobjectsIndexTitle')}}</h1>
 

@@ -25,7 +25,7 @@ class TemplateobjectsController extends ControllerBase
 		$baseUri=$this->config['application'][$environment]['staticBaseUri'];
 		$path=$baseUri.$this->view->language.'/configurationobjects/update/';
 		
-		$this->view->setVar('configurationobjects',$templateobjects);
+		$this->view->setVar('templateobjects',$templateobjects);
 		$this->view->setVar('path',$path);
 		
 		

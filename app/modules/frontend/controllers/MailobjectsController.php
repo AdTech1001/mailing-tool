@@ -292,7 +292,7 @@ class MailobjectsController extends ControllerBase
 			$bodyRaw=preg_replace('/({{editable begin}})(.*)({{editable end}})/siU', '<div class="editable">' .$content.'</div>', $bodyRaw, 1, $count);
 		}
 		
-		$bodyRaw=preg_replace('/({{editable begin}})(.*)({{editable end}})/siU', '<div class="editable"></div>', $bodyRaw);
+		$bodyRaw=preg_replace('/({{editable begin}})(.*)({{editable end}})/siU', '<div class="editable"></div>	', $bodyRaw);
 		return $bodyRaw;
 	}
 	
