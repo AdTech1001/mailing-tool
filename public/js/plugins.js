@@ -1,5 +1,5 @@
 require.config({
-    baseUrl: '/baywa-nltool/public/js/vendor',
+    baseUrl: '/public/js/vendor',
     paths: {
         // the left side is the module ID,
         // the right side is the path to

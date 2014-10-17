@@ -1,7 +1,7 @@
 
 
 function init(jQuery){
-	jQuery('.container').append('<div id="loadingimg"><h3>Einen Moment bitte</h3><div><img src="/baywa-nltool/images/ajax-loader.gif"></div></<div>');
+	jQuery('.container').append('<div id="loadingimg"><h3>Einen Moment bitte</h3><div><img src="/images/ajax-loader.gif"></div></<div>');
 	jQuery('body').append('<div id="tooltipOverlay"></div>');
 	jQuery.address.init().bind('change', navigation);
 	

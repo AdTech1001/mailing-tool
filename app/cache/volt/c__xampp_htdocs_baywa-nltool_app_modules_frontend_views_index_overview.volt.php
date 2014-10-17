@@ -1,12 +1,5 @@
 <div id="messages"><?php echo $this->flashSession->output(); ?></div>
-<div class="container">
-	<div class="function-bar">
-	<?php if (isset($functions)) { ?>    
-	<ul>
-		
-	</ul>
-	<?php } ?>	
-</div>
+<div class="container">	
 	<div class="desktop">
 		<?php echo $this->getContent(); ?>
 		<h1><?php echo nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('actionTitle'); ?></h1>

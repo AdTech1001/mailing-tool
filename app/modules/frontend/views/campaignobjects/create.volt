@@ -8,18 +8,26 @@
 	<div id="mailobjectSelectWrapper">
 		
 	</div><br>
-	<label>{{ tr('selectMailobjectLabel')}}</label><br>
+	<label>{{ tr('addConfigurationobject')}}</label><br>
 	<div id="configurationobjectSelectWrapper">
 		
 	</div><br>
+	<label>{{ tr('addressListLabel')}}</label><br>
+	<select id="adresslistSelect" >
+		<option value="0">{{ tr('pleaseSelect') }}</option>
+		<option value="1">Verteiler 1</option>
+		<option value="2">Verteiler 2</option>
+		<option value="3">Verteiler 3</option>		
+		
+	</select><br><br>
 	<label>{{ tr('sendoutSubject')}}</label><br>
 	<input type="text" id="subject"><br>
 	<label>{{ tr('sendoutDateLabel')}}</label><br>
 	<input type="text" id="datepicker"><br><br>
 	<label>{{ tr('abtest')}}</label><br>
-	 <span class="glyphicon glyphicon-transfer"></span> <input type="checkbox" id="abtestChecker"><br>
+	 <span class="glyphicon glyphicon-transfer"></span> <input type="checkbox" id="abtestChecker" name="abtest"><br>
 	<div id="btestForm" class="hidden">
-		<label>{{ tr('selectMailobjectLabelB')}}</label><br>
+		<label>{{ tr('addConfigurationobjectB')}}</label><br>
 	<div id="configurationobjectSelectWrapperB">
 		
 	</div><br>
@@ -194,6 +202,8 @@
 			<input type="hidden" value="0" name="configurationobjectB" >			
 			<input type="hidden" value="0" name="dateB" >
 			<input type="hidden" value="0" name="subjectB" >
+			<input type="hidden" value="0" name="abtest" >
+			<input type="hidden" value="0" name="segmentobjectuid" >
 		</div>
 	</div>
     

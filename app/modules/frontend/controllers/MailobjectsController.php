@@ -112,7 +112,7 @@ class MailobjectsController extends ControllerBase
 				
 				file_put_contents($generatedMailFile, $bodyNice);
 				
-				$this->response->redirect('mailobjects/update/'.$mailObject->uid.'/'); 
+				$this->response->redirect($this->view->language.'/mailobjects/update/'.$mailObject->uid.'/'); 
 				
 				}
 				

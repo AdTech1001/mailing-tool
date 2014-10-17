@@ -212,8 +212,9 @@ var	updateConnections = function(conn, remove) {
 var IterateConnections= function (){      
 	var list = [];    
         for (var i = 0; i < connections.length; i++) {
-            var source = connections[i].source.id;
-            var target = connections[i].target.id;
+			
+            var source = connections[i].endpoints[0].getUuid();
+            var target = connections[i].endpoints[1].getUuid();
             try{
                 var label = connections[i].getOverlay("label-overlay").labelText;
             }
@@ -235,15 +236,57 @@ function dummyTest(data){
 }
 
 function campaignCreateCallback(data){
-	if(data){
-		jQuery("[name='campaignobjectuid']").val(data);
+	if(parseInt(data)){
+		jQuery("[name='campaignobjectuid']").val(parseInt(data));
 	}
 }
 function loadInitialize(campaignuid){
 	ajaxIt('campaignobjects','index','&campaignobjectuid='+campaignuid,Load);	
 }
 function Load(data){
+	var campaignScheme=jQuery.parseJSON(data);
 	
+	jQuery('#automationWorkspace').append(decodeURI(campaignScheme.automationgraphstring));
+	jQuery('.window.jsplumbified').each(function(index,element){
+		var elementId=jQuery(element).attr('id');
+		if(elementId!=='startpoint'){
+			var elController=jQuery(element).attr('data-controller');
+		
+			switch(elController){
+				case 'sendoutobject':
+				instance.addEndpoint(jQuery(element),{uuid:elementId+'_split'}, splitConnectorSource);
+				instance.addEndpoint(jQuery(element),{uuid:elementId+'_main'}, mainflowConnectorTarget);						
+				instance.addEndpoint(jQuery(element), {uuid:elementId+'_cond'},conditionConnectorTarget);									
+				break;
+				case 'senddate':
+				instance.addEndpoint(jQuery(element), sendDateConnectorSource);
+				break;			
+				case "addresses":
+				instance.addEndpoint(jQuery(element), addressesConnectorSource);
+				break;
+				case "mailobject":
+				instance.addEndpoint(jQuery(element), mailTemplateConnectorSource);
+				break;
+				case "conditionobjects":
+					instance.addEndpoint(jQuery(element), {uuid:elementId+'_cond'},conditionConnectorSource);
+				break;
+				case "automationbjects":
+					instance.addEndpoint(jQuery(element),{uuid:elementId+'_split'}, splitConnectorTarget);
+					instance.addEndpoint(jQuery(element), {uuid:elementId+'_send'},sendDateConnectorSource);
+					instance.addEndpoint(jQuery(element), {uuid:elementId+'_main'},mainflowConnector2);
+				break;
+				default:
+
+				break;
+
+
+			}
+			instance.draggable(jQuery('#'+elementId));
+		}
+	});
+	for(var i=0; i<campaignScheme.connections.length; i++){
+		instance.connect({uuids:[campaignScheme.connections[i].source, campaignScheme.connections[i].target]});
+	}
 }
 
 function Save() {
@@ -272,7 +315,7 @@ function Save() {
 		
 		//var elementItself=JSON.stringify(jQuery('#'+elementsPathArr[i])[0].outerHTML);
 		var conditionsJson=getSendoutObjectConditions(elementsPathArr[i]);
-		var elementJson='{"id":"'+elementsPathArr[i]+'","mailobjectuid":'+jQuery(confValues[0]).val()+',"configurationuid":'+jQuery(confValues[1]).val()+',"tstamp":"'+jQuery(confValues[2]).val()+'","position":{"left":'+jQuery('#'+elementsPathArr[i]).position().left+',"top":'+jQuery('#'+elementsPathArr[i]).position().top+'}, "conditions":'+conditionsJson+'}';
+		var elementJson='{"id":"'+elementsPathArr[i]+'","mailobjectuid":'+jQuery(confValues[0]).val()+',"configurationuid":'+jQuery(confValues[1]).val()+',"tstamp":"'+jQuery(confValues[2]).val()+'","subject":"'+jQuery(confValues[3]).val()+'","configurationuidB":'+jQuery(confValues[4]).val()+',"tstampB":"'+jQuery(confValues[5]).val()+'","subjectB":"'+jQuery(confValues[6]).val()+'","abtest":'+jQuery(confValues[7]).val()+',"segmentobjectuid":'+jQuery(confValues[8]).val()+',"position":{"left":'+jQuery('#'+elementsPathArr[i]).position().left+',"top":'+jQuery('#'+elementsPathArr[i]).position().top+'}, "conditions":'+conditionsJson+'}';
 		sendoutobjectelements+='&sendoutobjectelements[]='+elementJson;
 		
 
@@ -281,15 +324,15 @@ function Save() {
 	
 	for(var j=0; j<connections.length; j++){
 		
-		connJson+='{"source":"'+connections[j].sourceId+'","target":"'+connections[j].targetId+'"},';
+		connJson+='{"source":"'+connections[j].endpoints[0].getUuid()+'","target":"'+connections[j].endpoints[1].getUuid()+'"},';
 	}
 	connJson=connJson.substring(0,connJson.length-1)+']}';
 	var action='update';
-	if(jQuery("[name='campaignobjectuid']").val()=='0'){
+	if(jQuery("[name='campaignobjectuid']").val()==='0'){
 		action='create';
 	}
 	
-	console.log(action);
+	
 	ajaxIt('campaignobjects',action,campaignTitle+'&htmlobjects='+objects+sendoutobjectelements+'&connections='+connJson,campaignCreateCallback);	
 	
     /*jQuery('.jsplumbified.sendoutobject').each(function(index,element){
@@ -371,13 +414,25 @@ jQuery('#mailobjectSelect button.ok').click(function(e){
 	jQuery(elementDefinition[4]).val(jQuery('#configurationobjectSelectB').val());
 	jQuery(elementDefinition[5]).val(jQuery('#datepickerB').val());
 	jQuery(elementDefinition[6]).val(jQuery('#subjectB').val());
+	var abtest=0;
+	if(jQuery('#abtestChecker').is(':checked')){
+	abtest=1;
+	}
+	jQuery(elementDefinition[7]).val(abtest);
+	jQuery(elementDefinition[8]).val(jQuery('#adresslistSelect').val());	
 	jQuery(activeElement).parent().parent().append('<div class="info glyphicon glyphicon-info-sign"></div>');
 	jQuery(activeElement).html(jQuery('#mailobjectSelect select')[0].selectedOptions[0].innerHTML.split(' | ')[0]);
+	jQuery('#abtestChecker').off('change').attr('checked', false);
 	jQuery('#mailobjectSelect').addClass('hidden');
+	jQuery('#btestForm').addClass('hidden');
+	
+
 });
 
 jQuery('#mailobjectSelect button.abort').click(function(e){
+	jQuery('#abtestChecker').off('change').attr('checked', false);
 	jQuery('#mailobjectSelect').addClass('hidden');
+	jQuery('#btestForm').addClass('hidden');
 });
 
 
@@ -398,7 +453,9 @@ var selectConfigurationobject= function(data){
 	jQuery('#datepicker,#datepickerB').datetimepicker({
 		lang:lang
 	});
+	
 	jQuery('#abtestChecker').change(function(e){
+		
 		jQuery('#btestForm').toggleClass('hidden');
 	});
 	
@@ -529,6 +586,7 @@ jsPlumb.ready(function() {
 	
 	instance.bind("connection", function(info) {
 		instance.repaintEverything();
+		
 			updateConnections(info.connection, false);
 		//jsPlumb.connect({source:info.source, target:info.target})
    		
@@ -546,7 +604,7 @@ jsPlumb.ready(function() {
 				updateConnections(info.connection, true);
 			});
 	
-	instance.addEndpoint(jQuery('#startpoint'), mainflowConnector);
+	instance.addEndpoint(jQuery('#startpoint'),{uuid:'startpoint'}, mainflowConnector);
 	instance.draggable(jQuery('#startpoint'));
 	
 	if(jQuery('[name="campaignobjectuid"]').val()!='0'){
@@ -576,14 +634,16 @@ jQuery( "#automationWorkspace" ).droppable({
 		 jQuery(newElement).removeClass('ui-draggable');		 		 
 		 jQuery(newElement).addClass('jsplumbified');
 		 jQuery(newElement).css('position','absolute');
-		 /* Wahrscheinliuch ID notwendig für dragging*/
+		 
 		var elController=jQuery(newElement).attr('data-controller');
+		instance.makeSource(newElement);
+		var newElementId=jQuery(newElement).attr('id');		
 		
 		switch(elController){
-			case 'sendoutobject':
-			instance.addEndpoint(jQuery(newElement), splitConnectorSource);
-			instance.addEndpoint(jQuery(newElement), mainflowConnectorTarget);						
-			instance.addEndpoint(jQuery(newElement), conditionConnectorTarget);									
+			case 'sendoutobject':							
+			instance.addEndpoint(jQuery(newElement),{uuid:newElementId+'_split'}, splitConnectorSource);
+			instance.addEndpoint(jQuery(newElement),{uuid:newElementId+'_main'}, mainflowConnectorTarget);						
+			instance.addEndpoint(jQuery(newElement),{uuid:newElementId+'_cond'}, conditionConnectorTarget);									
 			break;
 			case 'senddate':
 			instance.addEndpoint(jQuery(newElement), sendDateConnectorSource);
@@ -595,12 +655,12 @@ jQuery( "#automationWorkspace" ).droppable({
 			instance.addEndpoint(jQuery(newElement), mailTemplateConnectorSource);
 			break;
 			case "conditionobjects":
-				instance.addEndpoint(jQuery(newElement), conditionConnectorSource);
+				instance.addEndpoint(jQuery(newElement), {uuid:newElementId+'_cond'},conditionConnectorSource);
 			break;
 			case "automationbjects":
-				instance.addEndpoint(jQuery(newElement), splitConnectorTarget);
-				instance.addEndpoint(jQuery(newElement), sendDateConnectorSource);
-				instance.addEndpoint(jQuery(newElement), mainflowConnector2);
+				instance.addEndpoint(jQuery(newElement),{uuid:newElementId+'_split'}, splitConnectorTarget);
+				instance.addEndpoint(jQuery(newElement), {uuid:newElementId+'_send'},sendDateConnectorSource);
+				instance.addEndpoint(jQuery(newElement), {uuid:newElementId+'_main'},mainflowConnector2);
 			break;
 			default:
 			
@@ -611,7 +671,7 @@ jQuery( "#automationWorkspace" ).droppable({
 		
 		 
 		 
-		var newElementId=jQuery(newElement).attr('id');		
+		
          instance.draggable(jQuery('#'+newElementId));
 		 
 		 switch(elController){

@@ -19,7 +19,7 @@
         {{ stylesheet_link('css/main.css') }}     
 		{{ assets.outputCss() }}
 		{{ javascript_include('js/vendor/modernizr-2.6.2.min.js') }}     
-		<script data-main="/baywa-nltool/js/plugins" src="/baywa-nltool/js/require.js"></script>
+		<script data-main="/js/plugins" src="/baywa-nltool/js/require.js"></script>
 		{{ assets.outputJs() }}
 		
 	
