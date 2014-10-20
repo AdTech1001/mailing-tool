@@ -41,6 +41,7 @@ class ConfigurationobjectsController extends ControllerBase
 		$baseUri=$this->config['application'][$environment]['staticBaseUri'];
 		$path=$baseUri.$this->view->language.'/configurationobjects/update/';
 		
+		
 		$this->view->setVar('configurationobjects',$configurationobjects);
 		$this->view->setVar('path',$path);
 		}

@@ -4,7 +4,7 @@
 		{{ content() }}
 		<h1>{{tr('actionTitle')}}</h1>
 		<div class="module_el">
-			<h2>{{ link_to(language~'/campaignobjects/index/', '<span class="glyphicon glyphicon-envelope"></span> '~tr('campaign'), 'title': tr('campaign')) }}
+			<h2>{{ link_to(language~'/campaignobjects/index/', '<span class="glyphicon glyphicon-th"></span> '~tr('campaign'), 'title': tr('campaign')) }}
 			</h2>
 			<ul>
 			<li>{{ link_to(language~'/campaignobjects/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('campaignCreate'), 'title': tr('campaignCreate')) }}</li>
@@ -20,7 +20,7 @@
 			</ul>
 		</div>
 		<div class="module_el">
-			<h2>{{ link_to(language~'/templateobjects/index/', '<span class="glyphicon glyphicon-envelope"></span> '~tr('templateobjects'), 'title': tr('templateobjects')) }}
+			<h2>{{ link_to(language~'/templateobjects/index/', '<span class="glyphicon glyphicon-file"></span> '~tr('templateobjects'), 'title': tr('templateobjects')) }}
 			</h2>
 			<ul>
 			<li>{{ link_to(language~'/templateobjects/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('templateobjectsCreate'), 'title': tr('templateobjectsCreate')) }}</li>
@@ -28,7 +28,7 @@
 			</ul>
 		</div>
 		<div class="module_el">
-			<h2>{{ link_to(language~'/configurationobjects/index/', '<span class="glyphicon glyphicon-envelope"></span> '~tr('configurationobjects'), 'title': tr('configurationobjects')) }}
+			<h2>{{ link_to(language~'/configurationobjects/index/', '<span class="glyphicon glyphicon-align-justify"></span> '~tr('configurationobjects'), 'title': tr('configurationobjects')) }}
 			</h2>
 			<ul>
 			<li>{{ link_to(language~'/configurationobjects/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('configurationobjectsCreate'), 'title': tr('configurationobjectsCreate')) }}</li>

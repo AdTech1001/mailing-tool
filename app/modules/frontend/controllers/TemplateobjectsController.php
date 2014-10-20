@@ -36,14 +36,15 @@ class TemplateobjectsController extends ControllerBase
 		$compiled= $compiler->parse($file);*/
 		//echo('<iframe src="http://localhost/baywa-nltool/public/templates/newsletterMainTemplate.volt.php"></iframe>');
 	
+		$environment= $this->config['application']['debug'] ? 'development' : 'production';
 		$baseUri=$this->config['application'][$environment]['staticBaseUri'];
 			$path=$baseUri.$this->view->language;
-			$this->view->setVar('source',$path.$mailObjectUid.'.html');						
+			//$this->view->setVar('source',$path.$mailObjectUid.'.html');						
 			$this->view->setVar('path','/'.$path);	
 		if($this->request->isPost()){
 			$time=time();
-			$environment= $this->config['application']['debug'] ? 'development' : 'production';
-			$baseUri=$this->config['application'][$environment]['staticBaseUri'];
+			
+		
 			$dummyImage=$baseUri.'/public/images/dummy-image.jpg';
 			
 			

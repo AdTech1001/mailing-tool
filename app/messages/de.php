@@ -125,7 +125,9 @@ $messages = array(
 	"configurationobjectsCreate" => "Konfigurationen anlegen",
 	"configurationobjects" => "Konfigurationen",
 	"configurationobjectsRetrieve" => "Konfigurationen verwalten",
-	"templateobjectsIndexTitle" => "Vorlagen"
+	"templateobjectsIndexTitle" => "Vorlagen",
+	"create" => "erstellen",
+	"retrieve" => "verwalten"
 	
 );
 ?>

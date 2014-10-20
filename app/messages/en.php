@@ -124,7 +124,9 @@ $messages = array(
 	"configurationobjectsCreate" => "create configurations",
 	"configurationobjects" => "configurations",
 	"configurationobjectsRetrieve" => "manage configurations",
-	"templateobjectsIndexTitle" => "templates"
+	"templateobjectsIndexTitle" => "templates",
+	"create" => "create",
+	"retrieve" => "retrieve"
 	
 	
 );
