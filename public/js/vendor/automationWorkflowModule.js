@@ -257,6 +257,12 @@ function Load(data){
 				instance.addEndpoint(jQuery(element),{uuid:elementId+'_split'}, splitConnectorSource);
 				instance.addEndpoint(jQuery(element),{uuid:elementId+'_main'}, mainflowConnectorTarget);						
 				instance.addEndpoint(jQuery(element), {uuid:elementId+'_cond'},conditionConnectorTarget);									
+				jQuery('#'+elementId+' a').click(function(e)
+				{
+					e.preventDefault();
+					activeElement=jQuery(this);
+					assembleSendoutobjectConf(activeElement);
+				});
 				break;
 				case 'senddate':
 				instance.addEndpoint(jQuery(element), sendDateConnectorSource);
@@ -269,11 +275,23 @@ function Load(data){
 				break;
 				case "conditionobjects":
 					instance.addEndpoint(jQuery(element), {uuid:elementId+'_cond'},conditionConnectorSource);
+					jQuery('#'+elementId+' a').click(function(e)
+					{
+						e.preventDefault();
+						activeElement=jQuery(this);
+						conditionModeler(activeElement,'conditions');
+					});
 				break;
 				case "automationbjects":
 					instance.addEndpoint(jQuery(element),{uuid:elementId+'_split'}, splitConnectorTarget);
 					instance.addEndpoint(jQuery(element), {uuid:elementId+'_send'},sendDateConnectorSource);
 					instance.addEndpoint(jQuery(element), {uuid:elementId+'_main'},mainflowConnector2);
+					jQuery('#'+elementId+' a').click(function(e)
+					{
+						e.preventDefault();
+						activeElement=jQuery(this);
+						conditionModeler(activeElement,'split');
+					});
 				break;
 				default:
 
@@ -644,6 +662,12 @@ jQuery( "#automationWorkspace" ).droppable({
 			instance.addEndpoint(jQuery(newElement),{uuid:newElementId+'_split'}, splitConnectorSource);
 			instance.addEndpoint(jQuery(newElement),{uuid:newElementId+'_main'}, mainflowConnectorTarget);						
 			instance.addEndpoint(jQuery(newElement),{uuid:newElementId+'_cond'}, conditionConnectorTarget);									
+			 jQuery('#'+newElementId+' a').click(function(e)
+				{
+					e.preventDefault();
+					activeElement=jQuery(this);
+					assembleSendoutobjectConf(activeElement);
+				});
 			break;
 			case 'senddate':
 			instance.addEndpoint(jQuery(newElement), sendDateConnectorSource);
@@ -656,11 +680,23 @@ jQuery( "#automationWorkspace" ).droppable({
 			break;
 			case "conditionobjects":
 				instance.addEndpoint(jQuery(newElement), {uuid:newElementId+'_cond'},conditionConnectorSource);
+				jQuery('#'+newElementId+' a').click(function(e)
+				{
+					e.preventDefault();
+					activeElement=jQuery(this);
+					conditionModeler(activeElement,'conditions');
+				});
 			break;
 			case "automationbjects":
 				instance.addEndpoint(jQuery(newElement),{uuid:newElementId+'_split'}, splitConnectorTarget);
 				instance.addEndpoint(jQuery(newElement), {uuid:newElementId+'_send'},sendDateConnectorSource);
 				instance.addEndpoint(jQuery(newElement), {uuid:newElementId+'_main'},mainflowConnector2);
+				jQuery('#'+newElementId+' a').click(function(e)
+				{
+					e.preventDefault();
+					activeElement=jQuery(this);
+					conditionModeler(activeElement,'split');
+				});
 			break;
 			default:
 			
@@ -669,39 +705,8 @@ jQuery( "#automationWorkspace" ).droppable({
 			 
 		}
 		
-		 
-		 
-		
          instance.draggable(jQuery('#'+newElementId));
 		 
-		 switch(elController){
-			case 'sendoutobject':
-				 jQuery('#'+newElementId+' a').click(function(e)
-				{
-					e.preventDefault();
-					activeElement=jQuery(this);
-					assembleSendoutobjectConf(activeElement);
-				});
-			break;
-			case 'conditionobjects':
-				jQuery('#'+newElementId+' a').click(function(e)
-				{
-					e.preventDefault();
-					activeElement=jQuery(this);
-					conditionModeler(activeElement,'conditions');
-				});
-			break;
-			case 'automationbjects':
-				jQuery('#'+newElementId+' a').click(function(e)
-				{
-					e.preventDefault();
-					activeElement=jQuery(this);
-					conditionModeler(activeElement,'split');
-				});
-				break;
-												
-			 
-		}
 		 
         
          var label = jQuery("#"+newElementId+".jsplumbified .itemLabel");

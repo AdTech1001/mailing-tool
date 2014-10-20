@@ -94,7 +94,80 @@ class CampaignobjectsController extends ControllerBase
 				}
 				//TODO Conditions für Sendoutobjects ablegen
 				
-				foreach($this->request->getPost('sendoutobjectelements') as $sendoutobjectElements){
+				$this->writeSendoutObjects($campaignobjectRecord);
+				
+				
+				
+				die($campaignobjectRecord->uid);
+				
+				$this->view->disable();                       
+				
+		 }elseif($this->request->isPost() && $this->request->getPost('campaignobjectuid')!=0 ){
+			 /*UPDATE FUNCTIONality*/
+		 }else{
+			$this->assets->addJs('js/vendor/campaignInit.js');
+			$this->assets->addCss('css/jquery.datetimepicker.css');
+			$this->view->setVar('lang',$this->view->language);
+		 }
+	}
+	
+	public function updateAction(){
+		
+		if($this->request->isPost()){
+			$campaignObjectuid=$this->request->getPost('campaignobjectuid');
+			$campaignobjectRecord = Campaignobjects::findFirst(array(
+				"conditions" => "uid = ?1",
+				"bind" => array(1 => $campaignObjectuid)
+				));
+			$campaignobjectRecord->assign(array(
+				"tstamp" => time(),				
+				"automationgraphstring"=>$this->request->getPost('htmlobjects'),
+				'title'=>$this->request->getPost('title','striptags')== '' ? 'no name' : $this->request->getPost('title','striptags'),
+				'connections'=>$this->request->getPost('connections','striptags'),
+			));
+			$campaignobjectRecord->update();			
+			$this->removePreviousObjectsFromCampaign($campaignobjectRecord->uid);			
+			$this->writeSendoutObjects($campaignobjectRecord);
+			$this->view->disable();  
+			
+			die($campaignobjectRecord->uid);
+			
+		}else{
+			$campaignObjectuid=$this->dispatcher->getParam("uid");
+			$campaignobjectRecord = Campaignobjects::findFirst(array(
+				"conditions" => "uid = ?1",
+				"bind" => array(1 => $campaignObjectuid)
+				));
+			$this->view->setVar('campaignobjectUid',$campaignObjectuid);
+			$this->view->setVar('campaignobjectTitle',$campaignobjectRecord->title);
+
+			$this->assets->addJs('js/vendor/campaignInit.js');
+			$this->assets->addCss('css/jquery.datetimepicker.css');
+			$this->view->setVar('lang',$this->view->language);
+		}
+	}
+	
+	private function removePreviousObjectsFromCampaign($campaignobjectUid){
+		$sendoutobjectRecords=  Sendoutobjects::find(array(
+				"conditions" => "deleted = 0 AND hidden =0 AND campaignuid = ?1",
+							"bind" => array(
+								1 => $campaignobjectUid																
+								)
+			));
+		foreach($sendoutobjectRecords as $sendoutobjectRecord){
+			if($sendoutobjectRecord){
+				$sendoutobjectRecord->deleted=1;
+				$sendoutobjectRecord->hidden=1;				
+				$sendoutobjectRecord->update();
+			
+			}	
+		}
+			
+	}
+	
+	private function writeSendoutObjects($campaignobjectRecord){
+		$time=time();
+		foreach($this->request->getPost('sendoutobjectelements') as $sendoutobjectElements){
 					
 					$rawArray=json_decode($sendoutobjectElements,true);					
 					$sendoutobject=new Sendoutobjects();
@@ -154,27 +227,5 @@ class CampaignobjectsController extends ControllerBase
 						}
 					}
 				}
-				
-				
-				
-				die($campaignobjectRecord->uid);
-				
-				$this->view->disable();                       
-				
-		 }elseif($this->request->isPost() && $this->request->getPost('campaignobjectuid')!=0 ){
-			 /*UPDATE FUNCTIONality*/
-		 }else{
-			$this->assets->addJs('js/vendor/campaignInit.js');
-			$this->assets->addCss('css/jquery.datetimepicker.css');
-			$this->view->setVar('lang',$this->view->language);
-		 }
-	}
-	
-	public function updateAction(){
-		$campaignObjectuid=$this->dispatcher->getParam("uid");
-		$this->view->setVar('campaignobjectUid',$campaignObjectuid);
-		$this->assets->addJs('js/vendor/campaignInit.js');
-			$this->assets->addCss('css/jquery.datetimepicker.css');
-			$this->view->setVar('lang',$this->view->language);
 	}
 }

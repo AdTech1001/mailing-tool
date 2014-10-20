@@ -17,6 +17,7 @@ $messages = array(
 	"openMailobjectsTitle" => "Your open Mailprojects",
 	"latestStatisticsTitle" => "Statistics of the last sendouts",
 	"campaign"=>"Campaigns",
+	"campaignTitle" => "campaign title",
 	"campaignCreate"=> "create new campaign",
 	"campaignRetrieve" => "manage campaigns",
 	"content"=>"Content",

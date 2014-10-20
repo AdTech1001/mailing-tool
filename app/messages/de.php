@@ -18,6 +18,7 @@ $messages = array(
 	"latestStatisticsTitle" => "Statistiken der letzten Versandaktionen",
 	"actionTitle" => "Was möchten Sie tun?",
 	"campaign"=>"Kampagnen",
+	"campaignTitle" => "Kampagnen Name",
 	"campaignCreate"=> "Neue Kampagne erstellen",
 	"campaignRetrieve" => "Kampagnen verwalten",
 	"contentobjects"=>"Inhalte",

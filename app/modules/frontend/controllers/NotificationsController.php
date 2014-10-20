@@ -1,5 +1,5 @@
 <?php
-namespace nltool\Controllers;
+namespace nltool\Modules\Modules\Frontend\Controllers;
 
 
 /**

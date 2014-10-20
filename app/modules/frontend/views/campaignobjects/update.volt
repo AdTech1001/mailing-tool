@@ -8,12 +8,34 @@
 	<div id="mailobjectSelectWrapper">
 		
 	</div><br>
-	<label>{{ tr('selectMailobjectLabel')}}</label><br>
+	<label>{{ tr('addConfigurationobject')}}</label><br>
 	<div id="configurationobjectSelectWrapper">
 		
 	</div><br>
+	<label>{{ tr('addressListLabel')}}</label><br>
+	<select id="adresslistSelect" >
+		<option value="0">{{ tr('pleaseSelect') }}</option>
+		<option value="1">Verteiler 1</option>
+		<option value="2">Verteiler 2</option>
+		<option value="3">Verteiler 3</option>		
+		
+	</select><br><br>
+	<label>{{ tr('sendoutSubject')}}</label><br>
+	<input type="text" id="subject"><br>
 	<label>{{ tr('sendoutDateLabel')}}</label><br>
-	<input type="text" id="datepicker"><br>
+	<input type="text" id="datepicker"><br><br>
+	<label>{{ tr('abtest')}}</label><br>
+	 <span class="glyphicon glyphicon-transfer"></span> <input type="checkbox" id="abtestChecker" name="abtest"><br>
+	<div id="btestForm" class="hidden">
+		<label>{{ tr('addConfigurationobjectB')}}</label><br>
+	<div id="configurationobjectSelectWrapperB">
+		
+	</div><br>
+	<label>{{ tr('sendoutSubjectB')}}</label><br>
+	<input type="text" id="subjectB"><br>
+	<label>{{ tr('sendoutDateLabelB')}}</label><br>
+	<input type="text" id="datepickerB"><br>
+	</div>
 	<br><button class="ok">{{ tr('ok') }}</button><button class="abort">{{ tr('abort') }}</button>
 </div>
 <div id="linkSelect" class="allPurposeLayer hidden">
@@ -163,7 +185,7 @@
 </div>
 <form id="automationWorkflowForm">
 	
-	<label>{{tr('campaignCreateTitle')}}</label> <input type="text" value="" placeholder="{{tr('unnamedCampaign')}}" name="title">
+	<label>{{tr('campaignTitle')}}</label> <input type="text" value="{{ campaignobjectTitle }}" name="title">
 	<input type="hidden" value="{{ campaignobjectUid }}" name="campaignobjectuid">
 </form>	
 <div class="demo flowchart-demo automationWorkspace" id="automationWorkspace">
@@ -174,8 +196,14 @@
 	<div class="window sendoutobject" data-controller="sendoutobject" data-action="create">
 		<div class="glyphicon glyphicon-envelope"><br>{{ link_to(language~'/sendoutobject/create/', tr('createSendObject'),'class':'itemLabel'  )}}
 			<input type="hidden" value="0" name="mailobject" >
-			<input type="hidden" value="0" name="configurationobject" >
+			<input type="hidden" value="0" name="configurationobject" >			
 			<input type="hidden" value="0" name="date" >
+			<input type="hidden" value="0" name="subject" >
+			<input type="hidden" value="0" name="configurationobjectB" >			
+			<input type="hidden" value="0" name="dateB" >
+			<input type="hidden" value="0" name="subjectB" >
+			<input type="hidden" value="0" name="abtest" >
+			<input type="hidden" value="0" name="segmentobjectuid" >
 		</div>
 	</div>
     

@@ -8,7 +8,7 @@
 		<ul class="sercive-nav navbar-right">
 			<li>
 				
-				{{- link_to('notifications', '<span class="glyphicon glyphicon-globe"></span>', 'title': 'Notifications') -}}
+				{{- link_to(language~'notifications', '<span class="glyphicon glyphicon-globe"></span>', 'title': 'Notifications') -}}
 				
 			</li>			
 
@@ -27,7 +27,7 @@
               {% else %}
 			 <li class="dropdown">
               {% endif %}
-				{{- link_to('campaignobjects', '<span class="glyphicon glyphicon-th"></span> '~tr('campaign'), 'title': tr('campaign')) -}}				
+				{{- link_to(language~'/campaignobjects', '<span class="glyphicon glyphicon-th"></span> '~tr('campaign'), 'title': tr('campaign')) -}}				
 				<ul class="dropdown-menu submenu">
 					<li>{{ link_to(language~'/campaignobjects/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('create'), 'title': tr('create')) }}</li>
 					<li>{{ link_to(language~'/campaignobjects/index/', '<span class="glyphicon glyphicon-list"></span> '~tr('retrieve'), 'title': tr('retrieve')) }}</li>
@@ -38,7 +38,7 @@
               {% else %}
 			 <li class="dropdown">
               {% endif %}
-				{{- link_to('mailobjects', '<span class="glyphicon glyphicon-envelope"></span> '~tr('mailobjects'), 'title': tr('mailobjects')) -}}
+				{{- link_to(language~'/mailobjects', '<span class="glyphicon glyphicon-envelope"></span> '~tr('mailobjects'), 'title': tr('mailobjects')) -}}
 				<ul class="dropdown-menu submenu">
 					<li>{{ link_to(language~'/mailobjects/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('create'), 'title': tr('create')) }}</li>
 					<li>{{ link_to(language~'/mailobjects/index/', '<span class="glyphicon glyphicon-list"></span> '~tr('retrieve'), 'title': tr('retrieve')) }}</li>
@@ -49,7 +49,7 @@
               {% else %}
 			 <li class="dropdown">
               {% endif %}
-				{{- link_to('templateobjects', '<span class="glyphicon glyphicon-file"></span> '~tr('templateobjects'), 'title': tr('templateobjects')) -}}
+				{{- link_to(language~'/templateobjects', '<span class="glyphicon glyphicon-file"></span> '~tr('templateobjects'), 'title': tr('templateobjects')) -}}
 				<ul class="dropdown-menu submenu">
 					<li>{{ link_to(language~'/templateobjects/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('create'), 'title': tr('create')) }}</li>
 					<li>{{ link_to(language~'/templateobjects/index/', '<span class="glyphicon glyphicon-list"></span> '~tr('retrieve'), 'title': tr('retrieve')) }}</li>
@@ -60,7 +60,7 @@
               {% else %}
 			 <li class="dropdown">
               {% endif %}
-				{{- link_to('configurationobjects', '<span class="glyphicon glyphicon-align-justify"></span> '~tr('configurationobjects'), 'title': tr('configurationobjects')) -}}
+				{{- link_to(language~'/configurationobjects', '<span class="glyphicon glyphicon-align-justify"></span> '~tr('configurationobjects'), 'title': tr('configurationobjects')) -}}
 				<ul class="dropdown-menu submenu">
 					<li>{{ link_to(language~'/configurationobjects/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('create'), 'title': tr('create')) }}</li>
 					<li>{{ link_to(language~'/configurationobjects/index/', '<span class="glyphicon glyphicon-list"></span> '~tr('retrieve'), 'title': tr('retrieve')) }}</li>
