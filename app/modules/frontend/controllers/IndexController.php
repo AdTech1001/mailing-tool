@@ -12,15 +12,7 @@ class IndexController extends ControllerBase
 {
 	private $_loginForm;
 	
-	public function initialize()
-	{
-		$session=$this->session;
-		
-	$this->_loginForm = new LoginForm();
 	
-	 $this->view->setTemplateAfter('main');
-	 
-	}
 
     /**
      * @return \Phalcon\Http\ResponseInterface
@@ -28,7 +20,7 @@ class IndexController extends ControllerBase
     public function indexAction()
     {		
 		$auth = $this->session->get('auth');
-		
+		$this->_loginForm = new LoginForm();
 		if(!$auth){			
 			$this->view->form = $this->_loginForm;
 			/*$this->dispatcher->forward(array(

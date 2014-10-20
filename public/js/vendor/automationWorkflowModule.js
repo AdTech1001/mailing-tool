@@ -476,7 +476,25 @@ var selectConfigurationobject= function(data){
 		
 		jQuery('#btestForm').toggleClass('hidden');
 	});
-	
+	var activeElCurState=jQuery(activeElement).parent().find('input');
+	if(jQuery(activeElCurState[0]).val() >0){
+		jQuery('#mailobjectSelectElements').val(jQuery(activeElCurState[0]).val());
+		jQuery('#configurationobjectSelect').val(jQuery(activeElCurState[1]).val());
+		jQuery('#datepicker').val(jQuery(activeElCurState[2]).val());
+		jQuery('#subject').val(jQuery(activeElCurState[3]).val());
+		jQuery('#configurationobjectSelectB').val(jQuery(activeElCurState[4]).val());
+		jQuery('#datepickerB').val(jQuery(activeElCurState[5]).val());
+		jQuery('#subjectB').val(jQuery(activeElCurState[6]).val());
+		if(jQuery(activeElCurState[7]).val()==1){
+			document.getElementById('abtestChecker').checked=true;
+			jQuery('#btestForm').removeClass('hidden');
+		}
+		jQuery('#adresslistSelect').val(jQuery(activeElCurState[8]).val());
+		
+		
+		
+		
+	}
 };
 
 /*jQuery('#configurationobjectSelect button.ok').click(function(e){
@@ -495,7 +513,7 @@ jQuery('#configurationobjectSelect button.abort').click(function(e){
 
 
 
-var assembleSendoutobjectConf=function(activeElement){
+var assembleSendoutobjectConf=function(activeElement){	
 	ajaxIt('mailobjects','','',selectMailobject);					
 };
 

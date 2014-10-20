@@ -5,10 +5,7 @@
 	</div><?php if ($this->session->get('auth')) { ?><nav class="navbar navbar-reverse" role="navigation">
 	  
 		<ul class="sercive-nav navbar-right">
-			<li><?php echo $this->tag->linkTo(array($language . 'notifications', '<span class="glyphicon glyphicon-globe"></span>', 'title' => 'Notifications')); ?></li>			
-
-			<li><?php echo $this->tag->linkTo(array('help', '<span class="glyphicon glyphicon-question-sign"></span>', 'title' => 'Help')); ?></li>
-
+			<li><?php echo $this->tag->linkTo(array($language . '/notifications', '<span class="glyphicon glyphicon-globe"></span>', 'title' => 'Notifications')); ?></li>			
 			
 			<li><?php echo $this->tag->linkTo(array('', '<span class="glyphicon glyphicon-home"></span>', 'title' => 'Home')); ?></li>
 			<li><?php echo $this->tag->linkTo(array('settings', '<span class="glyphicon glyphicon-cog"></span>', 'title' => 'Settings')); ?></li>

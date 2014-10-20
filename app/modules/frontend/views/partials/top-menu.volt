@@ -8,12 +8,9 @@
 		<ul class="sercive-nav navbar-right">
 			<li>
 				
-				{{- link_to(language~'notifications', '<span class="glyphicon glyphicon-globe"></span>', 'title': 'Notifications') -}}
+				{{- link_to(language~'/notifications', '<span class="glyphicon glyphicon-globe"></span>', 'title': 'Notifications') -}}
 				
 			</li>			
-
-			<li>{{ link_to('help', '<span class="glyphicon glyphicon-question-sign"></span>', 'title': 'Help') }}</li>
-
 			
 			<li>{{ link_to('', '<span class="glyphicon glyphicon-home"></span>', 'title': 'Home') }}</li>
 			<li>{{ link_to('settings', '<span class="glyphicon glyphicon-cog"></span>', 'title': 'Settings') }}</li>
