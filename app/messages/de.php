@@ -128,7 +128,11 @@ $messages = array(
 	"configurationobjectsRetrieve" => "Konfigurationen verwalten",
 	"templateobjectsIndexTitle" => "Vorlagen",
 	"create" => "erstellen",
-	"retrieve" => "verwalten"
-	
+	"retrieve" => "verwalten",
+	"addressesCreateTitle" => "Adressbestand hochladen",
+	"addressSegmentSelectLabel" => "Adressverteiler zuordnen",
+	"addressSegmentNewLabel" => "neuen Adressverteiler erstellen",
+	"overwritesPreviousSelection" => "überschreibt vorherige Auswahl",
+	"divider" => "Trenner"
 );
 ?>

@@ -30,7 +30,8 @@
 <br>
 <label>{{ tr('confhtmlplainLabel') }}</label><br>
 	 {{ select("htmlplain",  [ '0' : tr('html'), '1' : tr('plain'), '2' : tr('both')]) }}
-    {{ submit_button(tr('ok')) }}
+	 <br><br>
+	 {{ submit_button(tr('ok')) }}
 
 </form>
 {%- endif -%}

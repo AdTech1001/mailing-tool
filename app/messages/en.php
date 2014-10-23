@@ -127,7 +127,12 @@ $messages = array(
 	"configurationobjectsRetrieve" => "manage configurations",
 	"templateobjectsIndexTitle" => "templates",
 	"create" => "create",
-	"retrieve" => "retrieve"
+	"retrieve" => "retrieve",
+	"addressesCreateTitle" => "upload addresses",
+	"addressSegmentSelectLabel" => "add to mailing list",
+	"addressSegmentNewLabel" => "create new mailing list",
+	"overwritesPreviousSelection" => "overwrites previous selection",
+	"divider" => "divider"
 	
 	
 );

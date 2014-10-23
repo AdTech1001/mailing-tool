@@ -3,6 +3,17 @@
 {{ content() }}
 
 <div id="confirmTitleInputTemplate" class="hidden"><input type="text" id="titleInput" name="title"><br><button class="ok">{{ tr('ok') }}</button><button class="abort">{{ tr('abort') }}</button></div>
+<div id="mailobjectPreview" class="allPurposeLayer hidden">
+	<div id="mailHeader">
+		<label>{{ tr('from')}}: </label><input id="prevFrom" type="text" value="">
+		<label>{{ tr('subject')}}: </label><input id="prevSubject" type="text" value="">
+		<label>{{ tr('senddate')}}: </label><input id="prevSenddate" type="text" value="">
+		<label>{{ tr('reply')}}: </label><input id="prevReply" type="text" value="">
+	</div>
+	<div id="mailPrev">
+		<iframe id="mailPrevFrame" style="border:1px solid; background:#e3e3e3;width:100%; min-height:101%;" src="" ></iframe>
+	</div>
+</div>
 <div id="mailobjectSelect" class="allPurposeLayer hidden">
 	<label>{{ tr('selectMailobjectLabel')}}</label><br>
 	<div id="mailobjectSelectWrapper">

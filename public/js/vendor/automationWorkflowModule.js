@@ -438,7 +438,11 @@ jQuery('#mailobjectSelect button.ok').click(function(e){
 	}
 	jQuery(elementDefinition[7]).val(abtest);
 	jQuery(elementDefinition[8]).val(jQuery('#adresslistSelect').val());	
-	jQuery(activeElement).parent().parent().append('<div class="info glyphicon glyphicon-info-sign"></div>');
+	var infoLayer=jQuery(activeElement).parent().parent().find('.info');
+	if(infoLayer.length==0){
+		jQuery(activeElement).parent().parent().append('<div class="info glyphicon glyphicon-info-sign"></div>');
+	}
+	
 	jQuery(activeElement).html(jQuery('#mailobjectSelect select')[0].selectedOptions[0].innerHTML.split(' | ')[0]);
 	jQuery('#abtestChecker').off('change').attr('checked', false);
 	jQuery('#mailobjectSelect').addClass('hidden');
@@ -789,5 +793,9 @@ jQuery('document').ready(function(){
 	lang=jQuery('#language').val();
 	jQuery('.window a').click(function(e){
 		e.preventDefault();
+	});
+	jQuery('#').delegate('div.info','hover',function(e){
+		console.log('erwheg');
+		console.log(jQuery(this).parent().find('input'));
 	});
 });

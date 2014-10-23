@@ -31,6 +31,7 @@
 <label>{{ tr('confhtmlplainLabel') }}</label><br>
 	 {{ form.render("htmlplain") }}
 	 {{form.render('uid')}}
+	 <br><br>
     {{ submit_button(tr('ok')) }}
 
 </form>
