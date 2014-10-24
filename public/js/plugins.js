@@ -18,7 +18,8 @@ require.config({
 		plumbscript:'automationWorkflowModule',
 		mailobjectsUpdate: 'mailobjectsUpdate',
 		tinymce:'tinymce.min',
-		datetimepicker:'jquery.datetimepicker'
+		datetimepicker:'jquery.datetimepicker',
+		addresses:'addresses'
 		
     }
 });

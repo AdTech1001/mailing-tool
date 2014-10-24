@@ -6,12 +6,12 @@
 
 <div class="loginForm">
   <form action="{{ form.getAction() }}" method="POST">
-   <label for="username">Email: </label>
-    {{form.render('username')}}<br/>
+   <label for="username">Email: </label><br>
+    {{form.render('username')}}<br/><br>
     
 
-    <label for="password">Password: </label>
-    {{form.render('password')}}<br>
+    <label for="password">Password: </label><br>
+    {{form.render('password')}}<br><br>
     
 
     {{form.render('login')}}

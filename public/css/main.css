@@ -59,6 +59,11 @@ background: #fff;
 	border: 1px solid #01994e;
 	outline: none;
 }
+
+input[type="checkbox"], input[type="radio"]{
+	width:auto;
+}
+
 html {
     font-size: 1em;
     line-height: 1.4;     
@@ -1160,6 +1165,15 @@ h2 .mode.active{
 }
 .sendoutobject .info:hover{
 	cursor:pointer;
+}
+table#mapTable{
+	width:300px;
+}
+#mapTable td{
+	padding:5px;
+}
+#mapTable td select{
+	width:150px;
 }
 
 @media (min-width: 768px) {

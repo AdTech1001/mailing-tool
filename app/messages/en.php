@@ -98,11 +98,16 @@ $messages = array(
 	"gender" => "gender",
 	"firstname" => "firstname",
 	"lastname" => "lastname",
+	"title" => "title",
+	"company" => "company",
 	"email" => "email",
 	"zip" => "zip",
 	"region" => "region",
 	"place" => "place",
 	"state" => "state",
+	"phone" => "phone",
+	"address" => "address",
+	"userlanguage" => "user language",
 	"organisation" => "organisation",
 	"subscription" => "subscription",
 	"clickprofile" => "clickprofile",
@@ -132,7 +137,15 @@ $messages = array(
 	"addressSegmentSelectLabel" => "add to mailing list",
 	"addressSegmentNewLabel" => "create new mailing list",
 	"overwritesPreviousSelection" => "overwrites previous selection",
-	"divider" => "divider"
+	"firstRowContainsFieldName" => "first row contains field names",
+	"dateFieldsWrapped" => "fields are wrapped in",
+	"divider" => "divider",
+	"quotesign" => "quotes",
+	"invertedcomma" => "inverted comma",
+	"semicolon" => "semicolon",
+	"colon" => "colon",
+	"comma" => "comma",
+	"tabs" => "tab"
 	
 	
 );
