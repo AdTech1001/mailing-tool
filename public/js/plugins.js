@@ -9,7 +9,7 @@ require.config({
         // is using jQuery 1.9.0 located at
         // js/lib/jquery-1.9.0.js, relative to
         // the HTML page.
-        jquery: 'jquery-1.10.2.min',
+        jquery: 'jquery-1.11.1.min',//'jquery-1.10.2.min',
 		jqueryui:'jquery-ui.min',
 		jqueryaddress:'jquery.address',
 		main: 'main',
@@ -19,8 +19,9 @@ require.config({
 		mailobjectsUpdate: 'mailobjectsUpdate',
 		tinymce:'tinymce.min',
 		datetimepicker:'jquery.datetimepicker',
-		addresses:'addresses'
-		
+		addresses:'addresses',
+		addressfolders:'addressfolders',
+		datatables:'jquery.dataTables'		
     }
 });
 

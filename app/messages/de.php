@@ -100,6 +100,7 @@ $messages = array(
 	"firstname" => "Vorname",
 	"lastname" => "Nachname",
 	"title" => "Titel",
+	"salutation" => "Anrede",
 	"company" => "Unternehmen",
 	"email" => "Email",
 	"zip" => "PLZ",
@@ -146,6 +147,9 @@ $messages = array(
 	"semicolon" => "Semikolon",
 	"colon" => "Doppelpunkt",
 	"comma" => "Komma",
-	"tabs" => "Tab"
+	"tabs" => "Tab",
+	"deleteAllExistingAddresses" => "Alle vorhandenen Einträge löschen",
+	"addressFolderSelectLabel" => "Adressordner",
+	"addressFolderNewLabel" => "neuer Adressordner"
 );
 ?>

@@ -17,6 +17,8 @@ var pollForTinymce=function(){
 				"searchreplace visualblocks code fullscreen",
 				"insertdatetime media table contextmenu paste"
 			],
+			extended_valid_elements : 'salutation[id]',
+			custom_elements : '~salutation',
 			toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | code"
 		});
 		
@@ -64,7 +66,22 @@ jQuery('document').ready(function(){
 			 }
 		});
 	});
-	
+	jQuery('#dynamicCElements .dynamicCElement').each(function(index,element){
+		jQuery(element).draggable({
+			appendTo: "#desktop",			
+			scroll: false,
+			helper: "clone",
+			zIndex: 999,
+			
+			revert: "invalid",
+			containment: "#desktop",
+			start: function(event,ui) {
+				
+				jQuery(ui.helper).addClass("clone");
+				
+			 }
+		});
+	});
 	
 	
 	jQuery('#editFrame .cElement').draggable({						
@@ -149,26 +166,30 @@ jQuery('document').ready(function(){
 				
 		  }		  
 		  jQuery(newElement).css({top:"",left:"",right:"",bottom:""});		  
-		  
-		  if(cElementsOnPosition.length===0){
-				jQuery(this).append(newElement);
+		  if(jQuery(ui.helper).hasClass('dynamicCElement')){
+			  
 		  }else{
-			  var inserted=false;
-			  for(var i=0; i<cElementsOnPosition.length; i++){				  
-				  
-				  if(elOffsetTop <= cElementsOnPosition[i].offsetTop){					 					  											  
-					jQuery(newElement).insertBefore(jQuery(cElementsOnPosition[i]));
-					inserted=true;
-					break;
-				  }else{
-					jQuery(newElement).insertAfter(jQuery(cElementsOnPosition[i]));
-					inserted=true;  
-				  }
-		      }
-			  if(!inserted){
-				  jQuery(this).append(newElement);
+			if(cElementsOnPosition.length===0){
+				jQuery(this).append(newElement);
+			}else{
+				var inserted=false;
+				for(var i=0; i<cElementsOnPosition.length; i++){				  
+
+					if(elOffsetTop <= cElementsOnPosition[i].offsetTop){					 					  											  
+					  jQuery(newElement).insertBefore(jQuery(cElementsOnPosition[i]));
+					  inserted=true;
+					  break;
+					}else{
+					  jQuery(newElement).insertAfter(jQuery(cElementsOnPosition[i]));
+					  inserted=true;  
+					}
+				}
+				if(!inserted){
+					jQuery(this).append(newElement);
+				}
 			  }
-			}
+		  }
+		  
 		 
 }
 	});

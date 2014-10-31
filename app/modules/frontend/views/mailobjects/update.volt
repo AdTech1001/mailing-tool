@@ -49,9 +49,9 @@
 		<div id="dynamicCElements">
 			<h3>{{ tr('dynamicCElementsTitle') }}</h3>
 			
-			<div class="cElementThumbWrapper"><span>currently none available</span>
-				<div class="cElementThumb">
-			
+			<div class="cElementThumbWrapper"><span>{{tr('salutation')}}</span>
+				<div class="dynamicCElement">
+					<salutation>dynamic content</salutation>
 				</div>
 			</div>
 			

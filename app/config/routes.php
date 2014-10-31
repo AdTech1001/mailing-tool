@@ -31,6 +31,18 @@ $router->add(
 );
 
 $router->add(
+	'/{language:[a-z]{2}}/addressfolders/update/:int[/]{0,1}', 
+	array(
+		'language' => 1,
+		'controller' => "addressfolders",
+		'action' => "update",
+		'uid' => 2,
+		'module'=>'frontend',
+		'namespace'  => 'nltool\Modules\Modules\Frontend\Controllers'
+	)
+);
+
+$router->add(
 	'/{language:[a-z]{2}}/campaignobjects/update/:int[/]{0,1}', 
 	array(
 		'language' => 1,
@@ -104,6 +116,15 @@ $router->add(
 	'/campaignobjects/:action[/]{0,1}', 
 	array(	
 		'controller' => 'campaignobjects',
+		'action' => 1,
+		'module'=>'frontend',
+		'namespace'  => 'nltool\Modules\Modules\Frontend\Controllers',
+	)
+);
+$router->add(
+	'/addressfolders/:action[/]{0,1}', 
+	array(	
+		'controller' => 'addressfolders',
 		'action' => 1,
 		'module'=>'frontend',
 		'namespace'  => 'nltool\Modules\Modules\Frontend\Controllers',

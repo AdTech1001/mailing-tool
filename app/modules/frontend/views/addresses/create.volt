@@ -33,12 +33,12 @@
 	{{ form(language~'/addresses/create/', 'method': 'post') }}
 
 
-<label>{{ tr('addressSegmentSelectLabel') }}</label><br>
-    {{ select('addresssegmentobjectsUid', addresssegmentobjects, 'using': ['uid', 'title'],
-    'useEmpty': true, 'emptyText': tr('pleaseSelect'), 'emptyValue': '@') }}
+<label>{{ tr('addressFolderSelectLabel') }}</label><br>
+    {{ select('addressFoldersUid', addressfolders, 'using': ['uid', 'title'],
+    'useEmpty': true, 'emptyText': tr('pleaseSelect'), 'emptyValue': '0') }}
 <br>{{ tr('or') }}<br>
-<label>{{ tr('addressSegmentNewLabel') }} ({{ tr('overwritesPreviousSelection') }})</label><br>
-    {{ text_field("addresssegmentobjectsCreate","size": 32) }}
+<label>{{ tr('addressFolderNewLabel') }} ({{ tr('overwritesPreviousSelection') }})</label><br>
+    {{ text_field("addressfolderCreate","size": 32) }}
 <br><br>
 <label>{{ tr('deleteAllExistingAddresses') }}</label><br>
     {{ check_field('deleteallexisting') }}
@@ -52,7 +52,7 @@
 		<td>{{uploadfield}}</td>
 		<td> >> </td>
 		<td>
-			{{ select('addresssegmentobjectsUid', [ '0' : tr('firstname'), '1' : tr('lastname'), '2' : tr('title'), '3' : tr('email'), '4' : tr('company'), '5' : tr('phone'), '6' : tr('address'), '7' : tr('place'), '8' : tr('zip'), '9' : tr('userlanguage'), '10' : tr('gender')]) }}
+			{{ select('adressFieldsMap[]', [ '0':tr('pleaseSelect'),'1' : tr('firstname'), '2' : tr('lastname'), '3' : tr('title'), '4' : tr('salutation'), '5' : tr('email'), '6' : tr('company'), '7' : tr('phone'), '8' : tr('address'), '9' : tr('place'), '10' : tr('zip'), '11' : tr('userlanguage'), '12' : tr('gender')]) }}
 		</td>
 		
 	</tr>
@@ -60,7 +60,10 @@
 	</table>
 	
 	<br><br>
+	{{ hidden_field("dataFieldWrap","value": dataFieldWrap) }}
+	{{ hidden_field("divider","value": divider) }}
 	{{ hidden_field("time","value": tstamp) }}
+	{{ hidden_field("firstRowFieldNames","value": firstRowFieldNames) }}
 	{{ hidden_field("filename","value": filename) }}
     {{ submit_button(tr('ok')) }}
 

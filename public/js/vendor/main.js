@@ -3,7 +3,7 @@
 function init(jQuery){
 	jQuery('.container').append('<div id="loadingimg"><h3>Einen Moment bitte</h3><div><img src="/baywa-nltool/images/ajax-loader.gif"></div></<div>');
 	jQuery('body').append('<div id="tooltipOverlay"></div>');
-	jQuery.address.init().bind('change', navigation);
+	//jQuery.address.init().bind('change', navigation);
 	
 	if(typeof(requirePlugins) != 'undefined'){
 		requireControllerPlugins();
@@ -41,11 +41,18 @@ var requireControllerPlugins=function(){
 			for(var i=2; i<requirePlugins.length; i++){
 				require([requirePlugins[i]]);
 			}
-		}else{
-			for(var i=0; i<requirePlugins.length; i++){
-				require([requirePlugins[i]]);
-			}	
-		}
+	}else if(requirePlugins[0]=='datatables'){
+		
+		require([requirePlugins[0]],function(datatables){
+				
+				require([requirePlugins[1]]);
+			});
+	}
+	else{
+		for(var i=0; i<requirePlugins.length; i++){
+			require([requirePlugins[i]]);
+		}	
+	}
 	
 };
 

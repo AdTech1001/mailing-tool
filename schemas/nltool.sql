@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS permissions (
 	resourceaction varchar(55) NOT NULL,
   PRIMARY KEY (uid),
   KEY profilesid (profileid)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=utf8;
 
 
 LOCK TABLES permissions WRITE;
@@ -119,12 +119,22 @@ INSERT INTO permissions (uid, crdate, profileid, resourceid, resourceaction) VAL
 (57, NOW(), 1, 12, 'create'),
 (58, NOW(), 1, 12, 'retrieve'),
 (59, NOW(), 1, 12, 'update'),
-(60, NOW(), 1, 12, 'delete');
+(60, NOW(), 1, 12, 'delete'),
 (61, NOW(), 1, 13, 'index'),
 (62, NOW(), 1, 13, 'create'),
 (63, NOW(), 1, 13, 'retrieve'),
 (64, NOW(), 1, 13, 'update'),
-(65, NOW(), 1, 13, 'delete');
+(65, NOW(), 1, 14, 'delete'),
+(66, NOW(), 1, 14, 'index'),
+(67, NOW(), 1, 14, 'create'),
+(68, NOW(), 1, 14, 'retrieve'),
+(69, NOW(), 1, 14, 'update'),
+(70, NOW(), 1, 14, 'delete'),
+(71, NOW(), 1, 15, 'index'),
+(72, NOW(), 1, 15, 'create'),
+(73, NOW(), 1, 15, 'retrieve'),
+(74, NOW(), 1, 15, 'update'),
+(75, NOW(), 1, 15, 'delete');
 UNLOCK TABLES;
 
 
@@ -143,7 +153,7 @@ CREATE TABLE IF NOT EXISTS resources(
 	hidden tinyint(4) DEFAULT '0' NOT NULL,
 	title varchar(255) NOT NULL,
 	PRIMARY KEY (uid)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 
 LOCK TABLES resources WRITE;
@@ -160,7 +170,9 @@ INSERT INTO resources (uid, crdate, title) VALUES
 (10, NOW(),'contentobjects'),
 (11, NOW(),'configurationobjects'),
 (12, NOW(),'sendoutobjects'),
-(13, NOW(),'addresses');
+(13, NOW(),'addresses'),
+(14, NOW(),'addressfolders'),
+(15, NOW(),'segmentobjects');
 UNLOCK TABLES;
 -- --------------------------------------------------------
 
@@ -436,6 +448,31 @@ CREATE TABLE segmentobjects (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 
+DROP TABLE IF EXISTS addressfolders;
+CREATE TABLE addressfolders (
+	uid int(11) NOT NULL auto_increment,
+	pid int(11) DEFAULT '0' NOT NULL,
+	tstamp int(11) DEFAULT '0' NOT NULL,
+	crdate int(11) DEFAULT '0' NOT NULL,
+	cruser_id int(11) DEFAULT '0' NOT NULL,
+	deleted tinyint(4) DEFAULT '0' NOT NULL,
+	hidden tinyint(4) DEFAULT '0' NOT NULL,	
+	usergroup int(11) DEFAULT '0' NOT NULL,	
+	title varchar(255) COLLATE utf8_general_ci NOT NULL,		
+  PRIMARY KEY (uid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+
+DROP TABLE IF EXISTS addresses_segmentobjects_lookup;
+CREATE TABLE addresses_segmentobjects_lookup (
+	uid int(11) NOT NULL auto_increment,	
+	deleted tinyint(4) DEFAULT '0' NOT NULL,	
+	uid_local int(11) DEFAULT '0' NOT NULL,
+	uid_foreign int(11) DEFAULT '0' NOT NULL,		
+  PRIMARY KEY (uid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+
 DROP TABLE IF EXISTS addresses;
 CREATE TABLE addresses (
 	uid int(11) NOT NULL auto_increment,
@@ -448,6 +485,7 @@ CREATE TABLE addresses (
 	usergroup int(11) DEFAULT '0' NOT NULL,	
 	first_name varchar(255) COLLATE utf8_general_ci NOT NULL,
 	last_name varchar(255) COLLATE utf8_general_ci NOT NULL,
+	salutation varchar(255) COLLATE utf8_general_ci NOT NULL,
 	email varchar(255) COLLATE utf8_general_ci NOT NULL,
 	phone varchar(255) COLLATE utf8_general_ci NOT NULL,
     address varchar(255) COLLATE utf8_general_ci NOT NULL,
