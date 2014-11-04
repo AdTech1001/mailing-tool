@@ -883,7 +883,24 @@ textarea {
 .glyphicon-tree-deciduous:before {
   content: "\e200";
 }
-
+.mce-i-glyphicon-repeat{
+	position: relative !important;
+  top: 1px !important;
+  display: inline-block !important;
+  font-family: 'Glyphicons Halflings' !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  line-height: 1 !important;
+	color:#01994e !important;	
+	
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+	
+}
+.mce-i-glyphicon-repeat:before{
+	content: "\e030" !important;
+	margin-right:3px;
+}
 
 /* ==========================================================================
    EXAMPLE Media Queries for Responsive Design.

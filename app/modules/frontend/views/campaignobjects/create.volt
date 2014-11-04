@@ -24,13 +24,9 @@
 		
 	</div><br>
 	<label>{{ tr('addressListLabel')}}</label><br>
-	<select id="adresslistSelect" >
-		<option value="0">{{ tr('pleaseSelect') }}</option>
-		<option value="1">Verteiler 1</option>
-		<option value="2">Verteiler 2</option>
-		<option value="3">Verteiler 3</option>		
+	<div id="adressfolderSelectWrapper">
 		
-	</select><br><br>
+	</div><br><br>
 	<label>{{ tr('sendoutSubject')}}</label><br>
 	<input type="text" id="subject"><br>
 	<label>{{ tr('sendoutDateLabel')}}</label><br>

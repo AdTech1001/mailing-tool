@@ -5,22 +5,75 @@ var reloadFrame=function(){
 
 var pollForTinymce=function(){
 	if(typeof(tinymce) != 'undefined'){
+		tinymce.PluginManager.add('customem', function(editor, url) {
+			// Add a button that opens a window
+			editor.addButton('customem', {
+				type : 'menubutton',
+				text: 'dynamische Felder',
+				icon: 'glyphicon-repeat',				
+				menu: [
+						{
+						text: jQuery('#salutationTitle').val(),
+						onclick: function(){
+							editor.insertContent('<dynamic>{{' + jQuery('#salutationTitle').val() + '}}</dynamic>');
+							}
+						},
+						{
+						text: jQuery('#lastnameTitle').val(),
+						onclick: function(){
+							editor.insertContent('<dynamic>{{' + jQuery('#lastnameTitle').val() + '}}</dynamic>');
+							}
+
+						}
+					]
+					
+					// Open window
+					/*editor.windowManager.open({
+						title: 'dynamic Field, will be substituted',
+						body: [
+							{type: 'textbox', name: 'description', label:jQuery('#salutationTitle').val() }
+						],
+						onsubmit: function(e) {
+							// Insert content when the window form is submitted
+							editor.insertContent('<dynamic><span>' + e.data.description + '</span></dynamic>');
+						}
+					});*/
+				
+			});
+
+			// Adds a menu item to the tools menu
+			/*editor.addMenuItem('customem', {
+				text: jQuery('#salutationTitle').val(),
+				context: 'tools',
+				onclick: function() {
+					editor.insertContent('<salutation>{{' + jQuery('#salutationTitle').val() + '}}</salutation>');
+				}
+			});*/
+		});
+		
 		tinymce.init({
 			selector: "#editFrame div.editable",
 			theme: "modern",			
 			schema: "html5",
 			inline: true,			
-			statusbar: false,
-			menubar : false,
+			relative_urls: false,
+			remove_script_host: false,
+			statusbar: true,
+			menubar : true,
 			plugins: [
-				"advlist autolink lists link image charmap print preview anchor",
+				"customem advlist autolink lists link image charmap print preview anchor",
 				"searchreplace visualblocks code fullscreen",
 				"insertdatetime media table contextmenu paste"
 			],
-			extended_valid_elements : 'salutation[id]',
-			custom_elements : '~salutation',
-			toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | code"
+			extended_valid_elements : "dynamic",
+			custom_elements: "~dynamic",			
+			toolbar: "customem | insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | code"
 		});
+		
+		
+		
+		
+		
 		
 	}else{
 		window.setTimeout(pollForTinymce,10);
@@ -166,9 +219,7 @@ jQuery('document').ready(function(){
 				
 		  }		  
 		  jQuery(newElement).css({top:"",left:"",right:"",bottom:""});		  
-		  if(jQuery(ui.helper).hasClass('dynamicCElement')){
-			  
-		  }else{
+		  
 			if(cElementsOnPosition.length===0){
 				jQuery(this).append(newElement);
 			}else{
@@ -188,17 +239,20 @@ jQuery('document').ready(function(){
 					jQuery(this).append(newElement);
 				}
 			  }
-		  }
+		  
 		  
 		 
 }
 	});
-	
+	jQuery('#mailobjectPreview').click(function(e){
+		jQuery('#viewFrame').show();
+		
+	});
 	
 	
 	jQuery('#mailobjectEditMode').click(function(e){
 		e.stopPropagation();
-		console.log(jQuery(this).hasClass('active'));
+		
 		if(jQuery(this).hasClass('active')){
 			tinymce.remove("#editFrame div.editable");
 			jQuery('#editFrame table').removeClass('mce-item-table');

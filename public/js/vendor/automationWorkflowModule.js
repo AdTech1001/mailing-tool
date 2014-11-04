@@ -414,11 +414,23 @@ var selectMailobject=function (data){
 	var selectString='<select id="mailobjectSelectElements">';
 	for(var i=0;i<jsObject.length;i++){
 		selectString+='<option value="'+jsObject[i].uid+'">'+jsObject[i].title+' | '+jsObject[i].date+'</option>';
-}
+	}
 	selectString+='</select>';
 	jQuery('#mailobjectSelectWrapper').html(selectString);
-	ajaxIt('configurationobjects','','',selectConfigurationobject);										
 	
+	ajaxIt('addressfolders','','',selectAdressfolder);
+};
+
+var selectAdressfolder=function(data){
+	var jsObject = JSON.parse( data );
+		var selectString='<select id="addressfoldersSelectElements">';
+		for(var i=0;i<jsObject.length;i++){
+			selectString+='<option value="'+jsObject[i].uid+'">'+jsObject[i].title+' | '+jsObject[i].addresscount+'</option>';
+	}
+		selectString+='</select>';
+	jQuery('#adressfolderSelectWrapper').html(selectString);
+
+	ajaxIt('configurationobjects','','',selectConfigurationobject);
 };
 
 
@@ -437,7 +449,7 @@ jQuery('#mailobjectSelect button.ok').click(function(e){
 	abtest=1;
 	}
 	jQuery(elementDefinition[7]).val(abtest);
-	jQuery(elementDefinition[8]).val(jQuery('#adresslistSelect').val());	
+	jQuery(elementDefinition[8]).val(jQuery('#addressfoldersSelectElements').val());	
 	var infoLayer=jQuery(activeElement).parent().parent().find('.info');
 	if(infoLayer.length==0){
 		jQuery(activeElement).parent().parent().append('<div class="info glyphicon glyphicon-info-sign"></div>');

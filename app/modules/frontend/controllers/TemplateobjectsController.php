@@ -23,7 +23,7 @@ class TemplateobjectsController extends ControllerBase
 		
 		$environment= $this->config['application']['debug'] ? 'development' : 'production';
 		$baseUri=$this->config['application'][$environment]['staticBaseUri'];
-		$path=$baseUri.$this->view->language.'/configurationobjects/update/';
+		$path=$baseUri.$this->view->language.'/templateobjects/update/';
 		
 		$this->view->setVar('templateobjects',$templateobjects);
 		$this->view->setVar('path',$path);
@@ -35,17 +35,17 @@ class TemplateobjectsController extends ControllerBase
 		/*$file=  file_get_contents('../app/modules/frontend/templates/newsletterMainTemplate.volt');
 		$compiled= $compiler->parse($file);*/
 		//echo('<iframe src="http://localhost/baywa-nltool/public/templates/newsletterMainTemplate.volt.php"></iframe>');
-	
+		$host='http://'.$this->request->getServer('HTTP_HOST');
 		$environment= $this->config['application']['debug'] ? 'development' : 'production';
 		$baseUri=$this->config['application'][$environment]['staticBaseUri'];
 			$path=$baseUri.$this->view->language;
 			//$this->view->setVar('source',$path.$mailObjectUid.'.html');						
-			$this->view->setVar('path','/'.$path);	
+			$this->view->setVar('path',$path);	
 		if($this->request->isPost()){
 			$time=time();
 			
 		
-			$dummyImage=$baseUri.'/public/images/dummy-image.jpg';
+			$dummyImage=$host.$baseUri.'/public/images/dummy-image.jpg';
 			
 			
 			$templateObject=new Templateobjects();
@@ -114,7 +114,7 @@ class TemplateobjectsController extends ControllerBase
 							$nameArray=explode('.',$src);
 							$extension=$nameArray[(count($nameArray)-1)];
 							$filename=$path.'/image_'.$counter.'.'.$extension;
-							$image->setAttribute('src',$baseUri.substr($filename,3));
+							$image->setAttribute('src',$host.$baseUri.substr($filename,3));
 							file_put_contents($filename,$file);
 						}else{
 							$image->setAttribute('src',$dummyImage);

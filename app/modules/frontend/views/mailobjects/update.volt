@@ -14,6 +14,8 @@
 			
 		</div>
 <div id="fileToolBar">
+	<div class="glyphicon glyphicon-eye-open" id="mailobjectPreview" data-controller="mailobject" data-action="update" title="{{ tr('preview') }}">
+	</div>
 	<div class="glyphicon glyphicon-edit" id="mailobjectEditMode" data-controller="mailobject" data-action="update" title="{{ tr('edit') }}">
 	</div>
 	<div class="glyphicon glyphicon-floppy-save" id="mailobjectUpdate" data-controller="mailobject" data-action="update" title="{{ tr('save') }}">
@@ -49,10 +51,8 @@
 		<div id="dynamicCElements">
 			<h3>{{ tr('dynamicCElementsTitle') }}</h3>
 			
-			<div class="cElementThumbWrapper"><span>{{tr('salutation')}}</span>
-				<div class="dynamicCElement">
-					<salutation>dynamic content</salutation>
-				</div>
+			<div class="cElementThumbWrapper"><span>Gegenwärtig nicht verfügbar</span>
+				
 			</div>
 			
 		</div>
@@ -77,4 +77,7 @@
 	<iframe id="mailobjectFrame" style="border:1px solid; background:#e3e3e3;width:80%; min-height:100%;" src="{{ source }}" ></iframe>
 </div>
 <div id="deleteOverlay" class="hidden" title="{{ tr('delete')}} "><span class='glyphicon glyphicon-remove'></span></div>
+<input type="hidden" id="salutationTitle" value="{{tr('salutation')}}">
+<input type="hidden" id="lastnameTitle" value="{{tr('lastname')}}">
+	   
 {% endif %}

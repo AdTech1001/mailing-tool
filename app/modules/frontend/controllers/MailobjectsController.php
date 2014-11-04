@@ -232,7 +232,7 @@ class MailobjectsController extends ControllerBase
 			$environment= $this->config['application']['debug'] ? 'development' : 'production';
 			$baseUri=$this->config['application'][$environment]['staticBaseUri'];
 			$path=$baseUri.$this->view->language;
-			$this->view->setVar('source',$path.$mailObjectUid.'.html');
+			$this->view->setVar('source',$baseUri.'mails/mailobject_'.$mailObjectUid.'.html');
 			$this->view->disable();
 			
 		}else{			
@@ -274,7 +274,7 @@ class MailobjectsController extends ControllerBase
 			$environment= $this->config['application']['debug'] ? 'development' : 'production';
 			$baseUri=$this->config['application'][$environment]['staticBaseUri'];
 			$path=$baseUri.$this->view->language;
-			$this->view->setVar('source',$path.$mailObjectUid.'.html');						
+			$this->view->setVar('source',$baseUri.'mails/mailobject_'.$mailObjectUid.'.html');
 			$this->view->setVar('path',$path.'/mailobjects/update/');			
 		}
 		

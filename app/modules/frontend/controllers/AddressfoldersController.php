@@ -12,7 +12,27 @@ use nltool\Models\Addresses as Addresses,
 class AddressfoldersController extends ControllerBase
 {
 	public function indexAction(){
-		
+		if($this->request->isPost()){
+			$adressfolders=Addressfolders::find(array(
+				"conditions" => "deleted=0 AND hidden=0 AND usergroup = ?1",
+				"bind" => array(1 => $this->session->get('auth')['usergroup']),
+				"order" => "tstamp DESC"
+			));
+			$addressfoldersArray=array();
+			foreach($adressfolders as $adressfolder){
+				$adressfolderAddresses=$adressfolder->countAddresses();
+				$addressfoldersArray[]=array(
+					'uid'=>$adressfolder->uid,
+					'title'=>$adressfolder->title,
+					'date' =>date('d.m.Y',$adressfolder->tstamp),
+					'addresscount'=>$adressfolderAddresses
+				);
+						
+			}
+			$returnJson=json_encode($addressfoldersArray);
+			echo($returnJson);
+			die();
+		}
 	}
 	
 	public function updateAction()
