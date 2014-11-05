@@ -38,6 +38,33 @@ return new \Phalcon\Config(array(
 	'languages'=>array(
 		'de' => 'Deutsch',
 		'en' => 'English'
+	),
+	'database'=>array(
+		'production'=>array(
+			'adapter'  => 'Mysql',
+			'host'     => 'nltool.mysql.eu1.frbit.com',
+			'username' => 'nltool',
+			'password' => 'CT7WnO8qobDDUwW8',
+			'dbname'   => 'nltool',
+			'charset'  => 'utf8'
+		),
+		'debug'=>array(
+			'adapter'  => 'Mysql',
+			'host'     => 'localhost',
+			'username' => 'root',
+			'password' => '',
+			'dbname'   => 'bayw-nltool',
+			'charset'  => 'utf8'
+		),
+		'oauth'=>array(
+			'adapter'  => 'Mysql',
+            'host'     => 'localhost',
+            'port'     => 3306,
+            'username' => 'root',
+            'password' => '',
+            'dbname'   => 'oauth2'
+)
 	)
     
 ));
+

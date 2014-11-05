@@ -12,7 +12,7 @@ use Phalcon\Session\Adapter\Files as SessionAdapter;
 use Phalcon\Cache\Backend\File as FileCache;
 use Phalcon\Mvc\Dispatcher as MvcDispatcher;
 use nltool\Notifications\Checker as NotificationsChecker;
-
+use Sum\Oauth2 AS Oauth2;
 use nltool\Auth\Auth;
 use nltool\Acl\Acl;
 
@@ -50,11 +50,11 @@ $di->set(
     'db',
     function () use ($config) {
 
-        $connection = new DatabaseConnection($config->database->toArray());
+        
 
         $debug = $config->application->debug;
         if ($debug) {
-
+			$connection = new DatabaseConnection($config->database->debug->toArray());
             $eventsManager = new EventsManager();
 
             $logger = new FileLogger(APP_PATH . "/app/logs/db.log");
@@ -73,7 +73,9 @@ $di->set(
 
             //Assign the eventsManager to the db adapter instance
             $connection->setEventsManager($eventsManager);
-        }
+		}else{
+			$connection = new DatabaseConnection($config->database->production->toArray());
+		}
 
         return $connection;
     }
@@ -239,3 +241,24 @@ $di->set('acl', function(){
 	return new Acl();
 });
 
+$di->set('oauth', function() use ($config) {
+		$oauthdb = new Phalcon\Db\Adapter\Pdo\Mysql($config->database->oauth->toArray());
+		
+		 $server = new \League\OAuth2\Server\Authorization(
+				 
+			 new Oauth2\Server\Storage\Pdo\Mysql\Client($oauthdb),
+			 new Sum\Oauth2\Server\Storage\Pdo\Mysql\Session($oauthdb),
+			 new Sum\Oauth2\Server\Storage\Pdo\Mysql\Scope($oauthdb)
+		 );
+
+		 # Not required as it called directly from original code
+		 # $request = new \League\OAuth2\Server\Util\Request();
+
+		 # add these 2 lines code if you want to use my own Request otherwise comment it
+		 $request = new \Sum\Oauth2\Server\Storage\Pdo\Mysql\Request(); 
+		 $server->setRequest($request);
+
+		 $server->setAccessTokenTTL(86400);
+		 $server->addGrantType(new League\OAuth2\Server\Grant\ClientCredentials());
+		 return $server;
+	 });

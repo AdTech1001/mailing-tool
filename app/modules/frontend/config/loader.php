@@ -16,8 +16,8 @@ $loader->registerNamespaces(
 		'nltool\Modules\Modules\Backend'=>$this->config->application->backendDir,
 		'nltool\Modules\Modules\Backend\Controllers'=>$this->config->application->backendControllersDir,
 		'nltool\app' => $this->config->application->appsDir,
-		'nltool' => $this->config->application->libraryDir
-       
+		'nltool' => $this->config->application->libraryDir,	
+		'Sum' => $this->config->application->libraryDir
     )
 );
 

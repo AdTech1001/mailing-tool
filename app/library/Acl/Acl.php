@@ -81,6 +81,9 @@ class Acl extends Component
 		'session' => array(
 			'index',
 			'start'
+		),
+		'triggersend'=>array(
+			'index'
 		)
 	);
 

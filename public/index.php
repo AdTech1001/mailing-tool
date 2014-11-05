@@ -13,39 +13,23 @@
 
 error_reporting(E_ALL);
 
+
 if (!isset($_GET['_url'])) {
     $_GET['_url'] = '/';
 }
 
 define('APP_PATH', realpath('..'));
-
+require APP_PATH . "../../../vendor/autoload.php";
+//require APP_PATH . "/app/config/loader.php";
 /**
  * Read the configuration
  */
 $config = include APP_PATH . "/app/config/config.php";
-if($config->application->debug){
-$config['database']= array(
-        'adapter'  => 'Mysql',
-        'host'     => 'localhost',
-        'username' => 'root',
-        'password' => '',
-        'dbname'   => 'bayw-nltool',
-        'charset'  => 'utf8'
-    );
-}else{
-	$config['database']= array(
-        'adapter'  => 'Mysql',
-        'host'     => 'nltool.mysql.eu1.frbit.com',
-        'username' => 'nltool',
-        'password' => 'CT7WnO8qobDDUwW8',
-        'dbname'   => 'nltool',
-        'charset'  => 'utf8'
-    );
-}
+
 /**
  * Include the loader
  */
-//require APP_PATH . "/app/config/loader.php";
+
 
 
 
@@ -65,6 +49,9 @@ try {
      * Handle the request
      */
     $application = new Phalcon\Mvc\Application($di);	
+	
+	
+	
 	require APP_PATH . '/app/config/modules.php';
 	echo $application->handle()->getContent();
 } catch (Phalcon\Exception $e) {
