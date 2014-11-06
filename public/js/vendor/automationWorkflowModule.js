@@ -369,10 +369,14 @@ function getSendoutObjectConditions(sendoutObjectId){
 	var conditions='[';
 	for(var i=0; i<splitTargets.length;i++){
 		if(splitTargets[i].sourceId !== 'startpoint'){
-		var condVals=JSON.stringify(jQuery('#'+splitTargets[i].sourceId+' form').serializeArray());
 		
-		var elItself=JSON.stringify(jQuery('#'+splitTargets[i].sourceId)[0].outerHTML);
-		 conditions+='{"condValues":'+condVals+'},';
+		jQuery(jQuery('#'+splitTargets[i].sourceId+' .conditionsRow')).each(function(index,element){
+			var rowId=jQuery(element).attr('id');
+			var condVals=JSON.stringify(jQuery('#'+splitTargets[i].sourceId+' #'+rowId+' select,'+'#'+splitTargets[i].sourceId+' #'+rowId+' input').serializeArray());		
+			//var elItself=JSON.stringify(jQuery('#'+splitTargets[i].sourceId)[0].outerHTML);
+			 conditions+=condVals+',';
+		});
+		
 		
 		}
 		

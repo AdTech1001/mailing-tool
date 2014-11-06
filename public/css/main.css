@@ -1056,7 +1056,9 @@ box-shadow: inset 3px 0px 5px 0px rgba(0,0,0,0.75);
 	border:1px solid #fff;
 	padding-top:3px;
 }
-
+#conditionsForm input, select, textarea{
+	width:auto;
+}
 #deleteOverlay{
 	position:absolute;
 	top:-5px;

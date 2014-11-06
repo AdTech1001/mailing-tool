@@ -500,3 +500,22 @@ CREATE TABLE addresses (
   PRIMARY KEY (uid),
 	KEY segmentobjects (segmentobjects)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+
+DROP TABLE IF EXISTS addressconditions;
+CREATE TABLE addressconditions(
+	uid int(11) NOT NULL auto_increment,
+	pid int(11) DEFAULT '0' NOT NULL,
+	tstamp int(11) DEFAULT '0' NOT NULL,
+	crdate int(11) DEFAULT '0' NOT NULL,
+	cruser_id int(11) DEFAULT '0' NOT NULL,
+	deleted tinyint(4) DEFAULT '0' NOT NULL,
+	hidden tinyint(4) DEFAULT '0' NOT NULL,
+	usergroup int(11) DEFAULT '0' NOT NULL,	
+	junctor int(11) DEFAULT '0' NOT NULL,	
+	conditionaloperator int(11) DEFAULT '0' NOT NULL,	
+	argument int(11) DEFAULT '0' NOT NULL,		
+	operator int(11) DEFAULT '0' NOT NULL,	
+	argumentcondition varchar(255) COLLATE utf8_general_ci NOT NULL,	
+	PRIMARY KEY (uid)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;

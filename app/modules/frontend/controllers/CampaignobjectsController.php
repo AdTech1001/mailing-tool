@@ -2,7 +2,8 @@
 namespace nltool\Modules\Modules\Frontend\Controllers;
 use nltool\Models\Mailobjects as Mailobjects,
 	nltool\Models\Campaignobjects as Campaignobjects,	
-	nltool\Models\Sendoutobjects as Sendoutobjects;
+	nltool\Models\Sendoutobjects as Sendoutobjects,
+	nltool\Models\Addressconditions	as Addressconditions;
 
 /**
  * Class IndexController
@@ -92,8 +93,7 @@ class CampaignobjectsController extends ControllerBase
 				if (!$campaignobjectRecord->save()) {
 					$this->flash->error($campaignobjectRecord->getMessages());
 				}
-				//TODO Conditions für Sendoutobjects ablegen
-				
+								
 				$this->writeSendoutObjects($campaignobjectRecord);
 				
 				
@@ -224,6 +224,29 @@ class CampaignobjectsController extends ControllerBase
 						));
 						if(!$sendoutobjectB->save()){
 							$this->flash->error($sendoutobjectB->getMessages());
+						}
+					}
+					
+					if(isset($rawArray['conditions'])){
+						foreach($rawArray['conditions'] as $conditionArray){
+							$addressconditions=new Addressconditions();				
+							$addressconditions->assign(array(
+								'pid'=>$sendoutobject->uid,
+								'crdate'=>$time,
+								'tstamp'=>$time,
+								'cruser_id' =>$this->session->get('auth')['uid'],
+								'usergroup' =>$this->session->get('auth')['usergroup'],
+								'deleted' =>0,
+								'hidden' => 0,
+								'junctor' => $conditionArray[0]['value'],
+								'conditionaloperator' => $conditionArray[1]['value'],
+								'argument',
+								'operator',
+								'argumentcondition'
+								
+								
+							));
+							
 						}
 					}
 				}

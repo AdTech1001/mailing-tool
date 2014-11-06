@@ -71,42 +71,47 @@
 				<td>{{tr('condition')}}</td>
 			</thead>
 		<tbody>
-		
+			
 			<tr id="conditionsRow_1" class="conditionsRow">
+		
 				<td>
 					<select name="junctor0[]" class="junctor0 hidden">
-						<option value='0'>{{ tr('and') }}</option>
-						<option value='1'>{{ tr('or') }}</option>
-						<option value='2'>{{ tr('xor') }}</option>
+						<option value='0'>{{ tr('pleaseSelect') }}</option>
+						<option value='1'>{{ tr('and') }}</option>
+						<option value='2'>{{ tr('or') }}</option>
+						<option value='3'>{{ tr('xor') }}</option>
 					</select>
 					<select name="junctor1[]" class="junctor1">
-						<option value='0'>{{ tr('if') }}</option>
-						<option value='1'>{{ tr('ifnot') }}</option>
+						<option value='0'>{{ tr('pleaseSelect') }}</option>
+						<option value='1'>{{ tr('if') }}</option>
+						<option value='2'>{{ tr('ifnot') }}</option>
 					</select>
 				</td>
 				<td>					
 					<select name="fields[]" class="fields">
-						<option value='0'>{{ tr('gender') }}</option>
-						<option value='1'>{{ tr('firstname') }}</option>
-						<option value='2'>{{ tr('lastname') }}</option>
-						<option value='3'>{{ tr('email') }}</option>
-						<option value='4'>{{ tr('zip') }}</option>
-						<option value='5'>{{ tr('region') }}</option>
-						<option value='6'>{{ tr('place') }}</option>
-						<option value='7'>{{ tr('state') }}</option>
-						<option value='8'>{{ tr('organisation') }}</option>
-						<option value='9'>{{ tr('subscription') }}</option>
-						<option value='10'>{{ tr('clickprofile') }}</option>
+						<option value='0'>{{ tr('pleaseSelect') }}</option>
+						<option value='1'>{{ tr('gender') }}</option>
+						<option value='2'>{{ tr('firstname') }}</option>
+						<option value='3'>{{ tr('lastname') }}</option>
+						<option value='4'>{{ tr('email') }}</option>
+						<option value='5'>{{ tr('zip') }}</option>
+						<option value='6'>{{ tr('region') }}</option>
+						<option value='7'>{{ tr('place') }}</option>
+						<option value='8'>{{ tr('state') }}</option>
+						<option value='9'>{{ tr('organisation') }}</option>
+						<option value='10'>{{ tr('subscription') }}</option>
+						<option value='11'>{{ tr('clickprofile') }}</option>
 					</select>
 				</td>
 				<td>
 					<select name="operator[]" class="fieldOperators">
-						<option value='0'>{{ tr('equals') }}</option>
-						<option value='1'>{{ tr('contains') }}</option>
-						<option value='2'>{{ tr('largerthan') }}</option>
-						<option value='3'>{{ tr('largerequal') }}</option>
-						<option value='4'>{{ tr('lowerthan') }}</option>
-						<option value='5'>{{ tr('lowerequal') }}</option>
+						<option value='0'>{{ tr('pleaseSelect') }}</option>
+						<option value='1'>{{ tr('equals') }}</option>
+						<option value='2'>{{ tr('contains') }}</option>
+						<option value='3'>{{ tr('largerthan') }}</option>
+						<option value='4'>{{ tr('largerequal') }}</option>
+						<option value='5'>{{ tr('lowerthan') }}</option>
+						<option value='6'>{{ tr('lowerequal') }}</option>
 					</select>
 					
 				</td>
