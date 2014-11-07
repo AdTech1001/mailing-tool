@@ -134,7 +134,12 @@ INSERT INTO permissions (uid, crdate, profileid, resourceid, resourceaction) VAL
 (72, NOW(), 1, 15, 'create'),
 (73, NOW(), 1, 15, 'retrieve'),
 (74, NOW(), 1, 15, 'update'),
-(75, NOW(), 1, 15, 'delete');
+(75, NOW(), 1, 15, 'delete'),
+(76, NOW(), 1, 16, 'index'),
+(77, NOW(), 1, 16, 'create'),
+(78, NOW(), 1, 16, 'retrieve'),
+(79, NOW(), 1, 16, 'update'),
+(80, NOW(), 1, 16, 'delete');
 UNLOCK TABLES;
 
 
@@ -153,7 +158,7 @@ CREATE TABLE IF NOT EXISTS resources(
 	hidden tinyint(4) DEFAULT '0' NOT NULL,
 	title varchar(255) NOT NULL,
 	PRIMARY KEY (uid)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 
 LOCK TABLES resources WRITE;
@@ -172,7 +177,8 @@ INSERT INTO resources (uid, crdate, title) VALUES
 (12, NOW(),'sendoutobjects'),
 (13, NOW(),'addresses'),
 (14, NOW(),'addressfolders'),
-(15, NOW(),'segmentobjects');
+(15, NOW(),'segmentobjects'),
+(16, NOW(),'addressconditions');
 UNLOCK TABLES;
 -- --------------------------------------------------------
 
@@ -521,3 +527,29 @@ CREATE TABLE addressconditions(
 	argumentcondition varchar(255) COLLATE utf8_general_ci NOT NULL,	
 	PRIMARY KEY (uid)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+
+DROP TABLE IF EXISTS mailqueue;
+CREATE TABLE mailqueue (
+	uid int(11) NOT NULL auto_increment,
+	pid int(11) DEFAULT '0' NOT NULL,	
+	tstamp int(11) DEFAULT '0' NOT NULL,
+	crdate int(11) DEFAULT '0' NOT NULL,	
+	deleted tinyint(4) DEFAULT '0' NOT NULL,
+	hidden tinyint(4) DEFAULT '0' NOT NULL,	
+	sent tinyint(4) DEFAULT '0' NOT NULL,	
+	campaignuid int(11) DEFAULT '0' NOT NULL,
+	mailobjectuid int(11) DEFAULT '0' NOT NULL,
+	configurationuid int(11) DEFAULT '0' NOT NULL,
+	email varchar(255) COLLATE utf8_general_ci NOT NULL,		
+	subject varchar(255) COLLATE utf8_general_ci NOT NULL,
+	sendermail varchar(255) COLLATE utf8_general_ci NOT NULL,	
+	sendername varchar(255) COLLATE utf8_general_ci NOT NULL,	
+	answermail varchar(255) COLLATE utf8_general_ci NOT NULL,	
+	answername varchar(255) COLLATE utf8_general_ci NOT NULL,	
+	returnpath varchar(255) COLLATE utf8_general_ci NOT NULL,	
+	organisation varchar(255) COLLATE utf8_general_ci NOT NULL,	
+	mailbody mediumtext,
+	PRIMARY KEY (uid)
+	
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;

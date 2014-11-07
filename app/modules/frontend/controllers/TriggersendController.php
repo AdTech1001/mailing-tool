@@ -1,6 +1,7 @@
 <?php
 namespace nltool\Modules\Modules\Frontend\Controllers;
-use nltool\Models\Sendoutobjects;
+use nltool\Models\Sendoutobjects,
+	nltool\Models\Mailqueue;
 /**
  * Class TriggersendController
  *
@@ -26,29 +27,68 @@ class TriggersendController extends Triggerauth
 			$time=time();
 			//find mailings which are due
 			$mailings= Sendoutobjects::find(array(
-				"conditions" => "deleted=0 AND hidden=0 AND reviewed=1 AND cleared=1 AND inprogress=0 AND sent=0 AND tstamp <= ?1",
+				"conditions" => "deleted=0 AND hidden=0 AND reviewed=1 AND cleared=1  AND sent=0 AND tstamp <= ?1",
 				"bind" => array(1 => $time),
 				"order" => "tstamp ASC"
 			));
 			
 			foreach($mailings AS $mailing){
-					$addressConditions=$mailing->getAddressconditions();
-					/*TODO FORM QUERY FROM CONDITIONS*/
-					$adressFolder=$mailing->getAddressfolder();
-					$addresses=$adressFolder->getAddresses();
-					$configuration=$mailing->getConfiguration();					
-					$bodyRaw=file_get_contents('../public/mails/mailobject_'.$mailing->mailobjectuid.'.html');
-					
-					foreach($addresses as $address){
-						$body=$this->renderVars($bodyRaw,$address);
-						$message = \Swift_Message::newInstance($mailing->subject)
-									->setFrom(array($configuration->sendermail => $configuration->sendername));
-						$message->setBody($body, 'text/html');
-						$message->setTo(array($address->email => $address->first_name.' '.$address->last_name));
+				$addressConditions=$mailing->getAddressconditions();
+				/*TODO FORM QUERY FROM CONDITIONS*/
+				$adressFolder=$mailing->getAddressfolder();
+				$addresses=$adressFolder->getAddresses();
+				$configuration=$mailing->getConfiguration();					
+				$bodyRaw=file_get_contents('../public/mails/mailobject_'.$mailing->mailobjectuid.'.html');
 
-					  //pull the trigger
-					  $mailer->send($message, $failures);
+				
+				if($mailing->inprogress==0){
+					// First build up Mailqueue, then Mail
+					$mailing;//UPDATE inprogress=1
+					foreach($addresses as $address){						
+						$body=$this->renderVars($bodyRaw,$address);
+						$mailqueueobject=new Mailqueue();
+						$mailqueueobject->assign(array(
+							"pid"=>0,
+							"tstamp"=>0,
+							"crdate"=>$time,
+							"deleted"=>0,
+							"hidden"=>0,
+							"sent"=>0,
+							"campaignuid"=>$mailing->campaignuid,
+							"mailobjectuid"=>$mailing->mailobjectuid,
+							"configurationuid"=>$mailing->configurationuid,
+							"email"=>$address->email,
+							"subject"=>$mailing->subject,
+							"sendermail"=>$configuration->sendermail,
+							"sendername"=>$configuration->sendername,
+							"answermail"=>$configuration->answermail,
+							"answername"=>$configuration->answername,
+							"returnpath"=>$configuration->returnpath,
+							"organisation"=>$configuration->answermail
+							));
+						$mailqueueobject->save();
+						 if (!$mailqueueobject->save()) {
+							$this->flash->error($mailqueueobject->getMessages());
+						}
 					}
+				}else{
+					//Mailqueue abarbeiten
+					foreach($addresses as $address){
+					
+					/*$message = \Swift_Message::newInstance($mailing->subject)
+								->setSender(array($configuration->sendermail => $configuration->sendername))
+								->setReplyTo($configuration->answermail)
+								->setReturnPath($configuration->returnpath);
+					$message->setBody($body, 'text/html');
+					$message->setTo(array($address->email => $address->first_name.' '.$address->last_name));
+
+				  //pull the trigger
+				  $mailer->send($message, $failures);*/
+				}
+				}
+
+
+				
 			}
 			
 			
