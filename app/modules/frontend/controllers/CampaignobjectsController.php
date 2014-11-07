@@ -188,6 +188,10 @@ class CampaignobjectsController extends ControllerBase
 						'usergroup' =>$this->session->get('auth')['usergroup'],
 						'deleted' =>0,
 						'hidden' => 0,
+						'reviewed'=>0,
+						'cleared'=>0,
+						'inprogress'=>0,
+						'sent'=>0,
 						'campaignuid'=>$campaignobjectRecord->uid,						
 						'mailobjectuid'=>intval($rawArray['mailobjectuid']),
 						'configurationuid'=>intval($rawArray['configurationuid']),
@@ -214,6 +218,10 @@ class CampaignobjectsController extends ControllerBase
 							'usergroup' =>$this->session->get('auth')['usergroup'],
 							'deleted' =>0,
 							'hidden' => 0,
+							'reviewed'=>0,
+							'cleared'=>0,
+							'inprogress'=>0,
+							'sent'=>0,
 							'campaignuid'=>$campaignobjectRecord->uid,						
 							'mailobjectuid'=>$sendoutobject->mailobjectuid,
 							'configurationuid'=>$rawArray['configurationuidB'],
@@ -238,14 +246,17 @@ class CampaignobjectsController extends ControllerBase
 								'usergroup' =>$this->session->get('auth')['usergroup'],
 								'deleted' =>0,
 								'hidden' => 0,
-								'junctor' => $conditionArray[0]['value'],
-								'conditionaloperator' => $conditionArray[1]['value'],
-								'argument',
-								'operator',
-								'argumentcondition'
+								'junctor' => intval($conditionArray[0]['value']),
+								'conditionaloperator' => intval($conditionArray[1]['value']),
+								'argument' => intval($conditionArray[2]['value']),
+								'operator'=> intval($conditionArray[3]['value']),
+								'argumentcondition' => $conditionArray[3]['value']
 								
 								
 							));
+							if(!$addressconditions->save()){
+								$this->flash->error($addressconditions->getMessages());
+							}
 							
 						}
 					}

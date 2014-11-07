@@ -3,7 +3,7 @@
 namespace nltool\Modules\Modules\Frontend\Controllers;
 use Phalcon\Mvc\Controller as Controller,
 	Phalcon\Mvc\Dispatcher;
-use Phalcon\Mvc\Micro\MiddlewareInterface;
+
 
 class Triggerauth extends Controller
 {

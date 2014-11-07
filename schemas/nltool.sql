@@ -378,6 +378,8 @@ CREATE TABLE sendoutobjects (
 	hidden tinyint(4) DEFAULT '0' NOT NULL,
 	reviewed tinyint(4) DEFAULT '0' NOT NULL,
 	cleared tinyint(4) DEFAULT '0' NOT NULL,
+	inprogress tinyint(4) DEFAULT '0' NOT NULL,
+	sent tinyint(4) DEFAULT '0' NOT NULL,
 	usergroup int(11) DEFAULT '0' NOT NULL,
 	campaignuid int(11) DEFAULT '0' NOT NULL,
 	mailobjectuid int(11) DEFAULT '0' NOT NULL,

@@ -7,7 +7,7 @@ use nltool\Models\Mailobjects as Mailobjects;
  *
  * @package baywa-nltool\Controllers
  */
-class SendoutobjectController extends ControllerBase
+class SendoutobjectsController extends ControllerBase
 {
 
     /**
