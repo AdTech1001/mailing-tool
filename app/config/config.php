@@ -29,12 +29,14 @@ return new \Phalcon\Config(array(
 		'version' => '0.1 Alpha'
     ),    
     'smtp'        => array(
-        'host'     => "",
+        'host'     => "smtp.iq-pi.org",
         'port'     => 25,
         'security' => "tls",
-        'username' => "",
-        'password' => ""
+        'username' => "mailing@iq-pi.org",
+        'password' => "hpkYhxr&mdm7",
+		'mailcycle' => 300
     ),
+	
 	'languages'=>array(
 		'de' => 'Deutsch',
 		'en' => 'English'

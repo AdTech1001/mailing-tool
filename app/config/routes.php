@@ -19,10 +19,31 @@ $router->add(
 );
 
 $router->add(
-	'/triggersend[/]{0,1}', 
+	'/linkreferer/:int/:int[/]{0,1}', 
+	array(		
+		'uid' => 1,
+		'addressuid'=>2,
+		'controller' => "linkreferer",
+		'action' => "index",		
+		'module'=>'frontend',
+		'namespace'  => 'nltool\Modules\Modules\Frontend\Controllers'
+	)
+);
+$router->add(
+	'/triggersend/generate[/]{0,1}', 
 	array(		
 		'controller' => "triggersend",
-		'action' => "index",		
+		'action' => "generate",		
+		'module'=>'frontend',
+		'namespace'  => 'nltool\Modules\Modules\Frontend\Controllers'
+	)
+);
+
+$router->add(
+	'/triggersend/send[/]{0,1}', 
+	array(		
+		'controller' => "triggersend",
+		'action' => "send",		
 		'module'=>'frontend',
 		'namespace'  => 'nltool\Modules\Modules\Frontend\Controllers'
 	)

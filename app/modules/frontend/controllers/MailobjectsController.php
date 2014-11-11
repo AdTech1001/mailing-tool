@@ -225,7 +225,7 @@ class MailobjectsController extends ControllerBase
 			));
 			$mailBody=$this->writeContentElements($bodyRaw, $contentObjects);
 			$mainTemplate=  file_get_contents($mainTemplateFile);
-			$mail=$this->renderMain($mainTemplate,$mailBody);
+			$mail=$this->renderMain($mainTemplate,$mailBody);			
 			file_put_contents($generatedMailformFile, $mail);
 			$this->view->setVar('compiledTemplatebodyRaw',$bodyRaw);
 			$this->view->setVar('mailobjectuid',$mailObjectUid);

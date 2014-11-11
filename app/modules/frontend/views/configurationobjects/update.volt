@@ -32,6 +32,9 @@
 	 {{ form.render("htmlplain") }}
 	 {{form.render('uid')}}
 	 <br><br>
+<label>{{ tr('confclicktrackingLabel') }}</label><br>
+	 {{ form.render("clicktracking") }}
+	 <br><br>		 
     {{ submit_button(tr('ok')) }}
 
 </form>

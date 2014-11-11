@@ -31,6 +31,9 @@
 <label>{{ tr('confhtmlplainLabel') }}</label><br>
 	 {{ select("htmlplain",  [ '0' : tr('html'), '1' : tr('plain'), '2' : tr('both')]) }}
 	 <br><br>
+<label>{{ tr('confclicktrackingLabel') }}</label><br>
+	 {{ select("clicktracking", [ '1' : tr('active'), '0' : tr('inactive')], 'value':1) }}
+	 <br><br>	 
 	 {{ submit_button(tr('ok')) }}
 
 </form>

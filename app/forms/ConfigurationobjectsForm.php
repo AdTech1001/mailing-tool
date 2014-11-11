@@ -124,6 +124,12 @@ class ConfigurationobjectsForm extends Form
             '1' => ControllerBase::translate('plain'),
 			'2' => ControllerBase::translate('both')
         )));
+		
+		$this->add(new Select('clicktracking', array(
+            '1' => ControllerBase::translate('active'),
+            '0' => ControllerBase::translate('inactive')
+			
+        )));
 
         
 

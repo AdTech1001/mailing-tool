@@ -16,12 +16,15 @@ class Triggerauth extends Controller
 				
 				$result=$this->oauth->getGrantType('client_credentials')->completeFlow($params);
 				
-				var_dump($result);
+				
 					
 				
 			} catch (\League\OAuth2\Server\Exception\ClientException $e) {
 				
 				echo $e->getMessage();
+				$environment= $this->config['application']['debug'] ? 'development' : 'production';
+				$baseUri=$this->config['application'][$environment]['staticBaseUri'];
+				echo('<img src="'.$baseUri.'images/cowboy-shaking-head.gif" style="position:absolute;top:40%;left:40%;">');
 				$this->response->sendHeaders();
 				return false;
 			} catch (\Exception $e) {

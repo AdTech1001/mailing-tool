@@ -36,7 +36,7 @@ class ConfigurationobjectsController extends ControllerBase
 			echo($returnJson);
 			die();
 		}else{
-			
+			 
 		$environment= $this->config['application']['debug'] ? 'development' : 'production';
 		$baseUri=$this->config['application'][$environment]['staticBaseUri'];
 		$path=$baseUri.$this->view->language.'/configurationobjects/update/';
@@ -73,7 +73,8 @@ class ConfigurationobjectsController extends ControllerBase
 				'answername' => $this->request->getPost('answername','striptags'),
 				'returnpath' => $this->request->getPost('returnpath','email'),
 				'organisation' => $this->request->getPost('organisation','striptags'),
-				'htmlplain' => $this->request->getPost('htmlplain','int')
+				'htmlplain' => $this->request->getPost('htmlplain','int'),
+				'clicktracking' => $this->request->getPost('clicktracking','int')
 			));
 		
 		 $configurationobject->save();
@@ -102,7 +103,8 @@ class ConfigurationobjectsController extends ControllerBase
 				'answername' => $this->request->getPost('answername','striptags'),
 				'returnpath' => $this->request->getPost('returnpath','email'),
 				'organisation' => $this->request->getPost('organisation','striptags'),
-				'htmlplain' => $this->request->getPost('htmlplain','int')
+				'htmlplain' => $this->request->getPost('htmlplain','int'),
+				'clicktracking' => $this->request->getPost('clicktracking','int')
 			));
 			 if (!$configurationobjectRecord->save()) {
                 $this->flash->error($configurationobjectRecord->getMessages());

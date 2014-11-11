@@ -156,7 +156,7 @@ class AddressesController extends ControllerBase
 							if($data==false && $insStr!=''){
 
 									$insStr=substr($insStr,0,-1);
-									var_dump("INSERT INTO Addresses ".$insField." VALUES ".$insStr);
+									
 									$this->di->get('db')->query("INSERT INTO Addresses ".$insField." VALUES ".$insStr);
 
 							}

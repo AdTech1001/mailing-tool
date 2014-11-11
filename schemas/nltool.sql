@@ -417,6 +417,7 @@ CREATE TABLE configurationobjects (
 	returnpath varchar(255) COLLATE utf8_general_ci NOT NULL,	
 	organisation varchar(255) COLLATE utf8_general_ci NOT NULL,	
 	htmlplain tinyint(4) DEFAULT '0' NOT NULL,
+	clicktracking tinyint(4) DEFAULT '1' NOT NULL,
 	PRIMARY KEY (uid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -538,7 +539,9 @@ CREATE TABLE mailqueue (
 	deleted tinyint(4) DEFAULT '0' NOT NULL,
 	hidden tinyint(4) DEFAULT '0' NOT NULL,	
 	sent tinyint(4) DEFAULT '0' NOT NULL,	
+	addressuid int(11) DEFAULT '0' NOT NULL,
 	campaignuid int(11) DEFAULT '0' NOT NULL,
+	sendoutobjectuid int(11) DEFAULT '0' NOT NULL,
 	mailobjectuid int(11) DEFAULT '0' NOT NULL,
 	configurationuid int(11) DEFAULT '0' NOT NULL,
 	email varchar(255) COLLATE utf8_general_ci NOT NULL,		
@@ -552,4 +555,34 @@ CREATE TABLE mailqueue (
 	mailbody mediumtext,
 	PRIMARY KEY (uid)
 	
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+DROP TABLE IF EXISTS linklookup;
+CREATE TABLE linklookup(
+	uid int(11) NOT NULL auto_increment,
+	pid int(11) DEFAULT '0' NOT NULL,	
+	tstamp int(11) DEFAULT '0' NOT NULL,
+	crdate int(11) DEFAULT '0' NOT NULL,	
+	deleted tinyint(4) DEFAULT '0' NOT NULL,
+	hidden tinyint(4) DEFAULT '0' NOT NULL,	
+	campaignuid int(11) DEFAULT '0' NOT NULL,
+	mailobjectuid int(11) DEFAULT '0' NOT NULL,
+	sendoutobjectuid int(11) DEFAULT '0' NOT NULL,
+	url text,
+	addressuid int(11) DEFAULT '0' NOT NULL,
+	PRIMARY KEY (uid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+
+DROP TABLE IF EXISTS linkclicks;
+CREATE TABLE linkclicks(
+	uid int(11) NOT NULL auto_increment,
+	pid int(11) DEFAULT '0' NOT NULL,	
+	tstamp int(11) DEFAULT '0' NOT NULL,
+	crdate int(11) DEFAULT '0' NOT NULL,	
+	deleted tinyint(4) DEFAULT '0' NOT NULL,
+	hidden tinyint(4) DEFAULT '0' NOT NULL,	
+	linkuid int(11) DEFAULT '0' NOT NULL,
+	addressuid int(11) DEFAULT '0' NOT NULL,	
+	PRIMARY KEY (uid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
