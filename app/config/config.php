@@ -25,7 +25,7 @@ return new \Phalcon\Config(array(
             'staticBaseUri' => '/',
             'baseUri'       => '/'
         ),
-        'debug'          => false,
+        'debug'          => true,
 		'version' => '0.9 Alpha'
     ),    
     'smtp'        => array(
