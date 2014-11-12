@@ -25,8 +25,8 @@ return new \Phalcon\Config(array(
             'staticBaseUri' => '/',
             'baseUri'       => '/'
         ),
-        'debug'          => true,
-		'version' => '0.1 Alpha'
+        'debug'          => false,
+		'version' => '0.9 Alpha'
     ),    
     'smtp'        => array(
         'host'     => "smtp.iq-pi.org",
@@ -46,7 +46,7 @@ return new \Phalcon\Config(array(
 			'adapter'  => 'Mysql',
 			'host'     => 'nltool.mysql.eu1.frbit.com',
 			'username' => 'nltool',
-			'password' => 'CT7WnO8qobDDUwW8',
+			'password' => 'ab9b03uQYRb_0lly',
 			'dbname'   => 'nltool',
 			'charset'  => 'utf8'
 		),
