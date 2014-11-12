@@ -111,12 +111,14 @@ class TriggersendController extends Triggerauth
 	}
 	
 	public function sendAction(){
+		
 		if(!$this->request->isPost()){
 			
 			$mailing= Sendoutobjects::findFirst(array(
 				"conditions" => "deleted=0 AND hidden=0 AND inprogress=1 AND reviewed=1 AND cleared=1  AND sent=0",				
 				"order" => "tstamp ASC"
 			));
+		
 			if($mailing){
 			$configuration=$mailing->getConfiguration();
 			$mailqueue=$mailing->getMailqueue(array(
@@ -124,7 +126,7 @@ class TriggersendController extends Triggerauth
 				"order" => "uid ASC",
 				"limit" => $this->config['smtp']['mailcycle']
 			));
-								
+			
 			$bodyRaw=file_get_contents('../public/mails/mailobject_'.$mailing->mailobjectuid.'.html');
 			if($configuration->clicktracking==1){
 						$bodyRaw=$this->writeClicktrackingLinks($bodyRaw,$mailing);
@@ -132,11 +134,10 @@ class TriggersendController extends Triggerauth
 			$counter=0;
 			foreach($mailqueue as $mailqueueElement){				
 				$address=$mailqueueElement->getAddress();
-				$transport = \Swift_SmtpTransport::newInstance($this->config['smtp']['host'],$this->config['smtp']['port'] )->setUsername($this->config['smtp']['username'])->setPassword($this->config['smtp']['password']);
+				
 			
 			
-				$mailer = \Swift_Mailer::newInstance($transport);
-				$mailer->registerPlugin(new \Swift_Plugins_AntiFloodPlugin(100,30));
+				
 				//Mailqueue abarbeiten
 
 				$body=$this->renderVars($bodyRaw,$address);
@@ -145,6 +146,10 @@ class TriggersendController extends Triggerauth
 				}else{
 					$bodyFinal=$body;
 				}
+				
+				 $transport = \Swift_SmtpTransport::newInstance($this->config['smtp']['host'],$this->config['smtp']['port'] )->setUsername($this->config['smtp']['username'])->setPassword($this->config['smtp']['password']);
+				$mailer = \Swift_Mailer::newInstance($transport);
+				$mailer->registerPlugin(new \Swift_Plugins_AntiFloodPlugin(100,30));
 				$message = \Swift_Message::newInstance($mailing->subject)
 							->setSender(array($configuration->sendermail => $configuration->sendername))
 							->setFrom(array($configuration->sendermail => $configuration->sendername))
@@ -157,10 +162,10 @@ class TriggersendController extends Triggerauth
 					"sent"=>1
 					
 				));
-				$mailqueueElement->save();
+				
 				//pull the trigger
 				$mailer->send($message, $failures);
-				
+				$mailqueueElement->save();
 				$counter++;
 			}
 			//Was wenn genau durch $this->config['smtp']['mailcycle'] teilbar?
@@ -203,8 +208,10 @@ class TriggersendController extends Triggerauth
 				"addressuid"=>0
 			));
 			$jumplink->save();
-			return $matches[1].'http://'.$this->request->getHttpHost().$this->baseUri.'/linkreferer/'.$jumplink->uid.$matches[3];
+			return $matches[1].'http://'.$this->request->getHttpHost().$this->baseUri.'linkreferer/'.$jumplink->uid.$matches[3];
 		},$body);
+		
+		
 		return $renderedbody;
 	}
 	
@@ -212,18 +219,19 @@ class TriggersendController extends Triggerauth
 				
 		$this->addressuid=$addressuid;
 		$environment= $this->config['application']['debug'] ? 'development' : 'production';
-		$this->baseUri=$this->config['application'][$environment]['staticBaseUri'];
-		
-		$renderedbody=preg_replace_callback('/(<a\s[^>]*href=\")([http|https][^\"]*)(\"[^>]*>)/siU', 'self::renderFinalCallback' ,$body);
-		return $renderedbody;
-		
-		
+		$this->baseUri=$this->config['application'][$environment]['staticBaseUri'];		
+		$renderedbody=preg_replace_callback('/(<a\s[^>]*href=\")([http|https][^\"]*)(\"[^>]*>)/siU', 'self::renderFinalCallback' ,$body);		
+		$finalizedBody=preg_replace_callback('/<body[^>]*>/im',"self::addOpenmailerBlankImage",$renderedbody);
+				
+		return $finalizedBody;				
 	}
 	
-	private function renderFinalCallback($matches){
-			
-			
+	private function renderFinalCallback($matches){						
 			return $matches[1].$matches[2].'/'.$this->addressuid.$matches[3];
+	}
+	
+	private function addOpenmailerBlankImage($matches){
+		return $matches[0].'<img width="1" height="1" src="'.'http://'.$this->request->getHttpHost().$this->baseUri.'linkreferer/open/'.$this->mailing->uid.'/'.$this->addressuid.'">';
 	}
 	
 	private function renderVars($body,$address){

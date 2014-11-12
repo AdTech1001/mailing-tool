@@ -19,7 +19,7 @@
         <?php echo $this->tag->stylesheetLink('css/main.css'); ?>     
 		<?php echo $this->assets->outputCss(); ?>
 		<?php echo $this->tag->javascriptInclude('js/vendor/modernizr-2.6.2.min.js'); ?>     
-		<script data-main="/baywa-nltool/js/plugins" src="/baywa-nltool/js/require.js"></script>
+		<script data-main="<?php echo $baseurl; ?>public/js/vendor/plugins" src="<?php echo $baseurl; ?>js/require.js"></script>
 		<?php echo $this->assets->outputJs(); ?>
 		
 	
@@ -37,6 +37,6 @@
 		</div>
 		
        
-       
+		<input id="baseurl" value="<?php echo $baseurl; ?>" type="hidden">
     </body>
 </html>

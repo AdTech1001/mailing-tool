@@ -30,6 +30,29 @@ $router->add(
 	)
 );
 $router->add(
+	'/linkreferer/:int[/]{0,1}', 
+	array(		
+		'uid' => 1,		
+		'controller' => "linkreferer",
+		'action' => "index",		
+		'module'=>'frontend',
+		'namespace'  => 'nltool\Modules\Modules\Frontend\Controllers'
+	)
+);
+
+$router->add(
+	'/linkreferer/open/:int/:int[/]{0,1}', 
+	array(		
+		'sendoutobjectuid' => 1,
+		'addressuid'=>2,
+		'controller' => "linkreferer",
+		'action' => "open",		
+		'module'=>'frontend',
+		'namespace'  => 'nltool\Modules\Modules\Frontend\Controllers'
+	)
+);
+
+$router->add(
 	'/triggersend/generate[/]{0,1}', 
 	array(		
 		'controller' => "triggersend",

@@ -1,5 +1,5 @@
 
-
+var baseurl=document.getElementById('baseurl').value;
 function init(jQuery){
 	jQuery('.container').append('<div id="loadingimg"><h3>Einen Moment bitte</h3><div><img src="/baywa-nltool/images/ajax-loader.gif"></div></<div>');
 	jQuery('body').append('<div id="tooltipOverlay"></div>');
@@ -81,7 +81,7 @@ var ajaxIt=function(controller,action,formdata,successhandler, parameters){
 	}
 
 	jQuery.ajax({
-		url: '/baywa-nltool/'+controller+'/'+action+parameters,
+		url: baseurl+'/'+controller+'/'+action+parameters,
 		cache: false,
 		async: true,
 		data: formdata,   

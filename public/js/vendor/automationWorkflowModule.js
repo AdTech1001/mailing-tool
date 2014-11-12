@@ -509,7 +509,7 @@ var selectConfigurationobject= function(data){
 			document.getElementById('abtestChecker').checked=true;
 			jQuery('#btestForm').removeClass('hidden');
 		}
-		jQuery('#adresslistSelect').val(jQuery(activeElCurState[8]).val());
+		jQuery('#addressfoldersSelectElements').val(jQuery(activeElCurState[8]).val());
 		
 		
 		
