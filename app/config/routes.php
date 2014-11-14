@@ -185,6 +185,16 @@ $router->add(
 	)
 );
 
+$router->add(
+	'/addresses/:action[/]{0,1}', 
+	array(	
+		'controller' => 'addresses',
+		'action' => 1,
+		'module'=>'frontend',
+		'namespace'  => 'nltool\Modules\Modules\Frontend\Controllers',
+	)
+);
+
 
 
 $router->add(

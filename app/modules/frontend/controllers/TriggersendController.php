@@ -80,7 +80,7 @@ class TriggersendController extends Triggerauth
 					if($counter%1000==0 && $counter !=0){
 
 						$insStr=substr($insStr,0,-1);
-						file_put_contents('log.txt', "INSERT INTO Mailqueue ".$insField." VALUES ".$insStr);
+						//file_put_contents('log.txt', "INSERT INTO Mailqueue ".$insField." VALUES ".$insStr);
 						$this->di->get('db')->query("INSERT INTO Mailqueue ".$insField." VALUES ".$insStr);
 						$insStr="";
 					}

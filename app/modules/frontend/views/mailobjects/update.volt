@@ -74,7 +74,18 @@
 	
 </div>	
 <div id="viewFrame" style="display:none">
-	<iframe id="mailobjectFrame" style="border:1px solid; background:#e3e3e3;width:80%; min-height:100%;" src="{{ source }}" ></iframe>
+	<div class="glyphicon glyphicon-remove" id="closePrev"></div>
+	<div id="deviceSelectBar">
+			<ul>
+				<li class="active"><img src="{{baseurl}}public/images/device-icon-desktop.png"></li>
+				<li><img src="{{baseurl}}public/images/device-icon-laptopt.png"></li>
+				<li><img src="{{baseurl}}public/images/device-icon-tablet-vert.png"></li>
+				<li><img src="{{baseurl}}public/images/device-icon-tablet-hor.png"></li>
+				<li><img src="{{baseurl}}public/images/device-icon-smartphone-vert.png"></li>
+				<li><img src="{{baseurl}}public/images/device-icon-smartphone-hor.png"></li>
+			</ul>
+	</div>
+	<iframe id="mailobjectFrame" style="border:1px solid; background:#e3e3e3;width:100%;height:100%;" src="{{ source }}" ></iframe>
 </div>
 <div id="deleteOverlay" class="hidden" title="{{ tr('delete')}} "><span class='glyphicon glyphicon-remove'></span></div>
 <input type="hidden" id="salutationTitle" value="{{tr('salutation')}}">

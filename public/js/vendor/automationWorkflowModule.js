@@ -473,6 +473,10 @@ jQuery('#mailobjectSelect button.abort').click(function(e){
 	jQuery('#btestForm').addClass('hidden');
 });
 
+jQuery('#conditionsModelerSelect button.abort').click(function(e){
+	jQuery('#conditionsModelerSelect').addClass('hidden');
+});
+
 
 var selectConfigurationobject= function(data){
 	var jsObject= JSON.parse(data);

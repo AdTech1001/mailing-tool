@@ -152,7 +152,10 @@ $messages = array(
 	"tabs" => "tab",
 	"deleteAllExistingAddresses" => "delete all existing entries",
 	"addressFolderSelectLabel" => "address folder",
-	"addressFolderNewLabel" => "create new address folder"
+	"addressFolderNewLabel" => "create new address folder",
+	"addresses"=>"addresses",
+	"addressesCreate"=>"create address",
+	"addressesRetrieve"=> "manage addresses"
 	
 );
 

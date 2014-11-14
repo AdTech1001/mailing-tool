@@ -393,6 +393,7 @@ CREATE TABLE sendoutobjects (
 	subject varchar(255) COLLATE utf8_general_ci NOT NULL,	
 	abtest tinyint(4) DEFAULT '0' NOT NULL,
 	segmentobjectuid int(11) DEFAULT '0' NOT NULL,
+	domid varchar(255) COLLATE utf8_general_ci NOT NULL,	
 	PRIMARY KEY (uid),
 	KEY campaignuid (campaignuid),
 	KEY mailobjectuid (mailobjectuid)

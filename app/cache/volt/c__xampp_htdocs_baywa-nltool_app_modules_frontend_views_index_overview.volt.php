@@ -35,13 +35,31 @@
 			<li><?php echo $this->tag->linkTo(array($language . '/configurationobjects/index/', '<span class="glyphicon glyphicon-list"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('configurationobjectsRetrieve'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('configurationobjectsRetrieve'))); ?></li>
 			</ul>
 		</div>
-		<div class="module_el hidden">
+		<div class="module_el">
 			<h2><?php echo $this->tag->linkTo(array($language . '/contentobjects/', '<span class="glyphicon glyphicon-envelope"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('contentobjects'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('contentobjects'))); ?>
 			</h2>
 			<ul>
 			<li><?php echo $this->tag->linkTo(array($language . '/contentobjects/create/', '<span class="glyphicon glyphicon-edit"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('contentobjectsCreate'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('contentobjectsCreate'))); ?></li>
 			<li><?php echo $this->tag->linkTo(array($language . '/contentobjects/index/', '<span class="glyphicon glyphicon-pencil"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('contentobjectsRetrieve'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('contentobjectsRetrieve'))); ?></li>
 			<li><?php echo $this->tag->linkTo(array($language . '/contentobjects/templates/', '<span class="glyphicon glyphicon-pencil"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('contentobjectsTemplates'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('contentobjectsTemplates'))); ?></li>
+			</ul>
+		</div>
+		<div class="module_el">
+			<h2><?php echo $this->tag->linkTo(array($language . '/addresses/', '<span class="glyphicon glyphicon-envelope"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('addresses'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('addresses'))); ?>
+			</h2>
+			<ul>
+			<li><?php echo $this->tag->linkTo(array($language . '/addresses/create/', '<span class="glyphicon glyphicon-edit"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('addressesCreate'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('addressesCreate'))); ?></li>
+			<li><?php echo $this->tag->linkTo(array($language . '/addresses/index/', '<span class="glyphicon glyphicon-pencil"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('addressesRetrieve'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('addressesRetrieve'))); ?></li>
+			
+			</ul>
+		</div>
+		<div class="module_el">
+			<h2><?php echo $this->tag->linkTo(array($language . '/addresses/', '<span class="glyphicon glyphicon-envelope"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('addresses'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('addresses'))); ?>
+			</h2>
+			<ul>
+			<li><?php echo $this->tag->linkTo(array($language . '/addresses/create/', '<span class="glyphicon glyphicon-edit"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('addressesCreate'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('addressesCreate'))); ?></li>
+			<li><?php echo $this->tag->linkTo(array($language . '/addresses/index/', '<span class="glyphicon glyphicon-pencil"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('addressesRetrieve'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('addressesRetrieve'))); ?></li>
+			
 			</ul>
 		</div>
 		

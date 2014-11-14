@@ -153,6 +153,9 @@ $messages = array(
 	"tabs" => "Tab",
 	"deleteAllExistingAddresses" => "Alle vorhandenen Einträge löschen",
 	"addressFolderSelectLabel" => "Adressordner",
-	"addressFolderNewLabel" => "neuer Adressordner"
+	"addressFolderNewLabel" => "neuer Adressordner",
+	"addresses"=>"Adressaten",
+	"addressesCreate"=>"Adressaten erstellen",
+	"addressesRetrieve"=> "Adressaten verwalten"
 );
 ?>

@@ -1,24 +1,26 @@
-
-
-
 jQuery(document).ready(function(e){
-	var dt = jQuery('#calender').dataTable( {
+	var folderuid=jQuery('#folderuid').val();
+	console.log(baseurl);
+	var dt = jQuery('#adressfolderTable').dataTable({
 	        "bProcessing": true,	        
-	        "sAjaxSource": "addresses/index/",
+	        "sAjaxSource": baseurl+"addresses/index/",
 	        "bServerSide": true,        
 	        "sServerMethod": 'POST',
 	        "oLanguage": {
          		"sSearch": "Suchen:",
          		"sLengthMenu": "_MENU_ Einträge anzeigen",
-         		"sInfo": "Es werden Einträge _START_ bis _END_ von insgesamt _TOTAL_ angezeigt",
-         		"sInfoEmpty": "keine passenden Veranstaltungen gefunden",
+         		/*"sInfo": "Es werden Einträge _START_ bis _END_ von insgesamt _TOTAL_ angezeigt",
+         		"sInfoEmpty": "keine passenden Veranstaltungen gefunden",*/
          		"sInfoFiltered":"(gefiltert von _MAX_  Einträgen)",
          		"oPaginate":{
          			"sPrevious" : "Vorherige",
          			"sNext" : "Nächste"
          			}
-       		}
+       		},
+			 "fnServerParams": function ( aoData ) {
+				 
+				 aoData.push( { "name": "folderuid","value":folderuid} );
+			 }
 		});
+		
 });
-
-

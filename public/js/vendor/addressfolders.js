@@ -3,7 +3,7 @@ jQuery(document).ready(function(e){
 	
 	var dt = jQuery('#adressfolderTable').dataTable({
 	        "bProcessing": true,	        
-	        "sAjaxSource": "/baywa-nltool/addressfolders/update/",
+	        "sAjaxSource": baseurl+"addressfolders/update/",
 	        "bServerSide": true,        
 	        "sServerMethod": 'POST',
 	        "oLanguage": {

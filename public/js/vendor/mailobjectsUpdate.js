@@ -84,6 +84,10 @@ jQuery('document').ready(function(){
 	/*jQuery('.editable p, .editable a, .editable img, .editable h1, .editable h2, .editable h3, .editable h4, .editable h5, .editable h6').each(function(index,element){
 		jQuery(element).attr('contenteditable','true');
 	});*/
+	
+	jQuery('#closePrev').click(function(e){
+		jQuery('#viewFrame').hide();
+	});
 	jQuery('#templatedCElements .cElementThumb').each(function(index,element){
 		jQuery(element).draggable({
 			appendTo: "#desktop",			
@@ -246,6 +250,15 @@ jQuery('document').ready(function(){
 	});
 	jQuery('#mailobjectPreview').click(function(e){
 		jQuery('#viewFrame').show();
+		
+	});
+	
+	jQuery('#deviceSelectBar ul li').click(function(e){
+		var elem=jQuery(this).index();
+		jQuery('#deviceSelectBar ul li').removeClass('active');
+		jQuery(this).addClass('active');
+		var deviceMap={0:{"width":1920,"height":1080},1:{"width":1320,"height":800},2:{"width":768,"height":1024},3:{"width":1024,"height":768},4:{"width":320,"height":568},5:{"width":568,"height":320}};
+		jQuery('#mailobjectFrame').width(deviceMap[elem].width).height(deviceMap[elem].height);
 		
 	});
 	

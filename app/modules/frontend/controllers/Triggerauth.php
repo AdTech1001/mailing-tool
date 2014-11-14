@@ -11,6 +11,8 @@ class Triggerauth extends Controller
 	
 		public function beforeExecuteRoute(Dispatcher $dispatcher)
 	{
+			$environment= $this->config['application']['debug'] ? 'development' : 'production';
+				$baseUri=$this->config['application'][$environment]['staticBaseUri'];
 			try {
 				$params = $this->oauth->getParam(array('client_id', 'client_secret'));
 				
@@ -22,8 +24,7 @@ class Triggerauth extends Controller
 			} catch (\League\OAuth2\Server\Exception\ClientException $e) {
 				
 				echo $e->getMessage();
-				$environment= $this->config['application']['debug'] ? 'development' : 'production';
-				$baseUri=$this->config['application'][$environment]['staticBaseUri'];
+				
 				echo('<img src="'.$baseUri.'images/cowboy-shaking-head.gif" style="position:absolute;top:40%;left:40%;">');
 				$this->response->sendHeaders();
 				return false;
@@ -34,6 +35,6 @@ class Triggerauth extends Controller
 				return false;
 			}
 			
-			
+			$this->view->setVar('baseurl', $baseUri);
 	}
 }

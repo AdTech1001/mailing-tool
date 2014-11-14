@@ -35,13 +35,31 @@
 			<li>{{ link_to(language~'/configurationobjects/index/', '<span class="glyphicon glyphicon-list"></span> '~tr('configurationobjectsRetrieve'), 'title': tr('configurationobjectsRetrieve')) }}</li>
 			</ul>
 		</div>
-		<div class="module_el hidden">
+		<div class="module_el">
 			<h2>{{ link_to(language~'/contentobjects/', '<span class="glyphicon glyphicon-envelope"></span> '~tr('contentobjects'), 'title': tr('contentobjects')) }}
 			</h2>
 			<ul>
 			<li>{{ link_to(language~'/contentobjects/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('contentobjectsCreate'), 'title': tr('contentobjectsCreate')) }}</li>
 			<li>{{ link_to(language~'/contentobjects/index/', '<span class="glyphicon glyphicon-pencil"></span> '~tr('contentobjectsRetrieve'), 'title': tr('contentobjectsRetrieve')) }}</li>
 			<li>{{ link_to(language~'/contentobjects/templates/', '<span class="glyphicon glyphicon-pencil"></span> '~tr('contentobjectsTemplates'), 'title': tr('contentobjectsTemplates')) }}</li>
+			</ul>
+		</div>
+		<div class="module_el">
+			<h2>{{ link_to(language~'/addresses/', '<span class="glyphicon glyphicon-envelope"></span> '~tr('addresses'), 'title': tr('addresses')) }}
+			</h2>
+			<ul>
+			<li>{{ link_to(language~'/addresses/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('addressesCreate'), 'title': tr('addressesCreate')) }}</li>
+			<li>{{ link_to(language~'/addresses/index/', '<span class="glyphicon glyphicon-pencil"></span> '~tr('addressesRetrieve'), 'title': tr('addressesRetrieve')) }}</li>
+			
+			</ul>
+		</div>
+		<div class="module_el">
+			<h2>{{ link_to(language~'/addresses/', '<span class="glyphicon glyphicon-envelope"></span> '~tr('addresses'), 'title': tr('addresses')) }}
+			</h2>
+			<ul>
+			<li>{{ link_to(language~'/addresses/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('addressesCreate'), 'title': tr('addressesCreate')) }}</li>
+			<li>{{ link_to(language~'/addresses/index/', '<span class="glyphicon glyphicon-pencil"></span> '~tr('addressesRetrieve'), 'title': tr('addressesRetrieve')) }}</li>
+			
 			</ul>
 		</div>
 		

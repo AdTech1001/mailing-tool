@@ -149,7 +149,7 @@ class CampaignobjectsController extends ControllerBase
 	
 	private function removePreviousObjectsFromCampaign($campaignobjectUid){
 		$sendoutobjectRecords=  Sendoutobjects::find(array(
-				"conditions" => "deleted = 0 AND hidden =0 AND campaignuid = ?1",
+				"conditions" => "deleted = 0 AND hidden =0 AND inprogress=0 AND cleared=0 AND sent=0 AND campaignuid = ?1",
 							"bind" => array(
 								1 => $campaignobjectUid																
 								)
@@ -159,7 +159,14 @@ class CampaignobjectsController extends ControllerBase
 				$sendoutobjectRecord->deleted=1;
 				$sendoutobjectRecord->hidden=1;				
 				$sendoutobjectRecord->update();
-			
+				$addressconditions=$sendoutobjectRecord->getAddressconditions();
+				if($addressconditions){
+					foreach($addressconditions as $addresscondition){
+						$addresscondition->deleted=1;
+						$addresscondition->hidden=1;
+						$addresscondition->save();
+					}
+				}
 			}	
 		}
 			
@@ -170,7 +177,7 @@ class CampaignobjectsController extends ControllerBase
 		foreach($this->request->getPost('sendoutobjectelements') as $sendoutobjectElements){
 					
 					$rawArray=json_decode($sendoutobjectElements,true);					
-					$sendoutobject=new Sendoutobjects();
+					
 					$rawdate=$rawArray['tstamp'];
 					
 					$dateArr=explode(' ',$rawdate);
@@ -180,40 +187,21 @@ class CampaignobjectsController extends ControllerBase
 					$dateDataArr=explode('/',$dateArr[0]);
 					$senddate=mktime($dateTimeArr[0],$dateTimeArr[1],0,$dateDataArr[1],$dateDataArr[2],$dateDataArr[0]);
 					}
-					$sendoutobject->assign(array(
-						'pid'=>0,
-						'crdate' => $time,
-						'tstamp' => $senddate,
-						'cruser_id' =>$this->session->get('auth')['uid'],
-						'usergroup' =>$this->session->get('auth')['usergroup'],
-						'deleted' =>0,
-						'hidden' => 0,
-						'reviewed'=>0,
-						'cleared'=>0,
-						'inprogress'=>0,
-						'sent'=>0,
-						'campaignuid'=>$campaignobjectRecord->uid,						
-						'mailobjectuid'=>intval($rawArray['mailobjectuid']),
-						'configurationuid'=>intval($rawArray['configurationuid']),
-						'subject'=>$rawArray['subject'],
-						'abtest'=>intval($rawArray['abtest']),
-						'segmentobjectuid'=>intval($rawArray['segmentobjectuid'])
-							
-					));
-					if(!$sendoutobject->save()){
-						$this->flash->error($sendoutobject->getMessages());
-					}
-					if($rawArray['abtest']==1){
-						$rawdateB=$rawArray['tstampB'];
-						
-						$dateArrB=explode(' ',$rawdateB);
-						$dateTimeArrB=explode(':',$dateArrB[1]);
-						$dateDataArrB=explode('/',$dateArrB[0]);
-						$sendoutobjectB=new Sendoutobjects();
-						$sendoutobjectB->assign(array(
-							'pid'=>$sendoutobject->uid,
+					$sendoutobject=  Sendoutobjects::findFirst(array(
+									"conditions" => "deleted=0 AND hidden=0 AND campaignuid = ?1 AND usergroup = ?2 AND domid LIKE ?3",
+									"bind" => array(
+											1 => $campaignobjectRecord->uid,
+											2 => $this->session->get('auth')['usergroup'],
+											3 => $rawArray['id']
+										)
+									));
+					
+					if(!$sendoutobject){
+						$sendoutobject=new Sendoutobjects();
+						$sendoutobject->assign(array(
+							'pid'=>0,
 							'crdate' => $time,
-							'tstamp' => mktime($dateTimeArrB[0],$dateTimeArrB[1],0,$dateDataArrB[1],$dateDataArrB[2],$dateDataArrB[0]),
+							'tstamp' => $senddate,
 							'cruser_id' =>$this->session->get('auth')['uid'],
 							'usergroup' =>$this->session->get('auth')['usergroup'],
 							'deleted' =>0,
@@ -223,20 +211,107 @@ class CampaignobjectsController extends ControllerBase
 							'inprogress'=>0,
 							'sent'=>0,
 							'campaignuid'=>$campaignobjectRecord->uid,						
-							'mailobjectuid'=>$sendoutobject->mailobjectuid,
-							'configurationuid'=>$rawArray['configurationuidB'],
-							'subject'=>$rawArray['subjectB'],
-							'abtest'=>1,
-							'segmentobjectuid'=>$sendoutobject->segmentobjectuid
+							'mailobjectuid'=>intval($rawArray['mailobjectuid']),
+							'configurationuid'=>intval($rawArray['configurationuid']),
+							'subject'=>$rawArray['subject'],
+							'abtest'=>intval($rawArray['abtest']),
+							'segmentobjectuid'=>intval($rawArray['segmentobjectuid']),
+							'domid'=>$rawArray['id']
 
 						));
-						if(!$sendoutobjectB->save()){
-							$this->flash->error($sendoutobjectB->getMessages());
+						if(!$sendoutobject->save()){
+							$this->flash->error($sendoutobject->getMessages());
+						}
+					}else{
+						if($sendoutobject->cleared!=1 || $sendoutobject->sent!=1 || $sendoutobject->inprogress!=1){
+							$sendoutobject->assign(array(							
+								'tstamp' => $senddate,
+								'cruser_id' =>$this->session->get('auth')['uid'],														
+								'mailobjectuid'=>intval($rawArray['mailobjectuid']),
+								'configurationuid'=>intval($rawArray['configurationuid']),
+								'subject'=>$rawArray['subject'],
+								'abtest'=>intval($rawArray['abtest']),
+								'segmentobjectuid'=>intval($rawArray['segmentobjectuid'])							
+							));
+							if(!$sendoutobject->save()){
+								$this->flash->error($sendoutobject->getMessages());
+							}
+						}
+
+					}
+					
+					
+					if($rawArray['abtest']==1){
+						$rawdateB=$rawArray['tstampB'];
+						
+						$dateArrB=explode(' ',$rawdateB);
+						$dateTimeArrB=explode(':',$dateArrB[1]);
+						$dateDataArrB=explode('/',$dateArrB[0]);
+						
+						$sendoutobjectB=  Sendoutobjects::findFirst(array(
+									"conditions" => "deleted=0 AND hidden=0 AND pid != 0 AND campaignuid = ?1 AND usergroup = ?2 AND domid = ?3",
+									"bind" => array(
+											1 => $campaignobjectRecord->uid,
+											2 => $this->session->get('auth')['usergroup'],
+											3 => $rawArray['id']
+										)
+									));
+						
+						if(!$sendoutobjectB){
+							$sendoutobjectB=new Sendoutobjects();
+							$sendoutobjectB->assign(array(
+								'pid'=>$sendoutobject->uid,
+								'crdate' => $time,
+								'tstamp' => mktime($dateTimeArrB[0],$dateTimeArrB[1],0,$dateDataArrB[1],$dateDataArrB[2],$dateDataArrB[0]),
+								'cruser_id' =>$this->session->get('auth')['uid'],
+								'usergroup' =>$this->session->get('auth')['usergroup'],
+								'deleted' =>0,
+								'hidden' => 0,
+								'reviewed'=>0,
+								'cleared'=>0,
+								'inprogress'=>0,
+								'sent'=>0,
+								'campaignuid'=>$campaignobjectRecord->uid,						
+								'mailobjectuid'=>$sendoutobject->mailobjectuid,
+								'configurationuid'=>$rawArray['configurationuidB'],
+								'subject'=>$rawArray['subjectB'],
+								'abtest'=>1,
+								'segmentobjectuid'=>$sendoutobject->segmentobjectuid,
+								'domid'=>$rawArray['id']
+
+							));
+							if(!$sendoutobjectB->save()){
+								$this->flash->error($sendoutobjectB->getMessages());
+							}
+						}else{
+							if($sendoutobjectB->cleared!=1 && $sendoutobjectB->sent!=1 && $sendoutobjectB->inprogress!=1){
+								$sendoutobjectB->assign(array(							
+									'tstamp' => $senddate,
+									'cruser_id' =>$this->session->get('auth')['uid'],														
+									'mailobjectuid'=>intval($rawArray['mailobjectuid']),
+									'configurationuid'=>intval($rawArray['configurationuid']),
+									'subject'=>$rawArray['subject'],
+									'abtest'=>1,
+									'segmentobjectuid'=>intval($rawArray['segmentobjectuid'])
+								));
+								if(!$sendoutobjectB->save()){
+									$this->flash->error($sendoutobjectB->getMessages());
+								}
+							}
+							
 						}
 					}
 					
 					if(isset($rawArray['conditions'])){
 						foreach($rawArray['conditions'] as $conditionArray){
+							$addressconditionsPrev=$sendoutobject->getAddressconditions();
+							if($addressconditionsPrev){
+								foreach($addressconditionsPrev as $addressconditionPrevEl){
+									$addressconditionPrevEl->deleted=1;
+									$addressconditionPrevEl->hidden=1;
+									$addressconditionPrevEl->save();
+								}
+							}
 							$addressconditions=new Addressconditions();				
 							$addressconditions->assign(array(
 								'pid'=>$sendoutobject->uid,

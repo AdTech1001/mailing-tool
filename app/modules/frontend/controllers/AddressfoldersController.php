@@ -197,7 +197,7 @@ class AddressfoldersController extends ControllerBase
 		$output = array(
 			"sEcho" => intval($_POST['sEcho']),
 			"iTotalRecords" => $iTotal,
-			"iTotalDisplayRecords" => $rResultFilterTotal,
+			"iTotalDisplayRecords" => $iTotal,
 			"aaData" => $resultSet
 		);
 		
