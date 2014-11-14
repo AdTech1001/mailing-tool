@@ -552,8 +552,9 @@ var conditionModeler=function(activeElement,splitCond){
 		appendRow=splitBlueprint;
 	}
 	var actElId=jQuery(activeElement).parent().parent().parent().attr('id');
-	if(jQuery('#'+actElId+' div.hidden').html() != ''){
-		jQuery('#'+splitCond+'Form').html(jQuery('#'+actElId+' div.hidden').html());
+	if(jQuery('#'+actElId+' form.hidden').html() != ''){
+		
+		jQuery('#'+splitCond+'Form').html(jQuery('#'+actElId+' form.hidden').html());
 		
 		conditionRowCounter=jQuery('#'+splitCond+'Wrapper table tbody tr:last-child').attr('id').split('_')[1];
 	}

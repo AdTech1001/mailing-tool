@@ -57,19 +57,21 @@ $di->set(
 			$connection = new DatabaseConnection($config->database->debug->toArray());
             $eventsManager = new EventsManager();
 
-            $logger = new FileLogger(APP_PATH . "/app/logs/db.log");
+            
 
             //Listen all the database events
-            $eventsManager->attach(
+            /*
+			  $logger = new FileLogger(APP_PATH . "/app/logs/db.log");
+			  $eventsManager->attach(
                 'db',
                 function ($event, $connection) use ($logger) {
-                    /** @var Phalcon\Events\Event $event */
+                    
                     if ($event->getType() == 'beforeQuery') {
-                        /** @var DatabaseConnection $connection */
+                        
                         $logger->log($connection->getSQLStatement(), \Phalcon\Logger::INFO);
                     }
                 }
-            );
+            );*/
 
             //Assign the eventsManager to the db adapter instance
             $connection->setEventsManager($eventsManager);
