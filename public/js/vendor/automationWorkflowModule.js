@@ -582,7 +582,7 @@ jQuery('#conditionsModelerSelect button.ok, #splitModelerSelect button.ok').clic
 	var prependRow=conditionsFormBlueprint;
 	if(jQuery(this).hasClass('split')){
 		splitCond='split';
-		prependRow=splitFormBlueprint
+		prependRow=splitFormBlueprint;
 	}
 	jQuery('#'+splitCond+'Wrapper').off('click');
 	e.preventDefault();

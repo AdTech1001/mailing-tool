@@ -303,8 +303,7 @@ class CampaignobjectsController extends ControllerBase
 					}
 					
 					if(isset($rawArray['conditions'])){
-						foreach($rawArray['conditions'] as $conditionArray){
-							$addressconditionsPrev=$sendoutobject->getAddressconditions();
+						$addressconditionsPrev=$sendoutobject->getAddressconditions();
 							if($addressconditionsPrev){
 								foreach($addressconditionsPrev as $addressconditionPrevEl){
 									$addressconditionPrevEl->deleted=1;
@@ -312,6 +311,9 @@ class CampaignobjectsController extends ControllerBase
 									$addressconditionPrevEl->save();
 								}
 							}
+						var_dump($rawArray['conditions']);
+						foreach($rawArray['conditions'] as $conditionArray){
+							
 							$addressconditions=new Addressconditions();				
 							$addressconditions->assign(array(
 								'pid'=>$sendoutobject->uid,
