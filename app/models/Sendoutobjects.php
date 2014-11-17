@@ -17,6 +17,7 @@ class Sendoutobjects extends Model{
 		$this->hasOne("segmentobjectuid", "nltool\Models\Addressfolders", "uid",array('alias' => 'addressfolder'));
 		$this->hasMany("uid", "nltool\Models\Addressconditions", "pid",array('alias' => 'addressconditions'));
 		$this->hasMany("uid", "nltool\Models\Mailqueue", "sendoutobjectuid",array('alias' => 'mailqueue'));
+		$this->belongsTo("campaignuid", "nltool\Models\Campaignobjects", "uid", array('alias' => 'campaign'));
     }
 	
 }

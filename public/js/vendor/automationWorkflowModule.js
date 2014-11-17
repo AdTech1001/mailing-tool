@@ -247,6 +247,7 @@ function Load(data){
 	var campaignScheme=jQuery.parseJSON(data);
 	
 	jQuery('#automationWorkspace').append(decodeURI(campaignScheme.automationgraphstring));
+	
 	jQuery('.window.jsplumbified').each(function(index,element){
 		var elementId=jQuery(element).attr('id');
 		if(elementId!=='startpoint'){
@@ -257,12 +258,18 @@ function Load(data){
 				instance.addEndpoint(jQuery(element),{uuid:elementId+'_split'}, splitConnectorSource);
 				instance.addEndpoint(jQuery(element),{uuid:elementId+'_main'}, mainflowConnectorTarget);						
 				instance.addEndpoint(jQuery(element), {uuid:elementId+'_cond'},conditionConnectorTarget);									
-				jQuery('#'+elementId+' a').click(function(e)
-				{
-					e.preventDefault();
-					activeElement=jQuery(this);
-					assembleSendoutobjectConf(activeElement);
-				});
+				
+					jQuery('#'+elementId+' a').click(function(e)
+					{
+						e.preventDefault();
+						if(campaignScheme.frozensendoutobjects.indexOf(elementId) == -1 ){
+						activeElement=jQuery(this);
+						assembleSendoutobjectConf(activeElement);
+						}else{
+							alert('This element is frozen');
+						}
+					});
+				
 				break;
 				case 'senddate':
 				instance.addEndpoint(jQuery(element), sendDateConnectorSource);
@@ -304,6 +311,9 @@ function Load(data){
 	});
 	for(var i=0; i<campaignScheme.connections.length; i++){
 		instance.connect({uuids:[campaignScheme.connections[i].source, campaignScheme.connections[i].target]});
+	}
+	for(var j=0; j<campaignScheme.frozensendoutobjects.length;j++){		
+		jQuery('#'+campaignScheme.frozensendoutobjects[j]+' div.info.glyphicon').css({"color":"#ff0000"});
 	}
 }
 

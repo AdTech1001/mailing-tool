@@ -42,12 +42,25 @@ class CampaignobjectsController extends ControllerBase
 			"conditions" => "uid = ?1",
 			"bind" => array(1 => $this->request->getPost('campaignobjectuid'))
 			));
-			
+			$frozenSendoutobjects=  Sendoutobjects::find(array(
+				"conditions" => "deleted=0 AND hidden =0 AND pid=0 AND campaignuid=?1 AND (cleared=1 OR inprogress=1 OR sent=1)",
+				"bind" => array(1 => $this->request->getPost('campaignobjectuid'))
+			));
+			$frozenDomIds='[';
+			foreach($frozenSendoutobjects as $frozenSendoutobject){
+				$frozenDomIds.='"'.$frozenSendoutobject->domid.'",';
+			}
+			if(strlen($frozenDomIds)>1){
+			$frozenDomIds=substr($frozenDomIds,0,-1);
+			}
+			$frozenDomIds.=']';
 			$campaignobjectJson=
 					'{"uid":'.$campaignobject->uid.',
 					"title":"'.$campaignobject->title.'",
 				"automationgraphstring":"'.$this->encodeURI($campaignobject->automationgraphstring).'",
-				"connections":'.substr($campaignobject->connections,1,-1).'}';
+				"connections":'.substr($campaignobject->connections,1,-1).','.
+				'"frozensendoutobjects":'.$frozenDomIds.
+					'}';
 			
 			die($campaignobjectJson);
 			
@@ -302,7 +315,7 @@ class CampaignobjectsController extends ControllerBase
 						}
 					}
 					
-					if(isset($rawArray['conditions'])){
+					if(isset($rawArray['conditions']) && ($sendoutobject->cleared==0 && $sendoutobject->inprogress=0 && $sendoutobject->sent==0)){
 						$addressconditionsPrev=$sendoutobject->getAddressconditions();
 							if($addressconditionsPrev){
 								foreach($addressconditionsPrev as $addressconditionPrevEl){
@@ -311,7 +324,7 @@ class CampaignobjectsController extends ControllerBase
 									$addressconditionPrevEl->save();
 								}
 							}
-						var_dump($rawArray['conditions']);
+						
 						foreach($rawArray['conditions'] as $conditionArray){
 							
 							$addressconditions=new Addressconditions();				

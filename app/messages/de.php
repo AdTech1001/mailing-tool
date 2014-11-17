@@ -156,6 +156,13 @@ $messages = array(
 	"addressFolderNewLabel" => "neuer Adressordner",
 	"addresses"=>"Adressaten",
 	"addressesCreate"=>"Adressaten erstellen",
-	"addressesRetrieve"=> "Adressaten verwalten"
+	"addressesRetrieve"=> "Adressaten verwalten",
+	"clearingTasks" => "anstehende Freigaben",
+	"yes"=>"Ja",
+	"no" => "Nein",
+	"sendstate"=>"Versandstatus",
+	"inprogress" =>"wird versendet",
+	"sent" => "versandt",
+	"preparation" => "in Vorbereitung"
 );
 ?>

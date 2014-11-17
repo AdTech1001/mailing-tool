@@ -155,7 +155,14 @@ $messages = array(
 	"addressFolderNewLabel" => "create new address folder",
 	"addresses"=>"addresses",
 	"addressesCreate"=>"create address",
-	"addressesRetrieve"=> "manage addresses"
+	"addressesRetrieve"=> "manage addresses",
+	"clearingTasks" => "upcoming Clearings",
+	"yes"=>"Yes",
+	"no" => "No",
+	"sendstate"=>"sendout status",
+	"inprogress" =>"currently sending",
+	"sent" => "sendout complete",
+	"preparation" => "in preparation"
 	
 );
 

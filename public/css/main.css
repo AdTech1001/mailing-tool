@@ -1047,8 +1047,21 @@ box-shadow: inset 3px 0px 5px 0px rgba(0,0,0,0.75);
 }
 #conditionsModelerSelect table{
 	width: 100%;
+	
 }
 
+table.maintable{
+	width:50%;
+}
+table.maintable td{
+	padding:10px;
+	border:1px solid;
+}
+
+table.maintable tr.even td{
+	background:#e3e3e3;
+	
+}
 #conditionsModelerSelect .conditionRow button{
 	width:25px;
 	height:25px;

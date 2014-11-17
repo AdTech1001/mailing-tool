@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS permissions (
 	resourceaction varchar(55) NOT NULL,
   PRIMARY KEY (uid),
   KEY profilesid (profileid)
-) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=86 DEFAULT CHARSET=utf8;
 
 
 LOCK TABLES permissions WRITE;
@@ -139,7 +139,12 @@ INSERT INTO permissions (uid, crdate, profileid, resourceid, resourceaction) VAL
 (77, NOW(), 1, 16, 'create'),
 (78, NOW(), 1, 16, 'retrieve'),
 (79, NOW(), 1, 16, 'update'),
-(80, NOW(), 1, 16, 'delete');
+(80, NOW(), 1, 16, 'delete'),
+(81, NOW(), 1, 17, 'index'),
+(82, NOW(), 1, 17, 'create'),
+(83, NOW(), 1, 17, 'retrieve'),
+(84, NOW(), 1, 17, 'update'),
+(85, NOW(), 1, 17, 'delete');
 UNLOCK TABLES;
 
 
@@ -158,7 +163,7 @@ CREATE TABLE IF NOT EXISTS resources(
 	hidden tinyint(4) DEFAULT '0' NOT NULL,
 	title varchar(255) NOT NULL,
 	PRIMARY KEY (uid)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 
 LOCK TABLES resources WRITE;
@@ -178,7 +183,8 @@ INSERT INTO resources (uid, crdate, title) VALUES
 (13, NOW(),'addresses'),
 (14, NOW(),'addressfolders'),
 (15, NOW(),'segmentobjects'),
-(16, NOW(),'addressconditions');
+(16, NOW(),'addressconditions'),
+(17, NOW(),'review');
 UNLOCK TABLES;
 -- --------------------------------------------------------
 
