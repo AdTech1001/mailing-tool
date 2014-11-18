@@ -15,6 +15,7 @@ use nltool\Notifications\Checker as NotificationsChecker;
 use Sum\Oauth2 AS Oauth2;
 use nltool\Auth\Auth;
 use nltool\Acl\Acl;
+use nltool\Helper\Mailrenderer;
 
 
 
@@ -241,6 +242,10 @@ $di->set('auth', function () {
 
 $di->set('acl', function(){
 	return new Acl();
+});
+
+$di->set('mailrenderer', function(){
+	return new Mailrenderer();
 });
 
 $di->set('oauth', function() use ($config) {

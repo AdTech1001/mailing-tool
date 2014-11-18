@@ -144,7 +144,12 @@ INSERT INTO permissions (uid, crdate, profileid, resourceid, resourceaction) VAL
 (82, NOW(), 1, 17, 'create'),
 (83, NOW(), 1, 17, 'retrieve'),
 (84, NOW(), 1, 17, 'update'),
-(85, NOW(), 1, 17, 'delete');
+(85, NOW(), 1, 18, 'delete'),
+(86, NOW(), 1, 18, 'index'),
+(87, NOW(), 1, 18, 'create'),
+(88, NOW(), 1, 18, 'retrieve'),
+(89, NOW(), 1, 18, 'update'),
+(90, NOW(), 1, 18, 'delete');
 UNLOCK TABLES;
 
 
@@ -163,7 +168,7 @@ CREATE TABLE IF NOT EXISTS resources(
 	hidden tinyint(4) DEFAULT '0' NOT NULL,
 	title varchar(255) NOT NULL,
 	PRIMARY KEY (uid)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 
 LOCK TABLES resources WRITE;
@@ -184,7 +189,8 @@ INSERT INTO resources (uid, crdate, title) VALUES
 (14, NOW(),'addressfolders'),
 (15, NOW(),'segmentobjects'),
 (16, NOW(),'addressconditions'),
-(17, NOW(),'review');
+(17, NOW(),'review'),
+(18, NOW(),'testmail');
 UNLOCK TABLES;
 -- --------------------------------------------------------
 

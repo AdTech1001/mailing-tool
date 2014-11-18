@@ -45,7 +45,7 @@
 			</ul>
 		</div>
 		<div class="module_el">
-			<h2>{{ link_to(language~'/addresses/', '<span class="glyphicon glyphicon-envelope"></span> '~tr('addresses'), 'title': tr('addresses')) }}
+			<h2>{{ link_to(language~'/addresses/', '<span class="glyphicon glyphicon-user"></span> '~tr('addresses'), 'title': tr('addresses')) }}
 			</h2>
 			<ul>
 			<li>{{ link_to(language~'/addresses/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('addressesCreate'), 'title': tr('addressesCreate')) }}</li>
@@ -53,15 +53,7 @@
 			
 			</ul>
 		</div>
-		<div class="module_el">
-			<h2>{{ link_to(language~'/addresses/', '<span class="glyphicon glyphicon-envelope"></span> '~tr('addresses'), 'title': tr('addresses')) }}
-			</h2>
-			<ul>
-			<li>{{ link_to(language~'/addresses/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('addressesCreate'), 'title': tr('addressesCreate')) }}</li>
-			<li>{{ link_to(language~'/addresses/index/', '<span class="glyphicon glyphicon-pencil"></span> '~tr('addressesRetrieve'), 'title': tr('addressesRetrieve')) }}</li>
-			
-			</ul>
-		</div>
+		
 		
 	</div>
 </div>

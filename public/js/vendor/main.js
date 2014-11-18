@@ -1,4 +1,5 @@
-
+var viewportW = Math.max(document.documentElement.clientWidth, window.innerWidth || 0)
+var viewportH = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
 var baseurl=document.getElementById('baseurl').value;
 function init(jQuery){
 	jQuery('.container').append('<div id="loadingimg"><h3>Einen Moment bitte</h3><div><img src="/baywa-nltool/images/ajax-loader.gif"></div></<div>');

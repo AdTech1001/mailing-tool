@@ -129,7 +129,7 @@ class TriggersendController extends Triggerauth
 			
 			$bodyRaw=file_get_contents('../public/mails/mailobject_'.$mailing->mailobjectuid.'.html');
 			if($configuration->clicktracking==1){
-						$bodyRaw=$this->writeClicktrackingLinks($bodyRaw,$mailing);
+						$bodyRaw=$this->mailrenderer->writeClicktrackingLinks($bodyRaw,$mailing);
 			}
 			$counter=0;
 			foreach($mailqueue as $mailqueueElement){				
@@ -140,9 +140,9 @@ class TriggersendController extends Triggerauth
 				
 				//Mailqueue abarbeiten
 
-				$body=$this->renderVars($bodyRaw,$address);
+				$body=$this->mailrenderer->renderVars($bodyRaw,$address);
 				if($configuration->clicktracking==1){
-					$bodyFinal=$this->renderFinal($body,$address->uid);								
+					$bodyFinal=$this->mailrenderer->renderFinal($body,$address->uid);								
 				}else{
 					$bodyFinal=$body;
 				}
@@ -185,72 +185,6 @@ class TriggersendController extends Triggerauth
 		}
 	}
 	
-	private function writeClicktrackingLinks($body,$mailing){
-		$this->mailing=$mailing;
-		
-		$environment= $this->config['application']['debug'] ? 'development' : 'production';
-		$this->baseUri=$this->config['application'][$environment]['staticBaseUri'];
-		
-		$renderedbody=preg_replace_callback('/(<a\s[^>]*href=\")([http|https][^\"]*)(\"[^>]*>)/siU',  function($matches){
-			
-			$time=time();
-			$jumplink=new Linklookup();
-			$jumplink->assign(array(
-				"pid"=>0,
-				"tstamp"=>$time,
-				"crdate"=>$time,
-				"deleted"=>0,
-				"hidden"=>0,				
-				"campaignuid"=>$this->mailing->campaignuid,
-				"mailobjectuid"=>$this->mailing->mailobjectuid,
-				"sendoutobjectuid"=>$this->mailing->uid,
-				"url"=>$matches[2],
-				"addressuid"=>0
-			));
-			$jumplink->save();
-			return $matches[1].'http://'.$this->request->getHttpHost().$this->baseUri.'linkreferer/'.$jumplink->uid.$matches[3];
-		},$body);
-		
-		
-		return $renderedbody;
-	}
 	
-	private function renderFinal($body,$addressuid){
-				
-		$this->addressuid=$addressuid;
-		$environment= $this->config['application']['debug'] ? 'development' : 'production';
-		$this->baseUri=$this->config['application'][$environment]['staticBaseUri'];		
-		$renderedbody=preg_replace_callback('/(<a\s[^>]*href=\")([http|https][^\"]*)(\"[^>]*>)/siU', 'self::renderFinalCallback' ,$body);		
-		$finalizedBody=preg_replace_callback('/<body[^>]*>/im',"self::addOpenmailerBlankImage",$renderedbody);
-				
-		return $finalizedBody;				
-	}
-	
-	private function renderFinalCallback($matches){						
-			return $matches[1].$matches[2].'/'.$this->addressuid.$matches[3];
-	}
-	
-	private function addOpenmailerBlankImage($matches){
-		return $matches[0].'<img width="1" height="1" src="'.'http://'.$this->request->getHttpHost().$this->baseUri.'linkreferer/open/'.$this->mailing->uid.'/'.$this->addressuid.'">';
-	}
-	
-	private function renderVars($body,$address){
-		$fieldMap=array(
-			'Anrede' => 'salutation',
-			'Vorname' => 'first_name',
-			'Nachname' => 'last_name',
-			'Titel' => 'title',
-			'Unternehmen' => 'company',
-			'Email' => 'Email'
-		); //TODO komplettieren
-		
-		preg_match_all('/{{(.*)}}/siU', $body, $matches);
-		
-		foreach($matches[0] as $key => $match){
-			$body=str_replace($match, $address->$fieldMap[$matches[1][$key]], $body);
-		}
-		
-		return $body;
-	}
 	
 }

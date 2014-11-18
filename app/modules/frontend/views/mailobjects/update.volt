@@ -90,5 +90,5 @@
 <div id="deleteOverlay" class="hidden" title="{{ tr('delete')}} "><span class='glyphicon glyphicon-remove'></span></div>
 <input type="hidden" id="salutationTitle" value="{{tr('salutation')}}">
 <input type="hidden" id="lastnameTitle" value="{{tr('lastname')}}">
-	   
+  
 {% endif %}

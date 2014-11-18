@@ -162,7 +162,9 @@ $messages = array(
 	"sendstate"=>"sendout status",
 	"inprogress" =>"currently sending",
 	"sent" => "sendout complete",
-	"preparation" => "in preparation"
+	"preparation" => "in preparation",
+	"reviewUpdateLabel" => "review and clearance",
+	"testmailLabel"=>"send testmail"
 	
 );
 

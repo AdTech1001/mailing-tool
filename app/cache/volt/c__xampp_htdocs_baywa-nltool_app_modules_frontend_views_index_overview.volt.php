@@ -45,7 +45,7 @@
 			</ul>
 		</div>
 		<div class="module_el">
-			<h2><?php echo $this->tag->linkTo(array($language . '/addresses/', '<span class="glyphicon glyphicon-envelope"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('addresses'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('addresses'))); ?>
+			<h2><?php echo $this->tag->linkTo(array($language . '/addresses/', '<span class="glyphicon glyphicon-user"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('addresses'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('addresses'))); ?>
 			</h2>
 			<ul>
 			<li><?php echo $this->tag->linkTo(array($language . '/addresses/create/', '<span class="glyphicon glyphicon-edit"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('addressesCreate'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('addressesCreate'))); ?></li>
@@ -53,15 +53,7 @@
 			
 			</ul>
 		</div>
-		<div class="module_el">
-			<h2><?php echo $this->tag->linkTo(array($language . '/addresses/', '<span class="glyphicon glyphicon-envelope"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('addresses'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('addresses'))); ?>
-			</h2>
-			<ul>
-			<li><?php echo $this->tag->linkTo(array($language . '/addresses/create/', '<span class="glyphicon glyphicon-edit"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('addressesCreate'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('addressesCreate'))); ?></li>
-			<li><?php echo $this->tag->linkTo(array($language . '/addresses/index/', '<span class="glyphicon glyphicon-pencil"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('addressesRetrieve'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('addressesRetrieve'))); ?></li>
-			
-			</ul>
-		</div>
+		
 		
 	</div>
 </div>
