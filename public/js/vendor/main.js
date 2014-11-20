@@ -82,7 +82,7 @@ var ajaxIt=function(controller,action,formdata,successhandler, parameters){
 	}
 
 	jQuery.ajax({
-		url: baseurl+'/'+controller+'/'+action+parameters,
+		url: baseurl+controller+'/'+action+parameters,
 		cache: false,
 		async: true,
 		data: formdata,   

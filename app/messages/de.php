@@ -165,6 +165,9 @@ $messages = array(
 	"sent" => "versandt",
 	"preparation" => "in Vorbereitung",
 	"reviewUpdateLabel" => "Überprüfung und Freigabe",
-	"testmailLabel"=>"Testmail versenden"
+	"testmailLabel"=>"Testmail versenden",
+	"reviewed"=>"überprüft",
+	"cleared"=>"freigeben",
+	"review" => "Freigabe"
 );
 ?>

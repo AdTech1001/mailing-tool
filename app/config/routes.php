@@ -279,7 +279,15 @@ $router->add(
 		'namespace'  => 'nltool\Modules\Modules\Frontend\Controllers',
     )
 );
-
+$router->add(
+    '/review/update[/]{0,1}',
+    array(
+       'controller' => 'review',
+       'action'     => 'update',
+		'module'=>'frontend',
+		'namespace'  => 'nltool\Modules\Modules\Frontend\Controllers',
+    )
+);
 
 
 $router->handle();

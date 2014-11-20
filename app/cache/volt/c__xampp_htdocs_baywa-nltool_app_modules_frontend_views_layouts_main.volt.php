@@ -14,6 +14,14 @@
 		  </ul>
 		<div class="clearfix"></div>
 		  <ul class="nav navbar-nav navbar-right">
+			  <?php if ('review' == $this->dispatcher->getControllerName()) { ?>
+              <li class="dropdown active">
+              <?php } else { ?>
+			 <li class="dropdown">
+              <?php } ?><?php echo $this->tag->linkTo(array($language . '/review', '<span class="glyphicon glyphicon-ok"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('review'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('review'))); ?><ul class="dropdown-menu submenu">					
+					<li><?php echo $this->tag->linkTo(array($language . '/review/index/', '<span class="glyphicon glyphicon-list"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('retrieve'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('retrieve'))); ?></li>
+				</ul>
+			</li>	
 			   <?php if ('campaignobjects' == $this->dispatcher->getControllerName()) { ?>
               <li class="dropdown active">
               <?php } else { ?>
@@ -32,15 +40,15 @@
 					<li><?php echo $this->tag->linkTo(array($language . '/mailobjects/index/', '<span class="glyphicon glyphicon-list"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('retrieve'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('retrieve'))); ?></li>
 				</ul>
 			</li>	
-			<?php if ('templateobjects' == $this->dispatcher->getControllerName()) { ?>
+			<?php if ('addresses' == $this->dispatcher->getControllerName()) { ?>
               <li class="dropdown active">
               <?php } else { ?>
 			 <li class="dropdown">
-              <?php } ?><?php echo $this->tag->linkTo(array($language . '/templateobjects', '<span class="glyphicon glyphicon-file"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('templateobjects'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('templateobjects'))); ?><ul class="dropdown-menu submenu">
-					<li><?php echo $this->tag->linkTo(array($language . '/templateobjects/create/', '<span class="glyphicon glyphicon-edit"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('create'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('create'))); ?></li>
-					<li><?php echo $this->tag->linkTo(array($language . '/templateobjects/index/', '<span class="glyphicon glyphicon-list"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('retrieve'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('retrieve'))); ?></li>
+              <?php } ?><?php echo $this->tag->linkTo(array($language . '/addresses', '<span class="glyphicon glyphicon-user"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('addresses'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('addresses'))); ?><ul class="dropdown-menu submenu">
+					<li><?php echo $this->tag->linkTo(array($language . '/addresses/create/', '<span class="glyphicon glyphicon-edit"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('create'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('create'))); ?></li>
+					<li><?php echo $this->tag->linkTo(array($language . '/addresses/index/', '<span class="glyphicon glyphicon-list"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('retrieve'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('retrieve'))); ?></li>
 				</ul>
-			</li>
+			</li>		
 			<?php if ('configurationobjects' == $this->dispatcher->getControllerName()) { ?>
               <li class="dropdown active">
               <?php } else { ?>
@@ -48,6 +56,15 @@
               <?php } ?><?php echo $this->tag->linkTo(array($language . '/configurationobjects', '<span class="glyphicon glyphicon-align-justify"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('configurationobjects'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('configurationobjects'))); ?><ul class="dropdown-menu submenu">
 					<li><?php echo $this->tag->linkTo(array($language . '/configurationobjects/create/', '<span class="glyphicon glyphicon-edit"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('create'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('create'))); ?></li>
 					<li><?php echo $this->tag->linkTo(array($language . '/configurationobjects/index/', '<span class="glyphicon glyphicon-list"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('retrieve'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('retrieve'))); ?></li>
+				</ul>
+			</li>
+			<?php if ('templateobjects' == $this->dispatcher->getControllerName()) { ?>
+              <li class="dropdown active">
+              <?php } else { ?>
+			 <li class="dropdown">
+              <?php } ?><?php echo $this->tag->linkTo(array($language . '/templateobjects', '<span class="glyphicon glyphicon-file"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('templateobjects'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('templateobjects'))); ?><ul class="dropdown-menu submenu">
+					<li><?php echo $this->tag->linkTo(array($language . '/templateobjects/create/', '<span class="glyphicon glyphicon-edit"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('create'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('create'))); ?></li>
+					<li><?php echo $this->tag->linkTo(array($language . '/templateobjects/index/', '<span class="glyphicon glyphicon-list"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('retrieve'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('retrieve'))); ?></li>
 				</ul>
 			</li>
 		  </ul>	

@@ -19,6 +19,16 @@
 		  </ul>
 		<div class="clearfix"></div>
 		  <ul class="nav navbar-nav navbar-right">
+			  {% if 'review' == dispatcher.getControllerName() %}
+              <li class="dropdown active">
+              {% else %}
+			 <li class="dropdown">
+              {% endif %}
+				{{- link_to(language~'/review', '<span class="glyphicon glyphicon-ok"></span> '~tr('review'), 'title': tr('review')) -}}
+				<ul class="dropdown-menu submenu">					
+					<li>{{ link_to(language~'/review/index/', '<span class="glyphicon glyphicon-list"></span> '~tr('retrieve'), 'title': tr('retrieve')) }}</li>
+				</ul>
+			</li>	
 			   {% if 'campaignobjects' == dispatcher.getControllerName() %}
               <li class="dropdown active">
               {% else %}
@@ -41,17 +51,17 @@
 					<li>{{ link_to(language~'/mailobjects/index/', '<span class="glyphicon glyphicon-list"></span> '~tr('retrieve'), 'title': tr('retrieve')) }}</li>
 				</ul>
 			</li>	
-			{% if 'templateobjects' == dispatcher.getControllerName() %}
+			{% if 'addresses' == dispatcher.getControllerName() %}
               <li class="dropdown active">
               {% else %}
 			 <li class="dropdown">
               {% endif %}
-				{{- link_to(language~'/templateobjects', '<span class="glyphicon glyphicon-file"></span> '~tr('templateobjects'), 'title': tr('templateobjects')) -}}
+				{{- link_to(language~'/addresses', '<span class="glyphicon glyphicon-user"></span> '~tr('addresses'), 'title': tr('addresses')) -}}
 				<ul class="dropdown-menu submenu">
-					<li>{{ link_to(language~'/templateobjects/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('create'), 'title': tr('create')) }}</li>
-					<li>{{ link_to(language~'/templateobjects/index/', '<span class="glyphicon glyphicon-list"></span> '~tr('retrieve'), 'title': tr('retrieve')) }}</li>
+					<li>{{ link_to(language~'/addresses/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('create'), 'title': tr('create')) }}</li>
+					<li>{{ link_to(language~'/addresses/index/', '<span class="glyphicon glyphicon-list"></span> '~tr('retrieve'), 'title': tr('retrieve')) }}</li>
 				</ul>
-			</li>
+			</li>		
 			{% if 'configurationobjects' == dispatcher.getControllerName() %}
               <li class="dropdown active">
               {% else %}
@@ -61,6 +71,17 @@
 				<ul class="dropdown-menu submenu">
 					<li>{{ link_to(language~'/configurationobjects/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('create'), 'title': tr('create')) }}</li>
 					<li>{{ link_to(language~'/configurationobjects/index/', '<span class="glyphicon glyphicon-list"></span> '~tr('retrieve'), 'title': tr('retrieve')) }}</li>
+				</ul>
+			</li>
+			{% if 'templateobjects' == dispatcher.getControllerName() %}
+              <li class="dropdown active">
+              {% else %}
+			 <li class="dropdown">
+              {% endif %}
+				{{- link_to(language~'/templateobjects', '<span class="glyphicon glyphicon-file"></span> '~tr('templateobjects'), 'title': tr('templateobjects')) -}}
+				<ul class="dropdown-menu submenu">
+					<li>{{ link_to(language~'/templateobjects/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('create'), 'title': tr('create')) }}</li>
+					<li>{{ link_to(language~'/templateobjects/index/', '<span class="glyphicon glyphicon-list"></span> '~tr('retrieve'), 'title': tr('retrieve')) }}</li>
 				</ul>
 			</li>
 		  </ul>	

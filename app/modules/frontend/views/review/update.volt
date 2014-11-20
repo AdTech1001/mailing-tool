@@ -3,25 +3,37 @@
 <div class="container">
 {%- if session.get('auth') -%}
 	<div id="menuWrapper" class="clearfix">
-	<div id="activityModeBar"><h1>{{ tr('reviewUpdateLabel') }}</h1>
+	<div id="activityModeBar"><h1 style="display:inline-block;">{{ tr('reviewUpdateLabel') }}</h1>
+		
 	</div>
 <div id="fileToolBar">	
 	<div class="glyphicon glyphicon-envelope" id="testmail" data-controller="mailobject" data-action="update" title="{{ tr('testmail') }}"></div>
 	<div class="glyphicon" style="font-size: 1em;top: -1px;">
 	{{ link_to(language~'/mailobjects/update/'~sendoutobject.mailobjectuid, '', 'title': tr('mailobjectsRetrieve'), 'id':'mailobjectEditMode', 'class':'glyphicon glyphicon-edit') }}
 	</div>
-	<div class="glyphicon glyphicon-floppy-save" id="mailobjectUpdate" data-controller="review" data-action="update" title="{{ tr('save') }}">
-	</div>
+	
 </div>	
 </div>		
 	<div id="reviewConfiguration">
-		<label>{{tr('sendoutDateLabel')}}:</label><span>{{ date('d.m.Y',sendoutobject.tstamp) }}</span><br>
-		<label>{{tr('sendoutSubject')}}: </label><span>{{ sendoutobject.subject }}</span><br><br>
-		<h4>{{tr('addConfigurationobject')}}</h4><br>
-		<label>{{tr('confSendernameLabel')~' ('~tr('confSendermailLabel')~')'}}:</label><span>{{ sendoutobject.configuration.sendername }} ({{ sendoutobject.configuration.sendermail }})</span><br>
-		<label>{{tr('confAnswernameLabel')~' ('~tr('confAnswermailLabel')~')'}}:</label><span>{{ sendoutobject.configuration.answername }} ({{ sendoutobject.configuration.answermail }})</span><br>
-		<label>{{tr('confReturnpathLabel')}}</label><span>{{ sendoutobject.configuration.returnpath }}</span>
-
+		<div id='reviewConfigurationInfo'>
+			<label>{{tr('sendoutDateLabel')}}:</label><span>{{ date('d.m.Y',sendoutobject.tstamp) }}</span><br>
+			<label>{{tr('sendoutSubject')}}: </label><span>{{ sendoutobject.subject }}</span><br><br>
+			<h4>{{tr('addConfigurationobject')}}</h4><br>
+			<label>{{tr('confSendernameLabel')~' ('~tr('confSendermailLabel')~')'}}:</label><span>{{ sendoutobject.configuration.sendername }} ({{ sendoutobject.configuration.sendermail }})</span><br>
+			<label>{{tr('confAnswernameLabel')~' ('~tr('confAnswermailLabel')~')'}}:</label><span>{{ sendoutobject.configuration.answername }} ({{ sendoutobject.configuration.answermail }})</span><br>
+			<label>{{tr('confReturnpathLabel')}}</label><span>{{ sendoutobject.configuration.returnpath }}</span>
+		</div>
+		<div id="reviewControls">
+			<div>
+				<label>{{ tr('reviewed') }}</label>
+				{{ check_field('review', 'checked':reviewChecked, 'id':'markReviewed') }}
+			</div>	<br>
+			<div>
+				<label>{{ tr('cleared') }}</label>
+				{{ check_field('clear', 'checked':clearedChecked,'id':'markCleared') }}
+			</div>	
+		</div>
+		<div class='clearfix'></div>
 	</div>
 
 	<div id="viewFrame" style="position:relative;overflow:hidden;">

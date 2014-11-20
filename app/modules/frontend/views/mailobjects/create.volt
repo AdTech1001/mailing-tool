@@ -2,7 +2,7 @@
 {{ content() }}
 <div class="container">
 	{%- if session.get('auth') -%}
-<div id="fileTollBar"><div class="glyphicon glyphicon-floppy-save" id="mailobjectsSave" data-controller="mailobjects" data-action="create"><span class="itemLabel">{{ tr('save') }}</span></div></div>	
+
 
 <h1>{{tr('composeTitle')}}</h1>
 <form action="{{path}}/mailobjects/create/" method="POST">
@@ -13,7 +13,7 @@
 		
 {% for templateobject in templateobjects %}
 <li data-uid="{{ templateobject.uid }}"><h3>{{ templateobject.title }}</h3><br>
-	<img src="{{baseurl}}{{ templateobjectsthumbs[templateobject.uid] }}">
+	<img src="{{httphost}}{{ templateobjectsthumbs[templateobject.uid] }}">
 	
 </li>
     

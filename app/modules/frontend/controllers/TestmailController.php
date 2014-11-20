@@ -17,7 +17,9 @@ class TestmailController extends ControllerBase
 			$sendoutobjectuid=$this->request->getPost("sendoutobjectuid");			
 			$address=new Addresses();
 			$address->assign(array(
-				'email'=>$this->request->getPost("email", "email", "some@example.com")
+				'email'=>$this->request->getPost("email", "email", "some@example.com"),
+				'salutation'=>'Sehr geehrter/Sehr geehrte',
+				'last_name'=>'Test'
 			));
 			
 			

@@ -9,8 +9,9 @@
 	.editarea{display:none;}
 	.ReadMsgBody {width: 100%; background-color: #ffffff;}
 	.ExternalClass {width: 100%; background-color: #ffffff;}
-	body	 {width: 100%; background-color: #ffffff; margin:0; padding:0; -webkit-font-smoothing: antialiased;font-family: Arial, Helvetica,sans-serif}
+	body	 {width: 100%; background-color: #ffffff; margin:0; padding:0; -webkit-font-smoothing: antialiased;font-family: Arial, Helvetica,sans-serif; color:#4d4d4d}
 	table {border-collapse: collapse;}
+	a{color:#009650;}
 
 	
 	@media only screen and (max-width: 640px)  {

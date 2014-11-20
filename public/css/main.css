@@ -1258,11 +1258,38 @@ table#mapTable{
 	padding:10px 10px 30px 10px;
 	font-size:1.3em;
 	font-weight:bold;
+	
+}
+#reviewConfigurationInfo{
+	float:left;
 }
 #reviewConfiguration label{
 	margin-right:10px;
 	width:200px;
 }
+
+#reviewControls{
+	margin-right:5px;
+}
+
+#reviewControls, #reviewControls div{
+	display:block;	
+	margin-left:20px;
+	float:right;
+}
+#reviewControls label{
+	color: #01994e;
+	font-size:1.5em;
+	display: inline-box;
+	width:100px;
+}
+#reviewControls input{
+	
+  padding: 10px;
+  margin-left:10px;
+  color:#01994e;
+}
+
 @media (min-width: 768px) {
 	
 }

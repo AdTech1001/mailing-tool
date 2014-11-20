@@ -29,6 +29,7 @@ class ControllerBase extends Controller
             'version' => $this->config->application->version
             
         ));
+		
 		if($this->config->application->debug){
 			$baseUrl = $this->config->application->development->baseUri;
 		}else{

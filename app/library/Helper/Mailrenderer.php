@@ -14,7 +14,7 @@ use Phalcon\Mvc\User\Component,
  */
 class Mailrenderer extends Component{
 	public function writeClicktrackingLinks($body,$mailing){
-		$this->mailing=$mailing;
+		$this->mailingToRender=$mailing;
 		
 		$environment= $this->config['application']['debug'] ? 'development' : 'production';
 		$this->baseUri=$this->config['application'][$environment]['staticBaseUri'];
@@ -29,9 +29,9 @@ class Mailrenderer extends Component{
 				"crdate"=>$time,
 				"deleted"=>0,
 				"hidden"=>0,				
-				"campaignuid"=>$this->mailing->campaignuid,
-				"mailobjectuid"=>$this->mailing->mailobjectuid,
-				"sendoutobjectuid"=>$this->mailing->uid,
+				"campaignuid"=>$this->mailingToRender->campaignuid,
+				"mailobjectuid"=>$this->mailingToRender->mailobjectuid,
+				"sendoutobjectuid"=>$this->mailingToRender->uid,
 				"url"=>$matches[2],
 				"addressuid"=>0
 			));
@@ -43,9 +43,10 @@ class Mailrenderer extends Component{
 		return $renderedbody;
 	}
 	
-	public function renderFinal($body,$addressuid){
+	public function renderFinal($body,$addressuid,$mailinguid){
 				
-		$this->addressuid=$addressuid;
+		$this->currentaddressuid=$addressuid;
+		$this->mailinguid=$mailinguid;
 		$environment= $this->config['application']['debug'] ? 'development' : 'production';
 		$this->baseUri=$this->config['application'][$environment]['staticBaseUri'];		
 		$renderedbody=preg_replace_callback('/(<a\s[^>]*href=\")([http|https][^\"]*)(\"[^>]*>)/siU', 'self::renderFinalCallback' ,$body);		
@@ -55,11 +56,11 @@ class Mailrenderer extends Component{
 	}
 	
 	public function renderFinalCallback($matches){						
-			return $matches[1].$matches[2].'/'.$this->addressuid.$matches[3];
+			return $matches[1].$matches[2].'/'.$this->currentaddressuid.$matches[3];
 	}
 	
 	public function addOpenmailerBlankImage($matches){
-		return $matches[0].'<img width="1" height="1" src="'.'http://'.$this->request->getHttpHost().$this->baseUri.'linkreferer/open/'.$this->mailing->uid.'/'.$this->addressuid.'">';
+		return $matches[0].'<img width="1" height="1" src="'.'http://'.$this->request->getHttpHost().$this->baseUri.'linkreferer/open/'.$this->mailinguid.'/'.$this->currentaddressuid.'">';
 	}
 	
 	public function renderVars($body,$address){
@@ -82,4 +83,3 @@ class Mailrenderer extends Component{
 	}
 }
 
-?>

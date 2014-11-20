@@ -7,7 +7,7 @@ use Phalcon\Tag,
 	Phalcon\Mvc\View\Engine\Volt\Compiler as Compiler;
 
 /**
- * Class IndexController
+ * Class MailobjectsController
  *
  * @package baywa-nltool\Controllers
  */
@@ -60,6 +60,7 @@ class MailobjectsController extends ControllerBase
      */
     public function createAction()
     {		
+		
         if($this->request->isPost()){
 			$time=time();
 			$templateUid=$_POST['templateobject'];
@@ -130,7 +131,7 @@ class MailobjectsController extends ControllerBase
 				));
 			$environment= $this->config['application']['debug'] ? 'development' : 'production';
 			$baseUri=$this->config['application'][$environment]['staticBaseUri'];
-			$this->view->setVar('baseurl','http://'.$this->request->getHttpHost());
+			$this->view->setVar('httphost','http://'.$this->request->getHttpHost());
 			$thumbnailSm=array();
 			foreach($templateobjects as $templateobject){
 				$thumbnailSmArray=explode('_',$templateobject->templatefilepath);

@@ -177,7 +177,7 @@ class CampaignobjectsController extends ControllerBase
 					foreach($addressconditions as $addresscondition){
 						$addresscondition->deleted=1;
 						$addresscondition->hidden=1;
-						$addresscondition->save();
+						$addresscondition->update();
 					}
 				}
 			}	
@@ -246,7 +246,7 @@ class CampaignobjectsController extends ControllerBase
 								'abtest'=>intval($rawArray['abtest']),
 								'segmentobjectuid'=>intval($rawArray['segmentobjectuid'])							
 							));
-							if(!$sendoutobject->save()){
+							if(!$sendoutobject->update()){
 								$this->flash->error($sendoutobject->getMessages());
 							}
 						}
@@ -307,7 +307,7 @@ class CampaignobjectsController extends ControllerBase
 									'abtest'=>1,
 									'segmentobjectuid'=>intval($rawArray['segmentobjectuid'])
 								));
-								if(!$sendoutobjectB->save()){
+								if(!$sendoutobjectB->update()){
 									$this->flash->error($sendoutobjectB->getMessages());
 								}
 							}
@@ -321,7 +321,7 @@ class CampaignobjectsController extends ControllerBase
 								foreach($addressconditionsPrev as $addressconditionPrevEl){
 									$addressconditionPrevEl->deleted=1;
 									$addressconditionPrevEl->hidden=1;
-									$addressconditionPrevEl->save();
+									$addressconditionPrevEl->update();
 								}
 							}
 						

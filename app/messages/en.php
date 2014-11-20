@@ -164,7 +164,10 @@ $messages = array(
 	"sent" => "sendout complete",
 	"preparation" => "in preparation",
 	"reviewUpdateLabel" => "review and clearance",
-	"testmailLabel"=>"send testmail"
+	"testmailLabel"=>"send testmail",
+	"reviewed"=>"reviewed",
+	"cleared"=>"cleared",
+	"review" => "review"
 	
 );
 

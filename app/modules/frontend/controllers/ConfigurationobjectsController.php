@@ -77,7 +77,7 @@ class ConfigurationobjectsController extends ControllerBase
 				'clicktracking' => $this->request->getPost('clicktracking','int')
 			));
 		
-		 $configurationobject->save();
+		 
 		 if (!$configurationobject->save()) {
               $this->flash->error($configurationobject->getMessages());
 		 } else {
@@ -106,7 +106,7 @@ class ConfigurationobjectsController extends ControllerBase
 				'htmlplain' => $this->request->getPost('htmlplain','int'),
 				'clicktracking' => $this->request->getPost('clicktracking','int')
 			));
-			 if (!$configurationobjectRecord->save()) {
+			 if (!$configurationobjectRecord->update()) {
                 $this->flash->error($configurationobjectRecord->getMessages());
             } else {
 

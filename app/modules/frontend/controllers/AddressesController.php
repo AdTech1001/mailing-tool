@@ -252,7 +252,7 @@ class AddressesController extends ControllerBase
 			$sWhere .= " AND (";
 			for ( $i=0 ; $i<count($aColumns) ; $i++ )
 			{
-				$sWhere .= "".$aColumnsFilter[$i]." LIKE '%:searchTerm:%' OR "; //$_POST['sSearch']
+				$sWhere .= "".$aColumnsFilter[$i]." LIKE :searchterm: OR "; //$_POST['sSearch']
 			}
 			$sWhere = substr_replace( $sWhere, "", -3 );
 			$sWhere .= ')';
@@ -289,8 +289,11 @@ class AddressesController extends ControllerBase
 		
 		
 		$bindArray['usergroup']=$this->session->get('auth')['usergroup'];
-		//$bindArray['searchTerm']=$this->request->getPost('sSearch');
+		if($this->request->getPost('sSearch')!=''){
+			$bindArray['searchterm']='%'.$this->request->getPost('sSearch').'%';			
+		}
 		
+		$resultSet=array();
 		$sQuery=$this->modelsManager->createQuery($phql);
 		$rResults = $sQuery->execute($bindArray);		
 		foreach ( $rResults as $aRow )
@@ -316,6 +319,7 @@ class AddressesController extends ControllerBase
 		
 		/* Total data set length */
 		$lphql = "SELECT COUNT(".$sIndexColumn.") AS countids FROM $sTable	".$sWhere;
+		
 		$lQuery=$this->modelsManager->createQuery($lphql);
 		$rResultTotal = $lQuery->execute($bindArray);        
 		foreach ( $rResultTotal as $aRow )

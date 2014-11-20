@@ -37,25 +37,29 @@ class AddressfoldersController extends ControllerBase
 	
 	public function updateAction()
 	{
-		$folderuid=$this->dispatcher->getParam("uid")?$this->dispatcher->getParam("uid"):0;
-		$this->assets->addJs('js/vendor/addressfoldersInit.js');
-		$this->assets->addCss('css/jquery.dataTables.css');
+		
 		
 		if($this->request->isPost()){
+			
+
 			$result=$this->getData();
 			$output=json_encode($result,true);			
 			die($output);
+			
+		}else{
+			$folderuid=$this->dispatcher->getParam("uid")?$this->dispatcher->getParam("uid"):0;
+			$this->assets->addJs('js/vendor/addressfoldersInit.js');
+			$this->assets->addCss('css/jquery.dataTables.css');
+			$addressfolderrecord=  Addressfolders::findFirst(array(
+				"conditions" => "uid = ?1",
+				"bind" => array(1 => $folderuid)
+				));
+			$this->view->setVar('foldertitle',$addressfolderrecord->title);
+			$this->view->setVar('folderuid',$folderuid);
 		}
-		$addressfolderrecord=  Addressfolders::findFirst(array(
-			"conditions" => "uid = ?1",
-			"bind" => array(1 => $folderuid)
-			));
-		$this->view->setVar('foldertitle',$addressfolderrecord->title);
-		$this->view->setVar('folderuid',$folderuid);
 	}
 	
 	private function getData(){
-		
 		$bindArray=array();
 		$aColumns=array('email','lastname',	'firstname','salutation','title','company','phone','address','city','zip','userlanguage','gender');
         

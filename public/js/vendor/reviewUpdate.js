@@ -1,5 +1,6 @@
 var oksent=function(data){
 	console.log(data);
+	
 };
 
 jQuery('document').ready(function(){
@@ -13,13 +14,26 @@ jQuery('document').ready(function(){
 		
 	});
 	
-	jQuery('#testmailLayer button.ok').click(function(e){
-		
+	jQuery('#testmailLayer button.ok').click(function(e){		
 		ajaxIt('testmail','create','&sendoutobjectuid='+sendoutobjectuid+'&email='+jQuery('#testmailLayer input').val(),oksent);	
+		jQuery('#testmailLayer').hide();
+	});
+	jQuery('#testmailLayer button.abort').click(function(e){
+		jQuery('#testmailLayer').hide();
 	});
 	
 	jQuery('#testmail').click(function(e){		
 		jQuery('#testmailLayer').show().css({"position":"fixed","top":((Math.round(viewportH/2))-(jQuery('#testmailLayer').height()*2)),"left":(Math.round((viewportW/2))-jQuery('#testmailLayer').width()/2)});
 		
+	});
+	
+	jQuery('#markReviewed').click(function(e){
+		
+		ajaxIt('review','update','&sendoutobjectuid='+sendoutobjectuid+'&reviewed='+jQuery(this).context.checked,oksent);	
+	});
+	
+	jQuery('#markCleared').click(function(e){
+		
+		ajaxIt('review','update','&sendoutobjectuid='+sendoutobjectuid+'&cleared='+jQuery(this).context.checked,oksent);	
 	});
 });
