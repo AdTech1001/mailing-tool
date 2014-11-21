@@ -52,9 +52,108 @@ class TriggersendController extends Controller
 			
 			foreach($mailings AS $mailing){
 				$addressConditions=$mailing->getAddressconditions();
+				$condStrng='';
+				foreach($addressConditions AS $condition){
+					switch($condition->junctor){
+						case 1:
+							$condStrng.='AND ( ';
+							break;
+						case 2: 
+							$condStrng.='OR ( ';
+							break;
+						default:
+							$condStrng='(';
+							break;
+					}
+					
+					$condition->conditionaloperator;
+					switch($condition->argument){
+						case 1:
+							$condStrng.='gender ';
+							break;
+						case 2: 
+							$condStrng.='first_name ';
+							break;
+						case 3: 
+							$condStrng.='last_name ';
+							break;
+						case 4: 
+							$condStrng.='email ';
+							break;
+						case 5: 
+							$condStrng.='zip ';
+							break;
+						case 2: 
+							$condStrng.='region ';
+							break;
+						case 2: 
+							$condStrng.='city ';
+							break;
+						case 2: 
+							$condStrng.='province ';
+							break;						
+						
+					}
+					
+					switch($condition->operator){
+						case 1:
+							if($condition->conditionaloperator == 1){
+								$condStrng.= '=';
+							}else if($condition->conditionaloperator == 2){
+								$condStrng.= '<>';
+							}						 
+						break;
+						case 2:
+							if($condition->conditionaloperator == 1){
+								$condStrng.= 'LIKE ';
+							}else if($condition->conditionaloperator == 2){
+								$condStrng.= 'NOT LIKE ';
+							}						 
+						break;
+						case 3:
+							if($condition->conditionaloperator == 1){
+								$condStrng.= '>';
+							}else if($condition->conditionaloperator == 2){
+								$condStrng.= '<=';
+							}						 
+						break;
+						case 4:
+							if($condition->conditionaloperator == 1){
+								$condStrng.= '>=';
+							}else if($condition->conditionaloperator == 2){
+								$condStrng.= '<';
+							}						 
+						break;
+						case 5:
+							if($condition->conditionaloperator == 1){
+								$condStrng.= '<';
+							}else if($condition->conditionaloperator == 2){
+								$condStrng.= '>=';
+							}						 
+						break;
+						case 6:
+							if($condition->conditionaloperator == 1){
+								$condStrng.= '<=';
+							}else if($condition->conditionaloperator == 2){
+								$condStrng.= '>';
+							}						 
+						break;
+					}
+					
+					if($condition->operator==2 ){
+						$condStrng.='"%'.$condition->argumentcondition.'%") ';
+						
+					}else{
+						$condStrng.=$condition->argumentcondition.') ';
+					}
+					
+				}
+				var_dump($condStrng);
 				/*TODO FORM QUERY FROM CONDITIONS*/
 				$adressFolder=$mailing->getAddressfolder();
-				$addresses=$adressFolder->getAddresses();
+				$addresses=$adressFolder->getAddresses(array(
+					'conditions'=>$condStrng
+				));
 				$configuration=$mailing->getConfiguration();					
 				$bodyRaw=file_get_contents('../public/mails/mailobject_'.$mailing->mailobjectuid.'.html');
 				if($configuration->clicktracking==1){

@@ -516,6 +516,8 @@ CREATE TABLE addresses (
 	company varchar(255) COLLATE utf8_general_ci NOT NULL,
 	segmentobjects int(11) DEFAULT '0' NOT NULL,		
 	zip int(11) DEFAULT '0' NOT NULL,		
+	region int(11) DEFAULT '0' NOT NULL,
+	province varchar(255) COLLATE utf8_general_ci NOT NULL,			
 	userlanguage int(11) DEFAULT '0' NOT NULL,
 	gender tinyint(4) DEFAULT '0' NOT NULL,
 	formal tinyint(4) DEFAULT '1' NOT NULL,
