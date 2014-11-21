@@ -285,7 +285,7 @@ class CampaignobjectsController extends ControllerBase
 								'inprogress'=>0,
 								'sent'=>0,
 								'campaignuid'=>$campaignobjectRecord->uid,						
-								'mailobjectuid'=>$sendoutobject->mailobjectuid,
+								'mailobjectuid'=>$rawArray['mailobjectB'],
 								'configurationuid'=>$rawArray['configurationuidB'],
 								'subject'=>$rawArray['subjectB'],
 								'abtest'=>1,
@@ -301,9 +301,9 @@ class CampaignobjectsController extends ControllerBase
 								$sendoutobjectB->assign(array(							
 									'tstamp' => $senddate,
 									'cruser_id' =>$this->session->get('auth')['uid'],														
-									'mailobjectuid'=>intval($rawArray['mailobjectuid']),
-									'configurationuid'=>intval($rawArray['configurationuid']),
-									'subject'=>$rawArray['subject'],
+									'mailobjectuid'=>intval($rawArray['mailobjectB']),
+									'configurationuid'=>intval($rawArray['configurationuidB']),
+									'subject'=>$rawArray['subjectB'],
 									'abtest'=>1,
 									'segmentobjectuid'=>intval($rawArray['segmentobjectuid'])
 								));

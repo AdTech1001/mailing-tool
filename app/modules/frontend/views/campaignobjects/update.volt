@@ -35,6 +35,10 @@
 	<label>{{ tr('abtest')}}</label><br>
 	 <span class="glyphicon glyphicon-transfer"></span> <input type="checkbox" id="abtestChecker" name="abtest"><br>
 	<div id="btestForm" class="hidden">
+		<label>{{ tr('selectMailobjectLabelB')}}</label><br>
+	<div id="mailobjectSelectWrapperB">
+		
+	</div><br>
 		<label>{{ tr('addConfigurationobjectB')}}</label><br>
 	<div id="configurationobjectSelectWrapperB">
 		
@@ -215,9 +219,9 @@
 			<input type="hidden" value="0" name="configurationobjectB" >			
 			<input type="hidden" value="0" name="dateB" >
 			<input type="hidden" value="0" name="subjectB" >
-			<input type="hidden" value="0" name="abtest" >
-			<input type="hidden" value="0" name="addressfolderuid" >
+			<input type="hidden" value="0" name="abtest" >			
 			<input type="hidden" value="0" name="segmentobjectuid" >
+			<input type="hidden" value="0" name="mailobjectB" >
 			
 		</div>
 	</div>

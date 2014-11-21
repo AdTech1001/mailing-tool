@@ -343,7 +343,7 @@ function Save() {
 		
 		//var elementItself=JSON.stringify(jQuery('#'+elementsPathArr[i])[0].outerHTML);
 		var conditionsJson=getSendoutObjectConditions(elementsPathArr[i]);
-		var elementJson='{"id":"'+elementsPathArr[i]+'","mailobjectuid":'+jQuery(confValues[0]).val()+',"configurationuid":'+jQuery(confValues[1]).val()+',"tstamp":"'+jQuery(confValues[2]).val()+'","subject":"'+jQuery(confValues[3]).val()+'","configurationuidB":'+jQuery(confValues[4]).val()+',"tstampB":"'+jQuery(confValues[5]).val()+'","subjectB":"'+jQuery(confValues[6]).val()+'","abtest":'+jQuery(confValues[7]).val()+',"segmentobjectuid":'+jQuery(confValues[8]).val()+',"position":{"left":'+jQuery('#'+elementsPathArr[i]).position().left+',"top":'+jQuery('#'+elementsPathArr[i]).position().top+'}, "conditions":'+conditionsJson+'}';
+		var elementJson='{"id":"'+elementsPathArr[i]+'","mailobjectuid":'+jQuery(confValues[0]).val()+',"configurationuid":'+jQuery(confValues[1]).val()+',"tstamp":"'+jQuery(confValues[2]).val()+'","subject":"'+jQuery(confValues[3]).val()+'","configurationuidB":'+jQuery(confValues[4]).val()+',"tstampB":"'+jQuery(confValues[5]).val()+'","subjectB":"'+jQuery(confValues[6]).val()+'","abtest":'+jQuery(confValues[7]).val()+',"segmentobjectuid":'+jQuery(confValues[8]).val()+',"mailobjectB":'+jQuery(confValues[9]).val()+',"position":{"left":'+jQuery('#'+elementsPathArr[i]).position().left+',"top":'+jQuery('#'+elementsPathArr[i]).position().top+'}, "conditions":'+conditionsJson+'}';
 		sendoutobjectelements+='&sendoutobjectelements[]='+elementJson;
 		
 
@@ -432,6 +432,14 @@ var selectMailobject=function (data){
 	selectString+='</select>';
 	jQuery('#mailobjectSelectWrapper').html(selectString);
 	
+	var selectStringB='<select id="mailobjectSelectElementsB">';
+	for(var i=0;i<jsObject.length;i++){
+		selectStringB+='<option value="'+jsObject[i].uid+'">'+jsObject[i].title+' | '+jsObject[i].date+'</option>';
+	}
+	selectStringB+='</select>';
+	jQuery('#mailobjectSelectWrapperB').html(selectStringB);
+	
+	
 	ajaxIt('addressfolders','','',selectAdressfolder);
 };
 
@@ -464,6 +472,7 @@ jQuery('#mailobjectSelect button.ok').click(function(e){
 	}
 	jQuery(elementDefinition[7]).val(abtest);
 	jQuery(elementDefinition[8]).val(jQuery('#addressfoldersSelectElements').val());	
+	jQuery(elementDefinition[9]).val(jQuery('#mailobjectSelectElementsB').val());	
 	var infoLayer=jQuery(activeElement).parent().parent().find('.info');
 	if(infoLayer.length==0){
 		jQuery(activeElement).parent().parent().append('<div class="info glyphicon glyphicon-info-sign"></div>');
@@ -524,7 +533,7 @@ var selectConfigurationobject= function(data){
 			jQuery('#btestForm').removeClass('hidden');
 		}
 		jQuery('#addressfoldersSelectElements').val(jQuery(activeElCurState[8]).val());
-		
+		jQuery('#mailobjectSelectElementsB').val(jQuery(activeElCurState[9]).val());
 		
 		
 		
@@ -692,6 +701,7 @@ jQuery( "#campaignCreateElements .window" ).draggable({
 });
 
 jQuery( "#automationWorkspace" ).droppable({
+		accept: ".window",
       drop: function( event, ui ) {
       	
       	if(!jQuery(ui.draggable).hasClass('jsplumbified')){
@@ -829,4 +839,5 @@ jQuery('document').ready(function(){
 		console.log('erwheg');
 		console.log(jQuery(this).parent().find('input'));
 	});
+	jQuery('.allPurposeLayer').draggable();
 });
