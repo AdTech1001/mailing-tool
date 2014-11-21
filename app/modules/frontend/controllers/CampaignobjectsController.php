@@ -315,7 +315,8 @@ class CampaignobjectsController extends ControllerBase
 						}
 					}
 					
-					if(isset($rawArray['conditions']) && ($sendoutobject->cleared==0 && $sendoutobject->inprogress=0 && $sendoutobject->sent==0)){
+					if(isset($rawArray['conditions']) && $sendoutobject->cleared==0 && $sendoutobject->inprogress==0 && $sendoutobject->sent==0){
+						var_dump($rawArray['conditions']);
 						$addressconditionsPrev=$sendoutobject->getAddressconditions();
 							if($addressconditionsPrev){
 								foreach($addressconditionsPrev as $addressconditionPrevEl){

@@ -1122,6 +1122,11 @@ table.maintable tr.even td{
 #fileToolBar > div{
 	cursor:pointer;
 	margin-left:20px;
+	
+}
+#campaignSave{
+	position: absolute;
+	right: 3px;
 }
 
 #templateCarousel{
@@ -1272,7 +1277,7 @@ table#mapTable{
 	margin-right:5px;
 }
 
-#reviewControls, #reviewControls div{
+#reviewControls{
 	display:block;	
 	margin-left:20px;
 	float:right;

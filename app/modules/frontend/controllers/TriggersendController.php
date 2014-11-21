@@ -39,7 +39,7 @@ class TriggersendController extends Controller
 		if(!$this->request->isPost()){
 			
 			$checktime=microtime(true);
-		file_put_contents('debugger.csv',$checktime.PHP_EOL,FILE_APPEND);
+		file_put_contents('debugger.csv',$checktime.' <-> '.getmypid().PHP_EOL,FILE_APPEND);
 			$this->mailrenderer->addressuid=1;
 			
 			$time=time();
@@ -109,7 +109,7 @@ class TriggersendController extends Controller
 							$insStr="";
 					}
 					$debug=json_encode($mailing);
-					file_put_contents('debuggerGenerate.csv',$checktime.' <-> '.$counter.' <-> '.$debug.'        <->      '.$insStr.PHP_EOL,FILE_APPEND);
+					file_put_contents('debuggerGenerate.csv',getmypid().' <--PID '.$checktime.' <-> '.$counter.' <-> '.$debug.'        <->      '.$insStr.PHP_EOL,FILE_APPEND);
 
 
 				}
@@ -193,7 +193,7 @@ class TriggersendController extends Controller
 				if($mailqueueElement->sent==0){
 				$mailer->send($message, $failures);				
 					$debug2=json_encode($to);
-					file_put_contents('debuggerSend.csv',$checktime.' <-> '.$counter.' <-> '.$debug2.'        <->      '.$debug.PHP_EOL,FILE_APPEND);
+					file_put_contents('debuggerSend.csv',getmypid().' <--PID '.$checktime.' <-> '.$counter.' <-> '.$debug2.'        <->      '.$debug.PHP_EOL,FILE_APPEND);
 				}
 				$mailqueueElement->assign(array(
 					"mailbody"=>$bodyFinal,

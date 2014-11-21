@@ -468,8 +468,8 @@ jQuery('#mailobjectSelect button.ok').click(function(e){
 	if(infoLayer.length==0){
 		jQuery(activeElement).parent().parent().append('<div class="info glyphicon glyphicon-info-sign"></div>');
 	}
-	
-	jQuery(activeElement).html(jQuery('#mailobjectSelect select')[0].selectedOptions[0].innerHTML.split(' | ')[0]);
+	//console.log();
+	jQuery(activeElement).html(jQuery('#mailobjectSelect select')[0][jQuery('#mailobjectSelect select')[0].selectedIndex].text.split(' | ')[0]);
 	jQuery('#abtestChecker').off('change').attr('checked', false);
 	jQuery('#mailobjectSelect').addClass('hidden');
 	jQuery('#btestForm').addClass('hidden');

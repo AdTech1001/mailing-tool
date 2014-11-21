@@ -24,6 +24,13 @@ var pollForTinymce=function(){
 							editor.insertContent('<dynamic>{{' + jQuery('#lastnameTitle').val() + '}}</dynamic>');
 							}
 
+						},
+						{
+						text: jQuery('#titleTitle').val(),
+						onclick: function(){
+							editor.insertContent('<dynamic>{{' + jQuery('#titleTitle').val() + '}}</dynamic>');
+							}
+
 						}
 					]
 					
