@@ -11,23 +11,12 @@ use nltool\Models\Sendoutobjects,
  * @package baywa-nltool\Controllers
  */
 
-class TriggersendController extends Controller
+class TriggersendController extends Triggerauth
 
 {
 	
 	
-	/**
-	 * @param Dispatcher $dispatcher
-	 *
-	 * @return bool
-	 */
-	public function beforeExecuteRoute(Dispatcher $dispatcher)
-	{
-		
-		$environment= $this->config['application']['debug'] ? 'development' : 'production';
-		$baseUri=$this->config['application'][$environment]['staticBaseUri'];
-		$this->view->setVar('baseurl', $baseUri);
-	}
+
 
     /**
      * @return \Phalcon\Http\ResponseInterface

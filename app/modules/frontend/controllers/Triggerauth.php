@@ -18,7 +18,7 @@ class Triggerauth extends Controller
 				
 				$result=$this->oauth->getGrantType('client_credentials')->completeFlow($params);
 				
-				
+				var_dump($result);
 					
 				
 			} catch (\League\OAuth2\Server\Exception\ClientException $e) {

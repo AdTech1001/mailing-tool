@@ -1,5 +1,5 @@
 <?php
-namespace nltool\Modules\Modules\Frontend\Controllers;
+namespace nltool\Modules\Modules\Backend\Controllers;
 use nltool\Models\Addresses as Addresses,
 	nltool\Models\Addressfolders as Addressfolders;	
 
