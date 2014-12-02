@@ -264,7 +264,7 @@ class TriggersendController extends Triggerauth
 			
 			//Mailqueue abarbeiten
 			for($counter=0;$counter<count($mailqueue);$counter++){
-				$checktime=microtime(true);
+				
 				$mailqueueElement=$mailqueue[$counter];
 				
 				$to=array();
@@ -293,12 +293,13 @@ class TriggersendController extends Triggerauth
 				$message->setTo($to);
 				
 				if($mailqueueElement->sent==0){
+					$checktime=microtime(true);
 				$mailer->send($message, $failures);				
 					$debug2=json_encode($to);
 					
 					$endtime=  microtime(true);
 					$timeused=$endtime-$checktime;
-					file_put_contents('debuggerSend.csv',getmypid().' <--PID '.$timeused.' <-> '.$counter.' <-> '.$debug2.'        <->      '.$debug.PHP_EOL,FILE_APPEND);
+					file_put_contents('../app/logs/debuggerSend.csv',getmypid().' <--PID '.$timeused.' <-> '.$counter.' <-> '.$debug2.'        <->      '.$debug.PHP_EOL,FILE_APPEND);
 				}
 				$mailqueueElement->assign(array(
 					"mailbody"=>$bodyFinal,
