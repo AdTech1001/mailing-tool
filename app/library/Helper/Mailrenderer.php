@@ -15,11 +15,12 @@ use Phalcon\Mvc\User\Component,
 class Mailrenderer extends Component{
 	public function writeClicktrackingLinks($body,$mailing){
 		$this->mailingToRender=$mailing;
-		
-		$environment= $this->config['application']['debug'] ? 'development' : 'production';
-		$this->baseUri=$this->config['application'][$environment]['staticBaseUri'];
-		
-		$renderedbody=preg_replace_callback('/(<a\s[^>]*href=\")([http|https][^\"]*)(\"[^>]*>)/siU',  function($matches){
+				
+		preg_match_all('/(<a\s[^>]*href=\")([http|https][^\"]*)(\"[^>]*>)/siU',$body,$matches); 
+		foreach($matches[2] as $key => $value ){
+			$params=explode('?',$value);
+			
+			$url=$params[0];
 			
 			$time=time();
 			$jumplink=new Linklookup();
@@ -32,23 +33,24 @@ class Mailrenderer extends Component{
 				"campaignuid"=>$this->mailingToRender->campaignuid,
 				"mailobjectuid"=>$this->mailingToRender->mailobjectuid,
 				"sendoutobjectuid"=>$this->mailingToRender->uid,
-				"url"=>$matches[2],
-				"addressuid"=>0
+				"url"=>$url,
+				"addressuid"=>0,
+				"linknumber"=>$key
 			));
 			$jumplink->save();
-			return $matches[1].'http://'.$this->request->getHttpHost().$this->baseUri.'linkreferer/'.$jumplink->uid.$matches[3];
-		},$body);
+		}
 		
-		
-		return $renderedbody;
 	}
 	
-	public function renderFinal($body,$addressuid,$mailinguid){
+	public function renderFinal($body,$addressuid,$mailinguid, $linkKeyMap){
 				
 		$this->currentaddressuid=$addressuid;
 		$this->mailinguid=$mailinguid;
 		$environment= $this->config['application']['debug'] ? 'development' : 'production';
 		$this->baseUri=$this->config['application'][$environment]['staticBaseUri'];		
+		$this->key=-1;
+		$this->linkkeymap=$linkKeyMap;
+		
 		$renderedbody=preg_replace_callback('/(<a\s[^>]*href=\")([http|https][^\"]*)(\"[^>]*>)/siU', 'self::renderFinalCallback' ,$body);		
 		$finalizedBody=preg_replace_callback('/<body[^>]*>/im',"self::addOpenmailerBlankImage",$renderedbody);
 				
@@ -56,7 +58,13 @@ class Mailrenderer extends Component{
 	}
 	
 	public function renderFinalCallback($matches){						
-			return $matches[1].$matches[2].'/'.$this->currentaddressuid.$matches[3];
+			$params='';
+			$urlArray=explode('?',$matches[2]);
+			if(count($urlArray)>1){
+				$params='?'.$urlArray[1];
+			}
+			$this->key++;
+			return $matches[1].'http://'.$this->request->getHttpHost().$this->baseUri.'linkreferer/'.$this->linkkeymap[$this->key].'/'.$this->currentaddressuid.'/'.$params.$matches[3];			
 	}
 	
 	public function addOpenmailerBlankImage($matches){

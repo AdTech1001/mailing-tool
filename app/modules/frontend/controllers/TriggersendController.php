@@ -26,9 +26,9 @@ class TriggersendController extends Triggerauth
 		
 		
 		if($this->request->isPost()){
-			echo('hello');
+		
 			$checktime=microtime(true);
-		file_put_contents('debugger.csv',$checktime.' <-> '.getmypid().PHP_EOL,FILE_APPEND);
+		
 			$this->mailrenderer->addressuid=1;
 			
 			$time=time();
@@ -194,8 +194,8 @@ class TriggersendController extends Triggerauth
 							$this->di->get('db')->query("INSERT INTO Mailqueue ".$insField." VALUES ".$insStr);
 							$insStr="";
 					}
-					$debug=json_encode($mailing);
-					file_put_contents('debuggerGenerate.csv',getmypid().' <--PID '.$checktime.' <-> '.$counter.' <-> '.$debug.'        <->      '.$insStr.PHP_EOL,FILE_APPEND);
+					
+					
 
 
 				}
@@ -248,10 +248,20 @@ class TriggersendController extends Triggerauth
 			$mailer = \Swift_Mailer::newInstance($transport);				
 			$mailer->registerPlugin(new \Swift_Plugins_AntiFloodPlugin(100,30));	
 			if($configuration->clicktracking==1){
-				$bodyPrerendered=$this->mailrenderer->writeClicktrackingLinks($bodyRaw,$mailing);
-			}else{
-				$bodyPrerendered=$bodyRaw;
+				$this->mailrenderer->writeClicktrackingLinks($bodyRaw,$mailing);
+				$links=Linklookup::find(array(
+					'conditions'=>'deleted=0 AND hidden=0 AND sendoutobjectuid = ?1',
+					'bind'=> array(
+						1=>$mailing->uid
+					),
+					'order'=>'linknumber ASC'
+				));
+				$linkKeyMap=array();
+				foreach($links as $link){
+					$linkKeyMap[$link->linknumber]=$link->uid;
+				}
 			}
+			
 			//Mailqueue abarbeiten
 			for($counter=0;$counter<count($mailqueue);$counter++){
 				$checktime=microtime(true);
@@ -263,17 +273,16 @@ class TriggersendController extends Triggerauth
 				$addressDebug=json_encode($address);
 			
 
-				$body=$this->mailrenderer->renderVars($bodyPrerendered,$address);
+				$body=$this->mailrenderer->renderVars($bodyRaw,$address);
 				
 				if($configuration->clicktracking==1){
 					
 					
-					$bodyFinal=$this->mailrenderer->renderFinal($body,$address->uid,$mailing->uid);								
+					$bodyFinal=$this->mailrenderer->renderFinal($body,$address->uid,$mailing->uid,$linkKeyMap);								
 				}else{
 					$bodyFinal=$body;
 				}
-				$endtime=  microtime(true);
-					$timeused=$endtime-$checktime;
+				
 				 $message = \Swift_Message::newInstance($mailing->subject)
 							->setSender(array($configuration->sendermail => $configuration->sendername))
 							->setFrom(array($configuration->sendermail => $configuration->sendername))
@@ -287,7 +296,8 @@ class TriggersendController extends Triggerauth
 				$mailer->send($message, $failures);				
 					$debug2=json_encode($to);
 					
-					
+					$endtime=  microtime(true);
+					$timeused=$endtime-$checktime;
 					file_put_contents('debuggerSend.csv',getmypid().' <--PID '.$timeused.' <-> '.$counter.' <-> '.$debug2.'        <->      '.$debug.PHP_EOL,FILE_APPEND);
 				}
 				$mailqueueElement->assign(array(

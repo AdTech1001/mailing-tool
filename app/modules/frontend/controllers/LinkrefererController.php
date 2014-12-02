@@ -15,6 +15,12 @@ class LinkrefererController extends Controller
 	{
 			$actionName=$this->dispatcher->getActionName();
 			if($actionName=="index"){
+				$callUrl=$_SERVER['REQUEST_URI'];
+				$urlArray=explode('?',$callUrl);
+				$params='';
+				if(count($urlArray)>1){
+					$params='?'.$urlArray[1];
+				}
 				$time=time();
 				$linklookupUid = $this->dispatcher->getParam("uid");
 				$LinklookupRecord = Linklookup::findFirst(array(
@@ -22,7 +28,7 @@ class LinkrefererController extends Controller
 				"bind" => array(1 => $linklookupUid)
 				));
 
-				header('Location: '.$LinklookupRecord->url); 
+				header('Location: '.$LinklookupRecord->url.$params); 
 				$linkClick=new Linkclicks();
 				$linkClick->assign(array(
 					'pid' =>0,

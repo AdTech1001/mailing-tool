@@ -21,15 +21,16 @@ class SubscriptionController extends Controller
 	
 	public function unsubscribeAction(){
 		$this->view->setMainView('baywa');
-		$mailaddress=explode('/',$this->dispatcher->getParam('email'));
 		
-		if(count($mailaddress)>2){
+		$mailaddress=$this->request->getQuery('email','email');
+		$userUid=$this->request->getQuery('id','int');
+		if($mailaddress && $userUid){
 			
 		$address=  Addresses::findFirst(array(
 				'conditions'=>'email LIKE ?1 AND uid = ?2',
 				'bind'=>array(
-					1=>$mailaddress[1],
-					2=>$mailaddress[2]
+					1=>$mailaddress,
+					2=>$userUid
 				)
 				));
 		}else{

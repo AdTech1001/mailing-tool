@@ -586,8 +586,8 @@ CREATE TABLE linklookup(
 	campaignuid int(11) DEFAULT '0' NOT NULL,
 	mailobjectuid int(11) DEFAULT '0' NOT NULL,
 	sendoutobjectuid int(11) DEFAULT '0' NOT NULL,
-	url text,
-	addressuid int(11) DEFAULT '0' NOT NULL,
+	url text,	
+	linknumber int(11) DEFAULT '0' NOT NULL,
 	PRIMARY KEY (uid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
