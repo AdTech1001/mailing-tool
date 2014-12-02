@@ -168,6 +168,8 @@ $messages = array(
 	"testmailLabel"=>"Testmail versenden",
 	"reviewed"=>"überprüft",
 	"cleared"=>"freigeben",
-	"review" => "Freigabe"
+	"review" => "Freigabe",
+	"unsubscribeSuccessful" => "Sie wurden vom Newsletter abgemeldet",
+	"unsubscribeError" => "Bei der Abmeldung ist ein Fehler aufgetreten"
 );
 ?>

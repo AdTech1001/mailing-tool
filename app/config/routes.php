@@ -131,6 +131,17 @@ $router->add(
 	)
 );
 
+$router->add(
+	'/{language:[a-z]{2}}/subscription/unsubscribe/:params[/]{0,1}', 
+	array(	
+		'controller' => "subscription",
+		'action' => "unsubscribe",	
+		'language'=>1,
+		'email'=>2,
+		'module'=>'frontend',
+		'namespace'  => 'nltool\Modules\Modules\Frontend\Controllers'
+	)
+);
 
 
 $router->add(
@@ -288,6 +299,8 @@ $router->add(
 		'namespace'  => 'nltool\Modules\Modules\Frontend\Controllers',
     )
 );
+
+
 
 
 $router->handle();

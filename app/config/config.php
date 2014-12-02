@@ -60,11 +60,10 @@ return new \Phalcon\Config(array(
 		),
 		'oauth'=>array(
 			'adapter'  => 'Mysql',
-            'host'     => 'localhost',
-            'port'     => 3306,
+            'host'     => 'localhost',            
             'username' => 'root',
             'password' => '',
-            'dbname'   => 'oauth2'
+            'dbname'   => 'bayw-nltool'
 )
 	)
     

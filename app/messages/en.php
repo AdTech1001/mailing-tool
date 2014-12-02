@@ -167,7 +167,9 @@ $messages = array(
 	"testmailLabel"=>"send testmail",
 	"reviewed"=>"reviewed",
 	"cleared"=>"cleared",
-	"review" => "review"
+	"review" => "review",
+	"unsubscribeSuccessful" => "you have successfully unsubscribed from the service",
+	"unsubscribeError" => "there was an error during your unsubscription process"
 	
 );
 

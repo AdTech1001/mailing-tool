@@ -617,3 +617,7 @@ CREATE TABLE openclicks(
 	addressuid int(11) DEFAULT '0' NOT NULL,	
 	PRIMARY KEY (uid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+
+
+

@@ -12,7 +12,7 @@ use Phalcon\Session\Adapter\Files as SessionAdapter;
 use Phalcon\Cache\Backend\File as FileCache;
 use Phalcon\Mvc\Dispatcher as MvcDispatcher;
 use nltool\Notifications\Checker as NotificationsChecker;
-use Sum\Oauth2 AS Oauth2;
+//use Sum\Oauth2 AS Oauth2;
 use nltool\Auth\Auth;
 use nltool\Acl\Acl;
 use nltool\Helper\Mailrenderer;
@@ -61,7 +61,7 @@ $di->set(
             
 
             //Listen all the database events
-            /*
+            
 			  $logger = new FileLogger(APP_PATH . "/app/logs/db.log");
 			  $eventsManager->attach(
                 'db',
@@ -72,7 +72,7 @@ $di->set(
                         $logger->log($connection->getSQLStatement(), \Phalcon\Logger::INFO);
                     }
                 }
-            );*/
+            );
 
             //Assign the eventsManager to the db adapter instance
             $connection->setEventsManager($eventsManager);
@@ -248,7 +248,7 @@ $di->set('mailrenderer', function(){
 	return new Mailrenderer();
 });
 
-$di->set('oauth', function() use ($config) {
+/*$di->set('oauth', function() use ($config) {
 		$oauthdb = new Phalcon\Db\Adapter\Pdo\Mysql($config->database->oauth->toArray());
 		
 		 $server = new \League\OAuth2\Server\Authorization(
@@ -269,3 +269,20 @@ $di->set('oauth', function() use ($config) {
 		 $server->addGrantType(new League\OAuth2\Server\Grant\ClientCredentials());
 		 return $server;
 	 });
+	 
+$di->set('resource' , function () use ($config) {
+    $oauthdb = new DbAdapter(
+        $config->database->oauth->toArray()
+    );
+    $resource = new League\OAuth2\Server\Resource(
+        new \Sum\Oauth2\Server\Storage\Pdo\Mysql\Session($oauthdb)
+    );
+    ##only exist on my develop fork
+    #$resource->setMsg([
+    #    'invalidToken' => 'Token tidak benar',
+    #    'missingToken' => 'Token tidak ditemukan'
+    #]);
+    $resource->setRequest(new \Sum\Oauth2\Server\Storage\Pdo\Mysql\Request());
+
+    return $resource;
+});*/

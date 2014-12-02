@@ -25,8 +25,8 @@ class TriggersendController extends Triggerauth
     {
 		
 		
-		if(!$this->request->isPost()){
-			
+		if($this->request->isPost()){
+			echo('hello');
 			$checktime=microtime(true);
 		file_put_contents('debugger.csv',$checktime.' <-> '.getmypid().PHP_EOL,FILE_APPEND);
 			$this->mailrenderer->addressuid=1;
@@ -51,7 +51,7 @@ class TriggersendController extends Triggerauth
 							$condStrng.='OR ( ';
 							break;
 						default:
-							$condStrng='(';
+							$condStrng=' AND (';
 							break;
 					}
 					
@@ -137,17 +137,15 @@ class TriggersendController extends Triggerauth
 					}
 					
 				}
-				var_dump($condStrng);
+				
 				/*TODO FORM QUERY FROM CONDITIONS*/
 				$adressFolder=$mailing->getAddressfolder();
 				$addresses=$adressFolder->getAddresses(array(
-					'conditions'=>$condStrng
+					'conditions'=>'deleted=0 AND hidden=0 '.$condStrng
 				));
 				$configuration=$mailing->getConfiguration();					
-				$bodyRaw=file_get_contents('../public/mails/mailobject_'.$mailing->mailobjectuid.'.html');
-				if($configuration->clicktracking==1){
-							$bodyRaw=$this->mailrenderer->writeClicktrackingLinks($bodyRaw,$mailing);
-						}
+				//$bodyRaw=file_get_contents('../public/mails/mailobject_'.$mailing->mailobjectuid.'.html');
+				
 				
 
 				// First build up Mailqueue, then Mail
@@ -227,8 +225,8 @@ class TriggersendController extends Triggerauth
 	}
 	
 	public function sendAction(){
-		$checktime=microtime(true);
-		if(!$this->request->isPost()){
+		
+		if($this->request->isPost()){
 			
 			$mailing= Sendoutobjects::findFirst(array(
 				"conditions" => "deleted=0 AND hidden=0 AND inprogress=1 AND reviewed=1 AND cleared=1  AND sent=0",				
@@ -244,17 +242,19 @@ class TriggersendController extends Triggerauth
 			));
 			
 			$bodyRaw=file_get_contents('../public/mails/mailobject_'.$mailing->mailobjectuid.'.html');
-			if($configuration->clicktracking==1){
-						$bodyRaw=$this->mailrenderer->writeClicktrackingLinks($bodyRaw,$mailing);
-			}
+			
 			$counter=0;
 			$transport = \Swift_SmtpTransport::newInstance($this->config['smtp']['host'],$this->config['smtp']['port'] )->setUsername($this->config['smtp']['username'])->setPassword($this->config['smtp']['password']);
 			$mailer = \Swift_Mailer::newInstance($transport);				
 			$mailer->registerPlugin(new \Swift_Plugins_AntiFloodPlugin(100,30));	
-			
-			
+			if($configuration->clicktracking==1){
+				$bodyPrerendered=$this->mailrenderer->writeClicktrackingLinks($bodyRaw,$mailing);
+			}else{
+				$bodyPrerendered=$bodyRaw;
+			}
 			//Mailqueue abarbeiten
 			for($counter=0;$counter<count($mailqueue);$counter++){
+				$checktime=microtime(true);
 				$mailqueueElement=$mailqueue[$counter];
 				
 				$to=array();
@@ -263,13 +263,17 @@ class TriggersendController extends Triggerauth
 				$addressDebug=json_encode($address);
 			
 
-				$body=$this->mailrenderer->renderVars($bodyRaw,$address);
+				$body=$this->mailrenderer->renderVars($bodyPrerendered,$address);
+				
 				if($configuration->clicktracking==1){
+					
+					
 					$bodyFinal=$this->mailrenderer->renderFinal($body,$address->uid,$mailing->uid);								
 				}else{
 					$bodyFinal=$body;
 				}
-				
+				$endtime=  microtime(true);
+					$timeused=$endtime-$checktime;
 				 $message = \Swift_Message::newInstance($mailing->subject)
 							->setSender(array($configuration->sendermail => $configuration->sendername))
 							->setFrom(array($configuration->sendermail => $configuration->sendername))
@@ -278,10 +282,13 @@ class TriggersendController extends Triggerauth
 				$message->setBody($bodyFinal, 'text/html');
 				$to=array($address->email => $address->first_name.' '.$address->last_name);
 				$message->setTo($to);
+				
 				if($mailqueueElement->sent==0){
 				$mailer->send($message, $failures);				
 					$debug2=json_encode($to);
-					file_put_contents('debuggerSend.csv',getmypid().' <--PID '.$checktime.' <-> '.$counter.' <-> '.$debug2.'        <->      '.$debug.PHP_EOL,FILE_APPEND);
+					
+					
+					file_put_contents('debuggerSend.csv',getmypid().' <--PID '.$timeused.' <-> '.$counter.' <-> '.$debug2.'        <->      '.$debug.PHP_EOL,FILE_APPEND);
 				}
 				$mailqueueElement->assign(array(
 					"mailbody"=>$bodyFinal,

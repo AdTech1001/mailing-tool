@@ -65,12 +65,14 @@ class Mailrenderer extends Component{
 	
 	public function renderVars($body,$address){
 		$fieldMap=array(
+			'userid'=>'uid',
+			'Userid'=>'uid',
 			'Anrede' => 'salutation',
 			'Vorname' => 'first_name',
 			'Nachname' => 'last_name',
 			'Titel' => 'title',
 			'Unternehmen' => 'company',
-			'Email' => 'Email'
+			'Email' => 'email'
 		); //TODO komplettieren
 		
 		preg_match_all('/{{(.*)}}/siU', $body, $matches);

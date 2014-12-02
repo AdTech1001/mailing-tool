@@ -1,7 +1,7 @@
 <?php
 namespace nltool\Models;
 use Phalcon\Mvc\Model;
-	
+Model::setup(['notNullValidations' => false]);
 
 
 /**
