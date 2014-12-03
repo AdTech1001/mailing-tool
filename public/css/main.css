@@ -1309,7 +1309,7 @@ table#mapTable{
 	}
 	nav{
 		float:right;
-		width:1100px;
+		/*width:1100px;*/
 		height:100%;
 		
 	}
@@ -1317,9 +1317,33 @@ table#mapTable{
 		float:left;
 		border-right:#e3e3e3 1px solid;
 		
+		
 		/*width:150px;*/
 		
 	}
+	/*nav ul.navbar-nav > li:after,nav ul.navbar-nav > li:before{
+		left: 100%;
+	top: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	}
+	nav ul.navbar-nav > li:after{
+		border-color: rgba(136, 183, 213, 0);
+	border-left-color: #eee;
+	border-width: 35px;
+	margin-top: -35px;
+	}
+	nav ul.navbar-nav > li:before{
+		border-color: rgba(0, 0, 0, 0);
+	border-left-color: #e3e3e3 ;
+	border-width: 36px;
+	margin-top: -36px;
+	}*/
+	
 	 nav ul.sercive-nav li{
 		border:none;
 		width:auto;

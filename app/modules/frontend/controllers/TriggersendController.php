@@ -186,7 +186,7 @@ class TriggersendController extends Triggerauth
 						$insStr.='('.$time.','.$address->uid.','.$mailing->campaignuid.','.$mailing->uid.','.$mailing->mailobjectuid.','.$mailing->configurationuid.',"'.$address->email.'","'.$configuration->sendermail.'","'.$configuration->sendername.'","'.$configuration->sendername.'","'.$configuration->answermail.'","'.$configuration->answername.'","'.$configuration->returnpath.'","'.$configuration->organisation.'"),';						
 					}
 					
-					if($counter%1000==0 && $counter !=0){
+					if($counter%500==0 && $counter !=0){
 							
 							$insStr=substr($insStr,0,-1);
 							//file_put_contents('log.txt', "INSERT INTO Mailqueue ".$insField." VALUES ".$insStr);
@@ -250,7 +250,7 @@ class TriggersendController extends Triggerauth
 			if($configuration->clicktracking==1){
 				$this->mailrenderer->writeClicktrackingLinks($bodyRaw,$mailing);
 				$links=Linklookup::find(array(
-					'conditions'=>'deleted=0 AND hidden=0 AND sendoutobjectuid = ?1',
+					'conditions'=>'deleted=0 AND hidden=0 AND addressuid=0 AND sendoutobjectuid = ?1',
 					'bind'=> array(
 						1=>$mailing->uid
 					),
@@ -274,7 +274,11 @@ class TriggersendController extends Triggerauth
 			
 
 				$body=$this->mailrenderer->renderVars($bodyRaw,$address);
-				
+				/*
+				 * Für die geplanten volldynamische Inhalte entstehen an dieser Stelle neue Links, 
+				 * diese müssen ins Linklookup eingefügt und eine neue individuelle Linkmap erstellt,
+				 * da der Renderer einfach $match[n] mit $linkKeyMap[n] in Verein bringt.
+				 */
 				if($configuration->clicktracking==1){
 					
 					

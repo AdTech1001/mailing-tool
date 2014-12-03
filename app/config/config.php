@@ -57,14 +57,8 @@ return new \Phalcon\Config(array(
 			'password' => '',
 			'dbname'   => 'bayw-nltool',
 			'charset'  => 'utf8'
-		),
-		'oauth'=>array(
-			'adapter'  => 'Mysql',
-            'host'     => 'localhost',            
-            'username' => 'root',
-            'password' => '',
-            'dbname'   => 'bayw-nltool'
-)
+		)
+		
 	)
     
 ));

@@ -404,7 +404,7 @@ CREATE TABLE sendoutobjects (
 	configurationuid int(11) DEFAULT '0' NOT NULL,
 	subject varchar(255) COLLATE utf8_general_ci NOT NULL,	
 	abtest tinyint(4) DEFAULT '0' NOT NULL,
-	segmentobjectuid int(11) DEFAULT '0' NOT NULL,
+	distributoruid int(11) DEFAULT '0' NOT NULL,
 	domid varchar(255) COLLATE utf8_general_ci NOT NULL,	
 	PRIMARY KEY (uid),
 	KEY campaignuid (campaignuid),
@@ -469,6 +469,39 @@ CREATE TABLE segmentobjects (
   PRIMARY KEY (uid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+DROP TABLE IF EXISTS distributors;
+CREATE TABLE distributors (
+	uid int(11) NOT NULL auto_increment,
+	pid int(11) DEFAULT '0' NOT NULL,
+	tstamp int(11) DEFAULT '0' NOT NULL,
+	crdate int(11) DEFAULT '0' NOT NULL,
+	cruser_id int(11) DEFAULT '0' NOT NULL,
+	deleted tinyint(4) DEFAULT '0' NOT NULL,
+	hidden tinyint(4) DEFAULT '0' NOT NULL,	
+	usergroup int(11) DEFAULT '0' NOT NULL,
+	campaignid int(11) DEFAULT '0' NOT NULL,	
+	title varchar(255) COLLATE utf8_general_ci NOT NULL,	
+	hashtags varchar(255) COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (uid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+DROP TABLE IF EXISTS distributors_segmentobjects_lookup;
+CREATE TABLE distributor_segmentobjects_lookup (
+	uid int(11) NOT NULL auto_increment,	
+	deleted tinyint(4) DEFAULT '0' NOT NULL,	
+	uid_local int(11) DEFAULT '0' NOT NULL,
+	uid_foreign int(11) DEFAULT '0' NOT NULL,		
+  PRIMARY KEY (uid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+DROP TABLE IF EXISTS distributors_addressfolders_lookup;
+CREATE TABLE distributor_addressfolders_lookup (
+	uid int(11) NOT NULL auto_increment,	
+	deleted tinyint(4) DEFAULT '0' NOT NULL,	
+	uid_local int(11) DEFAULT '0' NOT NULL,
+	uid_foreign int(11) DEFAULT '0' NOT NULL,		
+  PRIMARY KEY (uid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS addressfolders;
 CREATE TABLE addressfolders (
@@ -586,8 +619,9 @@ CREATE TABLE linklookup(
 	campaignuid int(11) DEFAULT '0' NOT NULL,
 	mailobjectuid int(11) DEFAULT '0' NOT NULL,
 	sendoutobjectuid int(11) DEFAULT '0' NOT NULL,
-	url text,	
+	url mediumtext,	
 	linknumber int(11) DEFAULT '0' NOT NULL,
+	params mediumtext,	
 	PRIMARY KEY (uid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 

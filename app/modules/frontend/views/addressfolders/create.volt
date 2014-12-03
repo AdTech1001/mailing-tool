@@ -30,7 +30,7 @@
 </form>
 </div>
 <div id="mapWrapper" class="{{ maphideshow }}">
-	{{ form(language~'/addresses/create/', 'method': 'post') }}
+	{{ form(language~'/addressfolders/create/', 'method': 'post') }}
 
 
 <label>{{ tr('addressFolderSelectLabel') }}</label><br>

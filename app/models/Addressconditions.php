@@ -4,7 +4,7 @@ use Phalcon\Mvc\Model;
 
 
 /**
- * Description of Contentobjects
+ * Description of Addressconditions
  *
  * @author Philipp-PC
  */

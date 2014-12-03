@@ -35,7 +35,8 @@ class Mailrenderer extends Component{
 				"sendoutobjectuid"=>$this->mailingToRender->uid,
 				"url"=>$url,
 				"addressuid"=>0,
-				"linknumber"=>$key
+				"linknumber"=>$key,
+				"params"=>isset($params[1]) ?: ''
 			));
 			$jumplink->save();
 		}

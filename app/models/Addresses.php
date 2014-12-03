@@ -4,7 +4,7 @@ use Phalcon\Mvc\Model;
 Model::setup(['notNullValidations' => false]);
 
 /**
- * Description of Contentobjects
+ * Description of Addresses
  *
  * @author Philipp-PC
  */

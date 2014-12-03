@@ -1,6 +1,6 @@
 <div class="container">
 	{{ content() }}
-{%- if session.get('auth') -%}
+
 {%- if unsubscribe -%}
 <h1>{{tr('unsubscribeSuccessful')}}</h1>
 {%- else -%}
@@ -8,6 +8,6 @@
 
 {%- endif -%}
 
-{%- endif -%}
+
 
 </div>
