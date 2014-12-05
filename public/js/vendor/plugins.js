@@ -21,6 +21,7 @@ require.config({
 		datetimepicker:'jquery.datetimepicker',
 		addresses:'addresses',
 		addressfolders:'addressfolders',
+		segmentobjects:'segmentobjects',
 		datatables:'jquery.dataTables'		
     }
 });

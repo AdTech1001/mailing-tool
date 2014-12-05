@@ -77,7 +77,7 @@
     {{ submit_button(tr('ok')) }}
 
 </form>
-</div>
+
 
 {%- endif -%}
 
