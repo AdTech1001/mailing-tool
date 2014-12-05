@@ -228,7 +228,7 @@ class CampaignobjectsController extends ControllerBase
 							'configurationuid'=>intval($rawArray['configurationuid']),
 							'subject'=>$rawArray['subject'],
 							'abtest'=>intval($rawArray['abtest']),
-							'segmentobjectuid'=>intval($rawArray['segmentobjectuid']),
+							'distributoruid'=>intval($rawArray['distributoruid']),
 							'domid'=>$rawArray['id']
 
 						));
@@ -244,7 +244,7 @@ class CampaignobjectsController extends ControllerBase
 								'configurationuid'=>intval($rawArray['configurationuid']),
 								'subject'=>$rawArray['subject'],
 								'abtest'=>intval($rawArray['abtest']),
-								'segmentobjectuid'=>intval($rawArray['segmentobjectuid'])							
+								'distributoruid'=>intval($rawArray['distributoruid'])							
 							));
 							if(!$sendoutobject->update()){
 								$this->flash->error($sendoutobject->getMessages());
@@ -289,7 +289,7 @@ class CampaignobjectsController extends ControllerBase
 								'configurationuid'=>$rawArray['configurationuidB'],
 								'subject'=>$rawArray['subjectB'],
 								'abtest'=>1,
-								'segmentobjectuid'=>$sendoutobject->segmentobjectuid,
+								'distributoruid'=>$sendoutobject->distributoruid,
 								'domid'=>$rawArray['id']
 
 							));
@@ -305,7 +305,7 @@ class CampaignobjectsController extends ControllerBase
 									'configurationuid'=>intval($rawArray['configurationuidB']),
 									'subject'=>$rawArray['subjectB'],
 									'abtest'=>1,
-									'segmentobjectuid'=>intval($rawArray['segmentobjectuid'])
+									'distributoruid'=>intval($rawArray['distributoruid'])
 								));
 								if(!$sendoutobjectB->update()){
 									$this->flash->error($sendoutobjectB->getMessages());

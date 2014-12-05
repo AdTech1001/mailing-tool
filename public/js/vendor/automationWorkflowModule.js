@@ -343,7 +343,7 @@ function Save() {
 		
 		//var elementItself=JSON.stringify(jQuery('#'+elementsPathArr[i])[0].outerHTML);
 		var conditionsJson=getSendoutObjectConditions(elementsPathArr[i]);
-		var elementJson='{"id":"'+elementsPathArr[i]+'","mailobjectuid":'+jQuery(confValues[0]).val()+',"configurationuid":'+jQuery(confValues[1]).val()+',"tstamp":"'+jQuery(confValues[2]).val()+'","subject":"'+jQuery(confValues[3]).val()+'","configurationuidB":'+jQuery(confValues[4]).val()+',"tstampB":"'+jQuery(confValues[5]).val()+'","subjectB":"'+jQuery(confValues[6]).val()+'","abtest":'+jQuery(confValues[7]).val()+',"segmentobjectuid":'+jQuery(confValues[8]).val()+',"mailobjectB":'+jQuery(confValues[9]).val()+',"position":{"left":'+jQuery('#'+elementsPathArr[i]).position().left+',"top":'+jQuery('#'+elementsPathArr[i]).position().top+'}, "conditions":'+conditionsJson+'}';
+		var elementJson='{"id":"'+elementsPathArr[i]+'","mailobjectuid":'+jQuery(confValues[0]).val()+',"configurationuid":'+jQuery(confValues[1]).val()+',"tstamp":"'+jQuery(confValues[2]).val()+'","subject":"'+jQuery(confValues[3]).val()+'","configurationuidB":'+jQuery(confValues[4]).val()+',"tstampB":"'+jQuery(confValues[5]).val()+'","subjectB":"'+jQuery(confValues[6]).val()+'","abtest":'+jQuery(confValues[7]).val()+',"distributoruid":'+jQuery(confValues[8]).val()+',"mailobjectB":'+jQuery(confValues[9]).val()+',"position":{"left":'+jQuery('#'+elementsPathArr[i]).position().left+',"top":'+jQuery('#'+elementsPathArr[i]).position().top+'}, "conditions":'+conditionsJson+'}';
 		sendoutobjectelements+='&sendoutobjectelements[]='+elementJson;
 		
 
@@ -440,7 +440,7 @@ var selectMailobject=function (data){
 	jQuery('#mailobjectSelectWrapperB').html(selectStringB);
 	
 	
-	ajaxIt('addressfolders','','',selectAdressfolder);
+	ajaxIt('distributors','','',selectAdressfolder);
 };
 
 var selectAdressfolder=function(data){

@@ -3,6 +3,8 @@
 {{ content() }}
 <div class="container">	
 {%- if session.get('auth') -%}
+
+{%- if detail -%}
 <h1>{{tr('addressFolderSelectLabel')}}: {{foldertitle}}</h1>
 
 
@@ -42,6 +44,14 @@
         </tfoot>
     </table>
 	{{ hidden_field("folderuid","value": folderuid) }}
+{%- else -%}
+<h1>{{tr('addressFolderSelectLabel')}}</h1>
+<ul class="listviewList">
+	{%- for addressfolder in addressfolders -%}
+	<li><a href='{{ path }}/addressfolders/index/{{ addressfolder.uid }}'>>> {{addressfolder.title}} | {{ date('d.m.Y',addressfolder.tstamp) }}</a></li>
+	{%- endfor -%}
+</ul>
+{%- endif -%}	
 {%- endif -%}
 
 </div>

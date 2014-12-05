@@ -220,7 +220,7 @@
 			<input type="hidden" value="0" name="dateB" >
 			<input type="hidden" value="0" name="subjectB" >
 			<input type="hidden" value="0" name="abtest" >			
-			<input type="hidden" value="0" name="segmentobjectuid" >
+			<input type="hidden" value="0" name="distributoruid" >
 			<input type="hidden" value="0" name="mailobjectB" >
 			
 		</div>

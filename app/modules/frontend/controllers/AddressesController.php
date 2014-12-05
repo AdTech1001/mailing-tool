@@ -87,7 +87,7 @@ class AddressesController extends ControllerBase
 		 */
 			
 
-		$sWhere = " WHERE usergroup = :usergroup: ";
+		$sWhere = " WHERE deleted=0 AND hidden=0 AND usergroup = :usergroup: ";
 		if ( isset($_POST['sSearch']) && $_POST['sSearch'] != "" )
 		{
 			$sWhere .= " AND (";

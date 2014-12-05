@@ -1069,7 +1069,7 @@ table.maintable tr.even td{
 	border:1px solid #fff;
 	padding-top:3px;
 }
-#conditionsForm input, select, textarea{
+#conditionsForm input, #conditionsForm select, #conditionsForm textarea{
 	width:auto;
 }
 #deleteOverlay{

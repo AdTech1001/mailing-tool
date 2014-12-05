@@ -11,6 +11,7 @@ use Phalcon\Mvc\Model;
 class Segmentobjects extends Model{
 	 public function initialize()
     {
-        $this->hasManyToMay("uid", "nltool\Models\Distributors_segmentobjects_lookup", "uid_foreign","uid_local",array('alias' => 'distributors'));
+		$this->hasManyToMany("uid", "nltool\Models\Segmentobjects_addresses_lookup", "uid_local","uid_foreign","nltool\Models\Addresses","uid",array('alias' => 'addresses'));
+        $this->hasManyToMany("uid", "nltool\Models\Distributors_segmentobjects_lookup", "uid_foreign","uid_local","nltool\Models\Distributors","uid",array('alias' => 'distributors'));
     }
 }

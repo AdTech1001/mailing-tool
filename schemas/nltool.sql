@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS permissions (
 	resourceaction varchar(55) NOT NULL,
   PRIMARY KEY (uid),
   KEY profilesid (profileid)
-) ENGINE=InnoDB AUTO_INCREMENT=86 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=utf8;
 
 
 LOCK TABLES permissions WRITE;
@@ -149,7 +149,12 @@ INSERT INTO permissions (uid, crdate, profileid, resourceid, resourceaction) VAL
 (87, NOW(), 1, 18, 'create'),
 (88, NOW(), 1, 18, 'retrieve'),
 (89, NOW(), 1, 18, 'update'),
-(90, NOW(), 1, 18, 'delete');
+(90, NOW(), 1, 18, 'delete'),
+(91, NOW(), 1, 19, 'index'),
+(92, NOW(), 1, 19, 'create'),
+(93, NOW(), 1, 19, 'retrieve'),
+(94, NOW(), 1, 19, 'update'),
+(95, NOW(), 1, 19, 'delete');
 UNLOCK TABLES;
 
 
@@ -168,7 +173,7 @@ CREATE TABLE IF NOT EXISTS resources(
 	hidden tinyint(4) DEFAULT '0' NOT NULL,
 	title varchar(255) NOT NULL,
 	PRIMARY KEY (uid)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 
 LOCK TABLES resources WRITE;
@@ -190,7 +195,8 @@ INSERT INTO resources (uid, crdate, title) VALUES
 (15, NOW(),'segmentobjects'),
 (16, NOW(),'addressconditions'),
 (17, NOW(),'review'),
-(18, NOW(),'testmail');
+(18, NOW(),'testmail'),
+(19, NOW(),'distributors');
 UNLOCK TABLES;
 -- --------------------------------------------------------
 
@@ -469,6 +475,16 @@ CREATE TABLE segmentobjects (
   PRIMARY KEY (uid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+DROP TABLE IF EXISTS segmentobjects_addresses_lookup;
+CREATE TABLE segmentobjects_addresses_lookup (
+	uid int(11) NOT NULL auto_increment,	
+	deleted tinyint(4) DEFAULT '0' NOT NULL,	
+	uid_local int(11) DEFAULT '0' NOT NULL,
+	uid_foreign int(11) DEFAULT '0' NOT NULL,		
+  PRIMARY KEY (uid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+
 DROP TABLE IF EXISTS distributors;
 CREATE TABLE distributors (
 	uid int(11) NOT NULL auto_increment,
@@ -478,8 +494,7 @@ CREATE TABLE distributors (
 	cruser_id int(11) DEFAULT '0' NOT NULL,
 	deleted tinyint(4) DEFAULT '0' NOT NULL,
 	hidden tinyint(4) DEFAULT '0' NOT NULL,	
-	usergroup int(11) DEFAULT '0' NOT NULL,
-	campaignid int(11) DEFAULT '0' NOT NULL,	
+	usergroup int(11) DEFAULT '0' NOT NULL,	
 	title varchar(255) COLLATE utf8_general_ci NOT NULL,	
 	hashtags varchar(255) COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (uid)
@@ -546,8 +561,7 @@ CREATE TABLE addresses (
 	phone varchar(255) COLLATE utf8_general_ci NOT NULL,
     address varchar(255) COLLATE utf8_general_ci NOT NULL,
     city  varchar(255) COLLATE utf8_general_ci NOT NULL,	
-	company varchar(255) COLLATE utf8_general_ci NOT NULL,
-	segmentobjects int(11) DEFAULT '0' NOT NULL,		
+	company varchar(255) COLLATE utf8_general_ci NOT NULL,	
 	zip int(11) DEFAULT '0' NOT NULL,		
 	region int(11) DEFAULT '0' NOT NULL,
 	province varchar(255) COLLATE utf8_general_ci NOT NULL,			
@@ -560,6 +574,7 @@ CREATE TABLE addresses (
   PRIMARY KEY (uid),
 	KEY segmentobjects (segmentobjects)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
 
 
 DROP TABLE IF EXISTS addressconditions;

@@ -4,8 +4,8 @@
 	{%- if session.get('auth') -%}
 
 <div id="mapWrapper" class="{{ filehideshow }}">
-<h1>{{tr('addressesCreateTitle')}}</h1>
-{{ form(language~'/addresses/create/', 'method': 'post', 'enctype': 'multipart/form-data') }}
+<h1>{{tr('addressFoldersCreateTitle')}}</h1>
+{{ form(language~'/addressfolders/create/', 'method': 'post', 'enctype': 'multipart/form-data') }}
 
 
 <label>{{ tr('firstRowContainsFieldName') }}</label><br>

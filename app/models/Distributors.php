@@ -12,8 +12,8 @@ class Distributors extends Model{
 	
 	 public function initialize()
     {
-       $this->hasManyToMay("uid", "nltool\Models\Distributors_segmentobjects_lookup", "uid_local", "uid_foreign", array('alias' => 'segments'));
-	   $this->hasManyToMay("uid", "nltool\Models\Distributors_segmentobjects_lookup", "uid_local", "uid_foreign", array('alias' => 'segments'));
+       $this->hasManyToMany("uid", "nltool\Models\Distributors_segmentobjects_lookup", "uid_local", "uid_foreign", "nltool\Models\Segmentobjects", "uid",array('alias' => 'segments'));
+	   $this->hasManyToMany("uid", "nltool\Models\Distributors_addressfolders_lookup", "uid_local", "uid_foreign", "nltool\Models\Addressfolders", "uid",array('alias' => 'addressfolders'));
     }
 	
 }

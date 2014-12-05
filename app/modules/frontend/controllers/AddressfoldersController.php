@@ -11,14 +11,19 @@ use nltool\Models\Addresses as Addresses,
  */
 class AddressfoldersController extends ControllerBase
 {
+	public $_divider= array(';',',',':','	');
+	public $_dataWrap=array('"',"'");
 	public function indexAction(){
+		$environment= $this->config['application']['debug'] ? 'development' : 'production';
+			$baseUri=$this->config['application'][$environment]['staticBaseUri'];
+			$path=$baseUri.$this->view->language;
 		if($this->request->isPost()){
-			$adressfolders=Addressfolders::find(array(
+			$adressfolders = Addressfolders::find(array(
 				"conditions" => "deleted=0 AND hidden=0 AND usergroup = ?1",
 				"bind" => array(1 => $this->session->get('auth')['usergroup']),
 				"order" => "tstamp DESC"
 			));
-			$addressfoldersArray=array();
+			$addressfoldersArray = array();
 			foreach($adressfolders as $adressfolder){
 				$adressfolderAddresses=$adressfolder->countAddresses();
 				$addressfoldersArray[]=array(
@@ -32,6 +37,31 @@ class AddressfoldersController extends ControllerBase
 			$returnJson=json_encode($addressfoldersArray);
 			echo($returnJson);
 			die();
+		}else{
+			if($this->dispatcher->getParam('uid')){
+				$this->assets->addCss('css/jquery.dataTables.css');
+				$this->assets->addJs('js/vendor/addressfoldersInit.js');
+				$addressfolder=Addressfolders::findFirst(array(
+					'conditions'=>"deleted=0 AND hidden=0 AND usergroup=?1 AND uid = ?2",
+					'bind'=>array(
+						1 => $this->session->get('auth')['usergroup'],
+						2 => $this->dispatcher->getParam('uid')
+					)
+				));
+				$this->view->setVar('foldertitle',$addressfolder->title);
+				$this->view->setVar('folderuid',$addressfolder->uid);
+				$this->view->setVar('detail',true);
+			}else{
+				$addressfolders = Addressfolders::find(array(
+					"conditions"=>"deleted=0 AND hidden=0 AND usergroup =?1",
+					"bind" => array(1=>$this->session->get('auth')['usergroup']),
+					"order" => "tstamp DESC"
+				));
+
+				$this->view->setVar('addressfolders',$addressfolders);
+				$this->view->setVar('detail',false);
+				$this->view->setVar('path',$path);
+			}
 		}
 	}
 	
@@ -220,6 +250,7 @@ class AddressfoldersController extends ControllerBase
 				));
 			$this->view->setVar('foldertitle',$addressfolderrecord->title);
 			$this->view->setVar('folderuid',$folderuid);
+			$this->view->setVar('addressfolder',$addressfolderrecord);
 		}
 	}
 	
@@ -280,7 +311,7 @@ class AddressfoldersController extends ControllerBase
 		 */
 			
 
-		$sWhere = " WHERE pid = :pid: ";
+		$sWhere = "WHERE deleted=0 AND hidden=0 AND pid = :pid: ";
 		if ( isset($_POST['sSearch']) && $_POST['sSearch'] != "" )
 		{
 			$sWhere .= " AND (";
