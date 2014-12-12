@@ -12,10 +12,20 @@
 	{{text_field('title')}}	
 	<br><br>	
 	<label>{{ tr('addressfolders') }}</label><br>
-    {{ select('addressfolders[]', addressfolders, 'using':['uid','title'],'multiple':true) }}	
+	<select name="addressfolders[]" multiple>
+		{% for addressfolder IN addressfolders %}
+		<option value="{{addressfolder.uid}}">{{addressfolder.title}} | {{addressfolder.countAddresses()}}</option>
+		{% endfor %}
+	</select>
+    
 	<br><br>
 	<label>{{ tr('segmenobjects') }}</label><br>
-    {{ select('segmentobjects[]', segmentobjects, 'using':['uid','title'],'multiple':true) }}	
+	<select name="segmentobjects[]" multiple>
+		{% for segmentobject IN segmentobjects %}
+		<option value="{{segmentobject.uid}}">{{segmentobject.title}} | {{segmentobject.countAddresses()}}</option>
+		{% endfor %}
+	</select>
+    
 	
 	<br><br>
 

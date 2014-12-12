@@ -468,9 +468,11 @@ CREATE TABLE segmentobjects (
 	cruser_id int(11) DEFAULT '0' NOT NULL,
 	deleted tinyint(4) DEFAULT '0' NOT NULL,
 	hidden tinyint(4) DEFAULT '0' NOT NULL,	
-	usergroup int(11) DEFAULT '0' NOT NULL,
-	campaignid int(11) DEFAULT '0' NOT NULL,	
+	usergroup int(11) DEFAULT '0' NOT NULL,	
 	title varchar(255) COLLATE utf8_general_ci NOT NULL,	
+	querystring mediumtext,	
+	stateobject mediumtext,	
+	bindarray mediumtext,	
 	hashtags varchar(255) COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (uid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;

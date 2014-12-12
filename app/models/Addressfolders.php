@@ -16,4 +16,12 @@ class Addressfolders extends Model{
 		$this->hasManyToMany("uid", "nltool\Models\Distributors_addressfolders_lookup", "uid_foreign", "uid_local", "nltool\Models\Distributors", "uid",array('alias' => 'distributors'));
     }
 	
+	public function getEmails(){
+		$addresses=$this->getAddresses();
+		$emails=[];
+		foreach($addresses as $address){
+			$emails[$address->uid] = $address->email;
+		}
+		return $emails;
+	}
 }

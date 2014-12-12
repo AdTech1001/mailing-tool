@@ -15,7 +15,21 @@ class SegmentobjectsController extends ControllerBase
 			$result=$this->getData();
 			$output=json_encode($result,true);			
 			die($output);
+		}else{
+			$segments=  Segmentobjects::find(array(
+				'conditions' => 'deleted=0 AND hidden =0 AND usergroup = ?1',
+				'bind' => array(
+					1 => $this->session->get('auth')['usergroup']
+				)
+			));
+			$environment= $this->config['application']['debug'] ? 'development' : 'production';
+			$baseUri=$this->config['application'][$environment]['staticBaseUri'];
+			$path=$baseUri.$this->view->language.'/segmentobjects/update/';
+			$this->view->setVar('segments',$segments);
+			$this->view->setVar('path',$path);
 		}
+		
+		
 	}
 	
 	function createAction(){
@@ -33,7 +47,28 @@ class SegmentobjectsController extends ControllerBase
 		
 	}
 	
-	
+	function updateAction(){
+		$this->assets->addCss('css/jquery.dataTables.css');
+		$this->assets->addJs('js/vendor/segmentobjectsInit.js');
+		$addressfolders=Addressfolders::find(array(
+			'conditions'=>"deleted=0 AND hidden=0 AND usergroup=?1",
+			'bind'=>array(
+				1 => $this->session->get('auth')['usergroup']
+				
+			)
+		));
+		
+		$segmentobjectUid=$this->dispatcher->getParam("uid")?$this->dispatcher->getParam("uid"):0;
+		
+		$segmentobject= Segmentobjects::findFirst(array(
+			'conditions' => 'deleted = 0 AND hidden = 0 AND uid = ?1',
+			'bind' => array(
+				1 => $segmentobjectUid
+			)
+		));
+		$this->view->setVar('segmentobject',$segmentobject);
+		$this->view->setVar('addressfolders',$addressfolders);
+	}
 	
 	private function getData(){
 		$bindArray=array();
@@ -90,15 +125,45 @@ class SegmentobjectsController extends ControllerBase
 		 * word by word on any field. It's possible to do here, but concerned about efficiency
 		 * on very large tables, and MySQL's regex functionality is very limited
 		 */
+		
+		
+		if(is_array($this->request->getPost('folderuid'))){
+			$insStrng=" AND pid IN (";
+			foreach($this->request->getPost('folderuid') as $key => $value){
+				$bindArray[$key]=$value;
+				$insStrng.='?'.$key.',';
+			}
+		$insStrng=substr($insStrng,0,-1).")";
+		}else{
+			$insStrng="";
+		}
+		
+		$filters='';
+		foreach($aColumns as $filterKey => $filtername){
 			
-
-		$sWhere = "WHERE deleted=0 AND hidden=0 AND pid = :pid: ";
+			if(null!==$this->request->getPost($filtername)){
+			$filterArray=explode(',',$this->request->getPost($filtername));
+			
+			$filters.=' AND (';
+			
+			foreach($filterArray as $key => $value){
+				$filters.=$aColumnsFilter[$filterKey].' LIKE :'.$filtername.$key.': OR ';
+				$bindArray[$filtername.$key]=$value;
+			}
+			$filters=substr($filters,0,-4).')';
+			
+			
+		}
+		}
+		
+		
+		$sWhere = "WHERE deleted=0 AND hidden=0".$insStrng.$filters;
 		if ( isset($_POST['sSearch']) && $_POST['sSearch'] != "" )
 		{
 			$sWhere .= " AND (";
 			for ( $i=0 ; $i<count($aColumns) ; $i++ )
 			{
-				$sWhere .= "".$aColumnsFilter[$i]." LIKE '%:searchTerm:%' OR "; //$_POST['sSearch']
+				$sWhere .= "".$aColumnsFilter[$i]." LIKE :searchterm: OR "; //$_POST['sSearch']
 			}
 			$sWhere = substr_replace( $sWhere, "", -3 );
 			$sWhere .= ')';
@@ -130,15 +195,61 @@ class SegmentobjectsController extends ControllerBase
 		 * SQL queries
 		 * Get data to display
 		 */
-		$phql = "SELECT ".str_replace(" , ", " ", implode(", ", $aColumnsSelect)).", uid FROM $sTable ".$sWhere." ".$sOrder." ".$sLimit;
+		
+		$phql = "SELECT ".str_replace(" , ", " ", implode(", ", $aColumnsSelect)).", uid FROM $sTable ".$sWhere." GROUP BY email ".$sOrder." ".$sLimit;
 		
 		
 		
-		$bindArray['pid']=$this->request->getPost('folderuid');
-		//$bindArray['searchTerm']=$this->request->getPost('sSearch');
+		if($this->request->getPost('sSearch')!=''){
+			$bindArray['searchterm']='%'.$this->request->getPost('sSearch').'%';			
+		}
 		
 		$sQuery=$this->modelsManager->createQuery($phql);
+		
+		
+		$resultSet=array();
 		$rResults = $sQuery->execute($bindArray);		
+		
+		/*For convinience Saving is located here, where the Query assembly is located*/
+		if($this->request->getPost('save')==1){
+			$time=time();
+			$segment=new Segmentobjects();
+			$segment->assign(array(
+				"pid" => 0,
+				"tstamp" => $time,
+				"crdate" => $time,
+				"cruser_id"=>$this->session->get('auth')['uid'],
+				"usergroup" => $this->session->get('auth')['usergroup'],
+				"deleted" => 0,
+				"hidden" => 0,
+				"title"	=> $this->request->getPost('save') != null?:'no name',
+				"hashtags" => '',
+				"querystring" => "SELECT ".str_replace(" , ", " ", implode(", ", $aColumnsSelect)).", uid FROM $sTable ".$sWhere." GROUP BY email ".$sOrder,
+				"stateobject" => $this->request->getPost('stateObject'),
+				"bindarray" => json_encode($bindArray)
+			));
+			if(!$segment->save()){
+			$this->flash->error($segment->getMessages());	
+			}			
+		}
+		/*For convinience Updating is located here, where the Query assembly is located*/
+		if($this->request->getPost('update')==1){
+			$segmentRecord = Segmentobjects::findFirst(array(
+				'conditions' => 'deleted = 0 AND hidden = 0 AND uid = ?1',
+				'bind' => array(
+					1 => $this->request->getPost('segmentobjectUid')
+				)
+			));
+			$segmentRecord->assign(array(
+				'time' => time(),
+				'querystring' => "SELECT ".str_replace(" , ", " ", implode(", ", $aColumnsSelect)).", uid FROM $sTable ".$sWhere." GROUP BY email ".$sOrder,
+				'stateobject' => $this->request->getPost('stateObject'),
+				'bindarray' => json_encode($bindArray)
+			));
+			
+			$segmentRecord->update();
+		}
+			
 		foreach ( $rResults as $aRow )
 		{	
 			$row = array();
@@ -162,11 +273,12 @@ class SegmentobjectsController extends ControllerBase
 		
 		/* Total data set length */
 		$lphql = "SELECT COUNT(".$sIndexColumn.") AS countids FROM $sTable	".$sWhere;
+		//echo($sWhere);
 		$lQuery=$this->modelsManager->createQuery($lphql);
 		$rResultTotal = $lQuery->execute($bindArray);        
 		foreach ( $rResultTotal as $aRow )
 		{
-				$iTotal = (array)$aRow;
+			$iTotal = (array)$aRow;
 		}
 		$iTotal=$iTotal['countids'];
 	//$GLOBALS['TYPO3_DB']->sql_fetch_assoc($rResultTotal);

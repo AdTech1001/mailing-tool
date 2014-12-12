@@ -100,6 +100,7 @@ $messages = array(
 	"action" => "action",
 	"gender" => "gender",
 	"firstname" => "firstname",
+	"firstnames" => "firstnames",
 	"lastname" => "lastname",
 	"title" => "title",
 	"salutation" => "salutation",
@@ -170,7 +171,12 @@ $messages = array(
 	"cleared"=>"cleared",
 	"review" => "review",
 	"unsubscribeSuccessful" => "you have successfully unsubscribed from the service",
-	"unsubscribeError" => "there was an error during your unsubscription process"
+	"unsubscribeError" => "there was an error during your unsubscription process",
+	"commaseperatedList" => "enter multiple keywords as comma seperated list (use % as wildcard)",
+	"segmentobjectsTitle" => "address segments",
+	"segmentobjectTitle" => "address segment",
+	"containingAddresses" => "number of addresses",
+	"filtersTitle" => "filter"
 	
 );
 

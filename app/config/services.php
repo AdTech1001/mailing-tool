@@ -68,8 +68,9 @@ $di->set(
                 function ($event, $connection) use ($logger) {
                     
                     if ($event->getType() == 'beforeQuery') {
-                        
-                        $logger->log($connection->getSQLStatement(), \Phalcon\Logger::INFO);
+                         
+							$logger->log($connection->getSQLStatement(), \Phalcon\Logger::INFO);
+						
                     }
                 }
             );

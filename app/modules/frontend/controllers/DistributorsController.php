@@ -14,7 +14,8 @@ use nltool\Models\Distributors as Distributors,
 class DistributorsController extends ControllerBase
 {
 	public function indexAction(){
-		$distributors = Distributors::find(array(
+		if($this->request->isPost()){
+			$distributors = Distributors::find(array(
 				"conditions" => "deleted=0 AND hidden=0 AND usergroup = ?1",
 				"bind" => array(1 => $this->session->get('auth')['usergroup']),
 				"order" => "tstamp DESC"
@@ -46,6 +47,18 @@ class DistributorsController extends ControllerBase
 			$returnJson=json_encode($distributorsArray);
 			echo($returnJson);
 			die();
+		}else{
+			$distributors = Distributors::find(array(
+				"conditions" => "deleted=0 AND hidden=0 AND usergroup = ?1",
+				"bind" => array(1 => $this->session->get('auth')['usergroup']),
+				"order" => "tstamp DESC"
+			));
+			$environment= $this->config['application']['debug'] ? 'development' : 'production';
+			$baseUri=$this->config['application'][$environment]['staticBaseUri'];
+			$path=$baseUri.$this->view->language.'/distributors/update/';
+			$this->view->setVar('path',$path);
+			$this->view->setVar('distributors',$distributors);
+		}
 	}
 
 	public function createAction(){
@@ -76,7 +89,9 @@ class DistributorsController extends ControllerBase
 				
 			));
 			$addressfolderArr=array();
+			
 			foreach ($addressfolders as $addressfolder){
+								
 				$addressfolderArr[]=$addressfolder;
 				
 			}
@@ -93,11 +108,16 @@ class DistributorsController extends ControllerBase
 			'conditions'=>'deleted=0 AND hidden=0 AND usergroup=?1',
 			'bind'=>array(1=>$this->session->get('auth')['usergroup'])
 		));
+		
+		
 		$segmentobjects=  Segmentobjects::find(array(
 			'conditions'=>'deleted=0 AND hidden=0 AND usergroup=?1',
 			'bind'=>array(1=>$this->session->get('auth')['usergroup'])
 		));
-
+		$addresses=$segmentobjects[0]->getAddresses();
+		foreach($addresses as $address){
+			print_r($address);
+		}
 		$this->view->setVar('addressfolders',$addressfolders);
 		$this->view->setVar('segmentobjects',$segmentobjects);
 		

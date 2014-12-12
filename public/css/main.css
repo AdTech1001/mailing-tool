@@ -1294,7 +1294,17 @@ table#mapTable{
   margin-left:10px;
   color:#01994e;
 }
-
+.filterSet{
+	padding:5px;
+	border:#eee 1px solid;
+}
+.filterSet label{
+	width:130px;
+	vertical-align:top;
+}
+.filterSet input{
+	margin-bottom:3px;
+}
 @media (min-width: 768px) {
 	
 }

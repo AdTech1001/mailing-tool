@@ -101,6 +101,7 @@ $messages = array(
 	"action" => "Aktion",
 	"gender" => "Geschlecht",
 	"firstname" => "Vorname",
+	"firstnames" => "Vornamen",
 	"lastname" => "Nachname",
 	"title" => "Titel",
 	"salutation" => "Anrede",
@@ -174,6 +175,11 @@ $messages = array(
 	"cleared"=>"freigeben",
 	"review" => "Freigabe",
 	"unsubscribeSuccessful" => "Sie wurden vom Newsletter abgemeldet",
-	"unsubscribeError" => "Bei der Abmeldung ist ein Fehler aufgetreten"
+	"unsubscribeError" => "Bei der Abmeldung ist ein Fehler aufgetreten",
+	"commaseperatedList" => "mehrere Stichwörter als kommaseparierte Liste eingeben (% kann als Platzhalter verwendet werden)",
+	"segmentobjectsTitle" => "Adresssegmente",
+	"segmentobjectTitle" => "Adresssegment",
+	"containingAddresses" => "Anzahl der Adressen",
+	"filtersTitle" => "Filter"
 );
 ?>
