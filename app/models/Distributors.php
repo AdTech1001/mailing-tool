@@ -26,24 +26,76 @@ class Distributors extends Model{
 		$fieldMap=array(
 			'pid'=>''
 		);
+		$pids=array();
 		
 		$folders=$this->getAddressfolders();
 		
 		$modelsManager=$this->getDi()->getShared('modelsManager');		
-				
+		$bindCounter=0;
 		foreach($folders as $key=> $folder){
-			$fieldMap['pid'].='?'.$key;
-			$bindArray[]=$folder->uid;			
+			$pids[]=$folder->uid;
 		}
-		
+		$searchTerms=array();
 		$segments=$this->getSegments();
-		
+		$where='';
 		foreach($segments as $segment){
 			$conditions=$segment->getConditions();
-			var_dump($segment);
+			if($conditions){
+				$where.=' AND (';
+				foreach($conditions as $condition){
+					if($condition->field !== 'searchterm'  && $condition->field !== 'pid'){
+						switch($condition->field){
+							case 'firstname':
+								$fieldname='first_name';
+								break;
+							case 'lastname':
+								$fieldname='last_name';
+								break;
+							default:
+								$fieldname=$condition->field;
+								break;
+						}
+						$bindArray[$condition->field.$bindCounter]=$condition->searchvalue;
+						$where .=$fieldname.' LIKE :'.$condition->field.$bindCounter.':';
+						$bindCounter++;
+					}elseif($condition->field === 'pid'){
+						$pids[]=$condition->searchvalue;
+					}elseif($condition->field === 'searchterm'){
+						$searchTerms[] =$condition->searchvalue;
+					}
+					
+				}
+				$where.=')';
+			}
+			
+		}
+		if(count($pids)>0){
+			$where.= ' AND pid IN (';
+			$pidStrng='';
+			foreach($pids as $key => $value){
+				$pidStrng.='?'.$key.',';
+				$bindArray[$key]=$value;
+			}
+			$where.=substr($pidStrng,0,-1).')';
+		}
+		$aColumnsFilter=array('email', 'last_name', 'first_name', 'salutation', 'title', 'company', 'phone', 'address', 'city', 'zip', 'userlanguage', 'gender' );
+		if(count($searchTerms) >0){
+			
+			$searchStrng='';
+			foreach($searchTerms as $key => $searchTerm){
+				$where.=' AND (';
+				foreach($aColumnsFilter as $filterName){
+					$searchStrng .= "".$filterName." LIKE :searchterm".$key.": OR ";
+				}
+				$bindArray['searchterm'.$key]='%'.$searchTerm.'%';
+				$searchStrng = substr($searchStrng, 0, -3 );
+				$where .= $searchStrng.')';
+			}
+			
 		}
 		
-		$queryStrng="SELECT email, last_name AS lastname, first_name AS firstname, salutation, title, company, phone, address, city, zip, userlanguage, gender, uid FROM nltool\Models\Addresses WHERE deleted=0 AND hidden=0 AND pid IN (".$fieldMap['pid'].") GROUP BY email";	
+		$queryStrng="SELECT email, last_name AS lastname, first_name AS firstname, salutation, title, company, phone, address, city, zip, userlanguage, gender, uid FROM nltool\Models\Addresses WHERE deleted=0 AND hidden=0 ".$where." GROUP BY email";	
+		
 		$sQuery=$modelsManager->createQuery($queryStrng);								
 		
 		$rResults = $sQuery->execute($bindArray);		
