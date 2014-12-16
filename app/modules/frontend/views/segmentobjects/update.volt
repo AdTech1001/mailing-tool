@@ -8,6 +8,8 @@
 <h1>{{tr('segmentobjectTitle')}}: {{segmentobject.title}}</h1>
 
 <div id="filters">
+	<label>{{ tr('title') }} </label>
+	{{ text_field('segmenttitle',"value":segmentobject.title)}}<br>
 	<div class="filterSet">
 	<h1>{{ tr('filtersTitle') }}</h1>
 	<label>{{ tr('addressfolders') }}</label>

@@ -1,7 +1,7 @@
 <?php
 namespace nltool\Models;
 use Phalcon\Mvc\Model;
-
+Model::setup(['notNullValidations' => false]);
 
 /**
  * Description of Distributors
@@ -22,27 +22,34 @@ class Distributors extends Model{
 	}
 	
 	public function countAddresses(){
-		$emailsArray=[];
-		$uidsArray=[];		
-		$segments=$this->getSegments();
-		foreach($segments as $segment){
-			$segmentAddresses=$segment->getEmails();
-			foreach($segmentAddresses as $uid => $email){				
-				$uidsArray[]=$uid;
-				$emailsArray[]=$email;
-			}
-		}
+		$bindArray=array();
+		$fieldMap=array(
+			'pid'=>''
+		);
 		
 		$folders=$this->getAddressfolders();
-		foreach($folders as $addressFolder){
-			$folderAddresses=$addressFolder->getEmails();
-			foreach($folderAddresses as $uid => $email){
-				$uidsArray[]=$uid;
-				$emailsArray[]=$email;
-			}
+		
+		$modelsManager=$this->getDi()->getShared('modelsManager');		
+				
+		foreach($folders as $key=> $folder){
+			$fieldMap['pid'].='?'.$key;
+			$bindArray[]=$folder->uid;			
 		}
-		$cleanedArray=array_unique($emailsArray);
-		return count($cleanedArray);
+		
+		$segments=$this->getSegments();
+		
+		foreach($segments as $segment){
+			$conditions=$segment->getConditions();
+			var_dump($segment);
+		}
+		
+		$queryStrng="SELECT email, last_name AS lastname, first_name AS firstname, salutation, title, company, phone, address, city, zip, userlanguage, gender, uid FROM nltool\Models\Addresses WHERE deleted=0 AND hidden=0 AND pid IN (".$fieldMap['pid'].") GROUP BY email";	
+		$sQuery=$modelsManager->createQuery($queryStrng);								
+		
+		$rResults = $sQuery->execute($bindArray);		
+		
+		/*$cleanedArray=array_unique($emailsArray);*/
+		return count($rResults);
 	}
 	
 }

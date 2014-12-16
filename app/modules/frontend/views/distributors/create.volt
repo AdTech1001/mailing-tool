@@ -8,7 +8,7 @@
 {{ form(language~'/distributors/create/', 'method': 'post') }}
 
 
-	<label>{{ tr('distributorTitleLabel') }}</label><br>
+	<label>{{ tr('title') }}</label><br>
 	{{text_field('title')}}	
 	<br><br>	
 	<label>{{ tr('addressfolders') }}</label><br>

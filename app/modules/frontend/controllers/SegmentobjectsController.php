@@ -1,6 +1,7 @@
 <?php
 namespace nltool\Modules\Modules\Frontend\Controllers;
 use nltool\Models\Segmentobjects as Segmentobjects,
+	nltool\Models\Segmentobjectsconditions,
 	nltool\Models\Addressfolders as Addressfolders;	
 
 /**
@@ -72,6 +73,7 @@ class SegmentobjectsController extends ControllerBase
 	
 	private function getData(){
 		$bindArray=array();
+		$filterFieldsArray=array();
 		$aColumns=array('email','lastname',	'firstname','salutation','title','company','phone','address','city','zip','userlanguage','gender');
         
         $aColumnsSelect=array('email', 'last_name AS lastname', 'first_name AS firstname', 'salutation', 'title', 'company', 'phone', 'address', 'city', 'zip', 'userlanguage', 'gender' );
@@ -132,6 +134,7 @@ class SegmentobjectsController extends ControllerBase
 			foreach($this->request->getPost('folderuid') as $key => $value){
 				$bindArray[$key]=$value;
 				$insStrng.='?'.$key.',';
+				$filterFieldsArray['pid'][]=$value;
 			}
 		$insStrng=substr($insStrng,0,-1).")";
 		}else{
@@ -147,6 +150,7 @@ class SegmentobjectsController extends ControllerBase
 			$filters.=' AND (';
 			
 			foreach($filterArray as $key => $value){
+				$filterFieldsArray[$filtername][]=$value;
 				$filters.=$aColumnsFilter[$filterKey].' LIKE :'.$filtername.$key.': OR ';
 				$bindArray[$filtername.$key]=$value;
 			}
@@ -160,6 +164,7 @@ class SegmentobjectsController extends ControllerBase
 		$sWhere = "WHERE deleted=0 AND hidden=0".$insStrng.$filters;
 		if ( isset($_POST['sSearch']) && $_POST['sSearch'] != "" )
 		{
+			$filterFieldsArray['searchterm']=$_POST['sSearch'];
 			$sWhere .= " AND (";
 			for ( $i=0 ; $i<count($aColumns) ; $i++ )
 			{
@@ -222,15 +227,50 @@ class SegmentobjectsController extends ControllerBase
 				"usergroup" => $this->session->get('auth')['usergroup'],
 				"deleted" => 0,
 				"hidden" => 0,
-				"title"	=> $this->request->getPost('save') != null?:'no name',
+				"title"	=> $this->request->getPost('segmenttitle') != null?:'no name',
 				"hashtags" => '',
 				"querystring" => "SELECT ".str_replace(" , ", " ", implode(", ", $aColumnsSelect)).", uid FROM $sTable ".$sWhere." GROUP BY email ".$sOrder,
+				"wherestatement" => $sWhere,
 				"stateobject" => $this->request->getPost('stateObject'),
 				"bindarray" => json_encode($bindArray)
 			));
+			
 			if(!$segment->save()){
 			$this->flash->error($segment->getMessages());	
 			}			
+			foreach($filterFieldsArray as $field =>$vals){
+				if(is_array($vals)){
+					foreach($vals as $val){
+						$segmentcondition=new Segmentobjectsconditions();
+						$segmentcondition->assign(array(
+							"pid" => $segment->uid,
+							"tstamp" => $time,
+							"crdate" => $time,
+							"cruser_id"=>$this->session->get('auth')['uid'],
+							"usergroup" => $this->session->get('auth')['usergroup'],
+							"deleted" => 0,
+							"hidden" => 0,							
+							"field" => $field,
+							"searchvalue" => $val
+						));
+						$segmentcondition->save();
+					}
+				}else{
+					$segmentcondition=new Segmentobjectsconditions();
+					$segmentcondition->assign(array(
+						"pid" => $segment->uid,
+						"tstamp" => $time,
+						"crdate" => $time,
+						"cruser_id"=>$this->session->get('auth')['uid'],
+						"usergroup" => $this->session->get('auth')['usergroup'],
+						"deleted" => 0,
+						"hidden" => 0,
+						"field" => $field,
+						"searchvalue" => $vals
+					));
+					$segmentcondition->save();
+				}
+			}
 		}
 		/*For convinience Updating is located here, where the Query assembly is located*/
 		if($this->request->getPost('update')==1){
@@ -242,12 +282,51 @@ class SegmentobjectsController extends ControllerBase
 			));
 			$segmentRecord->assign(array(
 				'time' => time(),
+				"title"	=> $this->request->getPost('segmenttitle')?:'no name',
 				'querystring' => "SELECT ".str_replace(" , ", " ", implode(", ", $aColumnsSelect)).", uid FROM $sTable ".$sWhere." GROUP BY email ".$sOrder,
+				'wherestatement' => $sWhere,
 				'stateobject' => $this->request->getPost('stateObject'),
 				'bindarray' => json_encode($bindArray)
-			));
-			
+			));			
 			$segmentRecord->update();
+			$conditions=$segmentRecord->getConditions();
+			foreach($conditions as $condition){
+				$condition->delete();
+			}
+			
+			foreach($filterFieldsArray as $field =>$vals){
+				if(is_array($vals)){
+					foreach($vals as $val){
+						$segmentcondition=new Segmentobjectsconditions();
+						$segmentcondition->assign(array(
+							"pid" => $segmentRecord->uid,
+							"tstamp" => $time,
+							"crdate" => $time,
+							"cruser_id"=>$this->session->get('auth')['uid'],
+							"usergroup" => $this->session->get('auth')['usergroup'],
+							"deleted" => 0,
+							"hidden" => 0,
+							"field" => $field,
+							"searchvalue" => $val
+						));
+						$segmentcondition->save();
+					}
+				}else{
+					$segmentcondition=new Segmentobjectsconditions();
+					$segmentcondition->assign(array(
+						"pid" => $segmentRecord->uid,
+						"tstamp" => $time,
+						"crdate" => $time,
+						"cruser_id"=>$this->session->get('auth')['uid'],
+						"usergroup" => $this->session->get('auth')['usergroup'],
+						"deleted" => 0,
+						"hidden" => 0,
+						"field" => $field,
+						"searchvalue" => $vals
+					));
+					$segmentcondition->save();
+				}
+			}
 		}
 			
 		foreach ( $rResults as $aRow )

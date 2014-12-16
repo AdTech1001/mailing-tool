@@ -180,6 +180,7 @@ $messages = array(
 	"segmentobjectsTitle" => "Adresssegmente",
 	"segmentobjectTitle" => "Adresssegment",
 	"containingAddresses" => "Anzahl der Adressen",
-	"filtersTitle" => "Filter"
+	"filtersTitle" => "Filter",
+	"distributorCreateTitle" => "Verteiler anlegen"
 );
 ?>

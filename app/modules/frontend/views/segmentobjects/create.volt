@@ -8,6 +8,8 @@
 <h1>{{tr('addressFolderSelectLabel')}}</h1>
 
 <div id="filters">
+	<label>{{ tr('title') }} </label>
+	{{ text_field('segmenttitle')}}<br>
 	<h1>{{ tr('filtersTitle') }}</h1>
 	<label>{{ tr('addressfolders') }}</label><br>
 	{{ select('addressfolders[]',addressfolders,"using":['uid','title'],'multiple':true) }}<br><br>

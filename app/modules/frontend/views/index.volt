@@ -36,7 +36,8 @@
         
 		</div>
 		
-       
+       {%- if session.get('auth') -%}
 		<input id="baseurl" value="{{baseurl}}" type="hidden">
+		{%- endif -%}
     </body>
 </html>

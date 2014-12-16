@@ -317,7 +317,7 @@ class AddressfoldersController extends ControllerBase
 			$sWhere .= " AND (";
 			for ( $i=0 ; $i<count($aColumns) ; $i++ )
 			{
-				$sWhere .= "".$aColumnsFilter[$i]." LIKE '%:searchTerm:%' OR "; //$_POST['sSearch']
+				$sWhere .= "".$aColumnsFilter[$i]." LIKE :searchTerm: OR "; //$_POST['sSearch']
 			}
 			$sWhere = substr_replace( $sWhere, "", -3 );
 			$sWhere .= ')';
@@ -354,10 +354,13 @@ class AddressfoldersController extends ControllerBase
 		
 		
 		$bindArray['pid']=$this->request->getPost('folderuid');
-		//$bindArray['searchTerm']=$this->request->getPost('sSearch');
+		if($this->request->getPost('sSearch') != ''){
+			$bindArray['searchTerm']='%'.$this->request->getPost('sSearch').'%';
+		}
 		
 		$sQuery=$this->modelsManager->createQuery($phql);
 		$rResults = $sQuery->execute($bindArray);		
+		$resultSet=array();
 		foreach ( $rResults as $aRow )
 		{	
 			$row = array();

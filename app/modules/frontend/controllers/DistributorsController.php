@@ -3,7 +3,9 @@ namespace nltool\Modules\Modules\Frontend\Controllers;
 use nltool\Models\Distributors as Distributors,
 	nltool\Models\Addresses as Addresses,
 	nltool\Models\Addressfolders as Addressfolders,
-	nltool\Models\Segmentobjects;
+	nltool\Models\Segmentobjects,
+	nltool\Models\Distributors_addressfolders_lookup,
+	nltool\Models\Distributors_segmentobjects_lookup;
 	
 
 /**
@@ -77,26 +79,10 @@ class DistributorsController extends ControllerBase
 				'hashtags'=>' ',
 				
 			));
-			$bindArray=array();
-			$inStrng='';
-			foreach($this->request->getPost('addressfolders') as $key=>$value){
-				$inStrng.='?'.$key.',';
-				$bindArray[$key]=$value;
-			}
-			$addressfolders=  Addressfolders::find(array(
-				'conditions' => 'uid IN ('.substr($inStrng,0,-1).')',
-				'bind' => $bindArray
-				
-			));
-			$addressfolderArr=array();
+			$relations=$this->createRelations();
 			
-			foreach ($addressfolders as $addressfolder){
-								
-				$addressfolderArr[]=$addressfolder;
-				
-			}
-			
-			$distributor->addressfolders=$addressfolderArr;
+			$distributor->segments=$relations['segments'];
+			$distributor->addressfolders=$relations['folders'];
 			
 			if(!$distributor->save()){
 				$this->flash->error($distributor->getMessages());
@@ -114,12 +100,142 @@ class DistributorsController extends ControllerBase
 			'conditions'=>'deleted=0 AND hidden=0 AND usergroup=?1',
 			'bind'=>array(1=>$this->session->get('auth')['usergroup'])
 		));
-		$addresses=$segmentobjects[0]->getAddresses();
-		foreach($addresses as $address){
-			print_r($address);
-		}
+		
 		$this->view->setVar('addressfolders',$addressfolders);
 		$this->view->setVar('segmentobjects',$segmentobjects);
 		
 	}
+	
+	public function updateAction(){
+		if($this->request->isPost()){
+			
+			$distributor=Distributors::findFirst(array(
+				'conditions' => 'uid = ?1',
+				'bind' => array(
+					1=>$this->request->getPost('uid')
+				)
+			));
+			
+			$distributor->title = $this->request->getPost('title');
+			
+			
+			$this->removeSegmentRelations($this->request->getPost('uid'));
+			$this->removeFolderRelations($this->request->getPost('uid'));
+			$relations=$this->createRelations();
+			
+			$distributor->segments=$relations['segments'];
+			$distributor->addressfolders=$relations['folders'];
+			if(!$distributor->update()){
+				$this->flash->error($distributor->getMessages());
+			}else{
+				$this->flash->success("Distributor was updated successfully");
+			}
+		}else{
+			$distributorUid=$this->dispatcher->getParam("uid")?$this->dispatcher->getParam("uid"):0;
+			
+			$distributor=Distributors::findFirst(array(
+				'conditions' => 'uid = ?1',
+				'bind' => array(
+					1=>$distributorUid
+				)
+			));
+		}	
+			$distributorSegments=$distributor->getSegments();
+			$distributorSegmentsArray=array();
+			foreach($distributorSegments as $distributorSegment){
+				$distributorSegmentsArray[]=$distributorSegment->uid;
+			}
+			$distributorFolders=$distributor->getAddressfolders();
+			$distributorFoldersArray=array();
+			foreach($distributorFolders as $distributorFolder){
+				$distributorFoldersArray[]=$distributorFolder->uid;
+			}
+			
+			
+			$addressfolders=Addressfolders::find(array(
+				'conditions'=>'deleted=0 AND hidden=0 AND usergroup=?1',
+				'bind'=>array(1=>$this->session->get('auth')['usergroup'])
+			));
+
+
+			$segmentobjects=  Segmentobjects::find(array(
+				'conditions'=>'deleted=0 AND hidden=0 AND usergroup=?1',
+				'bind'=>array(1=>$this->session->get('auth')['usergroup'])
+			));
+			
+			$this->view->setVar('distributorFoldersArray',$distributorFoldersArray);
+			$this->view->setVar('distributorSegmentsArray',$distributorSegmentsArray);
+			$this->view->setVar('addressfolders',$addressfolders);
+			$this->view->setVar('segmentobjects',$segmentobjects);
+			$this->view->setVar('distributor',$distributor);
+		
+		
+	}
+	
+	private function createRelations(){
+			$addressfolderArr=array();
+			$segmentsArr=array();
+			$folderBindArray=array();
+			$folderInStrng='';
+			if($this->request->getPost('addressfolders')){
+				foreach($this->request->getPost('addressfolders') as $key=>$value){
+					$folderInStrng.='?'.$key.',';
+					$folderBindArray[$key]=$value;
+				}
+				$addressfolders=  Addressfolders::find(array(
+					'conditions' => 'uid IN ('.substr($folderInStrng,0,-1).')',
+					'bind' => $folderBindArray
+
+				));
+
+
+				foreach ($addressfolders as $addressfolder){								
+					$addressfolderArr[]=$addressfolder;				
+				}
+			}
+			if($this->request->getPost('segmentobjects')){
+				$segmentBindArray=array();
+				$segmentInStrng='';
+				foreach($this->request->getPost('segmentobjects') as $key => $value){
+					$segmentInStrng.='?'.$key.',';
+					$segmentBindArray[$key]=$value;
+				}
+				$segments=  Segmentobjects::find(array(
+					'conditions' => 'uid IN ('.substr($segmentInStrng,0,-1).')',
+					'bind' => $segmentBindArray
+				));
+
+				foreach($segments as $segment){
+					$segmentsArr[]=$segment;
+				}
+			}
+		return array('folders'=>$addressfolderArr,'segments'=>$segmentsArr);
+	}
+	
+	private function removeSegmentRelations($uid){
+		$relations=Distributors_segmentobjects_lookup::find(array(
+			"conditions" => "uid_local = ?1",
+			"bind" => array(
+				1 => $uid
+			)
+		));
+		
+		foreach($relations as $relation){
+			$relation->delete();
+		}
+	}
+	
+	private function removeFolderRelations($uid){
+		$relations=Distributors_addressfolders_lookup::find(array(
+			"conditions" => "uid_local = ?1",
+			"bind" => array(
+				1 => $uid
+			)
+		));
+		
+		foreach($relations as $relation){
+			$relation->delete();
+		}
+	}
+	
 }

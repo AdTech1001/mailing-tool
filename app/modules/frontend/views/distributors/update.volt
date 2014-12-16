@@ -4,22 +4,32 @@
 	{%- if session.get('auth') -%}
 
 
-<h1>{{tr('distributorTitle')}}: distributor.title</h1>
-{{ form(language~'/distributors/create/', 'method': 'post') }}
+<h1>{{tr('addressListLabel')}}: {{distributor.title}}</h1>
+{{ form(language~'/distributors/update/'~distributor.uid, 'method': 'post') }}
 
 
 	<label>{{ tr('distributorTitleLabel') }}</label><br>
-	{{text_field('title'),"placeholder":distributor.title}}	
+	{{text_field('title',"value":distributor.title)}}	
 	<br><br>	
 	<label>{{ tr('addressfolders') }}</label><br>
-    {{ select('addressfolders[]', addressfolders, 'using':['uid','title'],'multiple':true) }}	
+	<select name="addressfolders[]" multiple>
+		{% for addressfolder IN addressfolders %}
+		<option value="{{addressfolder.uid}}" {% if addressfolder.uid in distributorFoldersArray%} selected {% endif %} >{{addressfolder.title}} | {{addressfolder.countAddresses()}}</option>
+		{% endfor %}
+	</select>
+    
 	<br><br>
-	<label>{{ tr('segmenobjects') }}</label><br>
-    {{ select('segmentobjects[]', segmentobjects, 'using':['uid','title'],'multiple':true) }}	
+	<label>{{ tr('segmentobjectsTitle') }}</label><br>
+	<select name="segmentobjects[]" multiple>
+		{% for segmentobject IN segmentobjects %}
+		<option value="{{segmentobject.uid}}" {% if segmentobject.uid in distributorSegmentsArray  %} selected {% endif %}>{{segmentobject.title}} | {{segmentobject.countAddresses()}}</option>
+		{% endfor %}
+	</select>
+    
 	
 	<br><br>
 
-
+	{{ hidden_field('uid',"value":distributor.uid) }}
     {{ submit_button(tr('ok'),'id':'uploadAndShowMap') }}
 
 </form>

@@ -27,7 +27,8 @@ CREATE TABLE feusers (
 	usergroup int(11) DEFAULT '0' NOT NULL,
 	superuser tinyint(4) DEFAULT '0' NOT NULL,
 	userlanguage int(11) DEFAULT '0' NOT NULL,
-  PRIMARY KEY (uid)
+  PRIMARY KEY (uid),
+  KEY email (email)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 
@@ -472,18 +473,27 @@ CREATE TABLE segmentobjects (
 	title varchar(255) COLLATE utf8_general_ci NOT NULL,	
 	querystring mediumtext,	
 	stateobject mediumtext,	
+	wherestatement mediumtext,	
 	bindarray mediumtext,	
 	hashtags varchar(255) COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (uid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
-DROP TABLE IF EXISTS segmentobjects_addresses_lookup;
-CREATE TABLE segmentobjects_addresses_lookup (
+
+DROP TABLE IF EXISTS segmentobjectsconditions;
+CREATE TABLE segmentobjectsconditions (
 	uid int(11) NOT NULL auto_increment,	
-	deleted tinyint(4) DEFAULT '0' NOT NULL,	
-	uid_local int(11) DEFAULT '0' NOT NULL,
-	uid_foreign int(11) DEFAULT '0' NOT NULL,		
-  PRIMARY KEY (uid)
+	pid int(11) DEFAULT '0' NOT NULL,
+	tstamp int(11) DEFAULT '0' NOT NULL,
+	crdate int(11) DEFAULT '0' NOT NULL,
+	cruser_id int(11) DEFAULT '0' NOT NULL,
+	deleted tinyint(4) DEFAULT '0' NOT NULL,
+	hidden tinyint(4) DEFAULT '0' NOT NULL,	
+	usergroup int(11) DEFAULT '0' NOT NULL,	
+	field varchar(255) COLLATE utf8_general_ci NOT NULL,	
+	searchvalue varchar(255) COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (uid),
+  KEY pid (pid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 
@@ -504,8 +514,7 @@ CREATE TABLE distributors (
 
 DROP TABLE IF EXISTS distributors_segmentobjects_lookup;
 CREATE TABLE distributor_segmentobjects_lookup (
-	uid int(11) NOT NULL auto_increment,	
-	deleted tinyint(4) DEFAULT '0' NOT NULL,	
+	uid int(11) NOT NULL auto_increment,		
 	uid_local int(11) DEFAULT '0' NOT NULL,
 	uid_foreign int(11) DEFAULT '0' NOT NULL,		
   PRIMARY KEY (uid)
@@ -513,8 +522,7 @@ CREATE TABLE distributor_segmentobjects_lookup (
 
 DROP TABLE IF EXISTS distributors_addressfolders_lookup;
 CREATE TABLE distributor_addressfolders_lookup (
-	uid int(11) NOT NULL auto_increment,	
-	deleted tinyint(4) DEFAULT '0' NOT NULL,	
+	uid int(11) NOT NULL auto_increment,			
 	uid_local int(11) DEFAULT '0' NOT NULL,
 	uid_foreign int(11) DEFAULT '0' NOT NULL,		
   PRIMARY KEY (uid)

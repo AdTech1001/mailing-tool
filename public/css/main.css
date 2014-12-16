@@ -1298,7 +1298,7 @@ table#mapTable{
 	padding:5px;
 	border:#eee 1px solid;
 }
-.filterSet label{
+#filters label{
 	width:130px;
 	vertical-align:top;
 }

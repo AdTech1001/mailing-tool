@@ -34,9 +34,5 @@
         
         <?php echo $this->getContent(); ?>
         
-		</div>
-		
-       
-		<input id="baseurl" value="<?php echo $baseurl; ?>" type="hidden">
-    </body>
+		</div><?php if ($this->session->get('auth')) { ?><input id="baseurl" value="<?php echo $baseurl; ?>" type="hidden"><?php } ?></body>
 </html>
