@@ -227,7 +227,7 @@ class SegmentobjectsController extends ControllerBase
 				"usergroup" => $this->session->get('auth')['usergroup'],
 				"deleted" => 0,
 				"hidden" => 0,
-				"title"	=> $this->request->getPost('segmenttitle') != null?:'no name',
+				"title"	=> $this->request->getPost('segmenttitle')?:'no name',
 				"hashtags" => '',
 				"querystring" => "SELECT ".str_replace(" , ", " ", implode(", ", $aColumnsSelect)).", uid FROM $sTable ".$sWhere." GROUP BY email ".$sOrder,
 				"wherestatement" => $sWhere,

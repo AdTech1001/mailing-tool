@@ -10,10 +10,22 @@
 		<label>{{ tr('senddate')}}: </label><input id="prevSenddate" type="text" value="">
 		<label>{{ tr('reply')}}: </label><input id="prevReply" type="text" value="">
 	</div>
-	<div id="mailPrev">
-		<iframe id="mailPrevFrame" style="border:1px solid; background:#e3e3e3;width:100%; min-height:101%;" src="" ></iframe>
-	</div>
+	
 </div>
+<div id="viewFrame" style="display:none">
+		<div class="glyphicon glyphicon-remove" id="closePrev"></div>
+		<div id="deviceSelectBar">
+				<ul>
+					<li class="active"><img src="{{baseurl}}public/images/device-icon-desktop.png"></li>
+					<li><img src="{{baseurl}}public/images/device-icon-laptopt.png"></li>
+					<li><img src="{{baseurl}}public/images/device-icon-tablet-vert.png"></li>
+					<li><img src="{{baseurl}}public/images/device-icon-tablet-hor.png"></li>
+					<li><img src="{{baseurl}}public/images/device-icon-smartphone-vert.png"></li>
+					<li><img src="{{baseurl}}public/images/device-icon-smartphone-hor.png"></li>
+				</ul>
+		</div>
+		<iframe id="mailobjectFrame" style="border:1px solid; background:#e3e3e3;width:100%;height:100%;" src=""></iframe>
+	</div>
 <div id="mailobjectSelect" class="allPurposeLayer hidden">
 	<label>{{ tr('selectMailobjectLabel')}}</label><br>
 	<div id="mailobjectSelectWrapper">
@@ -143,7 +155,7 @@
 				
 				<td>{{tr('operator')}}</td>
 				
-				<td><span class="glyphicon glyphicon-link"></span></td>
+				<td>{{tr('selectLink')}}</td>
 			</thead>
 		<tbody>
 		
@@ -163,21 +175,14 @@
 				<td>
 					
 					<select name="operator[]" class="actionOperators">
-						<option value='0'>{{ tr('hasOpened') }}</option>
+						<option>{{ tr('pleaseSelect') }}</option>
 						<option value='1'>{{ tr('hasClicked') }}</option>						
 					</select>
 				</td>
 				<td>					
+					<input type="hidden" value="" class="clickLink">
+					<span class="glyphicon glyphicon-link"></span>
 					
-					<select name="links[]" >
-		<option value='0'><a href="#">Link 1</a></option>
-		<option value='1'><a href="#">Link 2</a></option>
-		<option value='3'><a href="#">Link 3</a></option>
-		<option value='4'><a href="#">Link 4</a></option>
-		<option value='5'><a href="#">Link 5</a></option>
-		<option value='6'><a href="#">Link 6</a></option>
-		
-	</select>
 			
 				</td>
 				<td>
@@ -234,6 +239,7 @@
 
 
 <input type="hidden" id="language" value="{{ lang }}">
+<input type="hidden" id="mailpath" value="{{ mailpath }}">
 {%- endif -%}
 
 </div>

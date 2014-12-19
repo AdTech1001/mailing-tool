@@ -118,9 +118,13 @@ class CampaignobjectsController extends ControllerBase
 		 }elseif($this->request->isPost() && $this->request->getPost('campaignobjectuid')!=0 ){
 			 /*UPDATE FUNCTIONality*/
 		 }else{
+			$environment= $this->config['application']['debug'] ? 'development' : 'production';
+			$baseUri=$this->config['application'][$environment]['staticBaseUri'];
+			$path=$baseUri.'public/mails/';
 			$this->assets->addJs('js/vendor/campaignInit.js');
 			$this->assets->addCss('css/jquery.datetimepicker.css');
 			$this->view->setVar('lang',$this->view->language);
+			$this->view->setVar('mailpath',$path);
 		 }
 	}
 	
@@ -157,6 +161,10 @@ class CampaignobjectsController extends ControllerBase
 			$this->assets->addJs('js/vendor/campaignInit.js');
 			$this->assets->addCss('css/jquery.datetimepicker.css');
 			$this->view->setVar('lang',$this->view->language);
+			$environment= $this->config['application']['debug'] ? 'development' : 'production';
+			$baseUri=$this->config['application'][$environment]['staticBaseUri'];
+			$path=$baseUri.'public/mails/';
+			$this->view->setVar('mailpath',$path);
 		}
 	}
 	

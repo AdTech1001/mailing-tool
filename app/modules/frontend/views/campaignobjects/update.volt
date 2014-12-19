@@ -14,6 +14,12 @@
 		<iframe id="mailPrevFrame" style="border:1px solid; background:#e3e3e3;width:100%; min-height:101%;" src="" ></iframe>
 	</div>
 </div>
+<div id="viewFrame" style="display:none">
+		<div class="glyphicon glyphicon-remove" id="closePrev"></div>
+		<div id="deviceSelectBar">
+		</div>
+		<iframe id="mailobjectFrame" style="border:1px solid; background:#e3e3e3;width:100%;height:100%;" src=""></iframe>
+</div>
 <div id="mailobjectSelect" class="allPurposeLayer hidden">
 	<label>{{ tr('selectMailobjectLabel')}}</label><br>
 	<div id="mailobjectSelectWrapper">
@@ -145,7 +151,7 @@
 				
 				<td>{{tr('operator')}}</td>
 				
-				<td><span class="glyphicon glyphicon-link"></span></td>
+				<td>{{tr('selectLink')}}</td>
 			</thead>
 		<tbody>
 		
@@ -169,17 +175,9 @@
 						<option value='1'>{{ tr('hasClicked') }}</option>						
 					</select>
 				</td>
-				<td>					
-					
-					<select name="links[]" >
-		<option value='0'><a href="#">Link 1</a></option>
-		<option value='1'><a href="#">Link 2</a></option>
-		<option value='3'><a href="#">Link 3</a></option>
-		<option value='4'><a href="#">Link 4</a></option>
-		<option value='5'><a href="#">Link 5</a></option>
-		<option value='6'><a href="#">Link 6</a></option>
-		
-	</select>
+				<td>			
+					<input type="hidden" value="" class="clickLink">
+					<span class="glyphicon glyphicon-link"></span>
 			
 				</td>
 				<td>
@@ -236,6 +234,7 @@
 
 
 <input type="hidden" id="language" value="{{ lang }}">
+<input type="hidden" id="mailpath" value="{{ mailpath }}">
 {%- endif -%}
 
 </div>

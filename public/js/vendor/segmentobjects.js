@@ -114,20 +114,26 @@ jQuery(document).ready(function(e){
 				 }
 				 if(update){
 					 console.log('update');
-					 var stateObject=JSON.stringify(aoData);
+					 
 					 aoData.push({"name":"update","value":1});
 					 aoData.push({"name":"segmentobjectUid","value":segmentobjectUid});
-					 aoData.push({"name":"stateObject","value":stateObject});
-					 update=false;
-					 /* Search Input seemingly disappears before sending, so 
+					 
+					 /* Search Input seemingly disappears before sending, so */
+					 console.log(searchterms);
 					 for(key in aoData){
-						console.log(jQuery('#adressfolderTable_filter input'));
-					   if(aoData[key].name=='sSearch' && aoData[key].value=='' && jQuery('#adressfolderTable_filter input').val() !== ''){
-						   aoData[key].value=jQuery('#adressfolderTable_filter input').val();
+						
+					   if(aoData[key].name === 'sSearch'){
+						   if(aoData[key].value === '' && searchterms !== ''){
+						   aoData[key].value=searchterms;
+						   }
 					   }
 					   
-					 }*/
+					 }
+					 var stateObject=JSON.stringify(aoData);
+					 aoData.push({"name":"stateObject","value":stateObject});
+					 update=false;
 				 }				 
+				  aoData.push({"name":"segmenttitle","value":jQuery('input[name="segmenttitle"]').val()});
 			 }
 		});
 	
@@ -136,7 +142,7 @@ jQuery(document).ready(function(e){
 		dt.fnDraw();
 	});
 	
-	jQuery('#filters input[type="text"]').change(function(){
+	jQuery('#filterset input[type="text"]').change(function(){
 		var filtername=jQuery(this).attr('name');
 		filters[filtername]=jQuery(this).val()		
 		dt.fnDraw();
@@ -148,8 +154,10 @@ jQuery(document).ready(function(e){
 		
 	});
 	jQuery('#segmentUpdate').click(function(){
+		searchterms=jQuery('#adressfolderTable_filter input').val();
 		update=true;
 		dt.fnDraw();
+		jQuery('#adressfolderTable_filter input').val(searchterms);
 	});
 	
 	

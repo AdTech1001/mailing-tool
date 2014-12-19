@@ -24,8 +24,8 @@ class DistributorsController extends ControllerBase
 			));
 			$distributorsArray = array();
 			foreach($distributors as $distributor){
-				$distributorAddresses=0;
-				$folders=$distributor->getAddressfolders();
+				$distributorAddresses=$distributor->countAddresses();
+				/*$folders=$distributor->getAddressfolders();
 				if($folders){
 					foreach($folders as $folder){
 						$distributorAddresses+=$folder->countAddresses();
@@ -36,7 +36,7 @@ class DistributorsController extends ControllerBase
 					foreach($segments as $segment){
 						$distributorAddresses+=$segment->countAddresses();
 					}
-				}
+				}*/
 				
 				$distributorsArray[]=array(
 					'uid'=>$distributor->uid,

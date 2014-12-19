@@ -1060,7 +1060,13 @@ table.maintable td{
 
 table.maintable tr.even td{
 	background:#e3e3e3;
-	
+		
+}
+#splitModelerSelect.allPurposeLayer{
+	width:700px;
+}
+#splitModelerSelect td input, #splitModelerSelect td select{
+	width:200px;
 }
 #conditionsModelerSelect .conditionRow button{
 	width:25px;
@@ -1216,7 +1222,7 @@ table#mapTable{
 	position: fixed;
 	width: 100%;
 	height: 100%;
-	z-index: 1012;
+	z-index: 1014;
 	box-shadow: 10px 10px 5px #888888;
 	-webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 1);
 	-moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 1);

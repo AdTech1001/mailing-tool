@@ -320,7 +320,7 @@ function Load(data){
 function Save() {
 	var campaignTitle=jQuery('#automationWorkflowForm').serialize();	
 	//var conditions=jQuery('#conditionsForm').serialize();
-	console.log(connections);
+	
 	var firstConn=instance.getConnections({scope:'red',source:'startpoint'});
 	elementsPathArr=[];
 	if(firstConn.length>0){
@@ -343,7 +343,9 @@ function Save() {
 		
 		//var elementItself=JSON.stringify(jQuery('#'+elementsPathArr[i])[0].outerHTML);
 		var conditionsJson=getSendoutObjectConditions(elementsPathArr[i]);
-		var elementJson='{"id":"'+elementsPathArr[i]+'","mailobjectuid":'+jQuery(confValues[0]).val()+',"configurationuid":'+jQuery(confValues[1]).val()+',"tstamp":"'+jQuery(confValues[2]).val()+'","subject":"'+jQuery(confValues[3]).val()+'","configurationuidB":'+jQuery(confValues[4]).val()+',"tstampB":"'+jQuery(confValues[5]).val()+'","subjectB":"'+jQuery(confValues[6]).val()+'","abtest":'+jQuery(confValues[7]).val()+',"distributoruid":'+jQuery(confValues[8]).val()+',"mailobjectB":'+jQuery(confValues[9]).val()+',"position":{"left":'+jQuery('#'+elementsPathArr[i]).position().left+',"top":'+jQuery('#'+elementsPathArr[i]).position().top+'}, "conditions":'+conditionsJson+'}';
+		var clickCondTrue=getSendoutObjectClickConditionsTrue(elementsPathArr[i]);
+		var clickCondFalse=getSendoutObjectClickConditionsFalse(elementsPathArr[i]);
+		var elementJson='{"id":"'+elementsPathArr[i]+'","mailobjectuid":'+jQuery(confValues[0]).val()+',"configurationuid":'+jQuery(confValues[1]).val()+',"tstamp":"'+jQuery(confValues[2]).val()+'","subject":"'+jQuery(confValues[3]).val()+'","configurationuidB":'+jQuery(confValues[4]).val()+',"tstampB":"'+jQuery(confValues[5]).val()+'","subjectB":"'+jQuery(confValues[6]).val()+'","abtest":'+jQuery(confValues[7]).val()+',"distributoruid":'+jQuery(confValues[8]).val()+',"mailobjectB":'+jQuery(confValues[9]).val()+',"position":{"left":'+jQuery('#'+elementsPathArr[i]).position().left+',"top":'+jQuery('#'+elementsPathArr[i]).position().top+'}, "conditions":'+conditionsJson+',"clickconditionstrue":'+clickCondTrue+',"conditionsfalse":'+clickCondFalse+'}';
 		sendoutobjectelements+='&sendoutobjectelements[]='+elementJson;
 		
 
@@ -374,7 +376,7 @@ function Save() {
     });		*/
 }
 function getSendoutObjectConditions(sendoutObjectId){
-	var splitTargets=instance.getConnections({scope:'*',source:'*', target:sendoutObjectId});
+	var splitTargets=instance.getConnections({scope:'blue',source:'*', target:sendoutObjectId});
 	
 	var conditions='[';
 	for(var i=0; i<splitTargets.length;i++){
@@ -398,6 +400,60 @@ function getSendoutObjectConditions(sendoutObjectId){
 	}
 	return conditions;
 }
+
+function getSendoutObjectClickConditionsTrue(sendoutObjectId){
+	var splitTargets=instance.getConnections({scope:'green',source:'*', target:sendoutObjectId});
+	console.log(splitTargets);
+	var conditions='[';
+	for(var i=0; i<splitTargets.length;i++){
+		if(splitTargets[i].sourceId !== 'startpoint'){
+		
+		jQuery(jQuery('#'+splitTargets[i].sourceId+' .conditionsRow')).each(function(index,element){
+			var rowId=jQuery(element).attr('id');
+			var condVals=JSON.stringify(jQuery('#'+splitTargets[i].sourceId+' #'+rowId+' select,'+'#'+splitTargets[i].sourceId+' #'+rowId+' input').serializeArray());		
+			//var elItself=JSON.stringify(jQuery('#'+splitTargets[i].sourceId)[0].outerHTML);
+			 conditions+=condVals+',';
+		});
+		
+		
+		}
+		
+	}
+	if(conditions.length > 1){
+	conditions=conditions.substring(0,conditions.length-1)+']';
+	}else{
+		conditions+=']';
+	}
+	return conditions;
+}
+
+function getSendoutObjectClickConditionsFalse(sendoutObjectId){
+	var splitTargets=instance.getConnections({scope:'red',source:'*', target:sendoutObjectId});
+	
+	var conditions='[';
+	for(var i=0; i<splitTargets.length;i++){
+		if(splitTargets[i].sourceId !== 'startpoint'){
+		
+		jQuery(jQuery('#'+splitTargets[i].sourceId+' .conditionsRow')).each(function(index,element){
+			var rowId=jQuery(element).attr('id');
+			var condVals=JSON.stringify(jQuery('#'+splitTargets[i].sourceId+' #'+rowId+' select,'+'#'+splitTargets[i].sourceId+' #'+rowId+' input').serializeArray());		
+			//var elItself=JSON.stringify(jQuery('#'+splitTargets[i].sourceId)[0].outerHTML);
+			 conditions+=condVals+',';
+		});
+		
+		
+		}
+		
+	}
+	if(conditions.length > 1){
+	conditions=conditions.substring(0,conditions.length-1)+']';
+	}else{
+		conditions+=']';
+	}
+	return conditions;
+}
+
+
 function getSplitTargets(split){
 	var splitTargets=instance.getConnections({scope:['red','green'],source:split, target:'*'},true);
 	return splitTargets;
@@ -567,10 +623,39 @@ var splitFormBlueprint=jQuery('#splitForm')[0].outerHTML;
 var splitBlueprint=jQuery('#splitRow_1')[0].outerHTML;	
 var conditionModeler=function(activeElement,splitCond){	
 	var appendRow=conditionsBlueprint;
+	var actElId=jQuery(activeElement).parent().parent().parent().attr('id');
 	if(splitCond=='split'){
 		appendRow=splitBlueprint;
+		var connection=instance.getConnections({scope:'grey',source:'*', target:actElId});
+		if(connection.length===0){
+			alert('Needs to be connected first.');
+			return false;
+		}else{
+			var mailobject=jQuery('#'+connection[0].sourceId+' input[name="mailobject"]').val();			
+			if(typeof(mailobject)==='undefined'){
+				alert('Mailing object needs to be configured first.');
+				return false;
+			}else{
+				document.getElementById('mailobjectFrame').src=jQuery('#mailpath').val()+'mailobject_'+mailobject+'.html';														
+					jQuery("#mailobjectFrame").load(function(){
+						console.log('hello');
+						var frameContent=jQuery('#mailobjectFrame').contents();
+						frameContent.find("a").click(function(e){
+							console.log(jQuery(this).attr('href'));
+								jQuery('#'+rowId+' input').val(jQuery(this).attr('href'));
+								e.preventDefault();
+								return false;
+						 });
+
+
+					});
+			}
+			
+		}
+		
 	}
-	var actElId=jQuery(activeElement).parent().parent().parent().attr('id');
+	
+	
 	if(jQuery('#'+actElId+' form.hidden').html() != ''){
 		
 		jQuery('#'+splitCond+'Form').html(jQuery('#'+actElId+' form.hidden').html());
@@ -617,7 +702,20 @@ jQuery('#conditionsModelerSelect button.ok, #splitModelerSelect button.ok').clic
 });
 
 var addRowEvents=function(rowId, splitCond){
-	
+	if(splitCond=='split'){
+		jQuery('#'+rowId+' .glyphicon-link').click(function(e){
+			
+				jQuery('#viewFrame').show(function(){
+					
+					jQuery('#closePrev').click(function(e){
+						 jQuery('#closePrev').off('click');
+						 jQuery('#viewFrame').hide();
+						
+					});
+				});
+				
+		});
+	}else{
 	jQuery('#'+splitCond+'Form #'+rowId+' select').change(function(e){
 		var selectIndex=jQuery(this)[0].selectedIndex;	
 		jQuery(this).children().each(function(index,el){
@@ -650,6 +748,7 @@ var addRowEvents=function(rowId, splitCond){
 			break;
 		}
 	});
+	}
 };
 
 jsPlumb.ready(function() {
