@@ -403,16 +403,18 @@ function getSendoutObjectConditions(sendoutObjectId){
 
 function getSendoutObjectClickConditionsTrue(sendoutObjectId){
 	var splitTargets=instance.getConnections({scope:'green',source:'*', target:sendoutObjectId});
-	console.log(splitTargets);
+	
 	var conditions='[';
 	for(var i=0; i<splitTargets.length;i++){
 		if(splitTargets[i].sourceId !== 'startpoint'){
 		
-		jQuery(jQuery('#'+splitTargets[i].sourceId+' .conditionsRow')).each(function(index,element){
+		jQuery(jQuery('#'+splitTargets[i].sourceId+' .splitRow')).each(function(index,element){
 			var rowId=jQuery(element).attr('id');
+			
 			var condVals=JSON.stringify(jQuery('#'+splitTargets[i].sourceId+' #'+rowId+' select,'+'#'+splitTargets[i].sourceId+' #'+rowId+' input').serializeArray());		
 			//var elItself=JSON.stringify(jQuery('#'+splitTargets[i].sourceId)[0].outerHTML);
 			 conditions+=condVals+',';
+			 
 		});
 		
 		
@@ -642,7 +644,7 @@ var conditionModeler=function(activeElement,splitCond){
 						var frameContent=jQuery('#mailobjectFrame').contents();
 						frameContent.find("a").click(function(e){
 							console.log(jQuery(this).attr('href'));
-								jQuery('#'+rowId+' input').val(jQuery(this).attr('href'));
+								jQuery('#'+rowId+' input').val(encodeURIComponent(jQuery(this).attr('href')));
 								e.preventDefault();
 								return false;
 						 });
@@ -702,6 +704,19 @@ jQuery('#conditionsModelerSelect button.ok, #splitModelerSelect button.ok').clic
 });
 
 var addRowEvents=function(rowId, splitCond){
+	jQuery('#'+splitCond+'Form #'+rowId+' select').change(function(e){
+		var selectIndex=jQuery(this)[0].selectedIndex;	
+		jQuery(this).children().each(function(index,el){
+			if(index===selectIndex){
+				jQuery(el).attr({'selected':'selected'});
+			}else{
+				jQuery(el).removeAttr('selected');
+			}
+		});
+	});
+	jQuery('#'+splitCond+'Form #'+rowId+' input').change(function(e){
+		jQuery(this).attr({'value':jQuery(this).val()});
+	});
 	if(splitCond=='split'){
 		jQuery('#'+rowId+' .glyphicon-link').click(function(e){
 			
@@ -716,19 +731,7 @@ var addRowEvents=function(rowId, splitCond){
 				
 		});
 	}else{
-	jQuery('#'+splitCond+'Form #'+rowId+' select').change(function(e){
-		var selectIndex=jQuery(this)[0].selectedIndex;	
-		jQuery(this).children().each(function(index,el){
-			if(index===selectIndex){
-				jQuery(el).attr({'selected':'selected'});
-			}else{
-				jQuery(el).removeAttr('selected');
-			}
-		});
-	});
-	jQuery('#'+splitCond+'Form #'+rowId+' input').change(function(e){
-		jQuery(this).attr({'value':jQuery(this).val()});
-	});
+	
 	jQuery('#'+splitCond+'Form #'+rowId+' select.baseArgument').change(function(e){
 		
 		switch(jQuery(this).val()){

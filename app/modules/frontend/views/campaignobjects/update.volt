@@ -176,7 +176,7 @@
 					</select>
 				</td>
 				<td>			
-					<input type="hidden" value="" class="clickLink">
+					<input type="hidden" value="" name="clickLink" class="clickLink">
 					<span class="glyphicon glyphicon-link"></span>
 			
 				</td>
