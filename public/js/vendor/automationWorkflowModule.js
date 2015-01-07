@@ -164,13 +164,16 @@ var color3 = "#6d6e72";
 var splitConnectorSource = {
 	endpoint:["Rectangle", { width:15, height:20 } ],
 	paintStyle:{ fillStyle:color3 },
-	anchor:"Right",
+	anchor:"Continuous",
 	isSource:true,
 	scope:"grey",
 	connectorStyle:{ strokeStyle:color3, lineWidth:3 },
-	connector : [ "Flowchart", { stub:[40, 60], gap:10, cornerRadius:5, alwaysRespectStubs:true } ],
-	maxConnections:1,
-	isTarget:false
+	connector : [ "StateMachine", { stub:[40, 60], gap:10, cornerRadius:5, alwaysRespectStubs:true } ],
+	maxConnections:5,
+	isTarget:false,
+	onMaxConnections:function(info, e) {
+					alert("Maximum connections (" + info.maxConnections + ") reached");
+				}
 	
 };
 
@@ -182,7 +185,7 @@ var splitConnectorTarget = {
 	scope:"grey",
 	connectorStyle:{ strokeStyle:color3, lineWidth:3 },
 	connector : [ "Flowchart", { stub:[40, 60], gap:10, cornerRadius:5, alwaysRespectStubs:true } ],
-	maxConnections:1,
+	maxConnections:5,
 	isTarget:true
 	
 };
@@ -338,6 +341,7 @@ function Save() {
 			objects+=encodeURI(jQuery(element)[0].outerHTML);
 		}
 	});
+	console.log(elementsPathArr);
 	for(var i=0; i<elementsPathArr.length; i++ ){
 		var confValues=jQuery('#'+elementsPathArr[i]+' input');
 		
@@ -410,8 +414,11 @@ function getSendoutObjectClickConditionsTrue(sendoutObjectId){
 		
 		jQuery(jQuery('#'+splitTargets[i].sourceId+' .splitRow')).each(function(index,element){
 			var rowId=jQuery(element).attr('id');
+			var condArray=jQuery('#'+splitTargets[i].sourceId+' #'+rowId+' select,'+'#'+splitTargets[i].sourceId+' #'+rowId+' input').serializeArray();
+			var sourceDomIds=instance.getConnections({scope:'grey',source:'*', target:splitTargets[i].sourceId});
+			condArray.push({name:'sourceDomId',value:sourceDomIds[0].sourceId});
+			var condVals=JSON.stringify(condArray);		
 			
-			var condVals=JSON.stringify(jQuery('#'+splitTargets[i].sourceId+' #'+rowId+' select,'+'#'+splitTargets[i].sourceId+' #'+rowId+' input').serializeArray());		
 			//var elItself=JSON.stringify(jQuery('#'+splitTargets[i].sourceId)[0].outerHTML);
 			 conditions+=condVals+',';
 			 
@@ -438,7 +445,10 @@ function getSendoutObjectClickConditionsFalse(sendoutObjectId){
 		
 		jQuery(jQuery('#'+splitTargets[i].sourceId+' .conditionsRow')).each(function(index,element){
 			var rowId=jQuery(element).attr('id');
-			var condVals=JSON.stringify(jQuery('#'+splitTargets[i].sourceId+' #'+rowId+' select,'+'#'+splitTargets[i].sourceId+' #'+rowId+' input').serializeArray());		
+			var condArray=jQuery('#'+splitTargets[i].sourceId+' #'+rowId+' select,'+'#'+splitTargets[i].sourceId+' #'+rowId+' input').serializeArray();
+			var sourceDomIds=instance.getConnections({scope:'grey',source:'*', target:splitTargets[i].sourceId});
+			condArray.push({name:'sourceDomId',value:sourceDomIds[0].sourceId});
+			var condVals=JSON.stringify(condArray);		
 			//var elItself=JSON.stringify(jQuery('#'+splitTargets[i].sourceId)[0].outerHTML);
 			 conditions+=condVals+',';
 		});
@@ -466,13 +476,15 @@ function getPath(sendoutObject){
 	var nextElement=instance.getConnections({scope:['grey'],source:sendoutObject, target:'*'});
 	
 	if(nextElement.length >0){
-		var splitTargets=getSplitTargets(nextElement[0].targetId);
-		
-		if(splitTargets.length >0){
-			for(var i=0; i<splitTargets.length; i++){
-				
-				/*Recursion is dead, long live recursion*/
-				getPath(splitTargets[i].targetId);
+		for(var j=0;j<nextElement.length;j++){
+			var splitTargets=getSplitTargets(nextElement[j].targetId);
+
+			if(splitTargets.length >0){
+				for(var i=0; i<splitTargets.length; i++){
+
+					/*Recursion is dead, long live recursion*/
+					getPath(splitTargets[i].targetId);
+				}
 			}
 		}
 	}
@@ -640,11 +652,11 @@ var conditionModeler=function(activeElement,splitCond){
 			}else{
 				document.getElementById('mailobjectFrame').src=jQuery('#mailpath').val()+'mailobject_'+mailobject+'.html';														
 					jQuery("#mailobjectFrame").load(function(){
-						console.log('hello');
+						
 						var frameContent=jQuery('#mailobjectFrame').contents();
 						frameContent.find("a").click(function(e){
-							console.log(jQuery(this).attr('href'));
-								jQuery('#'+rowId+' input').val(encodeURIComponent(jQuery(this).attr('href')));
+						
+								jQuery('#splitModelerSelect #'+rowId+' input').val(encodeURIComponent(jQuery(this).attr('href')));
 								e.preventDefault();
 								return false;
 						 });
@@ -696,10 +708,12 @@ jQuery('#conditionsModelerSelect button.ok, #splitModelerSelect button.ok').clic
 	conditionRowCounter=1;
 	
 	var actElId=jQuery(activeElement).parent().parent().parent().attr('id');
+	
 	jQuery('#'+actElId+' form.hidden').html(jQuery('#'+splitCond+'Form').html());
 	
 	jQuery('#'+splitCond+'Form').remove();
 	jQuery('#'+splitCond+'Wrapper').prepend(prependRow);
+	
 	jQuery('#'+splitCond+'ModelerSelect').addClass('hidden');
 });
 

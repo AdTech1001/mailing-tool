@@ -21,7 +21,8 @@ class Distributors extends Model{
 		
 	}
 	
-	public function countAddresses(){
+	public function getAddresses($params= array()){
+		
 		$bindArray=array();
 		$fieldMap=array(
 			'pid'=>''
@@ -70,7 +71,7 @@ class Distributors extends Model{
 			
 		}
 		if(count($pids)>0){
-			$where.= ' AND pid IN (';
+			$where.= ' AND nltool\Models\Addresses.pid IN (';
 			$pidStrng='';
 			foreach($pids as $key => $value){
 				$pidStrng.='?'.$key.',';
@@ -93,12 +94,27 @@ class Distributors extends Model{
 			}
 			
 		}
-		
-		$queryStrng="SELECT email, last_name AS lastname, first_name AS firstname, salutation, title, company, phone, address, city, zip, userlanguage, gender, uid FROM nltool\Models\Addresses WHERE deleted=0 AND hidden=0 ".$where." GROUP BY email";	
+		if(isset($params['conditions'])){
+			$where.=$params['conditions'];
+		}
+		$joinTables='';
+		if(isset($params['clickconditions'])){
+			$joinTables=$params['clickconditions'][1];
+			$where.=$params['clickconditions'][0];
+		}
+		$queryStrng="SELECT email, last_name AS lastname, first_name AS firstname, salutation, title, company, phone, address, city, zip, userlanguage, gender, nltool\Models\Addresses.uid FROM nltool\Models\Addresses".$joinTables." WHERE nltool\Models\Addresses.deleted=0 AND nltool\Models\Addresses.hidden=0 ".$where." GROUP BY email,nltool\Models\Addresses.uid";	
 		
 		$sQuery=$modelsManager->createQuery($queryStrng);								
 		
 		$rResults = $sQuery->execute($bindArray);		
+		
+		/*$cleanedArray=array_unique($emailsArray);*/
+		return $rResults;
+	}
+	
+	public function countAddresses(){
+		$rResults=$this->getAddresses();
+		
 		
 		/*$cleanedArray=array_unique($emailsArray);*/
 		return count($rResults);

@@ -36,6 +36,10 @@ class LinkrefererController extends Controller
 					'hidden' => 0,
 					'tstamp' => $time,				
 					'crdate' => $time,
+					'url' => $LinklookupRecord->url.$params,
+					'campaignuid' => $LinklookupRecord->campaignuid,
+					'mailobjectuid' => $LinklookupRecord->mailobjectuid,
+					'sendoutobjectuid' => $LinklookupRecord->sendoutobjectuid,
 					'linkuid' => $this->dispatcher->getParam("uid"),
 					'addressuid' => $this->dispatcher->getParam("addressuid")
 				));

@@ -124,6 +124,7 @@ $messages = array(
 	"lowerequal" => "lower or equal",
 	"hasOpened" => "has opened",
 	"hasClicked" => "has clicked",
+	"noReaction" => "not reacted at all",
 	"selectLink" => "select link",
 	"addConditionRow" => "add conditions",
 	"addAutomation" => "add split",

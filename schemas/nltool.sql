@@ -442,24 +442,6 @@ CREATE TABLE configurationobjects (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 
-
-
-DROP TABLE IF EXISTS automationobjects;
-CREATE TABLE automationobjects (
-	uid int(11) NOT NULL auto_increment,
-	pid int(11) DEFAULT '0' NOT NULL,
-	tstamp int(11) DEFAULT '0' NOT NULL,
-	crdate int(11) DEFAULT '0' NOT NULL,
-	cruser_id int(11) DEFAULT '0' NOT NULL,
-	deleted tinyint(4) DEFAULT '0' NOT NULL,
-	hidden tinyint(4) DEFAULT '0' NOT NULL,	
-	usergroup int(11) DEFAULT '0' NOT NULL,
-	campaignid int(11) DEFAULT '0' NOT NULL,	
-	title varchar(255) COLLATE utf8_general_ci NOT NULL,	
-	automationgraphstring varchar(255) COLLATE utf8_general_ci NOT NULL,
-  PRIMARY KEY (uid)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
 DROP TABLE IF EXISTS segmentobjects;
 CREATE TABLE segmentobjects (
 	uid int(11) NOT NULL auto_increment,
@@ -606,6 +588,26 @@ CREATE TABLE addressconditions(
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 
+DROP TABLE IF EXISTS clickconditions;
+CREATE TABLE clickconditions(
+	uid int(11) NOT NULL auto_increment,
+	pid int(11) DEFAULT '0' NOT NULL,
+	tstamp int(11) DEFAULT '0' NOT NULL,
+	crdate int(11) DEFAULT '0' NOT NULL,
+	cruser_id int(11) DEFAULT '0' NOT NULL,
+	deleted tinyint(4) DEFAULT '0' NOT NULL,
+	hidden tinyint(4) DEFAULT '0' NOT NULL,
+	usergroup int(11) DEFAULT '0' NOT NULL,	
+	junctor int(11) DEFAULT '0' NOT NULL,	
+	conditionaloperator int(11) DEFAULT '0' NOT NULL,		
+	thecondition int(11) DEFAULT '0' NOT NULL,		
+	argumentcondition varchar(1000) COLLATE utf8_general_ci NOT NULL,	
+	conditiontrue tinyint(4) DEFAULT '0' NOT NULL,
+	sourcesendoutobjectuid int(11) DEFAULT '0' NOT NULL,
+	PRIMARY KEY (uid)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+
 DROP TABLE IF EXISTS mailqueue;
 CREATE TABLE mailqueue (
 	uid int(11) NOT NULL auto_increment,
@@ -659,6 +661,10 @@ CREATE TABLE linkclicks(
 	crdate int(11) DEFAULT '0' NOT NULL,	
 	deleted tinyint(4) DEFAULT '0' NOT NULL,
 	hidden tinyint(4) DEFAULT '0' NOT NULL,	
+	campaignuid int(11) DEFAULT '0' NOT NULL,
+	mailobjectuid int(11) DEFAULT '0' NOT NULL,
+	sendoutobjectuid int(11) DEFAULT '0' NOT NULL,
+	url mediumtext,	
 	linkuid int(11) DEFAULT '0' NOT NULL,
 	addressuid int(11) DEFAULT '0' NOT NULL,	
 	PRIMARY KEY (uid)

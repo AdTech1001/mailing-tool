@@ -3,7 +3,8 @@ namespace nltool\Modules\Modules\Frontend\Controllers;
 use nltool\Models\Mailobjects as Mailobjects,
 	nltool\Models\Campaignobjects as Campaignobjects,	
 	nltool\Models\Sendoutobjects as Sendoutobjects,
-	nltool\Models\Addressconditions	as Addressconditions;
+	nltool\Models\Addressconditions	as Addressconditions,
+	nltool\Models\Clickconditions;
 
 /**
  * Class IndexController
@@ -182,10 +183,14 @@ class CampaignobjectsController extends ControllerBase
 				$sendoutobjectRecord->update();
 				$addressconditions=$sendoutobjectRecord->getAddressconditions();
 				if($addressconditions){
-					foreach($addressconditions as $addresscondition){
-						$addresscondition->deleted=1;
-						$addresscondition->hidden=1;
-						$addresscondition->update();
+					foreach($addressconditions as $addresscondition){						
+						$addresscondition->delete();
+					}
+				}
+				$clickconditions=$sendoutobjectRecord->getClickconditions();
+				if($clickconditions){
+					foreach($clickconditions as $clickcondition){
+						$clickcondition->delete();
 					}
 				}
 			}	
@@ -327,10 +332,8 @@ class CampaignobjectsController extends ControllerBase
 						
 						$addressconditionsPrev=$sendoutobject->getAddressconditions();
 							if($addressconditionsPrev){
-								foreach($addressconditionsPrev as $addressconditionPrevEl){
-									$addressconditionPrevEl->deleted=1;
-									$addressconditionPrevEl->hidden=1;
-									$addressconditionPrevEl->update();
+								foreach($addressconditionsPrev as $addressconditionPrevEl){							
+									$addressconditionPrevEl->delete();
 								}
 							}
 						
@@ -355,6 +358,54 @@ class CampaignobjectsController extends ControllerBase
 							));
 							if(!$addressconditions->save()){
 								$this->flash->error($addressconditions->getMessages());
+							}
+							
+						}
+					}
+					
+					if(isset($rawArray['clickconditionstrue']) || isset($rawArray['clickconditionsfalse'])){
+						if(isset($rawArray['clickconditionstrue'])){
+							$truefalse=1;
+							$conditions=$rawArray['clickconditionstrue'];
+						}else{
+							$truefalse=0;
+							$conditions=$rawArray['clickconditionsfalse'];
+						}
+						$clickconditionsPrev=$sendoutobject->getClickconditions();
+						if($clickconditionsPrev){
+							foreach($clickconditionsPrev as $clickconditionPrev){
+								$clickconditionPrev->delete();
+							}
+						}
+						
+						foreach($conditions as $conditionArray){
+							/*Search for SourceSendoutobject UID not perferctly placed performancewise*/
+							$sourceSendoutObject= Sendoutobjects::findFirst(array(
+								'conditions' => 'deleted=0 AND hidden=0 AND campaignuid=?1 AND domid LIKE ?2',
+								'bind'=>array(
+									1=>$campaignobjectRecord->uid,
+									2=>$conditionArray[4]['value']
+								)
+							));
+							$clickcondition=new Clickconditions();
+							$clickcondition->assign(array(
+								'pid' => $sendoutobject->uid,
+								'crdate' => $time,
+								'tstamp' => $time,
+								'deleted'=>0,
+								'hidden'=>0,
+								'cruser_id' => $this->session->get('auth')['uid'],
+								'usergroup' => $this->session->get('auth')['usergroup'],
+								'junctor' => intval($conditionArray[0]['value']),
+								'conditionaloperator' => intval($conditionArray[1]['value']),
+								'thecondition' => intval($conditionArray[2]['value']),
+								'argumentcondition' =>$conditionArray[3]['value'],
+								'conditiontrue' => $truefalse,
+								'sourcesendoutobjectuid' => $sourceSendoutObject->uid
+									
+							));
+							if(!$clickcondition->save()){
+								$this->flash->error($clickcondition->getMessages());
 							}
 							
 						}

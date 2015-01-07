@@ -158,21 +158,25 @@
 			<tr id="splitRow_1" class="splitRow">
 				<td>
 					<select name="junctor0[]" class="junctor0 hidden">
-						<option value='0'>{{ tr('and') }}</option>
-						<option value='1'>{{ tr('or') }}</option>
-						<option value='2'>{{ tr('xor') }}</option>
+						<option value='0'>{{ tr('pleaseSelect') }}</option>
+						<option value='1'>{{ tr('and') }}</option>
+						<option value='2'>{{ tr('or') }}</option>
+						<option value='3'>{{ tr('xor') }}</option>
 					</select>
 					<select name="junctor1[]" class="junctor1">
-						<option value='0'>{{ tr('if') }}</option>
-						<option value='1'>{{ tr('ifnot') }}</option>
+						<option value='0'>{{ tr('pleaseSelect') }}</option>
+						<option value='1'>{{ tr('if') }}</option>
+						<option value='2'>{{ tr('ifnot') }}</option>
 					</select>
 				</td>
 				
 				<td>
 					
 					<select name="operator[]" class="actionOperators">
-						<option value='0'>{{ tr('hasOpened') }}</option>
-						<option value='1'>{{ tr('hasClicked') }}</option>						
+						<option>{{ tr('pleaseSelect') }}</option>
+						<option value='1'>{{ tr('hasClicked') }}</option>
+						<option value='2'>{{ tr('hasOpened') }}</option>
+						<option value='3'>{{ tr('noReaction') }}</option>						
 					</select>
 				</td>
 				<td>			

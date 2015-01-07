@@ -33,7 +33,7 @@ return new \Phalcon\Config(array(
         'port'     => 25,
         'security' => "tls",
         'username' => "mailing@iq-pi.org",
-        'password' => "none", //hpkYhxr&mdm7
+        'password' => "hpkYhxr&mdm7", //
 		'mailcycle' => 300
     ),
 	

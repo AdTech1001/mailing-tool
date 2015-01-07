@@ -42,106 +42,145 @@ class TriggersendController extends Triggerauth
 			foreach($mailings AS $mailing){
 				$addressConditions=$mailing->getAddressconditions();
 				$condStrng='';
-				foreach($addressConditions AS $condition){
-					switch($condition->junctor){
-						case 1:
-							$condStrng.='AND ( ';
+				if($addressConditions){
+					foreach($addressConditions AS $condition){
+						switch($condition->junctor){
+							case 1:
+								$condStrng.='AND ( ';
+								break;
+							case 2: 
+								$condStrng.='OR ( ';
+								break;
+							default:
+								$condStrng=' AND (';
+								break;
+						}
+
+						$condition->conditionaloperator;
+						switch($condition->argument){
+							case 1:
+								$condStrng.='gender ';
+								break;
+							case 2: 
+								$condStrng.='first_name ';
+								break;
+							case 3: 
+								$condStrng.='last_name ';
+								break;
+							case 4: 
+								$condStrng.='email ';
+								break;
+							case 5: 
+								$condStrng.='zip ';
+								break;
+							case 2: 
+								$condStrng.='region ';
+								break;
+							case 2: 
+								$condStrng.='city ';
+								break;
+							case 2: 
+								$condStrng.='province ';
+								break;						
+
+						}
+
+						switch($condition->operator){
+							case 1:
+								if($condition->conditionaloperator == 1){
+									$condStrng.= '=';
+								}else if($condition->conditionaloperator == 2){
+									$condStrng.= '<>';
+								}						 
 							break;
-						case 2: 
-							$condStrng.='OR ( ';
+							case 2:
+								if($condition->conditionaloperator == 1){
+									$condStrng.= 'LIKE ';
+								}else if($condition->conditionaloperator == 2){
+									$condStrng.= 'NOT LIKE ';
+								}						 
 							break;
-						default:
-							$condStrng=' AND (';
+							case 3:
+								if($condition->conditionaloperator == 1){
+									$condStrng.= '>';
+								}else if($condition->conditionaloperator == 2){
+									$condStrng.= '<=';
+								}						 
 							break;
+							case 4:
+								if($condition->conditionaloperator == 1){
+									$condStrng.= '>=';
+								}else if($condition->conditionaloperator == 2){
+									$condStrng.= '<';
+								}						 
+							break;
+							case 5:
+								if($condition->conditionaloperator == 1){
+									$condStrng.= '<';
+								}else if($condition->conditionaloperator == 2){
+									$condStrng.= '>=';
+								}						 
+							break;
+							case 6:
+								if($condition->conditionaloperator == 1){
+									$condStrng.= '<=';
+								}else if($condition->conditionaloperator == 2){
+									$condStrng.= '>';
+								}						 
+							break;
+						}
+
+						if($condition->operator==2 ){
+							$condStrng.='"%'.$condition->argumentcondition.'%") ';
+
+						}else{
+							$condStrng.=$condition->argumentcondition.') ';
+						}
+
 					}
-					
-					$condition->conditionaloperator;
-					switch($condition->argument){
-						case 1:
-							$condStrng.='gender ';
-							break;
-						case 2: 
-							$condStrng.='first_name ';
-							break;
-						case 3: 
-							$condStrng.='last_name ';
-							break;
-						case 4: 
-							$condStrng.='email ';
-							break;
-						case 5: 
-							$condStrng.='zip ';
-							break;
-						case 2: 
-							$condStrng.='region ';
-							break;
-						case 2: 
-							$condStrng.='city ';
-							break;
-						case 2: 
-							$condStrng.='province ';
-							break;						
-						
-					}
-					
-					switch($condition->operator){
-						case 1:
-							if($condition->conditionaloperator == 1){
-								$condStrng.= '=';
-							}else if($condition->conditionaloperator == 2){
-								$condStrng.= '<>';
-							}						 
-						break;
-						case 2:
-							if($condition->conditionaloperator == 1){
-								$condStrng.= 'LIKE ';
-							}else if($condition->conditionaloperator == 2){
-								$condStrng.= 'NOT LIKE ';
-							}						 
-						break;
-						case 3:
-							if($condition->conditionaloperator == 1){
-								$condStrng.= '>';
-							}else if($condition->conditionaloperator == 2){
-								$condStrng.= '<=';
-							}						 
-						break;
-						case 4:
-							if($condition->conditionaloperator == 1){
-								$condStrng.= '>=';
-							}else if($condition->conditionaloperator == 2){
-								$condStrng.= '<';
-							}						 
-						break;
-						case 5:
-							if($condition->conditionaloperator == 1){
-								$condStrng.= '<';
-							}else if($condition->conditionaloperator == 2){
-								$condStrng.= '>=';
-							}						 
-						break;
-						case 6:
-							if($condition->conditionaloperator == 1){
-								$condStrng.= '<=';
-							}else if($condition->conditionaloperator == 2){
-								$condStrng.= '>';
-							}						 
-						break;
-					}
-					
-					if($condition->operator==2 ){
-						$condStrng.='"%'.$condition->argumentcondition.'%") ';
-						
-					}else{
-						$condStrng.=$condition->argumentcondition.') ';
-					}
-					
 				}
-				
+				$clickconditions=$mailing->getClickconditions();
+				$clickcondstrng='';
+				$joinTables='';
+				if($clickconditions){
+					foreach($clickconditions as $clickcondition){
+						switch($clickcondition->junctor){
+							case 1:
+								$clickcondstrng.=' AND ( ';
+								break;
+							case 2: 
+								$clickcondstrng.=' OR ( ';
+								break;
+							default:
+								$clickcondstrng=' AND (';
+								break;
+						}
+						
+						switch($clickcondition->conditionaloperator){
+							case 1:
+								$joinTables=' LEFT JOIN nltool\Models\Linkclicks ON (nltool\Models\Addresses.uid=nltool\Models\Linkclicks.addressuid AND nltool\Models\Linkclicks.sendoutobjectuid='.$clickcondition->sourcesendoutobjectuid.')';
+								$bracePos=strpos($clickcondition->argumentcondition,'{{');
+								$likeNotLike=$clickcondition->conditiontrue==1 ?  'LIKE':'NOT LIKE';
+								if($bracePos){
+									$clickcondstrng.='url '.$likeNotLike.' "'.substr($clickcondition->argumentcondition,0,($bracePos-1)).'%"';
+								}else{
+									$clickcondstrng.='url '.$likeNotLike.' "'.$clickcondition->argumentcondition.'"';
+								}
+								
+								break;
+							
+						}
+						$clickcondstrng.=') ';
+					}
+				}
 				/*TODO FORM QUERY FROM CONDITIONS*/
-				$adressFolder=$mailing->getAddressfolder();
-				$addresses=$adressFolder->getAddresses(array(
-					'conditions'=>'deleted=0 AND hidden=0 '.$condStrng
+				$distributor=$mailing->getDistributor();
+				$addresses=$distributor->getAddresses(array(
+					'conditions'=>$condStrng,
+					'clickconditions'=>array(
+						0=>$clickcondstrng,
+						1=>$joinTables
+						)
 				));
 				$configuration=$mailing->getConfiguration();					
 				//$bodyRaw=file_get_contents('../public/mails/mailobject_'.$mailing->mailobjectuid.'.html');
@@ -250,7 +289,7 @@ class TriggersendController extends Triggerauth
 			if($configuration->clicktracking==1){
 				$this->mailrenderer->writeClicktrackingLinks($bodyRaw,$mailing);
 				$links=Linklookup::find(array(
-					'conditions'=>'deleted=0 AND hidden=0 AND addressuid=0 AND sendoutobjectuid = ?1',
+					'conditions'=>'deleted=0 AND hidden=0 AND sendoutobjectuid = ?1',
 					'bind'=> array(
 						1=>$mailing->uid
 					),
@@ -298,7 +337,7 @@ class TriggersendController extends Triggerauth
 				
 				if($mailqueueElement->sent==0){
 					$checktime=microtime(true);
-				$mailer->send($message, $failures);				
+					$mailer->send($message, $failures);				
 					$debug2=json_encode($to);
 					
 					$endtime=  microtime(true);
