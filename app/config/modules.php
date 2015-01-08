@@ -8,7 +8,7 @@ $application->registerModules(array(
         'className' => 'Modules\Modules\Frontend\Module',
         'path' => __DIR__ . '/../modules/frontend/Module.php'
     ), 
-    'dashboard' => array(
+    'backend' => array(
         'className' => 'Modules\Modules\Backend\Module',
         'path' => __DIR__ . '/../modules/backend/Module.php'
     )

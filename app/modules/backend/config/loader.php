@@ -9,20 +9,22 @@ $loader = new \Phalcon\Loader();
 $loader->registerNamespaces(
     array(
 		'nltool\Models'        => $this->config->application->modelsDir,
-		'nltool\Controllers'   => $config->application->controllersDir,
-		'nltool\Modules\Modules\Frontend'=>$config->application->frontendDir,
-		'nltool\Modules\Modules\Frontend\Controllers'=>$config->application->frontendControllersDir,
-		'nltool\Modules\Modules\Backend'=>$config->application->backendDir,
-		'nltool\Modules\Modules\Backend\Controllers'=>$config->application->backendControllersDir,
-		'nltool\app' => $config->application->appsDir,
-		'nltool' => $config->application->libraryDir
+		'nltool\Forms'        => $this->config->application->formsDir,		
+		'nltool\Controllers'   => $this->config->application->controllersDir,
+		'nltool\Modules\Modules\Frontend'=>$this->config->application->frontendDir,
+		'nltool\Modules\Modules\Frontend\Controllers'=>$this->config->application->frontendControllersDir,
+		'nltool\Modules\Modules\Backend'=>$this->config->application->backendDir,
+		'nltool\Modules\Modules\Backend\Controllers'=>$this->config->application->backendControllersDir,
+		'nltool\app' => $this->config->application->appsDir,
+		'nltool' => $this->config->application->libraryDir,	
+		'Sum' => $this->config->application->libraryDir
        
     )
 );
 
  $loader->registerDirs(array(
-        $config->application->controllersDir,
-        $config->application->modelsDir
+        $this->config->application->controllersDir,
+        $this->config->application->modelsDir
     ));
 
 $loader->register();

@@ -28,6 +28,7 @@ class SessionController extends ControllerBase
 	{
 		
 		if ($this->request->isPost()) {
+			
 			try {				
 				$this->auth->check(array(
 					'username' => $this->request->getPost('username'),
@@ -39,9 +40,10 @@ class SessionController extends ControllerBase
 				$this->view->disable();                            
 			} catch (AuthException $e) {
 				$this->flash->error($e->getMessage());
+				
 			}
 		}
-		return $this->forward('session/index');
+		
 	}
 	
 	

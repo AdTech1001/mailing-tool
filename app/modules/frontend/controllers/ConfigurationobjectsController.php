@@ -2,7 +2,8 @@
 namespace nltool\Modules\Modules\Frontend\Controllers;
 use nltool\Models\Configurationobjects as Configurationobjects,
 		Phalcon\Tag,
-		nltool\Forms\ConfigurationobjectsForm as ConfigurationobjectsForm;
+		nltool\Forms\ConfigurationobjectsForm as ConfigurationobjectsForm,
+		nltool\Models\Feusers;
 
 /**
  * Class IndexController
@@ -55,35 +56,39 @@ class ConfigurationobjectsController extends ControllerBase
 	{
 		 
 	 if($this->request->isPost())
-	{
-		$time=time();
-		$configurationobject=new Configurationobjects();
-		$configurationobject->assign(array(				
-				'pid' =>0,
-				'deleted'=>0,
-				'hidden' => 0,
-				'tstamp' => $time,				
-				'crdate' => $time,
-				'cruser_id' => $this->session->get('auth')['uid'],
-				'usergroup' => $this->session->get('auth')['usergroup'],
-				'title' => $this->request->getPost('title','striptags'),
-				'sendermail'=> $this->request->getPost('sendermail','email'),
-				'sendername' => $this->request->getPost('sendername','striptags'),
-				'answermail' => $this->request->getPost('answermail','email'),
-				'answername' => $this->request->getPost('answername','striptags'),
-				'returnpath' => $this->request->getPost('returnpath','email'),
-				'organisation' => $this->request->getPost('organisation','striptags'),
-				'htmlplain' => $this->request->getPost('htmlplain','int'),
-				'clicktracking' => $this->request->getPost('clicktracking','int')
-			));
-		
-		 
-		 if (!$configurationobject->save()) {
-              $this->flash->error($configurationobject->getMessages());
-		 } else {
+		{
+			$time=time();
+			$configurationobject=new Configurationobjects();
+			$configurationobject->assign(array(				
+					'pid' =>0,
+					'deleted'=>0,
+					'hidden' => 0,
+					'tstamp' => $time,				
+					'crdate' => $time,
+					'cruser_id' => $this->session->get('auth')['uid'],
+					'usergroup' => $this->session->get('auth')['usergroup'],
+					'title' => $this->request->getPost('title','striptags'),
+					'sendermail'=> $this->request->getPost('sendermail','email'),
+					'sendername' => $this->request->getPost('sendername','striptags'),
+					'answermail' => $this->request->getPost('answermail','email'),
+					'answername' => $this->request->getPost('answername','striptags'),
+					'returnpath' => $this->request->getPost('returnpath','email'),
+					'organisation' => $this->request->getPost('organisation','striptags'),
+					'htmlplain' => $this->request->getPost('htmlplain','int'),
+					'clicktracking' => $this->request->getPost('clicktracking','int')
+				));
+
+
+			 if (!$configurationobject->save()) {
+				  $this->flash->error($configurationobject->getMessages());
+			 } 
+
 
 		}
-	}
+	$feusers=Feusers::find(array(
+			'conditions' =>'deleted=0 AND hidden=0'
+		 ));
+		 $this->view->setVar('feusers',$feusers);
 		 
 	}
 	public function updateAction(){

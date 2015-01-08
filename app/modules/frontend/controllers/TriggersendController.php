@@ -337,7 +337,9 @@ class TriggersendController extends Triggerauth
 				
 				if($mailqueueElement->sent==0){
 					$checktime=microtime(true);
-					$mailer->send($message, $failures);				
+					if(!$this->config['application']['dontSendReally']){
+						$mailer->send($message, $failures);
+					}					
 					$debug2=json_encode($to);
 					
 					$endtime=  microtime(true);

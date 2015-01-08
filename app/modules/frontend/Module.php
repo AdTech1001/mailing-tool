@@ -45,6 +45,7 @@ $this->config = include APP_PATH . "/app/config/config.php";
  * Setting up the view component
  */
 		$config=$this->config;
+		
 $di->set(
     'view',
     function () use ($config) {

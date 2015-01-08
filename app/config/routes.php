@@ -300,7 +300,38 @@ $router->add(
     )
 );
 
+$router->add(
+	'/backend/{language:[a-z]{2}}/:controller[/]{0,1}', 
+	array(
+		'language' => 1,
+		'controller' => 2,
+		'action' => "index",
+		'module'=>'backend',
+		'namespace'  => 'nltool\Modules\Modules\Backend\Controllers',
+	)
+);
+$router->add(
+	'/backend/{language:[a-z]{2}}/:controller/:action[/]{0,1}', 
+	array(
+		'language' => 1,
+		'controller' => 2,
+		'action' => 3,		
+		'module'=>'backend',
+		'namespace'  => 'nltool\Modules\Modules\Backend\Controllers',
+	)
+);
 
+$router->add(
+	'/backend/{language:[a-z]{2}}/:controller/:action/:int[/]{0,1}', 
+	array(
+		'language' => 1,
+		'controller' => 2,
+		'action' => 3,
+		'uid'=>4,
+		'module'=>'backend',
+		'namespace'  => 'nltool\Modules\Modules\Backend\Controllers',
+	)
+);
 
 
 

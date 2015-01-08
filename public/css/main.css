@@ -1051,9 +1051,9 @@ box-shadow: inset 3px 0px 5px 0px rgba(0,0,0,0.75);
 }
 
 table.maintable{
-	width:50%;
+	min-width:50%;
 }
-table.maintable td{
+table.maintable td,table.maintable th{
 	padding:10px;
 	border:1px solid;
 }
