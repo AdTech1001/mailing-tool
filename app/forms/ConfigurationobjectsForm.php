@@ -8,6 +8,7 @@ use Phalcon\Forms\Element\Select;
 use Phalcon\Validation\Validator\PresenceOf;
 use Phalcon\Validation\Validator\Email;
 use nltool\Modules\Modules\Frontend\Controllers\ControllerBase as ControllerBase;
+use nltool\Models\Feusers;
 
 
 class ConfigurationobjectsForm extends Form
@@ -117,8 +118,17 @@ class ConfigurationobjectsForm extends Form
         ));
 
         $this->add($organisation);
+		$authorities=new Select("authorities[]", Feusers::find(array('conditions'=>'deleted=0 AND hidden=0')), array(
+            'using' => array('uid', 'email'),			 
+			'multiple'=>'multiple'		
+        ));
 		
-
+		 $selectedOptions = [];
+        foreach ($entity->getAuthorities() as $authority) {
+            $selectedOptions[]  = $authority->uid;
+        }
+		$authorities->setDefault($selectedOptions);
+		$this->add($authorities);
         $this->add(new Select('htmlplain', array(
             '0' => ControllerBase::translate('html'),
             '1' => ControllerBase::translate('plain'),

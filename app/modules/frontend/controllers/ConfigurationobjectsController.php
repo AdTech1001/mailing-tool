@@ -3,7 +3,8 @@ namespace nltool\Modules\Modules\Frontend\Controllers;
 use nltool\Models\Configurationobjects as Configurationobjects,
 		Phalcon\Tag,
 		nltool\Forms\ConfigurationobjectsForm as ConfigurationobjectsForm,
-		nltool\Models\Feusers;
+		nltool\Models\Feusers,
+		nltool\Models\Configurationobjects_feusers_lookup;
 
 /**
  * Class IndexController
@@ -95,10 +96,33 @@ class ConfigurationobjectsController extends ControllerBase
 		if(!$this->request->isPost()){
 			$configurationobjectUid = $this->dispatcher->getParam("uid");
 			$configurationobjectRecord = Configurationobjects::findFirstByUid($configurationobjectUid);
+			
 		}else{
 			$configurationobjectUid=$this->request->getPost('uid', 'int');
 			$configurationobjectRecord = Configurationobjects::findFirstByUid($configurationobjectUid);
 			$time=time();
+			$this->removeRelations($configurationobjectUid);
+			$folderInStrng='';
+			$folderBindArray=array();
+			if($this->request->getPost('authorities')){
+				foreach($this->request->getPost('authorities') as $key=>$value){
+					$folderInStrng.='?'.$key.',';
+					$folderBindArray[$key]=$value;
+				}
+				$authorities=  Feusers::find(array(
+					'conditions' => 'uid IN ('.substr($folderInStrng,0,-1).')',
+					'bind' => $folderBindArray
+
+				));
+
+
+				foreach ($authorities as $authority){								
+					$authoritiesArr[]=$authority;				
+				}
+			}
+			
+			
+			
 			$configurationobjectRecord->assign(array(								
 				'tstamp' => $time,												
 				'title' => $this->request->getPost('title','striptags'),
@@ -111,6 +135,8 @@ class ConfigurationobjectsController extends ControllerBase
 				'htmlplain' => $this->request->getPost('htmlplain','int'),
 				'clicktracking' => $this->request->getPost('clicktracking','int')
 			));
+			$configurationobjectRecord->authorities=$authoritiesArr;
+			
 			 if (!$configurationobjectRecord->update()) {
                 $this->flash->error($configurationobjectRecord->getMessages());
             } else {
@@ -127,6 +153,15 @@ class ConfigurationobjectsController extends ControllerBase
             'edit' => true
         ));
 		
+	}
+	
+	private function removeRelations($uid){
+		$relations=Configurationobjects_feusers_lookup::find(array('conditions'=>'uid_local=?1','bind'=>array(1=>$uid)));
+		if($relations){
+			foreach($relations as $relation){
+				$relations->delete();
+			}
+		}
 	}
 	
 }

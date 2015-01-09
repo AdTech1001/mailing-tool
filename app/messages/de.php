@@ -95,6 +95,7 @@ $messages = array(
 	"confOrganisationLabel" => "Organisation",
 	"confhtmlplainLabel" => "HTML, Plaintext, beides",
 	"confTitle" => "Konfiguration anlegen",
+	"authoritiesLabel" =>"Verantwortliche",
 	"html" => "HTML",
 	"plain" => "Plaintext",
 	"both" => "beides",

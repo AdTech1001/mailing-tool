@@ -24,8 +24,9 @@
 			<th>{{ tr('feusers.userlanguage') }}</th>
 		</tr>
 	</thead>
-	<tr>
+	<tbody>
 	{% for feuser in feusers %}
+	<tr>	
 	<td>{{feuser.username}}</td>
 	<td>{{feuser.last_name}}</td>
 	<td>{{feuser.first_name}}</td>
@@ -41,8 +42,10 @@
 	<td>{{feuser.superuser}}</td>
 	<td>{{feuser.getUserlanguage().shorttitle}}</td>
 	<td><a href='{{ path }}{{ feuser.uid }}'>>> {{tr('update')}}</a></td>
-	{% endfor %}
+	
 	</tr>
+	{% endfor %}
+	</tbody>
 </table>
 
 

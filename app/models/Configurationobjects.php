@@ -11,6 +11,8 @@ Model::setup(['notNullValidations' => false]);
  */
 class Configurationobjects extends Model{
 	
-	
+	public function initialize(){
+		$this->hasManyToMany("uid", "nltool\Models\Configurationobjects_feusers_lookup", "uid_local", "uid_foreign", "nltool\Models\Feusers", "uid",array('alias' => 'authorities'));
+	}
 	
 }

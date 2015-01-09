@@ -3,7 +3,8 @@ namespace nltool\Modules\Modules\Backend\Controllers;
 use nltool\Models\Feusers,
 	nltool\Models\Profiles,
 	nltool\Models\Languages,
-	nltool\Models\Usergroups;
+	nltool\Models\Usergroups,
+	nltool\Forms\FeusersForm;
 /**
  * Class FeusersController
  *
@@ -20,12 +21,44 @@ class FeusersController extends ControllerBase
 		
 		$environment= $this->config['application']['debug'] ? 'development' : 'production';
 		$baseUri=$this->config['application'][$environment]['staticBaseUri'];
-		$path=$baseUri.$this->view->language.'/distributors/update/';
+		$path=$baseUri.'/backend/'.$this->view->language.'/feusers/update/';
 		
 		$this->view->setVar('path',$path);
 		$this->view->setVar('feusers',$feusers);
 	}
-	
+	public function updateAction(){
+		if(!$this->request->isPost()){
+			$feuserUid = $this->dispatcher->getParam("uid");
+			$feuserRecord = Feusers::findFirstByUid($feuserUid);
+		}else{
+			$feuserUid = $this->request->getPost("uid");
+			$feuserRecord = Feusers::findFirstByUid($feuserUid);
+			
+			$feuserRecord->assign(array(
+				'tstamp' => time(),				
+				'cruser_id' => $this->session->get('auth')['uid'],								
+				'username' => $this->request->getPost('username'),
+				'password' => $this->myhash($this->request->getPost('password'), $this->unique_salt()),
+				'first_name' => $this->request->getPost('first_name'),
+				'last_name' => $this->request->getPost('last_name'),				
+				'title' => $this->request->getPost('title'),
+				'email' => $this->request->getPost('email'),
+				'phone' => $this->request->getPost('phone'),
+				'address' => $this->request->getPost('address'),
+				'city' => $this->request->getPost('city'),
+				'zip' => $this->request->getPost('zip'),
+				'company' => $this->request->getPost('company'),
+				'profileid' => $this->request->getPost('profileuid'),
+				'usergroup' => $this->request->getPost('usergroup'),
+				'superuser' => $this->request->getPost('superuser'),
+				'userlanguage' => $this->request->getPost('userlanguage')
+			));
+			$feuserRecord->update();
+		}
+		$this->view->form = new FeusersForm($feuserRecord, array(
+            'edit' => true
+        ));
+	}
 	public function createAction(){
 		if($this->request->isPost()){
 			$time=time();
@@ -36,8 +69,7 @@ class FeusersController extends ControllerBase
 				'crdate' => $time,
 				'cruser_id' => $this->session->get('auth')['uid'],
 				'deleted' => 0,
-				'hidden' => 0,
-				'usergroup' => $this->session->get('auth')['usergroup'],
+				'hidden' => 0,				
 				'username' => $this->request->getPost('username'),
 				'password' => $this->myhash($this->request->getPost('password'), $this->unique_salt()),
 				'first_name' => $this->request->getPost('first_name'),

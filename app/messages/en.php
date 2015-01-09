@@ -39,6 +39,7 @@ $messages = array(
 	"campaignCreate"=> "create new campaign",
 	"campaignRetrieve" => "manage campaigns",
 	"content"=>"Content",
+	"authoritiesLabel" =>"Authorities",
 	"contentCreate"=> "create new content",
 	"contentRetrieve" => "manage content",
 	"contentobjectsTemplates"=> "manage content layouts",

@@ -9,7 +9,11 @@
 
 	<label>{{ tr('confTitleLabel') }}</label><br>
     {{ form.render("title") }}
-	<br>
+	<br><br>
+	<label>{{ tr('authoritiesLabel') }}</label><br>
+	 {{ form.render("authorities[]") }}
+	 
+	 <br><br>
     <label>{{ tr('confSendermailLabel') }}</label><br>
     {{ form.render("sendermail") }}
 <br>
