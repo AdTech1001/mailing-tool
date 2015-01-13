@@ -44,6 +44,7 @@ class Feusers extends \Phalcon\Mvc\Model{
 		$this->hasOne('userlanguage','nltool\Models\Languages','uid',array(
 			'alias'=>'userlanguage'
 		));
+		  $this->hasMany("uid", "nltool\Models\Review", "cruser_id",array('alias' => 'reviews'));
 	}
 }
 

@@ -202,6 +202,7 @@ $messages = array(
 	"segmentobjectTitle" => "Adresssegment",
 	"containingAddresses" => "Anzahl der Adressen",
 	"filtersTitle" => "Filter",
-	"distributorCreateTitle" => "Verteiler anlegen"
+	"distributorCreateTitle" => "Verteiler anlegen",
+	"overallClearance" => "Gesamtfreigabe"
 );
 ?>

@@ -198,7 +198,8 @@ $messages = array(
 	"segmentobjectTitle" => "address segment",
 	"containingAddresses" => "number of addresses",
 	"filtersTitle" => "filter",
-	"distributorCreateTitle" => "create distribution list"
+	"distributorCreateTitle" => "create distribution list",
+	"overallClearance" => "overall clearance"
 	
 );
 

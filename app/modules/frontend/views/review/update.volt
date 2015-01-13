@@ -3,7 +3,7 @@
 <div class="container">
 {%- if session.get('auth') -%}
 	<div id="menuWrapper" class="clearfix">
-	<div id="activityModeBar"><h1 style="display:inline-block;">{{ tr('reviewUpdateLabel') }}</h1>
+	<div id="activityModeBar"  style="float:none"><h1 style="display:inline-block;">{{ tr('reviewUpdateLabel') }}</h1>
 		
 	</div>
 <div id="fileToolBar">	
@@ -13,7 +13,77 @@
 	</div>
 	
 </div>	
-</div>		
+<div id="reviewControls" class="clearfix">
+			<table id="FreigabeTabelle" class="maintable" style="width:auto;min-width:0">
+				<thead>
+					<tr><th colspan='{{sendoutobject.configuration.authorities.count()}}'><h2>{{tr('authoritiesLabel')}}</h2></th>
+			<th><h1>{{tr('overallClearance')}}</h1></th>
+					</tr>
+					
+				</thead>
+				<tr>
+					{% for authority in sendoutobject.configuration.authorities %}
+					<td >{{authority.email}}</td>
+					{% endfor %}
+					
+				</tr>
+				<tr>
+				{% for authority in authorities %}
+				
+				<td>
+					<div style="padding:20px;">
+						
+						<div>
+							<label>{{ tr('reviewed') }}</label>
+							{% if authority.uid == userUid %}
+							{{ check_field('review', 'checked':reviewChecked, 'id':'markReviewed') }}
+							{% else %}
+							{{ check_field('review', 'checked':reviewChecked,  'disabled':'disabled') }}
+							{% endif %}
+				
+						</div>
+						<br>
+						<div>
+							<label>{{ tr('cleared') }}</label>
+							{% if authority.uid == userUid %}
+							{{ check_field('review', 'checked':reviewChecked, 'id':'markCleared') }}
+							{% else %}
+							{{ check_field('review', 'checked':reviewChecked,  'disabled':'disabled') }}
+							{% endif %}
+						</div>	
+					</div>
+				
+				</td>
+				{% endfor %}
+				<td>
+					<div style="padding:20px;">
+						
+						<div>
+							<label>{{ tr('reviewed') }}</label>
+							{% if disabled %}
+							{{ check_field('reviewOverride', 'checked':reviewChecked, 'id':'overideReviews', 'disabled':'disabled') }}
+							{% else %}
+							{{ check_field('', 'checked':reviewChecked, 'id':'overideReviews') }}
+							{% endif %}
+						</div>
+						<br>
+						<div>
+							<label>{{ tr('cleared') }}</label>
+							{% if disabled %}
+							{{ check_field('clearanceOverride', 'checked':clearedChecked,'id':'overrideCleared', 'disabled':'disabled') }}
+							{% else %}
+							{{ check_field('', 'checked':clearedChecked,'id':'overrideCleared') }}
+							{% endif %}
+							
+						</div>	
+					</div>
+				</td>
+				</tr>
+			</table>
+			
+		</div>		
+</div>
+
 	<div id="reviewConfiguration">
 		<div id='reviewConfigurationInfo'>
 			<label>{{tr('sendoutDateLabel')}}:</label><span>{{ date('d.m.Y',sendoutobject.tstamp) }}</span><br>
@@ -23,16 +93,7 @@
 			<label>{{tr('confAnswernameLabel')~' ('~tr('confAnswermailLabel')~')'}}:</label><span>{{ sendoutobject.configuration.answername }} ({{ sendoutobject.configuration.answermail }})</span><br>
 			<label>{{tr('confReturnpathLabel')}}</label><span>{{ sendoutobject.configuration.returnpath }}</span>
 		</div>
-		<div id="reviewControls">
-			<div>
-				<label>{{ tr('reviewed') }}</label>
-				{{ check_field('review', 'checked':reviewChecked, 'id':'markReviewed') }}
-			</div>	<br>
-			<div>
-				<label>{{ tr('cleared') }}</label>
-				{{ check_field('clear', 'checked':clearedChecked,'id':'markCleared') }}
-			</div>	
-		</div>
+		
 		<div class='clearfix'></div>
 	</div>
 

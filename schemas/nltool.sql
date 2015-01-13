@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS permissions (
 	resourceaction varchar(55) NOT NULL,
   PRIMARY KEY (uid),
   KEY profilesid (profileid)
-) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8;
 
 
 LOCK TABLES permissions WRITE;
@@ -418,6 +418,21 @@ CREATE TABLE sendoutobjects (
 	KEY mailobjectuid (mailobjectuid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+
+DROP TABLE IF EXISTS review;
+CREATE TABLE review(
+	uid int(11) NOT NULL auto_increment,
+	pid int(11) DEFAULT '0' NOT NULL,	
+	tstamp int(11) DEFAULT '0' NOT NULL,
+	crdate int(11) DEFAULT '0' NOT NULL,
+	cruser_id int(11) DEFAULT '0' NOT NULL,
+	deleted tinyint(4) DEFAULT '0' NOT NULL,
+	hidden tinyint(4) DEFAULT '0' NOT NULL,
+	reviewed tinyint(4) DEFAULT '0' NOT NULL,
+	cleared tinyint(4) DEFAULT '0' NOT NULL,
+	PRIMARY KEY (uid),
+	KEY pid (pid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS configurationobjects;
 CREATE TABLE configurationobjects (
