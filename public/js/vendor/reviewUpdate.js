@@ -29,11 +29,39 @@ jQuery('document').ready(function(){
 	
 	jQuery('#markReviewed').click(function(e){
 		
-		ajaxIt('review','update','&sendoutobjectuid='+sendoutobjectuid+'&reviewed='+jQuery(this).context.checked,oksent);	
+		ajaxIt('review','update','sendoutobjectuid='+sendoutobjectuid+'&reviewed='+jQuery(this).context.checked,oksent);	
 	});
 	
 	jQuery('#markCleared').click(function(e){
+		console.log(jQuery(this).context.checked);
+		if(jQuery(this).context.checked==true){
+			var cnfrm = confirm(jQuery('#sureclear').val());
+			if (cnfrm == true) {
+				ajaxIt('review','update','sendoutobjectuid='+sendoutobjectuid+'&cleared='+jQuery(this).context.checked,oksent);	
+			}else{
+				jQuery(this).context.checked=false;
+			}
+		}else{
+			ajaxIt('review','update','sendoutobjectuid='+sendoutobjectuid+'&cleared='+jQuery(this).context.checked,oksent);	
+		}
 		
-		ajaxIt('review','update','&sendoutobjectuid='+sendoutobjectuid+'&cleared='+jQuery(this).context.checked,oksent);	
+	});
+	
+	jQuery('#overideReviews').click(function(e){
+		ajaxIt('review','update','sendoutobjectuid='+sendoutobjectuid+'&reviewOverride='+jQuery(this).context.checked,oksent);	
+	});
+	
+	jQuery('#overrideCleared').click(function(e){
+		
+		
+		if(jQuery(this).context.checked==true){
+			var cnfrm = confirm(jQuery('#sureclear').val());
+			if (cnfrm == true) {
+				ajaxIt('review','update','sendoutobjectuid='+sendoutobjectuid+'&clearanceOverride='+jQuery(this).context.checked,oksent);	
+			}
+		}else{
+			ajaxIt('review','update','sendoutobjectuid='+sendoutobjectuid+'&clearanceOverride='+jQuery(this).context.checked,oksent);
+		}
+		
 	});
 });

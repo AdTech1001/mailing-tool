@@ -13,7 +13,7 @@ Model::setup(['notNullValidations' => false]);
 class Feusers extends \Phalcon\Mvc\Model{
 	
 	
-
+	
 		
     public function validation()
     {

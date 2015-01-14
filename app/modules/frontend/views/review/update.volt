@@ -29,16 +29,16 @@
 				</tr>
 				<tr>
 				{% for authority in authorities %}
-				
+
 				<td>
 					<div style="padding:20px;">
 						
 						<div>
 							<label>{{ tr('reviewed') }}</label>
-							{% if authority.uid == userUid %}
-							{{ check_field('review', 'checked':reviewChecked, 'id':'markReviewed') }}
+							{% if authority.uid == userUid %}							
+							{{ check_field('review', 'checked':authority.reviewed, 'id':'markReviewed') }}
 							{% else %}
-							{{ check_field('review', 'checked':reviewChecked,  'disabled':'disabled') }}
+							{{ check_field('review', 'checked':authority.reviewed, 'disabled':'disabled') }}							
 							{% endif %}
 				
 						</div>
@@ -46,9 +46,9 @@
 						<div>
 							<label>{{ tr('cleared') }}</label>
 							{% if authority.uid == userUid %}
-							{{ check_field('review', 'checked':reviewChecked, 'id':'markCleared') }}
+							{{ check_field('clear', 'checked':authority.cleared, 'id':'markCleared') }}
 							{% else %}
-							{{ check_field('review', 'checked':reviewChecked,  'disabled':'disabled') }}
+							{{ check_field('clear', 'checked':authority.cleared,  'disabled':'disabled') }}
 							{% endif %}
 						</div>	
 					</div>
@@ -61,18 +61,18 @@
 						<div>
 							<label>{{ tr('reviewed') }}</label>
 							{% if disabled %}
-							{{ check_field('reviewOverride', 'checked':reviewChecked, 'id':'overideReviews', 'disabled':'disabled') }}
+							{{ check_field('', 'checked':reviewChecked, 'id':'overideReviews', 'disabled':'disabled') }}							
 							{% else %}
-							{{ check_field('', 'checked':reviewChecked, 'id':'overideReviews') }}
+							{{ check_field('reviewOverride', 'checked':reviewChecked, 'id':'overideReviews') }}
 							{% endif %}
 						</div>
 						<br>
 						<div>
 							<label>{{ tr('cleared') }}</label>
 							{% if disabled %}
-							{{ check_field('clearanceOverride', 'checked':clearedChecked,'id':'overrideCleared', 'disabled':'disabled') }}
+							{{ check_field('', 'checked':clearedChecked,'id':'overrideCleared','disabled':'disabled') }}							
 							{% else %}
-							{{ check_field('', 'checked':clearedChecked,'id':'overrideCleared') }}
+							{{ check_field('clearanceOverride', 'checked':clearedChecked,'id':'overrideCleared') }}
 							{% endif %}
 							
 						</div>	
@@ -117,5 +117,7 @@
 	<br><button class="ok split">{{ tr('ok') }}</button><button class="abort split">{{ tr('abort') }}</button>
 </div> 
 <input type="hidden" id="sendoutobjectuid" value="{{sendoutobject.uid}}">
+<input type="hidden" id="sureclear" value="{{tr('sureClear')}}">
+
 {%- endif -%}
 </div>

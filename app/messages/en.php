@@ -199,7 +199,8 @@ $messages = array(
 	"containingAddresses" => "number of addresses",
 	"filtersTitle" => "filter",
 	"distributorCreateTitle" => "create distribution list",
-	"overallClearance" => "overall clearance"
+	"overallClearance" => "overall clearance",
+	"sureClear" =>"Please confirm your clearance for sending out the mail."
 	
 );
 

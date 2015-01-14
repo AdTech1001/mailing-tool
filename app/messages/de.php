@@ -203,6 +203,7 @@ $messages = array(
 	"containingAddresses" => "Anzahl der Adressen",
 	"filtersTitle" => "Filter",
 	"distributorCreateTitle" => "Verteiler anlegen",
-	"overallClearance" => "Gesamtfreigabe"
+	"overallClearance" => "Gesamtfreigabe",
+	"sureClear" =>"Bitte bestätigen Sie, dass Sie die Freigabe für den Versand erteilen."
 );
 ?>

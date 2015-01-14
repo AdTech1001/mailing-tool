@@ -77,7 +77,7 @@ var dummyEmpty=function(){
 
 var ajaxIt=function(controller,action,formdata,successhandler, parameters){
 	 parameters = typeof parameters !== 'undefined' ? '/'+parameters : '';
-	if(successhandler != dummyEmpty){
+	if(successhandler !== dummyEmpty){
 	jQuery('#loadingimg').show();
 	}
 
