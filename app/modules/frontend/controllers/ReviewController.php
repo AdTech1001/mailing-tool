@@ -110,8 +110,8 @@ class ReviewController extends ControllerBase
 				$review=Review::findFirst(array(
 					'conditions' =>'deleted=0 AND hidden=0 AND cruser_id = ?1 AND pid =?2',
 					'bind' =>array(
-						1=>$sendoutobject->uid,
-						2=>$this->session->get('auth')['uid']
+						1=>$this->session->get('auth')['uid'],
+						2=>$sendoutobject->uid
 					)
 				));
 				if(!$review){
@@ -145,7 +145,7 @@ class ReviewController extends ControllerBase
 						$allclear=$this->checkAllReviewed($sendoutobject);
 						if($allclear){
 							$this->reviewSendoutobject($sendoutobject);
-							die('allclear');
+							die('allrevsclear');
 						}else{
 							die(1);
 						}
@@ -197,7 +197,7 @@ class ReviewController extends ControllerBase
 						$allclear=$this->checkAllCleared($sendoutobject);
 						if($allclear){
 							$this->clearSendoutobject($sendoutobject);
-							die('allclear');
+							die('allclearclear');
 						}else{
 							die(1);
 						}						

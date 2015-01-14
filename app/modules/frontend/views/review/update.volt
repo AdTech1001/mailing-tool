@@ -38,7 +38,7 @@
 							{% if authority.uid == userUid %}							
 							{{ check_field('review', 'checked':authority.reviewed, 'id':'markReviewed') }}
 							{% else %}
-							{{ check_field('review', 'checked':authority.reviewed, 'disabled':'disabled') }}							
+							{{ check_field('', 'checked':authority.reviewed, 'disabled':'disabled') }}							
 							{% endif %}
 				
 						</div>
@@ -48,7 +48,7 @@
 							{% if authority.uid == userUid %}
 							{{ check_field('clear', 'checked':authority.cleared, 'id':'markCleared') }}
 							{% else %}
-							{{ check_field('clear', 'checked':authority.cleared,  'disabled':'disabled') }}
+							{{ check_field('', 'checked':authority.cleared,  'disabled':'disabled') }}
 							{% endif %}
 						</div>	
 					</div>

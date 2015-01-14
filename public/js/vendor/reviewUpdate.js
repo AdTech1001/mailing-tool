@@ -1,6 +1,10 @@
 var oksent=function(data){
-	console.log(data);
-	
+	if(data==='allrevsclear'){
+		jQuery('#overideReviews').prop('checked', true);
+	}
+	if(data==='allclearclear'){
+		jQuery('#overrideCleared').prop('checked', true);
+	}
 };
 
 jQuery('document').ready(function(){
@@ -52,15 +56,17 @@ jQuery('document').ready(function(){
 	});
 	
 	jQuery('#overrideCleared').click(function(e){
-		
-		
-		if(jQuery(this).context.checked==true){
-			var cnfrm = confirm(jQuery('#sureclear').val());
-			if (cnfrm == true) {
-				ajaxIt('review','update','sendoutobjectuid='+sendoutobjectuid+'&clearanceOverride='+jQuery(this).context.checked,oksent);	
+		if(jQuery('#markReviewed').context.checked==true){		
+			if(jQuery(this).context.checked==true){
+				var cnfrm = confirm(jQuery('#sureclear').val());
+				if (cnfrm == true) {
+					ajaxIt('review','update','sendoutobjectuid='+sendoutobjectuid+'&clearanceOverride='+jQuery(this).context.checked,oksent);	
+				}
+			}else{
+				ajaxIt('review','update','sendoutobjectuid='+sendoutobjectuid+'&clearanceOverride='+jQuery(this).context.checked,oksent);
 			}
 		}else{
-			ajaxIt('review','update','sendoutobjectuid='+sendoutobjectuid+'&clearanceOverride='+jQuery(this).context.checked,oksent);
+			alert('Bitte zuerst die Überprüfung bestätigen.');
 		}
 		
 	});
