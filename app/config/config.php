@@ -27,7 +27,7 @@ return new \Phalcon\Config(array(
         ),
         'debug'          => true,
 		'dontSendReally' => true,
-		'version' => '0.9 Alpha'
+		'version' => '1.0 beta'
     ),    
     'smtp'        => array(
         'host'     => "smtp.iq-pi.org",

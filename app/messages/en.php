@@ -200,7 +200,8 @@ $messages = array(
 	"filtersTitle" => "filter",
 	"distributorCreateTitle" => "create distribution list",
 	"overallClearance" => "overall clearance",
-	"sureClear" =>"Please confirm your clearance for sending out the mail."
+	"sureClear" =>"Please confirm your clearance for sending out the mail.",
+	"reviewFirst" => "Please confirm review first."
 	
 );
 

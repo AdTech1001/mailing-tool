@@ -204,6 +204,7 @@ $messages = array(
 	"filtersTitle" => "Filter",
 	"distributorCreateTitle" => "Verteiler anlegen",
 	"overallClearance" => "Gesamtfreigabe",
-	"sureClear" =>"Bitte bestätigen Sie, dass Sie die Freigabe für den Versand erteilen."
+	"sureClear" =>"Bitte bestätigen Sie, dass Sie die Freigabe für den Versand erteilen.",
+	"reviewFirst" => "Bitte zuerst die Überprüfung bestätigen"
 );
 ?>

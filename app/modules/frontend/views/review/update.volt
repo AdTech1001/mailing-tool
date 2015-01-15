@@ -118,6 +118,8 @@
 </div> 
 <input type="hidden" id="sendoutobjectuid" value="{{sendoutobject.uid}}">
 <input type="hidden" id="sureclear" value="{{tr('sureClear')}}">
+<input type="hidden" id="reviewFirst" value="{{tr('reviewFirst')}}">
+
 
 {%- endif -%}
 </div>

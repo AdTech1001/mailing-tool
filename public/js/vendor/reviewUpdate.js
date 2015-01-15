@@ -37,7 +37,8 @@ jQuery('document').ready(function(){
 	});
 	
 	jQuery('#markCleared').click(function(e){
-		console.log(jQuery(this).context.checked);
+		
+		if(jQuery('#markReviewed').prop('checked')===true){		
 		if(jQuery(this).context.checked==true){
 			var cnfrm = confirm(jQuery('#sureclear').val());
 			if (cnfrm == true) {
@@ -48,7 +49,10 @@ jQuery('document').ready(function(){
 		}else{
 			ajaxIt('review','update','sendoutobjectuid='+sendoutobjectuid+'&cleared='+jQuery(this).context.checked,oksent);	
 		}
-		
+		}else{
+			alert(jQuery('#reviewFirst').val());
+			jQuery(this).context.checked=false;
+		}
 	});
 	
 	jQuery('#overideReviews').click(function(e){
@@ -56,7 +60,7 @@ jQuery('document').ready(function(){
 	});
 	
 	jQuery('#overrideCleared').click(function(e){
-		if(jQuery('#markReviewed').context.checked==true){		
+		if(jQuery('#overideReviews').prop('checked')===true){		
 			if(jQuery(this).context.checked==true){
 				var cnfrm = confirm(jQuery('#sureclear').val());
 				if (cnfrm == true) {
@@ -66,7 +70,8 @@ jQuery('document').ready(function(){
 				ajaxIt('review','update','sendoutobjectuid='+sendoutobjectuid+'&clearanceOverride='+jQuery(this).context.checked,oksent);
 			}
 		}else{
-			alert('Bitte zuerst die Überprüfung bestätigen.');
+			alert(jQuery('#reviewFirst').val());
+			jQuery(this).context.checked=false;
 		}
 		
 	});
