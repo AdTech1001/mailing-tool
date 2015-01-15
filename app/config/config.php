@@ -45,10 +45,10 @@ return new \Phalcon\Config(array(
 	'database'=>array(
 		'production'=>array(
 			'adapter'  => 'Mysql',
-			'host'     => 'nltool.mysql.eu1.frbit.com',
-			'username' => 'nltool',
-			'password' => 'ab9b03uQYRb_0lly',
-			'dbname'   => 'nltool',
+			'host'     => '002.mysql.db.fge.5hosting.com',
+			'username' => 'u1272_nltool',
+			'password' => 'b8A1uy1Hhz',
+			'dbname'   => 'db1272_nltool',
 			'charset'  => 'utf8'
 		),
 		'debug'=>array(

@@ -587,7 +587,7 @@ CREATE TABLE addresses (
 	itemsource  varchar(255) COLLATE utf8_general_ci NOT NULL,	
 	hasprofile tinyint(4) DEFAULT '1' NOT NULL,
   PRIMARY KEY (uid),
-	KEY segmentobjects (segmentobjects)
+	KEY pid (pid)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 
