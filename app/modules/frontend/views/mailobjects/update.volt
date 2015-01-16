@@ -38,7 +38,7 @@
 			{% for templatedCElement in templatedCElements %}
 			{%- if templatedCElement.sourcecode != '' -%}
 			<div class="cElementThumbWrapper"><span>{{ templatedCElement.title }}</span>
-				<div class="cElementThumb">
+				<div class="cElementThumb">					
 					{{ image(templatedCElement.templatefilepath) }}
 					
 					{{ templatedCElement.sourcecode }}

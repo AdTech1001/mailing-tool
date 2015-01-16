@@ -53,16 +53,26 @@
 					<li>{{ link_to(language~'/addressfolders/index/', '<span class="glyphicon glyphicon-list"></span> '~tr('retrieve'), 'title': tr('retrieve')) }}</li>
 				</ul>
 			</li>	
-			
-			  {% if 'addresses' == dispatcher.getControllerName() %}
+			{% if 'segmentobjects' == dispatcher.getControllerName() %}
               <li class="dropdown active">
               {% else %}
 			 <li class="dropdown">
               {% endif %}
-				{{- link_to(language~'/addresses', '<span class="glyphicon glyphicon-user"></span> '~tr('addresses'), 'title': tr('addresses')) -}}
+				{{- link_to(language~'/segmentobjects', '<span class="glyphicon glyphicon-user"></span> '~tr('segmentobjects'), 'title': tr('segmentobjects')) -}}
 				<ul class="dropdown-menu submenu">
-					<li>{{ link_to(language~'/addresses/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('create'), 'title': tr('create')) }}</li>
-					<li>{{ link_to(language~'/addresses/index/', '<span class="glyphicon glyphicon-list"></span> '~tr('retrieve'), 'title': tr('retrieve')) }}</li>
+					<li>{{ link_to(language~'/segmentobjects/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('create'), 'title': tr('create')) }}</li>
+					<li>{{ link_to(language~'/segmentobjects/index/', '<span class="glyphicon glyphicon-list"></span> '~tr('retrieve'), 'title': tr('retrieve')) }}</li>
+				</ul>
+			</li>	
+			  {% if 'distributors' == dispatcher.getControllerName() %}
+              <li class="dropdown active">
+              {% else %}
+			 <li class="dropdown">
+              {% endif %}
+				{{- link_to(language~'/distributors', '<span class="glyphicon glyphicon-user"></span> '~tr('distributors'), 'title': tr('distributors')) -}}
+				<ul class="dropdown-menu submenu">
+					<li>{{ link_to(language~'/distributors/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('create'), 'title': tr('create')) }}</li>
+					<li>{{ link_to(language~'/distributors/index/', '<span class="glyphicon glyphicon-list"></span> '~tr('retrieve'), 'title': tr('retrieve')) }}</li>
 				</ul>
 			</li>	
 			  {% if 'mailobjects' == dispatcher.getControllerName() %}

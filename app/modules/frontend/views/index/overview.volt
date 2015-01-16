@@ -1,7 +1,8 @@
 {% include 'partials/flash-messages.volt' %}
+{{ content() }}
 <div class="container">	
 	<div class="desktop">
-		{{ content() }}
+		
 		<h1>{{tr('actionTitle')}}</h1>
 		<div class="module_el">
 			<h2>{{ link_to(language~'/campaignobjects/index/', '<span class="glyphicon glyphicon-th"></span> '~tr('campaign'), 'title': tr('campaign')) }}
@@ -50,6 +51,33 @@
 			<ul>
 			<li>{{ link_to(language~'/addresses/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('addressesCreate'), 'title': tr('addressesCreate')) }}</li>
 			<li>{{ link_to(language~'/addresses/index/', '<span class="glyphicon glyphicon-pencil"></span> '~tr('addressesRetrieve'), 'title': tr('addressesRetrieve')) }}</li>
+			
+			</ul>
+		</div>
+		<div class="module_el">
+			<h2>{{ link_to(language~'/addressfolders/', '<span class="glyphicon glyphicon-user"></span> '~tr('addressfolders'), 'title': tr('addressfolders')) }}
+			</h2>
+			<ul>
+			<li>{{ link_to(language~'/addressfolders/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('addressfoldersCreate'), 'title': tr('addressfoldersCreate')) }}</li>
+			<li>{{ link_to(language~'/addressfolders/index/', '<span class="glyphicon glyphicon-pencil"></span> '~tr('addressfoldersRetrieve'), 'title': tr('addressfoldersCreate')) }}</li>
+			
+			</ul>
+		</div>
+		<div class="module_el">
+			<h2>{{ link_to(language~'/segmentobjects/', '<span class="glyphicon glyphicon-user"></span> '~tr('segmentobjects'), 'title': tr('segmentobjects')) }}
+			</h2>
+			<ul>
+			<li>{{ link_to(language~'/segmentobjects/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('segmentobjectsCreate'), 'title': tr('segmentobjectsCreate')) }}</li>
+			<li>{{ link_to(language~'/segmentobjects/index/', '<span class="glyphicon glyphicon-pencil"></span> '~tr('segmentobjectsRetrieve'), 'title': tr('segmentobjectsCreate')) }}</li>
+			
+			</ul>
+		</div>
+		<div class="module_el">
+			<h2>{{ link_to(language~'/distributors/', '<span class="glyphicon glyphicon-user"></span> '~tr('distributors'), 'title': tr('distributors')) }}
+			</h2>
+			<ul>
+			<li>{{ link_to(language~'/distributors/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('distributorsCreate'), 'title': tr('distributorsCreate')) }}</li>
+			<li>{{ link_to(language~'/distributors/index/', '<span class="glyphicon glyphicon-pencil"></span> '~tr('distributorsRetrieve'), 'title': tr('distributorsCreate')) }}</li>
 			
 			</ul>
 		</div>

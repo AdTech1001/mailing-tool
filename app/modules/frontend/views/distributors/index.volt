@@ -1,7 +1,7 @@
 <div class="container">
 	{{ content() }}
 {%- if session.get('auth') -%}
-<h1>{{tr('distributorCreateTitle')}}</h1>
+<h1>{{tr('distributors')}}</h1>
 
 <ul class="listviewList">
 	{% for distributor in distributors %}

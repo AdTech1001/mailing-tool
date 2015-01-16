@@ -19,7 +19,7 @@
 	</select>
     
 	<br><br>
-	<label>{{ tr('segmenobjects') }}</label><br>
+	<label>{{ tr('segmentobjects') }}</label><br>
 	<select name="segmentobjects[]" multiple>
 		{% for segmentobject IN segmentobjects %}
 		<option value="{{segmentobject.uid}}">{{segmentobject.title}} | {{segmentobject.countAddresses()}}</option>

@@ -1,18 +1,61 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>                                                                                                                                                                                                                              
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="cache-control" content="no-cache" />
-<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
-<meta http-equiv="pragma" content="no-cache" />
-<style type="text/css">
-	.editarea{display:none;}
-	.ReadMsgBody {width: 100%; background-color: #ffffff;}
-	.ExternalClass {width: 100%; background-color: #ffffff;}
-	body	 {width: 100%; background-color: #ffffff; margin:0; padding:0; -webkit-font-smoothing: antialiased;font-family: Arial, Helvetica,sans-serif; color:#4d4d4d}
-	table {border-collapse: collapse;}
-	a{color:#009650;}
+<html>
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+.fake_css_for_ios {
+ width:100%;
+ display: block;
+ -webkit-text-size-adjust:none;
+ margin: 1em 0;
+ color: black;
+ text-decoration: none;
+ border-bottom: none;
+ background: none;
+ padding-bottom:0px;
+ padding-left:0px;
+ padding-right:0px;
+ background:none;
+ border-bottom:thin;
+ border-bottom-style:double;
+ background-repeat:repeat;
+ border-left-color:#C06;
+ background-attachment:scroll;
+ border:thin;
+ page-break-before:auto;
+ page-break-before:avoid;
+ page-break-inside:inherit;
+ azimuth:center-left;
+ vertical-align:inherit;
+ font-stretch:extra-condensed;
+ font-size-adjust:none;
+ list-style-image: none;
+ counter-reset:none;
+ letter-spacing:normal;
+ empty-cells:inherit;
+ elevation:higher;
+ }
 
+ .ReadMsgBody {width: 100%; background-color: #ffffff;}
+	.ExternalClass {width: 100%; background-color: #ffffff;}
+
+	body	 {min-width: 100%!important;width: 100%; background-color: #ffffff; margin:0; padding:0; -webkit-font-smoothing: antialiased;font-family: Arial, Helvetica,sans-serif}
+	table {border-collapse: collapse;}
+	.navi-table a{
+		color:rgb(77,77,77);
+
+	}
+	p{
+		mso-table-lspace:0;
+		mso-table-rspace:0; 
+		margin:0;
+		margin-bottom:10px;
+	}
+	.navi-table a:hover{
+		color:#009650;
+	}
+	.navi-table, .navi-table li{
+		text-align:justify;
+	}
 	
 	@media only screen and (max-width: 640px)  {
 					body[yahoo] .deviceWidth {width:440px!important; padding:0;}	
@@ -24,7 +67,6 @@
 					body[yahoo] .center {text-align: center!important;}	 
 			}
 </style>
-                                                                                                                                                                                                
 </head>
 
 

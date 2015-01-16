@@ -13,7 +13,7 @@
 		
 {% for templateobject in templateobjects %}
 <li data-uid="{{ templateobject.uid }}"><h3>{{ templateobject.title }}</h3><br>
-	<img src="{{httphost}}{{ templateobjectsthumbs[templateobject.uid] }}">
+	<img src="{{ templateobjectsthumbs[templateobject.uid] }}">
 	
 </li>
     

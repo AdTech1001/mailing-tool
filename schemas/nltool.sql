@@ -510,7 +510,7 @@ CREATE TABLE distributors (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS distributors_segmentobjects_lookup;
-CREATE TABLE distributor_segmentobjects_lookup (
+CREATE TABLE distributors_segmentobjects_lookup (
 	uid int(11) NOT NULL auto_increment,		
 	uid_local int(11) DEFAULT '0' NOT NULL,
 	uid_foreign int(11) DEFAULT '0' NOT NULL,		
@@ -518,7 +518,7 @@ CREATE TABLE distributor_segmentobjects_lookup (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS distributors_addressfolders_lookup;
-CREATE TABLE distributor_addressfolders_lookup (
+CREATE TABLE distributors_addressfolders_lookup (
 	uid int(11) NOT NULL auto_increment,			
 	uid_local int(11) DEFAULT '0' NOT NULL,
 	uid_foreign int(11) DEFAULT '0' NOT NULL,		

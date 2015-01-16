@@ -42,14 +42,22 @@
 					<li><?php echo $this->tag->linkTo(array($language . '/addressfolders/index/', '<span class="glyphicon glyphicon-list"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('retrieve'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('retrieve'))); ?></li>
 				</ul>
 			</li>	
-			
-			  <?php if ('addresses' == $this->dispatcher->getControllerName()) { ?>
+			<?php if ('segmentobjects' == $this->dispatcher->getControllerName()) { ?>
               <li class="dropdown active">
               <?php } else { ?>
 			 <li class="dropdown">
-              <?php } ?><?php echo $this->tag->linkTo(array($language . '/addresses', '<span class="glyphicon glyphicon-user"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('addresses'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('addresses'))); ?><ul class="dropdown-menu submenu">
-					<li><?php echo $this->tag->linkTo(array($language . '/addresses/create/', '<span class="glyphicon glyphicon-edit"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('create'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('create'))); ?></li>
-					<li><?php echo $this->tag->linkTo(array($language . '/addresses/index/', '<span class="glyphicon glyphicon-list"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('retrieve'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('retrieve'))); ?></li>
+              <?php } ?><?php echo $this->tag->linkTo(array($language . '/segmentobjects', '<span class="glyphicon glyphicon-user"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('segmentobjects'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('segmentobjects'))); ?><ul class="dropdown-menu submenu">
+					<li><?php echo $this->tag->linkTo(array($language . '/segmentobjects/create/', '<span class="glyphicon glyphicon-edit"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('create'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('create'))); ?></li>
+					<li><?php echo $this->tag->linkTo(array($language . '/segmentobjects/index/', '<span class="glyphicon glyphicon-list"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('retrieve'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('retrieve'))); ?></li>
+				</ul>
+			</li>	
+			  <?php if ('distributors' == $this->dispatcher->getControllerName()) { ?>
+              <li class="dropdown active">
+              <?php } else { ?>
+			 <li class="dropdown">
+              <?php } ?><?php echo $this->tag->linkTo(array($language . '/distributors', '<span class="glyphicon glyphicon-user"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('distributors'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('distributors'))); ?><ul class="dropdown-menu submenu">
+					<li><?php echo $this->tag->linkTo(array($language . '/distributors/create/', '<span class="glyphicon glyphicon-edit"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('create'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('create'))); ?></li>
+					<li><?php echo $this->tag->linkTo(array($language . '/distributors/index/', '<span class="glyphicon glyphicon-list"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('retrieve'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('retrieve'))); ?></li>
 				</ul>
 			</li>	
 			  <?php if ('mailobjects' == $this->dispatcher->getControllerName()) { ?>

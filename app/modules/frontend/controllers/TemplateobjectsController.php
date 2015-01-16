@@ -83,7 +83,7 @@ class TemplateobjectsController extends ControllerBase
 						
 						$thumbFilenameS='../public/images/templateThumbnails/template_'.$templateObject->uid.'_S.'.$filetype;
 						$thumbFilenameL='../public/images/templateThumbnails/template_'.$templateObject->uid.'_L.'.$filetype;
-						$saveFilename='/public/images/templateThumbnails/template_'.$templateObject->uid.'_S.'.$filetype;
+						$saveFilename='public/images/templateThumbnails/template_'.$templateObject->uid.'_S.'.$filetype;
 						
 						$imageS = new GDAdapter($tmpFile);
 						$imageS->resize(300);

@@ -194,7 +194,7 @@ class AddressfoldersController extends ControllerBase
 									$insStr.='),';									
 									if($row>0 && $row%500==0){
 										$insStr=substr($insStr,0,-1);
-										$this->di->get('db')->query("INSERT INTO Addresses ".$insField." VALUES ".$insStr);
+										$this->di->get('db')->query("INSERT INTO addresses ".$insField." VALUES ".$insStr);
 										$insStr='';
 									}							
 
@@ -205,7 +205,7 @@ class AddressfoldersController extends ControllerBase
 
 									$insStr=substr($insStr,0,-1);
 									
-									$this->di->get('db')->query("INSERT INTO Addresses ".$insField." VALUES ".$insStr);
+									$this->di->get('db')->query("INSERT INTO addresses ".$insField." VALUES ".$insStr);
 
 							}
 

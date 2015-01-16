@@ -1401,7 +1401,8 @@ table#mapTable{
 	.module_el{
 		background:#f5f5f5;
 		padding:15px;
-		float:left;
+		display:inline-block;
+		margin-top:20px;
 		margin-right:40px;
 	}
 	.module_el h2{
