@@ -2,6 +2,8 @@
 namespace nltool\Helper;
 use Phalcon\Mvc\User\Component,
 	nltool\Models\Linklookup;
+
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.

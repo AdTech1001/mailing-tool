@@ -129,9 +129,9 @@ class TemplateobjectsController extends ControllerBase
 				}else{
 					$html=preg_replace('~<(?:!DOCTYPE|/?(?:html))[^>]*>\s*~i', '', $dom->saveHTML($dom->documentElement));
 				}
-				$templateObject->sourcecode=$html;
+				$templateObject->sourcecode=urldecode(html_entity_decode($html,ENT_QUOTES,'UTF-8'));
 				$templateObject->update();
-				file_put_contents($generatedTemplateFileName,$html);
+				file_put_contents($generatedTemplateFileName,urldecode(html_entity_decode($html,ENT_QUOTES,'UTF-8')));
             }
 				
 				

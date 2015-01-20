@@ -18,8 +18,8 @@ class Triggerauth extends Controller
 				
 			try {
 				
-				$client_id = $this->request->getPost('client_id' );
-				$client_secret=$this->request->getPost('client_secret');
+				$client_id = $this->request->getQuery('client_id' );
+				$client_secret=$this->request->getQuery('client_secret');
 				if(!($client_id=='sendtrigger' && $client_secret=='X4lPahQud43tfojn')){
 					throw new Exception('Auth failed');
 				}

@@ -48,6 +48,7 @@ class ReviewController extends ControllerBase
 					$reviewArray[$review->cruser_id]=$review;				
 			}
 			$authorityArray=array();
+			
 			foreach($authorities as $authority){
 				$authorityArray[$authority->uid]=$authority;
 				$authorityArray[$authority->uid]->reviewed=null;
@@ -81,9 +82,10 @@ class ReviewController extends ControllerBase
 			));
 			
 			if($this->session->get('auth')['superuser']==1){
-				if($this->request->getPost('reviewOverride')==true){
+				if($this->request->getPost('reviewOverride')=='true'){
+					
 					$sendoutobject->assign(array(
-						'reviewed'=>$this->request->getPost('reviewed')==true ? 1 :0
+						'reviewed'=>$this->request->getPost('reviewOverride')=='true' ? 1 :0
 					));
 					if(!$sendoutobject->update()){
 						$this->flash->error($sendoutobject->getMessages());
@@ -93,9 +95,9 @@ class ReviewController extends ControllerBase
 					}
 				}
 
-				if($this->request->getPost('clearanceOverride')==true){
+				if($this->request->getPost('clearanceOverride')=='true'){
 					$sendoutobject->assign(array(
-						'cleared'=>$this->request->getPost('cleared')==true ? 1 :0
+						'cleared'=>$this->request->getPost('cleared')=='true' ? 1 :0
 					));
 					if(!$sendoutobject->update()){
 						$this->flash->error($sendoutobject->getMessages());
@@ -130,7 +132,13 @@ class ReviewController extends ControllerBase
 						$this->flash->error($newReview->getMessages());
 						die();
 					}else{
-						die(1);
+						$allclear=$this->checkAllReviewed($sendoutobject);
+						if($allclear){
+							$this->reviewSendoutobject($sendoutobject);
+							die('allrevsclear');
+						}else{
+							die(1);
+						}
 					}
 					
 				}else{
@@ -181,7 +189,13 @@ class ReviewController extends ControllerBase
 						$this->flash->error($newReview->getMessages());
 						die();
 					}else{
-						die(1);
+						$allclear=$this->checkAllCleared($sendoutobject);
+						if($allclear){
+							$this->clearSendoutobject($sendoutobject);
+							die('allclearclear');
+						}else{
+							die(1);
+						}		
 					}
 				}else{
 					

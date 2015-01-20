@@ -163,9 +163,9 @@ var conditionConnectorTarget = {
 var color3 = "#6d6e72";
 var splitConnectorSource = {
 	endpoint:["Rectangle", { width:15, height:20 } ],
-	paintStyle:{ fillStyle:color3 },
-	anchor:"Continuous",
+	paintStyle:{ fillStyle:color3 },	
 	isSource:true,
+	anchor:"Right",
 	scope:"grey",
 	connectorStyle:{ strokeStyle:color3, lineWidth:3 },
 	connector : [ "StateMachine", { stub:[40, 60], gap:10, cornerRadius:5, alwaysRespectStubs:true } ],

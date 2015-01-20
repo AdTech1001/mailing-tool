@@ -352,7 +352,7 @@ class CampaignobjectsController extends ControllerBase
 								'conditionaloperator' => intval($conditionArray[1]['value']),
 								'argument' => intval($conditionArray[2]['value']),
 								'operator'=> intval($conditionArray[3]['value']),
-								'argumentcondition' => $conditionArray[3]['value']
+								'argumentcondition' => $conditionArray[4]['value']
 								
 								
 							));

@@ -5,6 +5,7 @@ use Phalcon\Mvc\Controller as Controller,
 use nltool\Models\Sendoutobjects,
 	nltool\Models\Mailqueue,
 	nltool\Models\Linklookup;
+require_once '../app/library/Swiftmailer/swift_required.php';
 /**
  * Class TriggersendController
  *
@@ -25,8 +26,9 @@ class TriggersendController extends Triggerauth
     {
 		
 		
-		if($this->request->isPost()){
-		
+		if(!$this->request->isPost()){
+			$trlayers=stream_get_transports();
+			
 			$checktime=microtime(true);
 		
 			$this->mailrenderer->addressuid=1;
@@ -39,7 +41,7 @@ class TriggersendController extends Triggerauth
 				"order" => "tstamp ASC"
 			));
 			
-			foreach($mailings AS $mailing){
+			foreach($mailings AS $key => $mailing){
 				$addressConditions=$mailing->getAddressconditions();
 				$condStrng='';
 				if($addressConditions){
@@ -173,7 +175,8 @@ class TriggersendController extends Triggerauth
 						$clickcondstrng.=') ';
 					}
 				}
-				/*TODO FORM QUERY FROM CONDITIONS*/
+				
+				
 				$distributor=$mailing->getDistributor();
 				$addresses=$distributor->getAddresses(array(
 					'conditions'=>$condStrng,
@@ -230,7 +233,7 @@ class TriggersendController extends Triggerauth
 							$insStr=substr($insStr,0,-1);
 							//file_put_contents('log.txt', "INSERT INTO Mailqueue ".$insField." VALUES ".$insStr);
 							echo('inloop:  '.$insStr);
-							$this->di->get('db')->query("INSERT INTO Mailqueue ".$insField." VALUES ".$insStr);
+							$this->di->get('db')->query("INSERT INTO mailqueue ".$insField." VALUES ".$insStr);
 							$insStr="";
 					}
 					
@@ -243,7 +246,7 @@ class TriggersendController extends Triggerauth
 					
 					$insStr=substr($insStr,0,-1);
 					echo('outloop:  '.$insStr);
-						$this->di->get('db')->query("INSERT INTO Mailqueue ".$insField." VALUES ".$insStr);
+						$this->di->get('db')->query("INSERT INTO mailqueue ".$insField." VALUES ".$insStr);
 						$insStr="";
 				}
 				
@@ -265,10 +268,10 @@ class TriggersendController extends Triggerauth
 	
 	public function sendAction(){
 		
-		if($this->request->isPost()){
+		if(!$this->request->isPost()){
 			
 			$mailing= Sendoutobjects::findFirst(array(
-				"conditions" => "deleted=0 AND hidden=0 AND inprogress=1 AND reviewed=1 AND cleared=1  AND sent=0",				
+				"conditions" => "deleted=0 AND hidden=0 AND inprogress=1 AND reviewed=1 AND cleared=1 AND sent=0",				
 				"order" => "tstamp ASC"
 			));
 			
@@ -282,11 +285,12 @@ class TriggersendController extends Triggerauth
 			
 			$bodyRaw=file_get_contents('../public/mails/mailobject_'.$mailing->mailobjectuid.'.html');
 			
-			$counter=0;
-			$transport = \Swift_SmtpTransport::newInstance($this->config['smtp']['host'],$this->config['smtp']['port'] )->setUsername($this->config['smtp']['username'])->setPassword($this->config['smtp']['password']);
-			$mailer = \Swift_Mailer::newInstance($transport);				
-			$mailer->registerPlugin(new \Swift_Plugins_AntiFloodPlugin(100,30));	
+			
+			
+			
+			
 			if($configuration->clicktracking==1){
+				
 				$this->mailrenderer->writeClicktrackingLinks($bodyRaw,$mailing);
 				$links=Linklookup::find(array(
 					'conditions'=>'deleted=0 AND hidden=0 AND sendoutobjectuid = ?1',
@@ -301,10 +305,26 @@ class TriggersendController extends Triggerauth
 				}
 			}
 			
-			//Mailqueue abarbeiten
-			for($counter=0;$counter<count($mailqueue);$counter++){
+							
+			//$mailer->registerPlugin(new \Swift_Plugins_AntiFloodPlugin(100,10));	
+			$counter=0;
+			$numSent=0;
+			foreach($mailqueue as $mailqueueElement){
+				if($counter==0 || $counter%100==0){
+					//Mailqueue abarbeiten
+					$transport = \Swift_SmtpTransport::newInstance()
+							->setHost($this->config['smtp']['host'])
+							->setPort($this->config['smtp']['port'])
+							->setEncryption($this->config['smtp']['security'])
+							->setUsername($this->config['smtp']['username'])
+							->setPassword($this->config['smtp']['password']);
+
+					$mailer = \Swift_Mailer::newInstance($transport);
+					if($counter>0){
+						sleep(10);
+					}
+				}
 				
-				$mailqueueElement=$mailqueue[$counter];
 				
 				$to=array();
 				$address=$mailqueueElement->getAddress();
@@ -337,21 +357,29 @@ class TriggersendController extends Triggerauth
 				
 				if($mailqueueElement->sent==0){
 					$checktime=microtime(true);
+					$mailqueueElement->assign(array(
+						"mailbody"=>$bodyFinal,
+						"sent"=>1
+					));							
+					$mailqueueElement->update();
 					if(!$this->config['application']['dontSendReally']){
-						$mailer->send($message, $failures);
-					}					
+						try{
+							$numSent+=$mailer->send($message, $failures);
+						}catch(\Swift_TransportException $e){
+							echo($e->getMessage());
+						}
+						
+					}	
+					//usleep(10000);
 					$debug2=json_encode($to);
 					
 					$endtime=  microtime(true);
 					$timeused=$endtime-$checktime;
-					file_put_contents('../app/logs/debuggerSend.csv',getmypid().' <--PID '.$timeused.' <-> '.$counter.' <-> '.$debug2.'        <->      '.$debug.PHP_EOL,FILE_APPEND);
+					var_dump($failures);
+					echo($counter.' : '.$address->uid.' <-> '.$timeused.'<br>');
+					//file_put_contents('../app/logs/debuggerSend.csv',getmypid().' <--PID '.$timeused.' <-> '.$counter.' <-> '.$debug2.'        <->      '.$debug.PHP_EOL,FILE_APPEND);
 				}
-				$mailqueueElement->assign(array(
-					"mailbody"=>$bodyFinal,
-					"sent"=>1
-					
-				));							
-				$mailqueueElement->update();
+				$counter++;
 			}
 			
 			

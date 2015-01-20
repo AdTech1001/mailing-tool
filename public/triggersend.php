@@ -16,7 +16,7 @@ $data=array(
 	'client_secret' => 'X4lPahQud43tfojn'
 );
 
-$host="http://localhost/baywa-nltool/triggersend/send/";
+$host="http://baywa-nltool.iq-pi.org/triggersend/send/";
 
 
 
@@ -24,7 +24,7 @@ $process = curl_init($host);
 
 
 
-curl_setopt($process, CURLOPT_TIMEOUT, 30);
+curl_setopt($process, CURLOPT_TIMEOUT, 120);
 curl_setopt($process, CURLOPT_RETURNTRANSFER, TRUE);
 curl_setopt($process, CURLOPT_POST , true);
 curl_setopt($process, CURLOPT_POSTFIELDS , $data);

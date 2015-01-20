@@ -16,7 +16,7 @@ $data=array(
 	'client_secret' => 'X4lPahQud43tfojn'
 );
 
-$host="http://localhost/baywa-nltool/triggersend/generate/";
+$host="http://baywa-nltool.iq-pi.org/triggersend/generate/";
 
 
 
