@@ -80,13 +80,14 @@ class AddressfoldersController extends ControllerBase
 			$this->view->setVar('filehideshow','hidden');
 			$this->view->setVar('maphideshow','');
 			
-
+			
 				if ($this->request->hasFiles() == true){
+					
 					$mimes = array('application/vnd.ms-excel','text/plain','text/csv','text/tsv');
 
 					$fileArray=$this->request->getUploadedFiles();
 					$file=$fileArray[0];
-
+					
 					if(in_array($file->getType(), $mimes)){
 						$nameArray=explode('.',$file->getName());
 						$filetype=$nameArray[(count($nameArray)-1)];
@@ -117,6 +118,8 @@ class AddressfoldersController extends ControllerBase
 							fclose($handle);
 							
 							
+						}else{
+							die('Failed');
 						}					
 					}
 					$this->view->setVar('divider',$this->request->getPost('divider'));
@@ -126,8 +129,8 @@ class AddressfoldersController extends ControllerBase
 					$this->view->setVar('filename',$file->getName());
 					$this->view->setVar('uploadfields',$fileRowField);
 				}else{
+					$time=time();
 					if($this->request->getPost('addressfolderCreate') != '' && $this->request->getPost('addressFoldersUid') ==0){
-						$time=time();
 						/*create the segment*/
 						$addressfolder=new Addressfolders();
 						$addressfolder->assign(array(
@@ -144,6 +147,21 @@ class AddressfoldersController extends ControllerBase
 						if (!$addressfolder->save()) {
 							$this->flash->error($addressfolder->getMessages());
 						}
+					}else{
+						$addressfolder=  Addressfolders::findFirst(array(
+							'conditions'=>'uid=?1',
+							'bind' => array(
+								1=>$this->request->getPost('addressFoldersUid')
+							)
+						));
+						
+						$addressfolder->assign(array(
+								'tstamp'=>$time
+								));
+						$addressfolder->update();
+					}
+						
+						
 
 						$row=0;
 						$insStr='';
@@ -214,7 +232,7 @@ class AddressfoldersController extends ControllerBase
 							
 						}
 						$this->response->redirect($this->view->language.'/addressfolders/update/'.$addressfolder->uid.'/'); 
-					}
+					
 
 
 				}

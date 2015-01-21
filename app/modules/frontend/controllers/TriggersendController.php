@@ -267,9 +267,15 @@ class TriggersendController extends Triggerauth
 	}
 	
 	public function sendAction(){
-		
+		$overallStart=  microtime(true);
+		$lockFile='../app/logs/sendLock.lock';
 		if(!$this->request->isPost()){
-			
+			if(file_exists($lockFile) ){
+				
+				die('locked');
+			}
+
+			file_put_contents($lockFile,'');
 			$mailing= Sendoutobjects::findFirst(array(
 				"conditions" => "deleted=0 AND hidden=0 AND inprogress=1 AND reviewed=1 AND cleared=1 AND sent=0",				
 				"order" => "tstamp ASC"
@@ -277,11 +283,12 @@ class TriggersendController extends Triggerauth
 			
 			if($mailing){
 			$configuration=$mailing->getConfiguration();
-			$mailqueue=$mailing->getMailqueue(array(
-				"conditions" => "deleted=0 AND hidden=0 AND sent=0",				
-				"order" => "uid ASC",
-				"limit" => $this->config['smtp']['mailcycle']
-			));
+			$modelsManager=$this->getDi()->getShared('modelsManager');					
+			$mailqueueQueryStrng="SELECT m.*, a.* FROM nltool\Models\Mailqueue AS m LEFT JOIN nltool\Models\Addresses AS a ON m.addressuid=a.uid WHERE m.sent=0 AND m.deleted=0 AND m.hidden=0 AND m.sendoutobjectuid=".$mailing->uid." LIMIT ".$this->config['smtp']['mailcycle'];			
+			$mailqueue=$modelsManager->executeQuery($mailqueueQueryStrng);										
+			
+			
+			
 			
 			$bodyRaw=file_get_contents('../public/mails/mailobject_'.$mailing->mailobjectuid.'.html');
 			
@@ -309,7 +316,9 @@ class TriggersendController extends Triggerauth
 			//$mailer->registerPlugin(new \Swift_Plugins_AntiFloodPlugin(100,10));	
 			$counter=0;
 			$numSent=0;
+			$sentArray=array();
 			foreach($mailqueue as $mailqueueElement){
+				$checktime=microtime(true);
 				if($counter==0 || $counter%100==0){
 					//Mailqueue abarbeiten
 					$transport = \Swift_SmtpTransport::newInstance()
@@ -320,19 +329,14 @@ class TriggersendController extends Triggerauth
 							->setPassword($this->config['smtp']['password']);
 
 					$mailer = \Swift_Mailer::newInstance($transport);
-					if($counter>0){
-						sleep(10);
+					if($counter>0){						
+						sleep(5);
 					}
 				}
 				
 				
-				$to=array();
-				$address=$mailqueueElement->getAddress();
-				$debug=json_encode($mailqueueElement);
-				$addressDebug=json_encode($address);
-			
 
-				$body=$this->mailrenderer->renderVars($bodyRaw,$address);
+				$body=$this->mailrenderer->renderVars($bodyRaw,$mailqueueElement->a);
 				/*
 				 * Für die geplanten volldynamische Inhalte entstehen an dieser Stelle neue Links, 
 				 * diese müssen ins Linklookup eingefügt und eine neue individuelle Linkmap erstellt,
@@ -341,7 +345,7 @@ class TriggersendController extends Triggerauth
 				if($configuration->clicktracking==1){
 					
 					
-					$bodyFinal=$this->mailrenderer->renderFinal($body,$address->uid,$mailing->uid,$linkKeyMap);								
+					$bodyFinal=$this->mailrenderer->renderFinal($body,$mailqueueElement->a->uid,$mailing->uid,$linkKeyMap);								
 				}else{
 					$bodyFinal=$body;
 				}
@@ -352,16 +356,18 @@ class TriggersendController extends Triggerauth
 							->setReplyTo($configuration->answermail)
 							->setReturnPath($configuration->returnpath);
 				$message->setBody($bodyFinal, 'text/html');
-				$to=array($address->email => $address->first_name.' '.$address->last_name);
+				$to=array($mailqueueElement->m->email => $mailqueueElement->a->first_name.' '.$mailqueueElement->a->last_name);
 				$message->setTo($to);
 				
-				if($mailqueueElement->sent==0){
-					$checktime=microtime(true);
-					$mailqueueElement->assign(array(
+				if($mailqueueElement->m->sent==0){
+					
+					/*$mailqueueElement->assign(array(
 						"mailbody"=>$bodyFinal,
 						"sent"=>1
 					));							
-					$mailqueueElement->update();
+					$mailqueueElement->update();*/
+					
+					array_push($sentArray,$mailqueueElement->m->uid);
 					if(!$this->config['application']['dontSendReally']){
 						try{
 							$numSent+=$mailer->send($message, $failures);
@@ -371,21 +377,34 @@ class TriggersendController extends Triggerauth
 						
 					}	
 					//usleep(10000);
-					$debug2=json_encode($to);
+				
 					
 					$endtime=  microtime(true);
 					$timeused=$endtime-$checktime;
-					var_dump($failures);
-					echo($counter.' : '.$address->uid.' <-> '.$timeused.'<br>');
-					//file_put_contents('../app/logs/debuggerSend.csv',getmypid().' <--PID '.$timeused.' <-> '.$counter.' <-> '.$debug2.'        <->      '.$debug.PHP_EOL,FILE_APPEND);
+					
+					//echo('pid: '.getmypid().' numsent: '.$numSent.' : counter'.$counter.' : '.$address->uid.' <-> '.$timeused.'<br>');
+					file_put_contents('../app/logs/debuggerSend.csv',getmypid().' <--PID '.$timeused.' <-> '.$counter.$mailqueue->a->uid.PHP_EOL,FILE_APPEND);
+				}
+				if($counter>0 && count($sentArray)>0 && $counter%20==0){
+					$queryStrng="UPDATE mailqueue SET tstamp=".time().",sent=1 WHERE uid IN(".implode(',',$sentArray).")";			
+					$this->db->query($queryStrng);
+					$sentArray=array();
 				}
 				$counter++;
 			}
 			
 			
+		if(count($sentArray)>0){
+			$queryStrng="UPDATE mailqueue SET tstamp=".time().",sent=1 WHERE uid IN(".implode(',',$sentArray).")";			
+			$this->db->query($queryStrng);
+		}
+		
+		
+			$restQueue=$mailing->countMailqueue(array(
+				"conditions" => "deleted=0 AND hidden=0 AND sent=0"								
+			));
 			
-			//Was wenn genau durch $this->config['smtp']['mailcycle'] teilbar?
-			if($counter<$this->config['smtp']['mailcycle']){
+			if(!$restQueue){
 				$mailing->assign(array(
 					"inprogress"=>0,
 					"sent" => 1
@@ -394,8 +413,9 @@ class TriggersendController extends Triggerauth
 				$mailing->update();
 			}
 			}
-			
-			
+			unlink($lockFile);
+			$overallEnd=  microtime(1)-$overallStart;
+			echo($overallEnd);
 		}else{
 			die('<img src="images/cowboy-shaking-head.gif" style="position:absolute;top:40%;left:40%;">');
 		}

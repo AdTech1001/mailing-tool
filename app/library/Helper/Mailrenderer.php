@@ -76,20 +76,20 @@ class Mailrenderer extends Component{
 	
 	public function renderVars($body,$address){
 		$fieldMap=array(
-			'userid'=>'uid',
-			'Userid'=>'uid',
-			'Anrede' => 'salutation',
-			'Vorname' => 'first_name',
-			'Nachname' => 'last_name',
-			'Titel' => 'title',
-			'Unternehmen' => 'company',
-			'Email' => 'email'
+			'userid'=>$address->uid,
+			'Userid'=>$address->uid,
+			'Anrede' => $address->salutation,
+			'Vorname' => $address->first_name,
+			'Nachname' => $address->last_name,
+			'Titel' => $address->title,
+			'Unternehmen' => $address->company,
+			'Email' =>  $address->email
 		); //TODO komplettieren
 		
 		preg_match_all('/{{(.*)}}/siU', $body, $matches);
 		
 		foreach($matches[0] as $key => $match){
-			$body=str_replace($match, $address->$fieldMap[$matches[1][$key]], $body);
+			$body=str_replace($match, $fieldMap[$matches[1][$key]], $body);
 		}
 		
 		return $body;

@@ -22,7 +22,7 @@ class Distributors extends Model{
 	}
 	
 	public function getAddresses($params= array()){
-		
+		  $config =  \Phalcon\DI\FactoryDefault::getDefault()->getShared('config');
 		$bindArray=array();
 		$fieldMap=array(
 			'pid'=>''
@@ -102,7 +102,9 @@ class Distributors extends Model{
 			$joinTables=$params['clickconditions'][1];
 			$where.=$params['clickconditions'][0];
 		}
-		$queryStrng="SELECT email, last_name AS lastname, first_name AS firstname, salutation, title, company, phone, address, city, zip, userlanguage, gender, nltool\Models\Addresses.uid FROM nltool\Models\Addresses".$joinTables." WHERE nltool\Models\Addresses.deleted=0 AND nltool\Models\Addresses.hidden=0 ".$where." GROUP BY email,nltool\Models\Addresses.uid";	
+		$groupBy=$config['application']['dontSendDuplicates'] ? " GROUP BY email" : "";
+		
+		$queryStrng="SELECT email, last_name AS lastname, first_name AS firstname, salutation, title, company, phone, address, city, zip, userlanguage, gender, nltool\Models\Addresses.uid FROM nltool\Models\Addresses".$joinTables." WHERE nltool\Models\Addresses.deleted=0 AND nltool\Models\Addresses.hidden=0 ".$where."".$groupBy;	
 		
 		$sQuery=$modelsManager->createQuery($queryStrng);								
 		
