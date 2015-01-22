@@ -1,7 +1,8 @@
 <?php
 namespace nltool\Modules\Modules\Frontend\Controllers;
 use Phalcon\Mvc\Controller as Controller,
-	Phalcon\Mvc\Dispatcher;
+	Phalcon\Mvc\Dispatcher,
+	Phalcon\Mvc\Model\Resultset;
 use nltool\Models\Sendoutobjects,
 	nltool\Models\Mailqueue,
 	nltool\Models\Linklookup;
@@ -26,8 +27,7 @@ class TriggersendController extends Triggerauth
     {
 		
 		
-		if(!$this->request->isPost()){
-			$trlayers=stream_get_transports();
+		if(!$this->request->isPost()){						
 			
 			$checktime=microtime(true);
 		
@@ -35,14 +35,15 @@ class TriggersendController extends Triggerauth
 			
 			$time=time();
 			//find mailings which are due
-			$mailings= Sendoutobjects::find(array(
+			$mailing= Sendoutobjects::findFirst(array(
 				"conditions" => "deleted=0 AND hidden=0 AND inprogress=0 AND reviewed=1 AND cleared=1  AND sent=0 AND tstamp <= ?1",
 				"bind" => array(1 => $time),
 				"order" => "tstamp ASC"
 			));
 			
-			foreach($mailings AS $key => $mailing){
+			if($mailing){
 				$addressConditions=$mailing->getAddressconditions();
+				
 				$condStrng='';
 				if($addressConditions){
 					foreach($addressConditions AS $condition){
@@ -178,6 +179,7 @@ class TriggersendController extends Triggerauth
 				
 				
 				$distributor=$mailing->getDistributor();
+				$addressTimeStart=microtime(true);
 				$addresses=$distributor->getAddresses(array(
 					'conditions'=>$condStrng,
 					'clickconditions'=>array(
@@ -186,6 +188,7 @@ class TriggersendController extends Triggerauth
 						)
 				));
 				$configuration=$mailing->getConfiguration();					
+				$getAddressTime=  microtime(true)-$addressTimeStart;
 				//$bodyRaw=file_get_contents('../public/mails/mailobject_'.$mailing->mailobjectuid.'.html');
 				
 				
@@ -195,72 +198,49 @@ class TriggersendController extends Triggerauth
 				$mailing->update();
 				$insField='(crdate,addressuid,campaignuid,sendoutobjectuid,mailobjectuid,configurationuid,email,subject,sendermail,sendername,answermail,answername,returnpath,organisation)';
 				
-				$insStr='';
-				
-				for($counter=0;$counter<count($addresses);$counter++){						
-					$address=$addresses[$counter];
-					/*$mailqueueobject=new Mailqueue();
-					$mailqueueobject->assign(array(
-						"pid"=>0,
-						"tstamp"=>0,
-						"crdate"=>$time,
-						"deleted"=>0,
-						"hidden"=>0,
-						"sent"=>0,
-						"campaignuid"=>$mailing->campaignuid,
-						"mailobjectuid"=>$mailing->mailobjectuid,
-						"configurationuid"=>$mailing->configurationuid,
-						"email"=>$address->email,
-						"subject"=>$mailing->subject,
-						"sendermail"=>$configuration->sendermail,
-						"sendername"=>$configuration->sendername,
-						"answermail"=>$configuration->answermail,
-						"answername"=>$configuration->answername,
-						"returnpath"=>$configuration->returnpath,
-						"organisation"=>$configuration->organisation,
-						"mailbody"=>$bodyFinal
-						));*/
-					/*$mailqueueobject->save();*/
-					 /*if (!$mailqueueobject->save()) {
-						$this->flash->error($mailqueueobject->getMessages());
-					}*/
-					if($mailing->abtest==0 || ($mailing->abtest==1 && $mailing->pid==0 && ($counter+1)%2!=0) || ($mailing->abtest==1 && $mailing->pid!=0 && ($counter+1)%2==0)){
-						$insStr.='('.$time.','.$address->uid.','.$mailing->campaignuid.','.$mailing->uid.','.$mailing->mailobjectuid.','.$mailing->configurationuid.',"'.$address->email.'","'.$configuration->sendermail.'","'.$configuration->sendername.'","'.$configuration->sendername.'","'.$configuration->answermail.'","'.$configuration->answername.'","'.$configuration->returnpath.'","'.$configuration->organisation.'"),';						
+				$insStr=array();
+				$counter=0;
+				foreach($addresses as $address){						
+										
+					if($mailing->abtest==0){
+						$insStr[]='('.$time.','.$address->uid.','.$mailing->campaignuid.','.$mailing->uid.','.$mailing->mailobjectuid.','.$mailing->configurationuid.',"'.$address->email.'","'.$configuration->sendermail.'","'.$configuration->sendername.'","'.$configuration->sendername.'","'.$configuration->answermail.'","'.$configuration->answername.'","'.$configuration->returnpath.'","'.$configuration->organisation.'")';						
+					}else{
+						if($mailing->pid==0 && ($counter+1)%2!=0){
+							$insStr[]='('.$time.','.$address->uid.','.$mailing->campaignuid.','.$mailing->uid.','.$mailing->mailobjectuid.','.$mailing->configurationuid.',"'.$address->email.'","'.$configuration->sendermail.'","'.$configuration->sendername.'","'.$configuration->sendername.'","'.$configuration->answermail.'","'.$configuration->answername.'","'.$configuration->returnpath.'","'.$configuration->organisation.'")';						
+						}elseif($mailing->pid!=0 && ($counter+1)%2==0){
+							$insStr[]='('.$time.','.$address->uid.','.$mailing->campaignuid.','.$mailing->uid.','.$mailing->mailobjectuid.','.$mailing->configurationuid.',"'.$address->email.'","'.$configuration->sendermail.'","'.$configuration->sendername.'","'.$configuration->sendername.'","'.$configuration->answermail.'","'.$configuration->answername.'","'.$configuration->returnpath.'","'.$configuration->organisation.'")';						
+						}
 					}
 					
-					if($counter%500==0 && $counter !=0){
-							
-							$insStr=substr($insStr,0,-1);
-							//file_put_contents('log.txt', "INSERT INTO Mailqueue ".$insField." VALUES ".$insStr);
-							echo('inloop:  '.$insStr);
-							$this->di->get('db')->query("INSERT INTO mailqueue ".$insField." VALUES ".$insStr);
-							$insStr="";
+					if($counter%200==0 && $counter >0){
+														
+							$this->di->get('db')->query("INSERT INTO mailqueue ".$insField." VALUES ".implode(',',$insStr));
+							$insStr=array();
 					}
 					
-					
+					$counter++;
 
 
 				}
 				
-				if($insStr!=''){
-					
-					$insStr=substr($insStr,0,-1);
-					echo('outloop:  '.$insStr);
-						$this->di->get('db')->query("INSERT INTO mailqueue ".$insField." VALUES ".$insStr);
-						$insStr="";
+				if(count($insStr)>0){
+						$this->di->get('db')->query("INSERT INTO mailqueue ".$insField." VALUES ".implode(',',$insStr));
+						$insStr=array();
 				}
 				
 
 
 				
-			}
+			
 			
 				
 			//generate mails as they are handed over to the smtp mailqueue
 			//hand them over to smtp in chunks of X (Backend configuration) numbers
 			
-			
-			
+			$overallTime=microtime(true)-$checktime;
+			echo('$getAddressTime: '.$getAddressTime.'<br>');
+			echo('$overallTime: '.$overallTime.'<br>');
+			}
 		}else{
 			die('<img src="images/cowboy-shaking-head.gif" style="position:absolute;top:40%;left:40%;">');
 		}

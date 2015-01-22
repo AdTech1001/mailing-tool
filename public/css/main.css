@@ -994,12 +994,10 @@ box-shadow: inset 3px 0px 5px 0px rgba(0,0,0,0.75);
 
 }
 #editFrame .cElement{
-	
+	border:1px dashed;
 }
 
-#editFrame .cElement{
-	
-}
+
 
 .cElement:hover, .ui-draggable-handle:hover, .cElement a:hover{
 

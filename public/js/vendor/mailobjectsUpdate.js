@@ -208,7 +208,9 @@ jQuery('document').ready(function(){
       hoverClass: "ui-state-hover",
 	  
       drop: function( event, ui ) {		  
-		  var elOffsetTop=ui.draggable[0].offsetTop;
+		  
+		  var elOffsetTop=event.pageY - $(this).offset().top;
+		  
 		  var cElementsOnPosition=jQuery(this).find('.cElement');
 		  var newElement;
 		  
@@ -236,8 +238,9 @@ jQuery('document').ready(function(){
 				jQuery(this).append(newElement);
 			}else{
 				var inserted=false;
+				
 				for(var i=0; i<cElementsOnPosition.length; i++){				  
-
+				
 					if(elOffsetTop <= cElementsOnPosition[i].offsetTop){					 					  											  
 					  jQuery(newElement).insertBefore(jQuery(cElementsOnPosition[i]));
 					  inserted=true;

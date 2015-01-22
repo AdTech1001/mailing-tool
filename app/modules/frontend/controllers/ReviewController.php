@@ -97,7 +97,7 @@ class ReviewController extends ControllerBase
 
 				if($this->request->getPost('clearanceOverride')=='true'){
 					$sendoutobject->assign(array(
-						'cleared'=>$this->request->getPost('cleared')=='true' ? 1 :0
+						'cleared'=>$this->request->getPost('clearanceOverride')=='true' ? 1 :0
 					));
 					if(!$sendoutobject->update()){
 						$this->flash->error($sendoutobject->getMessages());

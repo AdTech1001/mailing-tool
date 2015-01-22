@@ -27,6 +27,7 @@ return new \Phalcon\Config(array(
         ),
         'debug'          => true,
 		'dontSendReally' => true,
+		'dontSendDuplicates' => false,
 		'version' => '1.0 beta'
     ),    
     'smtp'        => array(
