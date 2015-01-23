@@ -201,7 +201,7 @@ class SegmentobjectsController extends ControllerBase
 		 * Get data to display
 		 */
 		
-		$phql = "SELECT ".str_replace(" , ", " ", implode(", ", $aColumnsSelect)).", uid FROM $sTable ".$sWhere." GROUP BY email ".$sOrder." ".$sLimit;
+		$phql = "SELECT ".str_replace(" , ", " ", implode(", ", $aColumnsSelect)).", uid FROM $sTable ".$sWhere." ".$sOrder." ".$sLimit;
 		
 		
 		
