@@ -91,8 +91,7 @@ var ajaxIt=function(controller,action,formdata,successhandler, parameters){
 			jQuery('#loadingimg').hide();	
 			successhandler(data);
 		},
-		error: function(e){
-			console.log(e);
+		error: function(e){			
 			jQuery('#loadingimg').hide();
 			}
 		});

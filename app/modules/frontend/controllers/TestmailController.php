@@ -20,10 +20,14 @@ class TestmailController extends ControllerBase
 			$address->assign(array(
 				'email'=>$this->request->getPost("email", "email", "some@example.com"),
 				'salutation'=>'Sehr geehrter/Sehr geehrte',
-				'last_name'=>'Test'
+				'last_name'=>'Tester',
+				'uid'=>$this->session->get('auth')['uid'],
+				'first_name'=>'Test',
+				'title' => 'Dr.',
+				'company' => 'Testcompany'				
 			));
-			$wrapObject=new stdClass();
-			$wrapObject->a=$address;
+			
+			
 			
 			$mailing=  Sendoutobjects::findFirst(array(
 				'conditions'=>'uid=?1',
@@ -34,10 +38,10 @@ class TestmailController extends ControllerBase
 			$configuration=$mailing->getConfiguration();
 			
 			$bodyRaw=file_get_contents('../public/mails/mailobject_'.$mailing->mailobjectuid.'.html');
-						
-			$bodyRaw=$this->mailrenderer->writeClicktrackingLinks($bodyRaw,$mailing);			
+			
+			$this->mailrenderer->writeClicktrackingLinks($bodyRaw,$mailing);			
 
-			$bodyFinal=$this->mailrenderer->renderVars($bodyRaw,$wrapObject);
+			$bodyFinal=$this->mailrenderer->renderVars($bodyRaw,$address);
 			
 
 			 $transport = \Swift_SmtpTransport::newInstance()
