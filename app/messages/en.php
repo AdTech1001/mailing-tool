@@ -34,7 +34,8 @@ $messages = array(
 	"runningJobsTitle" => "running Jobs",
 	"openMailobjectsTitle" => "Your open Mailprojects",
 	"latestStatisticsTitle" => "Statistics of the last sendouts",
-	"campaign"=>"Campaigns",
+	"campaigns"=>"campaigns",
+	"campaign"=>"campaign",
 	"campaignTitle" => "campaign title",
 	"campaignCreate"=> "create new campaign",
 	"campaignRetrieve" => "manage campaigns",
@@ -202,11 +203,21 @@ $messages = array(
 	"filtersTitle" => "filter",
 	"distributorCreateTitle" => "create distribution list",
 	"distributors"=>"distributor lists",
+	"distributorTitleLabel" =>"distributor list",
 	"distributorsCreate"=>"create distributor lists",
 	"distributorsRetrieve"=>"manage distributor lists",
 	"overallClearance" => "overall clearance",
 	"sureClear" =>"Please confirm your clearance for sending out the mail.",
-	"reviewFirst" => "Please confirm review first."
+	"reviewFirst" => "Please confirm review first.",
+	"recipients" =>"recipients",
+	"report" =>"report",
+	"response" => "response",
+	"opened" => "mails opened",
+	"clicked" => "links clicked",
+	"responseLinks" => "clicked links",
+	"linknumber"=>"link number",
+	"url"=>"URL",
+	"totalClicks" => "click count"
 	
 );
 

@@ -37,7 +37,11 @@ $di->set(
     },
     true
 );
-
+	
+$di->set('tag', function() {
+	
+    return new nltool\Helper\Tag();
+});
 
 $di->set('modelsManager', function() {
       return new Phalcon\Mvc\Model\Manager();

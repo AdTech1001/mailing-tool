@@ -71,6 +71,13 @@ class Acl extends Component
             'update',
             'delete'
         ),
+		'report' =>array(
+			'index',
+			'create',
+			'retrieve',
+			'update',
+			'delete'
+		),
 		'session'=>array()
     );
 	

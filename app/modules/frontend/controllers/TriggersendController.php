@@ -195,6 +195,7 @@ class TriggersendController extends Triggerauth
 
 				// First build up Mailqueue, then Mail
 				$mailing->inprogress=1;
+				$mailing->sendstart=$time;
 				$mailing->update();
 				$insField='(crdate,addressuid,campaignuid,sendoutobjectuid,mailobjectuid,configurationuid,email,subject,sendermail,sendername,answermail,answername,returnpath,organisation)';
 				
@@ -335,6 +336,10 @@ class TriggersendController extends Triggerauth
 							->setFrom(array($configuration->sendermail => $configuration->sendername))
 							->setReplyTo($configuration->answermail)
 							->setReturnPath($configuration->returnpath);
+				$headers = $message->getHeaders();
+				$headers->addIdHeader('Int-ID', $mailqueueElement->m->uid.'.' .  uniqid().'@'. $_SERVER['SERVER_NAME']);
+				
+				 				 
 				$message->setBody($bodyFinal, 'text/html');
 				$to=array($mailqueueElement->m->email => $mailqueueElement->a->first_name.' '.$mailqueueElement->a->last_name);
 				$message->setTo($to);
@@ -363,7 +368,7 @@ class TriggersendController extends Triggerauth
 					$timeused=$endtime-$checktime;
 					
 					//echo('pid: '.getmypid().' numsent: '.$numSent.' : counter'.$counter.' : '.$address->uid.' <-> '.$timeused.'<br>');
-					file_put_contents('../app/logs/debuggerSend.csv',getmypid().' <--PID '.$timeused.' <-> '.$counter.$mailqueue->a->uid.PHP_EOL,FILE_APPEND);
+					file_put_contents('../app/logs/debuggerSend.csv',getmypid().' <--PID '.$timeused.' <-> '.$counter.$mailqueueElement->a->uid.PHP_EOL,FILE_APPEND);
 				}
 				if($counter>0 && count($sentArray)>0 && $counter%20==0){
 					$queryStrng="UPDATE mailqueue SET tstamp=".time().",sent=1 WHERE uid IN(".implode(',',$sentArray).")";			
@@ -387,7 +392,8 @@ class TriggersendController extends Triggerauth
 			if(!$restQueue){
 				$mailing->assign(array(
 					"inprogress"=>0,
-					"sent" => 1
+					"sent" => 1,
+					"sendend" => time()
 				));
 				
 				$mailing->update();

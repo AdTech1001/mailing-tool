@@ -11,6 +11,10 @@ use Phalcon\Mvc\Model;
  */
 class Linkclicks extends Model{
 	
-	
+	public function initialize(){
+		$this->belongsTo('linkuid', 'nltool\Models\Linklookup', 'uid', 
+            array('alias' => 'link')
+        );
+	}
 	
 }

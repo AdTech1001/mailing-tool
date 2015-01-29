@@ -20,6 +20,8 @@ class Sendoutobjects extends Model{
 		$this->hasMany("uid", "nltool\Models\Mailqueue", "sendoutobjectuid",array('alias' => 'mailqueue'));
 		$this->belongsTo("campaignuid", "nltool\Models\Campaignobjects", "uid", array('alias' => 'campaign'));
 		$this->hasMany("uid", "nltool\Models\Review", "pid",array('alias' => 'review'));
+		$this->hasMany("uid", "nltool\Models\linkclicks", "sendoutobjectuid",array('alias' => 'linkclicks'));
+		$this->hasMany("uid", "nltool\Models\openclicks", "sendoutobjectuid",array('alias' => 'openclicks'));
     }
 	
 }

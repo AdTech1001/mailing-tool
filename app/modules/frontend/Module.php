@@ -84,7 +84,12 @@ $di->set(
 		$volt->getCompiler()->addFunction('tr', function ($key) {
 			return "nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate({$key})";
 		});
-
+		 $volt->getCompiler()->addFunction(
+                    'roundTwo',
+                    function ($resolvedArgs, $exprArgs) {
+                        return 'nltool\Helper\Tag::roundTwo(' . $resolvedArgs . ')';
+                    }
+                );
         $volt->getCompiler()->addFunction('number_format', function($resolvedArgs) {
             return 'number_format(' . $resolvedArgs . ')';
         });

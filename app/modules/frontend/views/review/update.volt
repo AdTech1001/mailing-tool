@@ -93,6 +93,10 @@
 			<label>{{tr('confAnswernameLabel')~' ('~tr('confAnswermailLabel')~')'}}:</label><span>{{ sendoutobject.configuration.answername }} ({{ sendoutobject.configuration.answermail }})</span><br>
 			<label>{{tr('confReturnpathLabel')}}</label><span>{{ sendoutobject.configuration.returnpath }}</span>
 		</div>
+		<div id="distributor">
+			<label>{{tr('distributorTitleLabel')}}</label><br>
+				<a href='{{baseurl}}{{ language }}/distributors/update/{{ sendoutobject.getDistributor().uid }}'>{{sendoutobject.getDistributor().title}}</a><br><br>
+				{{sendoutobject.getDistributor().countAddresses()~' '~tr('recipients')}}</div>
 		
 		<div class='clearfix'></div>
 	</div>
