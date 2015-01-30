@@ -188,7 +188,7 @@ $di->set(
         
             $frontCache = new \Phalcon\Cache\Frontend\None();
             return new Phalcon\Cache\Backend\Memory($frontCache);
-		/*if ($config->application->debug) {
+		if ($config->application->debug) {
         } else {
             //Cache data for one day by default
 			
@@ -200,7 +200,7 @@ $di->set(
                 "cacheDir" => APP_PATH . "/app/cache/views/",
                 "prefix"   => "nltool-cache-"
             ));
-        }*/
+        }
     }
 );
 

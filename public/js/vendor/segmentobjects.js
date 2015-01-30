@@ -1,4 +1,4 @@
-jQuery(document).ready(function(e){	
+function pluginInit(){	
 	var filters={'folderuid':'','firstname':'','lastname':'','zip':'','company':'','address':''};
 	var save=false;
 	var update=false;
@@ -81,8 +81,7 @@ jQuery(document).ready(function(e){
 						 aoData.push( { "name": filter,"value":filters[filter]} );				 
 					 }
 				 }
-				 if(load){
-					 console.log('load');
+				 if(load){					 
 					 /*
 					//Seems to work, but might be unreliable
 					for(key in segmentobjectState){
@@ -106,20 +105,19 @@ jQuery(document).ready(function(e){
 				 
 				 
 				 if(save){
-					 console.log('save');
+					 
 					 var stateObject=JSON.stringify(aoData);
 					 aoData.push({"name":"save","value":1});
 					 aoData.push({"name":"stateObject","value":stateObject});
 					 save=false;
 				 }
 				 if(update){
-					 console.log('update');
-					 
+					 					 
 					 aoData.push({"name":"update","value":1});
 					 aoData.push({"name":"segmentobjectUid","value":segmentobjectUid});
 					 
 					 /* Search Input seemingly disappears before sending, so */
-					 console.log(searchterms);
+					 
 					 for(key in aoData){
 						
 					   if(aoData[key].name === 'sSearch'){
@@ -163,4 +161,4 @@ jQuery(document).ready(function(e){
 	
 	
 	
-});
+};

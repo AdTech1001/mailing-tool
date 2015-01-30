@@ -81,6 +81,14 @@
 			
 			</ul>
 		</div>
+		<div class="module_el">
+			<h2>{{ link_to(language~'/report/', '<span class="glyphicon glyphicon-stats"></span> '~tr('report'), 'title': tr('report')) }}
+			</h2>
+			<ul>			
+			<li>{{ link_to(language~'/report/index/', '<span class="glyphicon glyphicon-eye-open"></span> '~tr('report'), 'title': tr('report')) }}</li>
+			
+			</ul>
+		</div>
 		
 		
 	</div>

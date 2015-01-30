@@ -37,21 +37,30 @@ function init(jQuery){
 var requireControllerPlugins=function(){
 	if(requirePlugins[0]=='jsplumb'){
 			require([requirePlugins[0]],function(jsPlumb){
-				require([requirePlugins[1]]);
+				require([requirePlugins[1]],letsRoll);
 			});
 			for(var i=2; i<requirePlugins.length; i++){
-				require([requirePlugins[i]]);
+				if(i==requirePlugins.length-1){
+					require([requirePlugins[i]]);
+				}else{
+					require([requirePlugins[i]]);
+				}
 			}
 	}else if(requirePlugins[0]=='datatables'){
 		
-		require([requirePlugins[0]],function(datatables){
+		require([requirePlugins[0]],function(datatables){				
 				
-				require([requirePlugins[1]]);
+				require([requirePlugins[1]],letsRoll);
 			});
 	}
 	else{
 		for(var i=0; i<requirePlugins.length; i++){
-			require([requirePlugins[i]]);
+			if(i==requirePlugins.length-1){
+				require([requirePlugins[i]],letsRoll);
+			}else{
+				require([requirePlugins[i]]);
+			}
+			
 		}	
 	}
 	
@@ -103,3 +112,6 @@ $(document).ready(function(jQuery){
 	
 });
 
+function letsRoll(){
+	pluginInit();
+}

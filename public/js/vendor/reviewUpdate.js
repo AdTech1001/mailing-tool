@@ -7,7 +7,7 @@ var oksent=function(data){
 	}
 };
 
-jQuery('document').ready(function(){
+function pluginInit(){	
 	var sendoutobjectuid=jQuery('#sendoutobjectuid').val();
 	jQuery('#deviceSelectBar ul li').click(function(e){
 		var elem=jQuery(this).index();
@@ -75,4 +75,4 @@ jQuery('document').ready(function(){
 		}
 		
 	});
-});
+};

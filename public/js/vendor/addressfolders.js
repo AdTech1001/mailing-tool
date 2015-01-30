@@ -1,4 +1,4 @@
-jQuery(document).ready(function(e){
+function pluginInit(){
 	var folderuid=jQuery('#folderuid').val();
 	
 	var dt = jQuery('#adressfolderTable').dataTable({
@@ -23,4 +23,4 @@ jQuery(document).ready(function(e){
 			 }
 		});
 		
-});
+};

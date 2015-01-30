@@ -4,14 +4,10 @@
 		<a href="<?php echo $baseurl; ?>" title="Home"><?php echo $this->tag->image(array('images/logo.png')); ?></a>
 	</div><?php if ($this->session->get('auth')) { ?><nav class="navbar navbar-reverse" role="navigation">
 	  
-		<ul class="sercive-nav navbar-right">
-			<li><?php echo $this->tag->linkTo(array($language . '/notifications', '<span class="glyphicon glyphicon-globe"></span>', 'title' => 'Notifications')); ?></li>			
-			
-			<li><?php echo $this->tag->linkTo(array('', '<span class="glyphicon glyphicon-home"></span>', 'title' => 'Home')); ?></li>
-			<li><?php echo $this->tag->linkTo(array('settings', '<span class="glyphicon glyphicon-cog"></span>', 'title' => 'Settings')); ?></li>
-			<li><?php echo $this->tag->linkTo(array('session/logout/', '<span class="glyphicon glyphicon-off"></span>', 'title' => 'Logout')); ?></li>
-			
-		  </ul>
+		<ul class="sercive-nav navbar-right">						
+			<li><?php echo $this->tag->linkTo(array('', '<span class="glyphicon glyphicon-home"></span>', 'title' => 'Home')); ?></li>			
+			<li><?php echo $this->tag->linkTo(array('session/logout/', '<span class="glyphicon glyphicon-off"></span>', 'title' => 'Logout')); ?></li>			
+		</ul>
 		<div class="clearfix"></div>
 		  <ul class="nav navbar-nav navbar-right">
 			  <?php if ('templateobjects' == $this->dispatcher->getControllerName()) { ?>
@@ -86,6 +82,11 @@
 					<li><?php echo $this->tag->linkTo(array($language . '/review/index/', '<span class="glyphicon glyphicon-list"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('retrieve'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('retrieve'))); ?></li>
 				</ul>
 			</li>	
+			<?php if ('review' == $this->dispatcher->getControllerName()) { ?>
+              <li class="dropdown active">
+              <?php } else { ?>
+			 <li class="dropdown">
+              <?php } ?><?php echo $this->tag->linkTo(array($language . '/report', '<span class="glyphicon glyphicon-stats"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('report'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('report'))); ?></li>	
 			  			
 			
 				

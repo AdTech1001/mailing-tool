@@ -917,9 +917,15 @@ textarea {
 nav ul{
 	margin:0px;
 	padding:0px;
-	height:92px;
+	
 }
-
+.sercive-nav.navbar-right{
+	margin-top:25px;
+}
+.nav.navbar-nav.navbar-right{
+	margin-top:50px;
+	margin-bottom:10px;
+}
 header, .container{	
 	
 	border-bottom:#e5e5e5 1px solid;
@@ -1383,7 +1389,7 @@ table#mapTable{
 		width:100%;*/
 		display:block;
 		text-decoration:none;
-		padding:20px;
+		padding:12px;
 	}
 	nav ul li.active a{
 		background-color:#eee;

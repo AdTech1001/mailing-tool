@@ -88,11 +88,18 @@ var pollForTinymce=function(){
 	}
 }
 
-jQuery('document').ready(function(){
+function pluginInit(){
 	/*jQuery('.editable p, .editable a, .editable img, .editable h1, .editable h2, .editable h3, .editable h4, .editable h5, .editable h6').each(function(index,element){
 		jQuery(element).attr('contenteditable','true');
 	});*/
-	
+	jQuery('#editFrame a').click(function(e){		
+		e.preventDefault();
+		var r = confirm("Would you like to open the link?");
+		if (r == true) {
+			
+			window.open(jQuery(this).attr('href'), "linkwindow", "scrollbars=auto");
+		} 
+	});
 	jQuery('#closePrev').click(function(e){
 		jQuery('#viewFrame').hide();
 	});
@@ -314,6 +321,6 @@ jQuery('document').ready(function(){
 	);
 		
 	
-});
+};
 
 

@@ -81,6 +81,14 @@
 			
 			</ul>
 		</div>
+		<div class="module_el">
+			<h2><?php echo $this->tag->linkTo(array($language . '/report/', '<span class="glyphicon glyphicon-stats"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('report'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('report'))); ?>
+			</h2>
+			<ul>			
+			<li><?php echo $this->tag->linkTo(array($language . '/report/index/', '<span class="glyphicon glyphicon-eye-open"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('report'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('report'))); ?></li>
+			
+			</ul>
+		</div>
 		
 		
 	</div>

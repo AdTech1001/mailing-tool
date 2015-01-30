@@ -5,18 +5,10 @@
 	{%- if session.get('auth') -%}
 	<nav class="navbar navbar-reverse" role="navigation">
 	  
-		<ul class="sercive-nav navbar-right">
-			<li>
-				
-				{{- link_to(language~'/notifications', '<span class="glyphicon glyphicon-globe"></span>', 'title': 'Notifications') -}}
-				
-			</li>			
-			
-			<li>{{ link_to('', '<span class="glyphicon glyphicon-home"></span>', 'title': 'Home') }}</li>
-			<li>{{ link_to('settings', '<span class="glyphicon glyphicon-cog"></span>', 'title': 'Settings') }}</li>
-			<li>{{ link_to('session/logout/', '<span class="glyphicon glyphicon-off"></span>', 'title': 'Logout') }}</li>
-			
-		  </ul>
+		<ul class="sercive-nav navbar-right">						
+			<li>{{ link_to('', '<span class="glyphicon glyphicon-home"></span>', 'title': 'Home') }}</li>			
+			<li>{{ link_to('session/logout/', '<span class="glyphicon glyphicon-off"></span>', 'title': 'Logout') }}</li>			
+		</ul>
 		<div class="clearfix"></div>
 		  <ul class="nav navbar-nav navbar-right">
 			  {% if 'templateobjects' == dispatcher.getControllerName() %}
@@ -106,6 +98,14 @@
 				<ul class="dropdown-menu submenu">					
 					<li>{{ link_to(language~'/review/index/', '<span class="glyphicon glyphicon-list"></span> '~tr('retrieve'), 'title': tr('retrieve')) }}</li>
 				</ul>
+			</li>	
+			{% if 'review' == dispatcher.getControllerName() %}
+              <li class="dropdown active">
+              {% else %}
+			 <li class="dropdown">
+              {% endif %}
+				{{- link_to(language~'/report', '<span class="glyphicon glyphicon-stats"></span> '~tr('report'), 'title': tr('report')) -}}
+				
 			</li>	
 			  			
 			

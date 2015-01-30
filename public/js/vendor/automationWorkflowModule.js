@@ -341,7 +341,7 @@ function Save() {
 			objects+=encodeURI(jQuery(element)[0].outerHTML);
 		}
 	});
-	console.log(elementsPathArr);
+	
 	for(var i=0; i<elementsPathArr.length; i++ ){
 		var confValues=jQuery('#'+elementsPathArr[i]+' input');
 		
@@ -547,7 +547,7 @@ jQuery('#mailobjectSelect button.ok').click(function(e){
 	if(infoLayer.length==0){
 		jQuery(activeElement).parent().parent().append('<div class="info glyphicon glyphicon-info-sign"></div>');
 	}
-	//console.log();
+	
 	jQuery(activeElement).html(jQuery('#mailobjectSelect select')[0][jQuery('#mailobjectSelect select')[0].selectedIndex].text.split(' | ')[0]);
 	jQuery('#abtestChecker').off('change').attr('checked', false);
 	jQuery('#mailobjectSelect').addClass('hidden');
@@ -767,7 +767,7 @@ var addRowEvents=function(rowId, splitCond){
 	});
 	}
 };
-
+function pluginInit(){	
 jsPlumb.ready(function() {
 	jsPlumb.setContainer(jQuery("#automationWorkspace"));
 	
@@ -809,6 +809,17 @@ jsPlumb.ready(function() {
 	
 });
 
+	
+lang=jQuery('#language').val();
+jQuery('.window a').click(function(e){
+	e.preventDefault();
+});
+jQuery('#').delegate('div.info','hover',function(e){
+	
+});
+jQuery('.allPurposeLayer').draggable();
+	
+}
 jQuery( "#campaignCreateElements .window" ).draggable({
     appendTo: "#automationWorkspace",
     helper: "clone",
@@ -946,14 +957,3 @@ var closeTitleInput=function(destroyEl){
 };
 
 
-jQuery('document').ready(function(){
-	lang=jQuery('#language').val();
-	jQuery('.window a').click(function(e){
-		e.preventDefault();
-	});
-	jQuery('#').delegate('div.info','hover',function(e){
-		console.log('erwheg');
-		console.log(jQuery(this).parent().find('input'));
-	});
-	jQuery('.allPurposeLayer').draggable();
-});

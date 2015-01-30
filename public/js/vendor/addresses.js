@@ -1,6 +1,5 @@
-jQuery(document).ready(function(e){
-	var folderuid=jQuery('#folderuid').val();
-	console.log(baseurl);
+function pluginInit(){
+	var folderuid=jQuery('#folderuid').val();	
 	var dt = jQuery('#adressfolderTable').dataTable({
 	        "bProcessing": true,	        
 	        "sAjaxSource": baseurl+"addresses/index/",
@@ -23,4 +22,4 @@ jQuery(document).ready(function(e){
 			 }
 		});
 		
-});
+};
