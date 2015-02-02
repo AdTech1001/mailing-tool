@@ -72,9 +72,9 @@ $messages = array(
 	"templateTypeMail" => "Mailtemplate",
 	"templateTypeContent" => "Template für Inhaltselement",
 	"pleaseSelect" => "Bitte auswählen",
-	"templatedCElementsTitle"=> "Vorlagen für Inhaltselemente",
-	"recentCElementsTitle" => "zuletzt verwendete Inhaltselemente",
-	"dynamicCElementsTitle" => "dynamische Inhaltslemente",
+	"templatedCElementsTitle"=> "Vorlagen",
+	"recentCElementsTitle" => "zuletzt verwendet",
+	"dynamicCElementsTitle" => "dynamisch",
 	"edit" => "Bearbeiten",
 	"save" => "Speichern",
 	"update"=>"Update",
@@ -221,6 +221,8 @@ $messages = array(
 	"responseLinks" => "geklickte Links",
 	"linknumber"=>"Linknummer",
 	"url"=>"URL",
-	"totalClicks" => "Anzahl der Klicks"
+	"totalClicks" => "Anzahl der Klicks",
+	"preview" => "Vorschau",
+	"contentElements" => "Inhaltselemente"
 );
 ?>

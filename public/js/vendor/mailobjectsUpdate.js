@@ -99,100 +99,103 @@ function pluginInit(){
 	/*jQuery('.editable p, .editable a, .editable img, .editable h1, .editable h2, .editable h3, .editable h4, .editable h5, .editable h6').each(function(index,element){
 		jQuery(element).attr('contenteditable','true');
 	});*/
-	jQuery('#editFrame a').click(function(e){		
-		e.preventDefault();
-		var r = confirm("Would you like to open the link?");
-		if (r == true) {
-			
-			window.open(jQuery(this).attr('href'), "linkwindow", "scrollbars=auto");
-		} 
-	});
-	jQuery('#closePrev').click(function(e){
-		jQuery('#viewFrame').hide();
-	});
-	jQuery('#templatedCElements .cElementThumb').each(function(index,element){
-		jQuery(element).draggable({
-			appendTo: "#desktop",			
-			helper: "clone",
-			scroll: false,
-			zIndex:999,
-			handle: "img",
-			snap: ".cElement",
-			revert: "invalid",
-			containment: "#desktop",
-			start: function(event,ui) {
-				
-				jQuery(ui.helper).addClass("clone");
-				var cElement=jQuery(ui.helper).find('.cElement');
-				jQuery(cElement).addClass('hidden');
-			 }
-		});
-	});
-	
-	jQuery('#recentCElements .cElement').each(function(index,element){
-		jQuery(element).draggable({
-			appendTo: "#desktop",			
-			scroll: false,
-			helper: "clone",
-			zIndex: 999,
-			snap: ".cElement",
-			revert: "invalid",
-			containment: "#desktop",
-			start: function(event,ui) {
-				
-				jQuery(ui.helper).addClass("clone");
-				
-			 }
-		});
-	});
-	jQuery('#dynamicCElements .dynamicCElement').each(function(index,element){
-		jQuery(element).draggable({
-			appendTo: "#desktop",			
-			scroll: false,
-			helper: "clone",
-			zIndex: 999,
-			
-			revert: "invalid",
-			containment: "#desktop",
-			start: function(event,ui) {
-				
-				jQuery(ui.helper).addClass("clone");
-				
-			 }
-		});
-	});
-	
-	
-	jQuery('#editFrame .cElement').draggable({						
-			containment: "#editFrame",
-			snap: ".cElement",
-			revert: 'invalid' 
-	});
-	
-	jQuery('#editFrame .editable .cElement').mouseenter(function(e){		
-		var elementToDelete=jQuery(this);
-		var templateposition=jQuery('.editable').index(jQuery(this).parent());
+	var  arrangeMode=function(){
 		
-		var positionsorting=jQuery(this).index();		
-		jQuery(this).append(jQuery('#deleteOverlay'));
-		jQuery('#deleteOverlay').removeClass('hidden').click(function(e){
-			
-			jQuery(elementToDelete).remove();
-		var formdata=jQuery('#editFrameForm').serialize();
-			formdata+='&templateposition='+templateposition+'&positionsorting='+positionsorting;			
-			
-			ajaxIt('contentobjects','delete',formdata,reloadFrameDelete);
+	
+		jQuery('#editFrame a').click(function(e){		
+			e.preventDefault();
+			var r = confirm("Would you like to open the link?");
+			if (r == true) {
+
+				window.open(jQuery(this).attr('href'), "linkwindow", "scrollbars=auto");
+			} 
 		});
-	});
+		jQuery('#closePrev').click(function(e){
+			jQuery('#viewFrame').hide();
+		});
+		jQuery('#templatedCElements .cElementThumb').each(function(index,element){
+			jQuery(element).draggable({
+				appendTo: "#desktop",			
+				helper: "clone",
+				scroll: false,
+				zIndex:999,
+				handle: "img",
+				snap: ".cElement",
+				revert: "invalid",
+				containment: "#desktop",
+				start: function(event,ui) {
+
+					jQuery(ui.helper).addClass("clone");
+					var cElement=jQuery(ui.helper).find('.cElement');
+					jQuery(cElement).addClass('hidden');
+				 }
+			});
+		});
+
+		jQuery('#recentCElements .cElement').each(function(index,element){
+			jQuery(element).draggable({
+				appendTo: "#desktop",			
+				scroll: false,
+				helper: "clone",
+				zIndex: 999,
+				snap: ".cElement",
+				revert: "invalid",
+				containment: "#desktop",
+				start: function(event,ui) {
+
+					jQuery(ui.helper).addClass("clone");
+
+				 }
+			});
+		});
+		jQuery('#dynamicCElements .dynamicCElement').each(function(index,element){
+			jQuery(element).draggable({
+				appendTo: "#desktop",			
+				scroll: false,
+				helper: "clone",
+				zIndex: 999,
+
+				revert: "invalid",
+				containment: "#desktop",
+				start: function(event,ui) {
+
+					jQuery(ui.helper).addClass("clone");
+
+				 }
+			});
+		});
+
+
+		jQuery('#editFrame .cElement').draggable({						
+				containment: "#editFrame",
+				snap: ".cElement",
+				revert: 'invalid' 
+		});
+
+		jQuery('#editFrame .editable .cElement').mouseenter(function(e){		
+			var elementToDelete=jQuery(this);
+			var templateposition=jQuery('.editable').index(jQuery(this).parent());
+
+			var positionsorting=jQuery(this).index();		
+			jQuery(this).append(jQuery('#deleteOverlay'));
+			jQuery('#deleteOverlay').removeClass('hidden').click(function(e){
+
+				jQuery(elementToDelete).remove();
+			var formdata=jQuery('#editFrameForm').serialize();
+				formdata+='&templateposition='+templateposition+'&positionsorting='+positionsorting;			
+
+				ajaxIt('contentobjects','delete',formdata,reloadFrameDelete);
+			});
+		});
+
+		jQuery('#editFrame .cElement').mouseleave(function(e){
+			jQuery('body').append(jQuery('#deleteOverlay'));
+			jQuery('#deleteOverlay').addClass('hidden').off('click');
+
+		});
 	
-	jQuery('#editFrame .cElement').mouseleave(function(e){
-		jQuery('body').append(jQuery('#deleteOverlay'));
-		jQuery('#deleteOverlay').addClass('hidden').off('click');
-		
-	});
-	
-	
-	
+	}
+	arrangeMode();
 	var modeAcvtivateFunction=function(e){
 		e.stopPropagation()
 		var modeToActivate=jQuery(this).attr('data-mode');
@@ -204,6 +207,7 @@ function pluginInit(){
 			case 'arrange':
 				tinymce.remove("#editFrame div.editable");
 				jQuery('#editFrame table').removeClass('mce-item-table');
+				arrangeMode();
 				break;
 		}
 		
@@ -270,7 +274,7 @@ function pluginInit(){
 		  
 		  
 		 
-}
+	}
 	});
 	jQuery('#mailobjectPreview').click(function(e){
 		jQuery('#viewFrame').show();

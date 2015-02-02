@@ -980,24 +980,33 @@ nav ul li a{
 	font-size:1.3em;
 	color:#4e4e4e;
 }
-
-#campaignCreateElements{
-	position:absolute;
+#left{
+	float:left;
+}
+#right{
+	float:right;
+}
+#campaignCreateElements{	
 	background:#e3e3e3;
 	top:0px;
 	right:0px;
 	height:100%;
-	padding-top:20px;
-	width:350px;
 	
-	overflow-y:scroll;
-	-webkit-box-shadow: inset 3px 0px 5px 0px rgba(0,0,0,0.75);
--moz-box-shadow: inset 3px 0px 5px 0px rgba(0,0,0,0.75);
-box-shadow: inset 3px 0px 5px 0px rgba(0,0,0,0.75);
+	width:450px;	
+	
+	box-shadow: 0px 0px 10px 2px rgba(78,78,78,1);
 }
-
+.tabsWrapper{
+	width:100%;
+	disoplay:block;
+	overflow:scroll;
+	background:#fff;
+	padding-top:20px;
+}
 #campaignCreateElements h3{
-	margin-left:10px;
+	margin-top:0px;
+	padding-top:0px;
+	
 }
 
 #campaignCreateElements .window{
@@ -1013,10 +1022,14 @@ box-shadow: inset 3px 0px 5px 0px rgba(0,0,0,0.75);
 	margin-bottom:20px;
 	height:200px;
 	width:320px;
-	border:#fff 1px solid;
+	background:#e5e5e5;
 	padding:10px;
+	border-radius: 0.5em;
+	box-shadow: 0px 0px 5px 0px rgba(0,0,0,1);
 }
-
+#templatedCElements{
+	
+}
 #templatedCElements .cElement{
 	/*zoom: 0.3;*/
 	display:none;
@@ -1113,8 +1126,8 @@ table.maintable tr.even td{
 	background:#e3e3e3;
 	height:20px;
 	width:20px;
-	padding-left:1px;
-	padding-top:1px;
+	padding-left:3px;
+	padding-top:2px;
 	font-weight:bold;
 	border:#01994e 1px solid;
 	border-radius:10px;
@@ -1139,18 +1152,21 @@ table.maintable tr.even td{
 	position:relative;
 	margin-bottom:10px;
 }
-#activityModeBar{
-	display:inline-block;
-	float:left;
-}
 
-#fileToolBar{	
-	font-size:16px;
 	
-	width:150px;
+
+#fileToolBar{			
 	position:absolute;
-	bottom:0px;
-	right:0px;
+	top:5px;
+	right:10px;
+	color:#fff;
+	
+}
+#fileToolBar div{
+	font-size:1.2em;
+}
+#fileToolBar .glyphicon{
+	color:#fff;
 }
 #fileToolBar > div{
 	cursor:pointer;
@@ -1207,30 +1223,32 @@ table.maintable tr.even td{
 	padding: 10px;*/
 }
 
-#activityModeBar{
+.desktopHeader{
 	width:100%;
 	box-shadow: 0px 2px 5px 0px rgba(0,0,0,1);
-}
-#modes{
+	display:inline-block;
+	float:left;
+	position: relative;
 	background:#01994e;
-	width:100%;
-	color:#e5e5e5;
 	height:50px;
-	padding-top:15px;
-	
-	
 }
-#modes span{
+.modes{	
+	width:100%;
+	color:#e5e5e5;	
+	padding-top:13px;	
+}
+
+.modes span{
 	font-size: 1.2em;
 	
 }
-#modes span:hover{
+.modes span:hover{
  cursor:pointer;
  text-decoration: underline;
  color:#fff;
 }
 
-#modes span.active{
+.modes span.active{
 	color:#fff;
 	text-decoration: underline;
 }

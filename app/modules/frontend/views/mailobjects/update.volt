@@ -6,28 +6,24 @@
 <div class="container">
 <div id="menuWrapper" class="clearfix">
 	
-<div id="fileToolBar">
-	<div class="glyphicon glyphicon-eye-open" id="mailobjectPreview" data-controller="mailobject" data-action="update" title="{{ tr('preview') }}">
-	</div>
-	<div class="glyphicon glyphicon-edit" id="mailobjectEditMode" data-controller="mailobject" data-action="update" title="{{ tr('edit') }}">
-	</div>
-	<div class="glyphicon glyphicon-floppy-save" id="mailobjectUpdate" data-controller="mailobject" data-action="update" title="{{ tr('save') }}">
-	</div>
-</div>	
+
 </div>		
 	
 <div class="clearfix"></div>
 <div id="desktop">
+	<div id="left">
 	<h1>{{ tr('activeModeTitle') }}</h1>
 	<div id="editFrameWrapper">
-		<div id="activityModeBar">
-		<div id="modes">
-			<span class="mode active" data-mode="arrange" style="margin-right:50px;margin-left:10px;">{{ tr('mailUpdateModeArrange') }}</span>
-			<span class="mode inactive" data-mode="edit">{{ tr('mailUpdateModeEdit') }}</span>
-		</div>
 		
-		
-			
+		<div id="activityModeBar" class="desktopHeader">
+			<div class="modes">
+				<span class="mode active" data-mode="arrange" style="margin-right:50px;margin-left:10px;">{{ tr('mailUpdateModeArrange') }}</span>
+				<span class="mode inactive" data-mode="edit">{{ tr('mailUpdateModeEdit') }}</span>
+			</div>
+			<div id="fileToolBar">
+				<div id="mailobjectPreview" data-controller="mailobject" data-action="update" title="{{ tr('preview') }}" style="margin-bottom:5px;"><span class="glyphicon glyphicon-eye-open"></span> &nbsp;{{ tr('preview') }}</div> 
+				<div id="mailobjectUpdate" data-controller="mailobject" data-action="update" title="{{ tr('save') }}"><span class="glyphicon glyphicon-floppy-save"></span> &nbsp;{{ tr('save') }}</div>
+			</div>				
 		</div>
 		<br>
 		<div id="editFrame">
@@ -38,12 +34,23 @@
 
 		</div>
 	</div>
-	<div id="campaignCreateElements">
+	</div>
+	<div id="right">
+		<h1>{{ tr('contentElements') }}</h1>
+	<div id="campaignCreateElements" >
+		<div class="desktopHeader">
+			<div class="modes">
+				<span class="active" style="margin-right:50px;margin-left:10px;">{{ tr('templatedCElementsTitle') }}</span>
+				<span style="margin-right:50px;margin-left:10px;">{{ tr('dynamicCElementsTitle') }}</span>
+				<span>{{ tr('recentCElementsTitle') }}</span>
+			</div>
+		</div>
+		<div class="tabsWrapper">
 		<div id="templatedCElements">
-			<h3>{{ tr('templatedCElementsTitle') }}</h3>
+			
 			{% for templatedCElement in templatedCElements %}
 			{%- if templatedCElement.sourcecode != '' -%}
-			<div class="cElementThumbWrapper"><span>{{ templatedCElement.title }}</span>
+			<div class="cElementThumbWrapper"><h3>{{ templatedCElement.title }}</h3>
 				<div class="cElementThumb">					
 					{{ image(templatedCElement.templatefilepath) }}
 					
@@ -54,16 +61,16 @@
 			{% endif %}
 			{% endfor %}
 		</div>
-		<div id="dynamicCElements">
-			<h3>{{ tr('dynamicCElementsTitle') }}</h3>
+		<div id="dynamicCElements" class="hidden">
+			
 			
 			<div class="cElementThumbWrapper"><span>Gegenwärtig nicht verfügbar</span>
 				
 			</div>
 			
 		</div>
-		<div id="recentCElements">
-			<h3>{{ tr('recentCElementsTitle') }}</h3>
+		<div id="recentCElements" class="hidden">
+			
 			{% for cElement in cElements %}
 			{%- if cElement.sourcecode != '' -%}
 			<div class="cElementThumbWrapper"><span>{{ cElement.title }}</span>
@@ -74,7 +81,9 @@
 			{% endif %}
 			{% endfor %}
 		</div>
+		</div>
 	</div>	
+	</div>
 	<div class="clearfix"></div>
 </div>
 	
