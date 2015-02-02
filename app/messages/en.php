@@ -197,6 +197,7 @@ $messages = array(
 	"commaseperatedList" => "enter multiple keywords as comma seperated list (use % as wildcard)",
 	"segmentobjectsTitle" => "address segments",
 	"segmentobjects" => "address segments",	
+	"segmentobject"=>"adress segment",
 	"segmentobjectsCreate" => "create address segments",
 	"segmentobjectsRetrieve" => "manage address segments",
 	"containingAddresses" => "number of addresses",

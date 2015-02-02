@@ -200,6 +200,7 @@ $messages = array(
 	"unsubscribeError" => "Bei der Abmeldung ist ein Fehler aufgetreten",
 	"commaseperatedList" => "mehrere Stichwörter als kommaseparierte Liste eingeben (% kann als Platzhalter verwendet werden)",
 	"segmentobjectsTitle" => "Adresssegmente",
+	"segmentobject"=>"Adresssegment",
 	"segmentobjects" => "Adresssegmente",
 	"segmentobjectsCreate" => "Adresssegmente anlegen",
 	"segmentobjectsRetrieve" => "Adresssegmente anlegen",
