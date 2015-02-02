@@ -183,23 +183,7 @@ body {
 
 /* demo elements */
 
-a, a:visited {
-    text-decoration:none;
-    color:#01994e;
-    border-radius:0.2em;
-    -webkit-transition: color 0.15s ease-in;
-    -moz-transition: color 0.15s ease-in;
-    -o-transition: color 0.15s ease-in;
-    transition: color 0.15s ease-in;
-}
 
-a:hover {
-    color:#7AB02C;
-}
-
-a:active {
-  color:#FF2300;
-}
 
 .menu, #render, #explanation {   
 	background-color:#fff;	    

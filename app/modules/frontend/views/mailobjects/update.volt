@@ -5,14 +5,7 @@
 {%- if session.get('auth') -%}
 <div class="container">
 <div id="menuWrapper" class="clearfix">
-	<div id="activityModeBar"><h1>{{ tr('activeModeTitle') }}</h1>
-		<h2 id="activeMode">
-			<span class="mode active" data-mode="arrange">{{ tr('mailUpdateModeArrange') }}</span>
-		</h2>
-		<div class="mode glyphicon glyphicon-retweet"></div>
-		<h2 id="inactiveMode" class="mode inactive"><span class="mode inactive" data-mode="edit">{{ tr('mailUpdateModeEdit') }}</span></h2>
-			
-		</div>
+	
 <div id="fileToolBar">
 	<div class="glyphicon glyphicon-eye-open" id="mailobjectPreview" data-controller="mailobject" data-action="update" title="{{ tr('preview') }}">
 	</div>
@@ -25,12 +18,25 @@
 	
 <div class="clearfix"></div>
 <div id="desktop">
-	<div id="editFrame">
-		<form id="editFrameForm">
-		{{ compiledTemplatebodyRaw }} 
-		<input type="hidden" value="{{ mailobjectuid }}" name="mailobjectUid" id="mailobjectUid">
-		</form>
-	
+	<h1>{{ tr('activeModeTitle') }}</h1>
+	<div id="editFrameWrapper">
+		<div id="activityModeBar">
+		<div id="modes">
+			<span class="mode active" data-mode="arrange" style="margin-right:50px;margin-left:10px;">{{ tr('mailUpdateModeArrange') }}</span>
+			<span class="mode inactive" data-mode="edit">{{ tr('mailUpdateModeEdit') }}</span>
+		</div>
+		
+		
+			
+		</div>
+		<br>
+		<div id="editFrame">
+			<form id="editFrameForm">
+			{{ compiledTemplatebodyRaw }} 
+			<input type="hidden" value="{{ mailobjectuid }}" name="mailobjectUid" id="mailobjectUid">
+			</form>
+
+		</div>
 	</div>
 	<div id="campaignCreateElements">
 		<div id="templatedCElements">

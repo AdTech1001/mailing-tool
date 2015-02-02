@@ -28,7 +28,7 @@
 		  font-size:12px;
 }
 body{
-	background:#fff;
+	background:#e5e5e5;
 }
 html,
 button,
@@ -149,7 +149,23 @@ textarea {
 
 
 
+a {
+    text-decoration:none;
+    color:#01994e;
+    border-radius:0.2em;
+    -webkit-transition: color 0.15s ease-in;
+    -moz-transition: color 0.15s ease-in;
+    -o-transition: color 0.15s ease-in;
+    transition: color 0.15s ease-in;
+}
 
+a:hover {
+    color:#7AB02C;
+}
+
+a:active {
+  color:#FF2300;
+}
 
 
 
@@ -277,9 +293,7 @@ textarea {
   font-style: normal;
   font-weight: normal;
   line-height: 1;
-	color:#01994e;
-	
-	font-size:1.3em;
+  color:#4e4e4e;	
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -883,6 +897,7 @@ textarea {
 .glyphicon-tree-deciduous:before {
   content: "\e200";
 }
+
 .mce-i-glyphicon-repeat{
 	position: relative !important;
   top: 1px !important;
@@ -920,16 +935,23 @@ nav ul{
 	
 }
 .sercive-nav.navbar-right{
-	margin-top:25px;
+	margin-top:60px;
 }
+
 .nav.navbar-nav.navbar-right{
-	margin-top:50px;
-	margin-bottom:10px;
+	margin-top:20px;
+	margin-bottom:0px;
+	padding-left:40px;
+	
+	
+}
+header{
+	background:#fff;
 }
 header, .container{	
 	
 	border-bottom:#e5e5e5 1px solid;
-	margin:10px 20px;
+	/*margin:10px 20px;*/
 }
 
 
@@ -955,7 +977,8 @@ border-radius: 4px;
 	position:relative;
 }
 nav ul li a{
-	font-size:1.5em;
+	font-size:1.3em;
+	color:#4e4e4e;
 }
 
 #campaignCreateElements{
@@ -1165,12 +1188,15 @@ table.maintable tr.even td{
 }
 #desktop{
 	position:relative;
-	background:#e3e3e3
+	
+}
+#editFrameWrapper{
+	float:left;
+	box-shadow: 0px 0px 10px 2px rgba(78,78,78,1);
 }
 #editFrame{
-	position:relative;
-	float:left;
-	margin:20px;
+	
+	
 }
 .editable{
 	width:auto;
@@ -1181,28 +1207,32 @@ table.maintable tr.even td{
 	padding: 10px;*/
 }
 
-#activityModeBar h2,  div.mode{
-	display:inline-block;
-	margin-right: 30px;
+#activityModeBar{
+	width:100%;
+	box-shadow: 0px 2px 5px 0px rgba(0,0,0,1);
+}
+#modes{
+	background:#01994e;
+	width:100%;
+	color:#e5e5e5;
+	height:50px;
+	padding-top:15px;
+	
 	
 }
-h2 .mode{
-	font-size:1.2em;
+#modes span{
+	font-size: 1.2em;
+	
 }
-h2 .mode.active{
-	text-decoration: underline;
-	color:#01994e;
-}
-#inactiveMode span:hover{
+#modes span:hover{
  cursor:pointer;
  text-decoration: underline;
- color:#01994e;
+ color:#fff;
 }
-#mailobjectEditMode{
-	color:#4d4d4d;
-}
-#mailobjectEditMode.active{
-	color:#01994e;
+
+#modes span.active{
+	color:#fff;
+	text-decoration: underline;
 }
 
 .sendoutobject .info{
@@ -1327,22 +1357,47 @@ table#mapTable{
 }
 
 @media (min-width: 992px) {
-	
+	#logo{
+		
+	}
+	#headerLeft{
+		height:130px;
+		background:#009149;
+		float:left;
+		
+	}
+	#logo,#pageTitle{
+		
+	}
+	#pageTitle h1{
+		margin:15px 0px 0px 150px;
+		padding:0;
+		font-weight: normal;
+		
+	}
+	nav{
+		
+		width:100%;
+		height:100%;
+		border-bottom:40px solid #009149;
+		
+	}
+	.navbar-nav{
+		float:none !important;
+		margin-left:135px;
+		margin-top:50px;
+	}
+	.container{
+		margin-left:130px;
+	}
 }
 
 @media (min-width: 1200px) {
-	#logo{
-		float:left;
-	}
-	nav{
-		float:right;
-		/*width:1100px;*/
-		height:100%;
-		
-	}
+	
+	
 	nav ul li{
 		float:left;
-		border-right:#e3e3e3 1px solid;
+		
 		
 		
 		/*width:150px;*/
@@ -1384,30 +1439,33 @@ table#mapTable{
 	}
 	
 	nav ul li a{
-		color:#01994e;
+		color:#4e4e4e;
 		/*height:100%;
 		width:100%;*/
 		display:block;
 		text-decoration:none;
-		padding:12px;
+		padding:12px 18px;
 	}
 	nav ul li.active a{
 		background-color:#eee;
 	}
 	
-	.dropdown:hover .dropdown-menu {
+	.dropdown:hover .dropdown-menu,.dropdown.active .dropdown-menu {
 		display: block;
+	}
+	.active ul.submenu li a{
+		background:none;
 	}
 	ul.submenu{
 	 border:none;	
 	 height:auto;
 	}
-	ul.submenu a{	
+	nav ul.submenu li a{	
 		font-size:1.3em;
-		
+		color:#fff;
 	}
 	ul.submenu li {	
-	width:100%;
+		display:inline-block
 	}
 	.module_el{
 		background:#f5f5f5;
@@ -1464,9 +1522,7 @@ table#mapTable{
     }
 
     a,
-    a:visited {
-        text-decoration: underline;
-    }
+    
 
     a[href]:after {
         content: " (" attr(href) ")";

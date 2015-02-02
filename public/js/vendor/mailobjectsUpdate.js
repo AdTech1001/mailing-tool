@@ -2,6 +2,13 @@ var reloadFrame=function(){
 		location.reload()
 	//document.getElementById('mailobjectFrame').src += '';	
 };
+var reloadFrameDelete=function(data){
+	if(data=='1'){
+		location.reload();
+	}else{
+		alert('An error occured');
+	}
+};
 
 var pollForTinymce=function(){
 	if(typeof(tinymce) != 'undefined'){
@@ -165,6 +172,7 @@ function pluginInit(){
 	jQuery('#editFrame .editable .cElement').mouseenter(function(e){		
 		var elementToDelete=jQuery(this);
 		var templateposition=jQuery('.editable').index(jQuery(this).parent());
+		
 		var positionsorting=jQuery(this).index();		
 		jQuery(this).append(jQuery('#deleteOverlay'));
 		jQuery('#deleteOverlay').removeClass('hidden').click(function(e){
@@ -173,7 +181,7 @@ function pluginInit(){
 		var formdata=jQuery('#editFrameForm').serialize();
 			formdata+='&templateposition='+templateposition+'&positionsorting='+positionsorting;			
 			
-			ajaxIt('contentobjects','delete',formdata,reloadFrame);
+			ajaxIt('contentobjects','delete',formdata,reloadFrameDelete);
 		});
 	});
 	
@@ -188,26 +196,24 @@ function pluginInit(){
 	var modeAcvtivateFunction=function(e){
 		e.stopPropagation()
 		var modeToActivate=jQuery(this).attr('data-mode');
+		
 		switch(modeToActivate){
 			case 'edit':
-				jQuery('#mailobjectEditMode').trigger('click');
+				pollForTinymce();
 				break;
 			case 'arrange':
-				jQuery('#mailobjectEditMode').trigger('click');
+				tinymce.remove("#editFrame div.editable");
+				jQuery('#editFrame table').removeClass('mce-item-table');
 				break;
 		}
 		
-		var currentActive=jQuery('#activeMode span');
+		jQuery('.mode.active').removeClass('active').addClass('inactive').click(modeAcvtivateFunction);
+		jQuery(this).removeClass('inactive').addClass('active');		
 		
-		jQuery('#inactiveMode').append(currentActive);
-		jQuery(currentActive).removeClass('active').addClass('inactive').click(modeAcvtivateFunction);
-		jQuery(this).removeClass('inactive').addClass('active');
-		
-		jQuery('#activeMode').html(jQuery(this));
 		jQuery(this).off( "click");
 	};
 	
-	jQuery('#inactiveMode span').click(modeAcvtivateFunction);
+	jQuery('.mode.inactive').click(modeAcvtivateFunction);
 	
 	
 	jQuery('.editable').droppable({
@@ -281,19 +287,7 @@ function pluginInit(){
 	});
 	
 	
-	jQuery('#mailobjectEditMode').click(function(e){
-		e.stopPropagation();
-		
-		if(jQuery(this).hasClass('active')){
-			tinymce.remove("#editFrame div.editable");
-			jQuery('#editFrame table').removeClass('mce-item-table');
-			jQuery(this).removeClass('active');
-		}else{
-			jQuery(this).addClass('active');
-			pollForTinymce();
-		}
-		
-	});
+	
 	
 	jQuery('#mailobjectUpdate').bind('click', 
 		

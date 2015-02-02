@@ -38,16 +38,52 @@ class ContentobjectsController extends ControllerBase
 								
 								)
 			));
+			
 			if($contentobjectRecord){
+				
 				$contentobjectRecord->deleted=1;
 				$contentobjectRecord->hidden=1;
 				$contentobjectRecord->tstamp=time();
 				$contentobjectRecord->update();
+				
+				$this->checkAndUpdateRecords();
+				die('1');
+			}		
 			
-			}			
-			$this->view->disable();
+			
+			
 		}
 		
+	}
+	
+	private function checkAndUpdateRecords(){
+		
+		$contentRecordsOnPosition= Contentobjects::findFirst(array(
+				"conditions" => "deleted = 0 AND hidden =0 AND templateposition = ?1 AND mailobjectuid = ?2",
+							"bind" => array(
+								1 => $_POST['templateposition'],	
+								2 => $_POST['mailobjectUid']
+								
+								)
+			));
+		
+		if(!$contentRecordsOnPosition){
+			$followingTemplatePositionRecords=Contentobjects::find(array(
+				"conditions" => "deleted = 0 AND hidden =0 AND templateposition > ?1 AND mailobjectuid = ?2",
+							"bind" => array(
+								1 => $_POST['templateposition'],	
+								2 => $_POST['mailobjectUid']
+								
+								)
+			));
+			if($followingTemplatePositionRecords){
+				foreach($followingTemplatePositionRecords as $record){
+					
+					$record->templateposition=$record->templateposition-1;
+					$record->update();
+				}
+			}
+		}
 	}
 
 }
