@@ -73,7 +73,7 @@ $messages = array(
 	"templateTypeContent" => "content element template",
 	"pleaseSelect" => "please select",
 	"templatedCElementsTitle"=> "templates",
-	"recentCElementsTitle" => "recent used",
+	"recentCElementsTitle" => "recently used",
 	"dynamicCElementsTitle" => "dynamic",
 	"edit" => "edit",
 	"save" => "save",
@@ -220,7 +220,8 @@ $messages = array(
 	"url"=>"URL",
 	"totalClicks" => "click count",
 	"preview" => "preview",
-	"contentElements" => "content elements"
+	"contentElements" => "content elements",
+	"dynamicFields" => "dynamic fields"
 	
 );
 

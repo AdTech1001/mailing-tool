@@ -16,7 +16,7 @@ var pollForTinymce=function(){
 			// Add a button that opens a window
 			editor.addButton('customem', {
 				type : 'menubutton',
-				text: 'dynamische Felder',
+				text: jQuery('#dynamicFields').val(),
 				icon: 'glyphicon-repeat',				
 				menu: [
 						{
@@ -70,11 +70,12 @@ var pollForTinymce=function(){
 			theme: "modern",			
 			schema: "html5",
 			inline: true,
+			language: lang,
 			keep_styles: true,					
 			relative_urls: false,
 			remove_script_host: false,
 			statusbar: true,
-			menubar : true,
+			menubar : "tools table format view insert edit",
 			plugins: [
 				"customem advlist autolink lists link image charmap print preview anchor",
 				"searchreplace visualblocks code fullscreen",
@@ -94,11 +95,12 @@ var pollForTinymce=function(){
 		window.setTimeout(pollForTinymce,10);
 	}
 }
-
+var lang;
 function pluginInit(){
 	/*jQuery('.editable p, .editable a, .editable img, .editable h1, .editable h2, .editable h3, .editable h4, .editable h5, .editable h6').each(function(index,element){
 		jQuery(element).attr('contenteditable','true');
 	});*/
+	lang=jQuery('#lang').val();
 	var  arrangeMode=function(){
 		
 	
@@ -197,7 +199,7 @@ function pluginInit(){
 	}
 	arrangeMode();
 	var modeAcvtivateFunction=function(e){
-		e.stopPropagation()
+		e.stopPropagation();
 		var modeToActivate=jQuery(this).attr('data-mode');
 		
 		switch(modeToActivate){
@@ -216,9 +218,22 @@ function pluginInit(){
 		
 		jQuery(this).off( "click");
 	};
-	
+	var cesToActivate=function(e){
+		var mode=jQuery(this).attr('data-mode');		
+		jQuery('.cemode').removeClass('active').addClass('inactive');
+		jQuery(this).removeClass('inactive').addClass('active');
+		jQuery('.tabs').each(function(index,element){
+			if(jQuery(element).hasClass(mode)){
+				jQuery(element).removeClass('hidden');
+			}else{
+				jQuery(element).addClass('hidden');
+			}
+			
+		});
+		
+	}
 	jQuery('.mode.inactive').click(modeAcvtivateFunction);
-	
+	jQuery('.cemode').click(cesToActivate);
 	
 	jQuery('.editable').droppable({
       activeClass: "ui-state-default",

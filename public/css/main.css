@@ -986,15 +986,17 @@ nav ul li a{
 #right{
 	float:right;
 }
-#campaignCreateElements{	
+#campaignCreateElements,#contentElements{	
 	background:#e3e3e3;
 	top:0px;
 	right:0px;
-	height:100%;
-	
-	width:450px;	
-	
+	height:100%;	
+	width:450px;		
 	box-shadow: 0px 0px 10px 2px rgba(78,78,78,1);
+	position:absolute;
+}
+#contentElements{
+	position:relative;
 }
 .tabsWrapper{
 	width:100%;
@@ -1002,6 +1004,8 @@ nav ul li a{
 	overflow:scroll;
 	background:#fff;
 	padding-top:20px;
+	max-height:800px;
+	
 }
 #campaignCreateElements h3{
 	margin-top:0px;
@@ -1025,7 +1029,7 @@ nav ul li a{
 	background:#e5e5e5;
 	padding:10px;
 	border-radius: 0.5em;
-	box-shadow: 0px 0px 5px 0px rgba(0,0,0,1);
+	box-shadow: 0px 0px 5px 0px rgba(78,78,78,1);
 }
 #templatedCElements{
 	
@@ -1382,7 +1386,7 @@ table#mapTable{
 		height:130px;
 		background:#009149;
 		float:left;
-		
+		box-shadow: 2px -2px 3px 0px rgba(78,78,78,0.5);
 	}
 	#logo,#pageTitle{
 		
@@ -1398,6 +1402,7 @@ table#mapTable{
 		width:100%;
 		height:100%;
 		border-bottom:40px solid #009149;
+		box-shadow: inset 2px -2px 2px 0px rgba(78,78,78,0.5);
 		
 	}
 	.navbar-nav{
@@ -1464,8 +1469,9 @@ table#mapTable{
 		text-decoration:none;
 		padding:12px 18px;
 	}
-	nav ul li.active a{
-		background-color:#eee;
+	nav ul li.active {
+		/*background-color:#eee;*/
+		background: url(../images/icon-menu.png) no-repeat 50% 31px;
 	}
 	
 	.dropdown:hover .dropdown-menu,.dropdown.active .dropdown-menu {
@@ -1512,7 +1518,8 @@ table#mapTable{
 	}
 	
 	.automationWorkspace{
-		background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAE0lEQVQIW2NkQAOMpAk8fvz4PwAJ6AOtsmMOwwAAAABJRU5ErkJggg==) repeat;
+		background:#fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAE0lEQVQIW2NkQAOMpAk8fvz4PwAJ6AOtsmMOwwAAAABJRU5ErkJggg==) repeat;
+		
 
 	}
 	

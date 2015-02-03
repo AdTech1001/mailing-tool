@@ -7,6 +7,7 @@ function init(jQuery){
 	//jQuery.address.init().bind('change', navigation);
 	
 	if(typeof(requirePlugins) != 'undefined'){
+		jQuery('#loadingimg').show();	
 		requireControllerPlugins();
 	}
 	
@@ -113,5 +114,11 @@ $(document).ready(function(jQuery){
 });
 
 function letsRoll(){
-	pluginInit();
+	if(typeof(pluginInit) !== 'undefined'){
+		jQuery('#loadingimg').hide();	
+		pluginInit();
+		
+	}else{	
+		window.setTimeout(letsRoll,10);
+	}
 }

@@ -34,5 +34,6 @@
         
         <?php echo $this->getContent(); ?>
         
-		</div><?php if ($this->session->get('auth')) { ?><input id="baseurl" value="<?php echo $baseurl; ?>" type="hidden"><?php } ?></body>
+		</div><?php if ($this->session->get('auth')) { ?><input id="lang" value="<?php echo $language; ?>" type="hidden">
+		<input id="baseurl" value="<?php echo $baseurl; ?>" type="hidden"><?php } ?></body>
 </html>

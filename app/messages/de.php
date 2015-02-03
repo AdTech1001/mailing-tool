@@ -224,6 +224,7 @@ $messages = array(
 	"url"=>"URL",
 	"totalClicks" => "Anzahl der Klicks",
 	"preview" => "Vorschau",
-	"contentElements" => "Inhaltselemente"
+	"contentElements" => "Inhaltselemente",
+	"dynamicFields" => "dynamische Felder"
 );
 ?>

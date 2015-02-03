@@ -185,6 +185,23 @@ class MailobjectsController extends ControllerBase
 						));
 						
 						if($contentobjectRecord){
+							$versionContentobjectRecord=new Contentobjects();
+							$versionContentobjectRecord->assign(array(
+								'pid' =>$contentobjectRecord->uid,
+								'crdate' => $contentobjectRecord->crdate,
+								'tstamp' => $updateTime,
+								'hidden' => 1,
+								'cruser_id' =>$contentobjectRecord->cruser_id,
+								'usergroup' =>$contentobjectRecord->usergroup,
+								'contenttype' =>$contentobjectRecord->contenttype,
+								'sourcecode'=> $contentobjectRecord->sourcecode,
+								'templateposition'=> $contentobjectRecord->templateposition,
+								'positionsorting'=> $contentobjectRecord->positionsorting,
+								'mailobjectuid' => $contentobjectRecord->mailobjectuid,
+								'title'=> $contentobjectRecord->title
+							));
+							$versionContentobjectRecord->save();
+								
 							$contentobjectRecord->sourcecode=$cElement;
 							$contentobjectRecord->tstamp=$updateTime;
 							$contentobjectRecord->update();
