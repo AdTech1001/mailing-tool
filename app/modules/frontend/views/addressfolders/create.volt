@@ -2,9 +2,11 @@
 {{ content() }}
 <div class="container">
 	{%- if session.get('auth') -%}
-
+	<div class="ceElement medium">
+		<h1>{{tr('addressFoldersCreateTitle')}}</h1>
 <div id="mapWrapper" class="{{ filehideshow }}">
-<h1>{{tr('addressFoldersCreateTitle')}}</h1>
+
+<div class='listelementContainer'>
 {{ form(language~'/addressfolders/create/', 'method': 'post', 'enctype': 'multipart/form-data') }}
 
 
@@ -29,7 +31,10 @@
 
 </form>
 </div>
+</div>
+
 <div id="mapWrapper" class="{{ maphideshow }}">
+	<div class='listelementContainer'>
 	{{ form(language~'/addressfolders/create/', 'method': 'post') }}
 
 
@@ -68,6 +73,8 @@
     {{ submit_button(tr('ok')) }}
 
 </form>
+</div>
+</div>
 </div>
 
 {%- endif -%}

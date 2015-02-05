@@ -3,14 +3,33 @@
 {{ content() }}
 <div class="container">
 {%- if session.get('auth') -%}
-<h1>{{tr('templateobjectsIndexTitle')}}</h1>
+<div class="ceElement small">
+<h1>{{tr('templateobjectsPages')}}</h1>
 
-<ul class="listviewList">
-	{% for templateobject in templateobjects %}
-	<li><a href='{{ path }}{{ templateobject.uid }}'>>> {{templateobject.title}} | {{ date('d.m.Y',templateobject.tstamp) }}</a></li>
+
+	{% for templateobject in pagetemplateobjects %}
+	<div class="listelementContainer">
+		<a href='{{ path }}{{ templateobject.uid }}'>>> {{templateobject.title}} | {{ date('d.m.Y',templateobject.tstamp) }}</a><br>
+		<div class="thumb">
+			<img src="{{baseurl}}{{templateobject.templatefilepath}}">
+		</div>
+	</div>
 	{% endfor %}
-</ul>
+</div>
 
+<div class="ceElement small">
+	<h1>{{tr('templateobjectsContent')}}</h1>
+	<div class="ceElementsWrapper">
+		{% for templateobject in contenttemplateobjects %}
+		<div class="listelementContainer">
+			<a href='{{ path }}{{ templateobject.uid }}'>>> {{templateobject.title}} | {{ date('d.m.Y',templateobject.tstamp) }}</a><br>
+			<div class="thumb">
+				<img src="{{baseurl}}{{templateobject.templatefilepath}}">
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+</div>
 
 {%- endif -%}
 

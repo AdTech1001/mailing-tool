@@ -2,6 +2,7 @@
 <div class="container">
 	{{ content() }}
 {%- if session.get('auth') -%}
+<div class="ceElement small">
 <h1>{{tr('configurationobjectsIndexTitle')}}</h1>
 
 <ul class="listviewList">
@@ -10,7 +11,7 @@
 	{% endfor %}
 </ul>
 
-
+</div>
 {%- endif -%}
 
 </div>

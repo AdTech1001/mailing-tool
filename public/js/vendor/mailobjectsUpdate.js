@@ -1,7 +1,11 @@
 var reloadFrame=function(){
-		location.reload()
+		location.reload();
 	//document.getElementById('mailobjectFrame').src += '';	
 };
+var showPreview=function(){
+	document.getElementById('mailobjectFrame').contentWindow.location.reload();
+	jQuery('#viewFrame').show();
+}
 var reloadFrameDelete=function(data){
 	if(data=='1'){
 		location.reload();
@@ -115,13 +119,12 @@ function pluginInit(){
 		jQuery('#closePrev').click(function(e){
 			jQuery('#viewFrame').hide();
 		});
-		jQuery('#templatedCElements .cElementThumb').each(function(index,element){
+		jQuery('#templatedCElements .cElementThumbWrapper').each(function(index,element){
 			jQuery(element).draggable({
 				appendTo: "#desktop",			
 				helper: "clone",
 				scroll: false,
-				zIndex:999,
-				handle: "img",
+				zIndex:999,				
 				snap: ".cElement",
 				revert: "invalid",
 				containment: "#desktop",
@@ -247,8 +250,10 @@ function pluginInit(){
 		  var newElement;
 		  
 		  if(jQuery(ui.helper).hasClass('clone')){
-				if(jQuery(ui.helper).hasClass('cElementThumb')){
-					newElement=jQuery(ui.draggable[0].lastElementChild).clone();
+				if(jQuery(ui.helper).hasClass('cElementThumbWrapper')){					
+					var helper=jQuery(ui.helper).find('.cElementThumb');					
+					newElement=jQuery(helper[0].lastElementChild).clone();
+					jQuery(newElement).removeClass('hidden');
 				}else{
 					newElement=jQuery(ui.draggable).clone();
 				}
@@ -291,10 +296,7 @@ function pluginInit(){
 		 
 	}
 	});
-	jQuery('#mailobjectPreview').click(function(e){
-		jQuery('#viewFrame').show();
-		
-	});
+	
 	
 	jQuery('#deviceSelectBar ul li').click(function(e){
 		var elem=jQuery(this).index();
@@ -305,12 +307,19 @@ function pluginInit(){
 		
 	});
 	
-	
-	
-	
-	jQuery('#mailobjectUpdate').bind('click', 
+	jQuery('#mailobjectPreview').click(function(e){
+		update(e,true);
 		
-		function(e){
+	});
+	
+	
+	jQuery('#mailobjectUpdate').bind('click',function(e){
+		update(e,false);
+		
+	});
+	
+	function update(e,prev){
+		
 			var editElements='';
 			jQuery('#editFrame .editable').each(function(posIndex,posEl){
 				jQuery(posEl).children('.cElement').each(function(index,element){
@@ -329,10 +338,13 @@ function pluginInit(){
 			var formdata=jQuery('#editFrameForm').serialize();
 			formdata+=editElements;			
 			var mailobjectUid=jQuery('#mailobjectUid').val();
-			ajaxIt(baseController,baseAction,formdata,reloadFrame,mailobjectUid);
-		}
-	);
+			if(!prev){
+				ajaxIt(baseController,baseAction,formdata,reloadFrame,mailobjectUid);
+			}else{
+				ajaxIt(baseController,baseAction,formdata,showPreview,mailobjectUid);
+			}
 		
+	}
 	
 };
 

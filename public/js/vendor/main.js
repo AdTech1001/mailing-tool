@@ -2,7 +2,7 @@ var viewportW = Math.max(document.documentElement.clientWidth, window.innerWidth
 var viewportH = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
 var baseurl=document.getElementById('baseurl').value;
 function init(jQuery){
-	jQuery('.container').append('<div id="loadingimg"><h3>Einen Moment bitte</h3><div><img src="'+baseurl+'public/images/ajax-loader.gif"></div></<div>');
+	jQuery('body').append('<div id="loadingimg"><h3>Einen Moment bitte</h3><div><img src="'+baseurl+'public/images/ajax-loader.gif"></div></<div>');
 	jQuery('body').append('<div id="tooltipOverlay"></div>');
 	//jQuery.address.init().bind('change', navigation);
 	
@@ -14,7 +14,7 @@ function init(jQuery){
 	jQuery('#addImage').click(function(e){
 		e.stopPropagation();
 		jQuery("#addImageDialog").trigger('click');
-		
+		jQuery('#currentImg').hide();
 	});
 	
 	jQuery('#templateCarousel li').click(function(){

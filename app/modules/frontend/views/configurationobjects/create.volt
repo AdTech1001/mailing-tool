@@ -2,9 +2,10 @@
 {{ content() }}
 <div class="container">
 	{%- if session.get('auth') -%}
-<div id="fileTollBar"><div class="glyphicon glyphicon-floppy-save" id="configurationobjectsSave" data-controller="configurationsobjects" data-action="create"><span class="itemLabel">{{ tr('save') }}</span></div></div>	
 
+<div class="ceElement medium">
 <h1>{{tr('confTitle')}}</h1>
+<div class='listelementContainer'>
 {{ form(language~'/configurationobjects/create/', 'method': 'post') }}
 
 	<label>{{ tr('confTitleLabel') }}</label><br>
@@ -40,6 +41,8 @@
 	 {{ submit_button(tr('ok')) }}
 
 </form>
+</div>
+</div>
 {%- endif -%}
 
 </div>

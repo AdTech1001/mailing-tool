@@ -984,7 +984,10 @@ nav ul li a{
 	float:left;
 }
 #right{
-	float:right;
+	float:left;
+	padding-left:140px;
+	margin-left:10px;
+	background:url(../images/icon-dragdrop.png) no-repeat 0px 200px;
 }
 #campaignCreateElements,#contentElements{	
 	background:#e3e3e3;
@@ -995,6 +998,64 @@ nav ul li a{
 	box-shadow: 0px 0px 10px 2px rgba(78,78,78,1);
 	position:absolute;
 }
+.ceElement{
+	
+	margin-right:100px;
+	float:left;
+	background:#fff;
+	box-shadow: 0px 0px 10px 2px rgba(78,78,78,1);
+}
+.ceElement.small{
+	width:450px;
+}
+.ceElement.medium{
+	width:750px;
+}
+.ceElementsWrapper{
+	max-height:800px;
+	overflow-y:scroll;
+	overflow-x:hidden;
+}
+
+.ceElement a{
+	font-size: 14px;	
+	display:block;
+}
+.ceElement h1{
+	background:#009149;
+	margin:0px;
+	color:#fff;
+	text-align: center;
+	padding:15px 10px;	
+	box-shadow:0px 2px 5px 0px rgba(78,78,78,1);
+	margin-bottom:10px;
+}
+
+.listelementContainer{
+	margin-left: auto;
+	margin-right: auto;	
+	margin-bottom: 20px;	
+	background: #e5e5e5;
+	padding: 10px;
+	border-radius: 0.5em;
+	box-shadow: 0px 0px 5px 0px rgba(78,78,78,1);
+}
+.small .listelementContainer{
+	height: 250px;
+	width: 320px;
+}
+
+.medium .listelementContainer{
+	width:90%;
+}
+
+.listelementContainer .thumb{
+	overflow-y: scroll;
+	overflow-x:hidden;
+	height: 170px;
+}
+
+
 #contentElements{
 	position:relative;
 }
@@ -1141,8 +1202,8 @@ table.maintable tr.even td{
 }
 
 .listviewList li{
-	background:#f5f5f5;
-	width:400px;
+	border-bottom:1px solid #baeada;
+	
 	padding:5px;	
 	
 }
