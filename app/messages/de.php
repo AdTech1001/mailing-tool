@@ -228,6 +228,7 @@ $messages = array(
 	"totalClicks" => "Anzahl der Klicks",
 	"preview" => "Vorschau",
 	"contentElements" => "Inhaltselemente",
-	"dynamicFields" => "dynamische Felder"
+	"dynamicFields" => "dynamische Felder",
+	"result" => "Ergebnis"
 );
 ?>

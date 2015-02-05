@@ -999,17 +999,20 @@ nav ul li a{
 	position:absolute;
 }
 .ceElement{
-	
 	margin-right:100px;
 	float:left;
 	background:#fff;
 	box-shadow: 0px 0px 10px 2px rgba(78,78,78,1);
+	margin-bottom:40px;
 }
 .ceElement.small{
 	width:450px;
 }
 .ceElement.medium{
 	width:750px;
+}
+.ceElement.large{
+	width:90%;
 }
 .ceElementsWrapper{
 	max-height:800px;

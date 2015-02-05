@@ -224,7 +224,8 @@ $messages = array(
 	"totalClicks" => "click count",
 	"preview" => "preview",
 	"contentElements" => "content elements",
-	"dynamicFields" => "dynamic fields"
+	"dynamicFields" => "dynamic fields",
+	"result" => "result"
 	
 );
 

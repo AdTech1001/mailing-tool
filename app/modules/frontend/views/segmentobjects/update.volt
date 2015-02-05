@@ -5,29 +5,35 @@
 <div id="menuWrapper" class="clearfix">
 <div id="fileToolBar"><div class="glyphicon glyphicon-floppy-save" id="segmentUpdate" data-controller="campaign" data-action="update" title="{{ tr('save') }}"></div></div>
 </div>	
-<h1>{{tr('segmentobject')}}: {{segmentobject.title}}</h1>
 
-<div id="filters">
-	<label>{{ tr('title') }} </label>
-	{{ text_field('segmenttitle',"value":segmentobject.title)}}<br>
-	<div class="filterSet">
-	<h1>{{ tr('filtersTitle') }}</h1>
-	<label>{{ tr('addressfolders') }}</label>
-	{{ select('addressfolders[]',addressfolders,"using":['uid','title'],'multiple':true) }}<br><br>	
-	{{ tr('commaseperatedList')}}<br>
-	<label>{{ tr('firstnames') }}</label>
-	{{ text_field('firstname')}}<br>
-	<label>{{ tr('lastname')}}</label>
-	{{ text_field('lastname')}}<br>
-	<label>{{ tr('zip')}}</label>
-	{{ text_field('zip')}}<br>
-	<label>{{ tr('company')}}</label>
-	{{ text_field('company')}}<br>
-	<label>{{ tr('address')}}</label>
-	{{ text_field('address')}}<br>
+<div class="ceElement medium">
+	<h1>{{tr('segmentobject')}}: {{segmentobject.title}}</h1>
+	<div class='listelementContainer'>
+		<div id="filters">
+			<label>{{ tr('title') }} </label>
+			{{ text_field('segmenttitle',"value":segmentobject.title)}}<br><br>
+			<div class="filterSet">
+			<h2>{{ tr('filtersTitle') }}</h2>
+			<label>{{ tr('addressfolders') }}</label>
+			{{ select('addressfolders[]',addressfolders,"using":['uid','title'],'multiple':true) }}<br><br>	
+			{{ tr('commaseperatedList')}}<br>
+			<label>{{ tr('firstnames') }}</label>
+			{{ text_field('firstname')}}<br>
+			<label>{{ tr('lastname')}}</label>
+			{{ text_field('lastname')}}<br>
+			<label>{{ tr('zip')}}</label>
+			{{ text_field('zip')}}<br>
+			<label>{{ tr('company')}}</label>
+			{{ text_field('company')}}<br>
+			<label>{{ tr('address')}}</label>
+			{{ text_field('address')}}<br>
+			</div>
+			<br><br>
+		</div>
 	</div>
-	<br><br>
 </div>
+<div class="ceElement large">
+<h1>{{tr('result')}}</h1>
 <table id="adressfolderTable" class="display" cellspacing="0" width="100%">
         <thead>
             <tr>
@@ -64,7 +70,7 @@
         </tfoot>
     </table>
 
-
+</div>
 
 <input id="segmentobjectUid" type="hidden" value="{{segmentobject.uid}}">
 <input id="segmentobjectState" type="hidden" data-src='{{ segmentobject.stateobject }}'>

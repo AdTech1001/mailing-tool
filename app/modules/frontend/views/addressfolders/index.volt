@@ -5,6 +5,7 @@
 {%- if session.get('auth') -%}
 
 {%- if detail -%}
+<div class="ceElement large">
 <h1>{{tr('addressFolderSelectLabel')}}: {{foldertitle}}</h1>
 
 
@@ -44,13 +45,17 @@
         </tfoot>
     </table>
 	{{ hidden_field("folderuid","value": folderuid) }}
+	</div>
 {%- else -%}
+<div class="ceElement medium">
+
 <h1>{{tr('addressFolderSelectLabel')}}</h1>
 <ul class="listviewList">
 	{%- for addressfolder in addressfolders -%}
 	<li><a href='{{ path }}/addressfolders/index/{{ addressfolder.uid }}'>>> {{addressfolder.title}} | {{ date('d.m.Y',addressfolder.tstamp) }}</a></li>
 	{%- endfor -%}
 </ul>
+</div>
 {%- endif -%}	
 {%- endif -%}
 

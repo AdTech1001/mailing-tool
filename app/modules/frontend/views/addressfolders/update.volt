@@ -2,6 +2,7 @@
 {{ content() }}
 <div class="container">
 	{%- if session.get('auth') -%}
+	<div class="ceElement large">
 <h1>{{tr('addressFolderSelectLabel')}}: {{foldertitle}}</h1>
 
 
