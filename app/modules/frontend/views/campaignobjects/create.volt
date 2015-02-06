@@ -204,18 +204,22 @@
 
 <div class="container">	
 {%- if session.get('auth') -%}
+<div class="ceElement large">
+	<h1>{{tr('campaignCreateTitle')}}</h1>
 <div id="menuWrapper" class="clearfix">
 <div id="fileToolBar"><div class="glyphicon glyphicon-floppy-save" id="campaignSave" data-controller="campaign" data-action="update" title="{{ tr('save') }}"></div></div>
 </div>
+	
 <form id="automationWorkflowForm">
 	
-	<label>{{tr('campaignCreateTitle')}}</label> <input type="text" value="" placeholder="{{tr('unnamedCampaign')}}" name="title">
+	<label>&nbsp;{{tr('title')}}: </label> <input type="text" value="" placeholder="{{tr('unnamedCampaign')}}" name="title"><br><br>
 	<input type="hidden" value="0" name="campaignobjectuid">
 </form>	
 <div class="demo flowchart-demo automationWorkspace" id="automationWorkspace">
 	        <div class="window jsplumbified" id="startpoint" data-controller="dummy" data-action="start"><div class="glyphicon glyphicon-play"><br><span class="itemLabel">{{ tr('startCampaign') }}</span></div></div>
 
-<div id="campaignCreateElements">
+<div id="campaignCreateElements" class='ceElement small'>
+	<h1>{{tr('functions')}}</h1>
 	
 	<div class="window sendoutobject" data-controller="sendoutobject" data-action="create">
 		<div class="glyphicon glyphicon-envelope"><br>{{ link_to(language~'/sendoutobject/create/', tr('createSendObject'),'class':'itemLabel'  )}}
@@ -241,7 +245,7 @@
 </div> 	
 </div>
 
-
+</div>
 <input type="hidden" id="language" value="{{ lang }}">
 <input type="hidden" id="mailpath" value="{{ mailpath }}">
 {%- endif -%}

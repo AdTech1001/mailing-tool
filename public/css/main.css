@@ -935,7 +935,8 @@ nav ul{
 	
 }
 .sercive-nav.navbar-right{
-	margin-top:60px;
+	margin-top:35px;
+	margin-right:20px;
 }
 
 .nav.navbar-nav.navbar-right{
@@ -972,7 +973,8 @@ border-radius: 4px;
 }
 .container{
 	border-bottom:none;
-	padding:20px;
+	padding:100px 20px 20px 20px;	
+	
 	/*background:#e5e5e5;*/
 	position:relative;
 }
@@ -989,7 +991,13 @@ nav ul li a{
 	margin-left:10px;
 	background:url(../images/icon-dragdrop.png) no-repeat 0px 200px;
 }
-#campaignCreateElements,#contentElements{	
+#campaignCreateElements{
+	position:absolute;
+	top:10px;
+	right:0px;
+	background:url(../images/icon-dragdrop.png) no-repeat 10px 150px;
+}
+#contentElements{	
 	background:#e3e3e3;
 	top:0px;
 	right:0px;
@@ -1001,9 +1009,19 @@ nav ul li a{
 .ceElement{
 	margin-right:100px;
 	float:left;
+	position:relative;
 	background:#fff;
 	box-shadow: 0px 0px 10px 2px rgba(78,78,78,1);
 	margin-bottom:40px;
+}
+.ceElement.xs h1 a{
+	color:#fff;
+}
+.ceElement.xs ul{
+	padding:10px 20px;
+}
+.ceElement.xs ul li{
+	margin-bottom:10px;
 }
 .ceElement.small{
 	width:450px;
@@ -1163,11 +1181,15 @@ table.maintable{
 }
 table.maintable td,table.maintable th{
 	padding:10px;
-	border:1px solid;
-}
 
+}
 table.maintable tr.even td{
-	background:#e3e3e3;
+	background:#f9f9f9;
+	border-top:1px solid #dddddd;
+	
+}
+table.maintable tr.odd td{
+	background:#fff;
 		
 }
 #splitModelerSelect.allPurposeLayer{
@@ -1217,7 +1239,7 @@ table.maintable tr.even td{
 
 
 #menuWrapper{
-	position:relative;
+	
 	margin-bottom:10px;
 }
 
@@ -1231,7 +1253,7 @@ table.maintable tr.even td{
 	
 }
 #fileToolBar div{
-	font-size:1.2em;
+	font-size:1.5em;
 }
 #fileToolBar .glyphicon{
 	color:#fff;
@@ -1241,12 +1263,15 @@ table.maintable tr.even td{
 	margin-left:20px;
 	
 }
+
 #campaignSave{
 	position: absolute;
 	right: 3px;
 }
 
 #templateCarousel{
+	height:300px;
+	overflow-y:hidden;
 	overflow-x:scroll;
 	margin-top:20px;
 	margin-bottom:20px;
@@ -1257,11 +1282,15 @@ table.maintable tr.even td{
 }
 
 #templateCarousel li{
-	float: left;
-	height: 250px;
+	display: inline-block;
+	height: 300px;
 	overflow-y: scroll;
-	margin-right:50px;
+	margin-right:40px;
 	cursor:pointer;
+	
+}
+#templateCarousel li div.listelementContainer{
+	margin-top:5px;
 }
 #templateCarousel li.active{
 	border:2px solid;
@@ -1353,7 +1382,9 @@ table#mapTable{
 	left:0;
 	overflow:scroll;
 }
-
+#viewFrame.small{
+	width:90%;
+}
 #closePrev{
 	position:absolute;
 	top:5px;
@@ -1385,7 +1416,7 @@ table#mapTable{
 }
 
 #reviewConfiguration{
-	background:#e3e3e3;
+	
 	padding:10px 10px 30px 10px;
 	font-size:1.3em;
 	font-weight:bold;
@@ -1396,7 +1427,8 @@ table#mapTable{
 }
 #distributor{
 	float:right;
-	background:#fff;
+	background:#e3e3e3;
+	box-shadow: 0px 0px 10px 2px rgba(78,78,78,1);
 	color:#01994e;
 	padding:10px;
 		
@@ -1465,7 +1497,7 @@ table#mapTable{
 		
 		width:100%;
 		height:100%;
-		border-bottom:40px solid #009149;
+		/*border-bottom:40px solid #009149;*/
 		box-shadow: inset 2px -2px 2px 0px rgba(78,78,78,0.5);
 		
 	}
@@ -1477,19 +1509,15 @@ table#mapTable{
 	.container{
 		margin-left:130px;
 	}
+	header{
+		height:131px;
+	}
 }
 
 @media (min-width: 1200px) {
 	
 	
-	nav ul li{
-		float:left;
-		
-		
-		
-		/*width:150px;*/
-		
-	}
+	
 	/*nav ul.navbar-nav > li:after,nav ul.navbar-nav > li:before{
 		left: 100%;
 	top: 50%;
@@ -1533,7 +1561,7 @@ table#mapTable{
 		text-decoration:none;
 		padding:12px 18px;
 	}
-	nav ul li.active {
+	nav ul li.active,nav ul li:hover {
 		/*background-color:#eee;*/
 		background: url(../images/icon-menu.png) no-repeat 50% 31px;
 	}
@@ -1552,9 +1580,7 @@ table#mapTable{
 		font-size:1.3em;
 		color:#fff;
 	}
-	ul.submenu li {	
-		display:inline-block
-	}
+	
 	.module_el{
 		background:#f5f5f5;
 		padding:15px;

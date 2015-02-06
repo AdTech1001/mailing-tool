@@ -827,6 +827,11 @@ jQuery( "#campaignCreateElements .window" ).draggable({
 	zIndex:999      
 });
 
+jQuery('#campaignCreateElements').draggable({
+	handle:"h1",
+	containment: "#automationWorkspace"
+});
+
 jQuery( "#automationWorkspace" ).droppable({
 		accept: ".window",
       drop: function( event, ui ) {

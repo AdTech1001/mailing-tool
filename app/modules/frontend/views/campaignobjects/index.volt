@@ -3,7 +3,8 @@
 {{ content() }}
 <div class="container">	
 {%- if session.get('auth') -%}
-<h1>{{tr('campaignObjectsIndexTitle')}}</h1>
+<div class='ceElement medium'>
+<h1>{{tr('campaigns')}}</h1>
 
 
 
@@ -12,7 +13,7 @@
 	<li><a href='{{ path }}{{ campaignobject.uid }}'>>> {{campaignobject.title}} | {{ date('d.m.Y',campaignobject.tstamp) }}</a></li>
 	{% endfor %}
 </ul>
-
+</div>
 {%- endif -%}
 
 </div>

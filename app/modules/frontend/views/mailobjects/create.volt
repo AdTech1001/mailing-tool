@@ -10,8 +10,8 @@
 			<label>{{ tr('nameLabel')}}</label><br>
 			<input name="title" type="text" syle="width:400px;"><br><br>
 
-			
-			<ul id="templateCarousel">
+			<div id="templateCarousel">
+			<ul style="width:{{ 430*templateobjects.count()~'px'}}">
 		{% for templateobject in templateobjects %}
 		<li data-uid="{{ templateobject.uid }}">
 		<div class="listelementContainer">
@@ -23,6 +23,7 @@
 			</li>
 		{% endfor  %}
 			</ul>			
+			</div>
 			<div class="clearfix"></div>
 		<input type="hidden" name="templateobject" value="0">
 		<input type="submit" value="{{ tr('ok') }}">

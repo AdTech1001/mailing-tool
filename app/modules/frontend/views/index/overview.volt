@@ -3,89 +3,73 @@
 <div class="container">	
 	<div class="desktop">
 		
-		<h1>{{tr('actionTitle')}}</h1>
-		<div class="module_el">
-			<h2>{{ link_to(language~'/campaignobjects/index/', '<span class="glyphicon glyphicon-th"></span> '~tr('campaign'), 'title': tr('campaign')) }}
-			</h2>
+		<h1>{{tr('actionTitle')}}</h1><br>
+		<div class="ceElement xs">
+			<h1>{{ link_to(language~'/templateobjects/index/', tr('templateobjects'), 'title': tr('templateobjects')) }}
+			</h1>
 			<ul>
-			<li>{{ link_to(language~'/campaignobjects/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('campaignCreate'), 'title': tr('campaignCreate')) }}</li>
-			<li>{{ link_to(language~'/campaignobjects/index/', '<span class="glyphicon glyphicon-list"></span> '~tr('campaignRetrieve'), 'title': tr('campaignRetrieve')) }}</li>
+			<li>{{ link_to(language~'/templateobjects/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('create'), 'title': tr('templateobjectsCreate')) }}</li>
+			<li>{{ link_to(language~'/templateobjects/index/', '<span class="glyphicon glyphicon-list"></span> '~tr('retrieve'), 'title': tr('templateobjectsRetrieve')) }}</li>
 			</ul>
 		</div>
-		<div class="module_el">
-			<h2>{{ link_to(language~'/mailobjects/index/', '<span class="glyphicon glyphicon-envelope"></span> '~tr('mailobjects'), 'title': tr('mailobjects')) }}
-			</h2>
+		<div class="ceElement xs">
+			<h1>{{ link_to(language~'/configurationobjects/index/',tr('configurationobjects'), 'title': tr('configurationobjects')) }}
+			</h1>
 			<ul>
-			<li>{{ link_to(language~'/mailobjects/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('mailobjectsCreate'), 'title': tr('mailobjectsCreate')) }}</li>
-			<li>{{ link_to(language~'/mailobjects/index/', '<span class="glyphicon glyphicon-list"></span> '~tr('mailobjectsRetrieve'), 'title': tr('mailobjectsRetrieve')) }}</li>
+			<li>{{ link_to(language~'/configurationobjects/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('create'), 'title': tr('configurationobjectsCreate')) }}</li>
+			<li>{{ link_to(language~'/configurationobjects/index/', '<span class="glyphicon glyphicon-list"></span> '~tr('retrieve'), 'title': tr('configurationobjectsRetrieve')) }}</li>
 			</ul>
 		</div>
-		<div class="module_el">
-			<h2>{{ link_to(language~'/templateobjects/index/', '<span class="glyphicon glyphicon-file"></span> '~tr('templateobjects'), 'title': tr('templateobjects')) }}
-			</h2>
+		<div class="ceElement xs">
+			<h1>{{ link_to(language~'/addressfolders/', tr('addressfolders'), 'title': tr('addressfolders')) }}
+			</h1>
 			<ul>
-			<li>{{ link_to(language~'/templateobjects/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('templateobjectsCreate'), 'title': tr('templateobjectsCreate')) }}</li>
-			<li>{{ link_to(language~'/templateobjects/index/', '<span class="glyphicon glyphicon-list"></span> '~tr('templateobjectsRetrieve'), 'title': tr('templateobjectsRetrieve')) }}</li>
-			</ul>
-		</div>
-		<div class="module_el">
-			<h2>{{ link_to(language~'/configurationobjects/index/', '<span class="glyphicon glyphicon-align-justify"></span> '~tr('configurationobjects'), 'title': tr('configurationobjects')) }}
-			</h2>
-			<ul>
-			<li>{{ link_to(language~'/configurationobjects/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('configurationobjectsCreate'), 'title': tr('configurationobjectsCreate')) }}</li>
-			<li>{{ link_to(language~'/configurationobjects/index/', '<span class="glyphicon glyphicon-list"></span> '~tr('configurationobjectsRetrieve'), 'title': tr('configurationobjectsRetrieve')) }}</li>
-			</ul>
-		</div>
-		<div class="module_el">
-			<h2>{{ link_to(language~'/contentobjects/', '<span class="glyphicon glyphicon-envelope"></span> '~tr('contentobjects'), 'title': tr('contentobjects')) }}
-			</h2>
-			<ul>
-			<li>{{ link_to(language~'/contentobjects/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('contentobjectsCreate'), 'title': tr('contentobjectsCreate')) }}</li>
-			<li>{{ link_to(language~'/contentobjects/index/', '<span class="glyphicon glyphicon-pencil"></span> '~tr('contentobjectsRetrieve'), 'title': tr('contentobjectsRetrieve')) }}</li>
-			<li>{{ link_to(language~'/contentobjects/templates/', '<span class="glyphicon glyphicon-pencil"></span> '~tr('contentobjectsTemplates'), 'title': tr('contentobjectsTemplates')) }}</li>
-			</ul>
-		</div>
-		<div class="module_el">
-			<h2>{{ link_to(language~'/addresses/', '<span class="glyphicon glyphicon-user"></span> '~tr('addresses'), 'title': tr('addresses')) }}
-			</h2>
-			<ul>
-			<li>{{ link_to(language~'/addresses/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('addressesCreate'), 'title': tr('addressesCreate')) }}</li>
-			<li>{{ link_to(language~'/addresses/index/', '<span class="glyphicon glyphicon-pencil"></span> '~tr('addressesRetrieve'), 'title': tr('addressesRetrieve')) }}</li>
+			<li>{{ link_to(language~'/addressfolders/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('create'), 'title': tr('addressfoldersCreate')) }}</li>
+			<li>{{ link_to(language~'/addressfolders/index/', '<span class="glyphicon glyphicon-list"></span> '~tr('retrieve'), 'title': tr('addressfoldersCreate')) }}</li>
 			
 			</ul>
 		</div>
-		<div class="module_el">
-			<h2>{{ link_to(language~'/addressfolders/', '<span class="glyphicon glyphicon-user"></span> '~tr('addressfolders'), 'title': tr('addressfolders')) }}
-			</h2>
+		<div class="ceElement xs">
+			<h1>{{ link_to(language~'/segmentobjects/', tr('segmentobjects'), 'title': tr('segmentobjects')) }}
+			</h1>
 			<ul>
-			<li>{{ link_to(language~'/addressfolders/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('addressfoldersCreate'), 'title': tr('addressfoldersCreate')) }}</li>
-			<li>{{ link_to(language~'/addressfolders/index/', '<span class="glyphicon glyphicon-pencil"></span> '~tr('addressfoldersRetrieve'), 'title': tr('addressfoldersCreate')) }}</li>
+			<li>{{ link_to(language~'/segmentobjects/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('create'), 'title': tr('segmentobjectsCreate')) }}</li>
+			<li>{{ link_to(language~'/segmentobjects/index/', '<span class="glyphicon glyphicon-list"></span> '~tr('retrieve'), 'title': tr('segmentobjectsCreate')) }}</li>
 			
 			</ul>
 		</div>
-		<div class="module_el">
-			<h2>{{ link_to(language~'/segmentobjects/', '<span class="glyphicon glyphicon-user"></span> '~tr('segmentobjects'), 'title': tr('segmentobjects')) }}
-			</h2>
+		<div class="ceElement xs">
+			<h1>{{ link_to(language~'/distributors/', tr('distributors'), 'title': tr('distributors')) }}
+			</h1>
 			<ul>
-			<li>{{ link_to(language~'/segmentobjects/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('segmentobjectsCreate'), 'title': tr('segmentobjectsCreate')) }}</li>
-			<li>{{ link_to(language~'/segmentobjects/index/', '<span class="glyphicon glyphicon-pencil"></span> '~tr('segmentobjectsRetrieve'), 'title': tr('segmentobjectsCreate')) }}</li>
+			<li>{{ link_to(language~'/distributors/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('create'), 'title': tr('distributorsCreate')) }}</li>
+			<li>{{ link_to(language~'/distributors/index/', '<span class="glyphicon glyphicon-list"></span> '~tr('retrieve'), 'title': tr('distributorsCreate')) }}</li>
 			
 			</ul>
 		</div>
-		<div class="module_el">
-			<h2>{{ link_to(language~'/distributors/', '<span class="glyphicon glyphicon-user"></span> '~tr('distributors'), 'title': tr('distributors')) }}
-			</h2>
+		<div class="ceElement xs">
+			<h1>{{ link_to(language~'/mailobjects/index/', tr('mailobjects'), 'title': tr('mailobjects')) }}
+			</h1>
 			<ul>
-			<li>{{ link_to(language~'/distributors/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('distributorsCreate'), 'title': tr('distributorsCreate')) }}</li>
-			<li>{{ link_to(language~'/distributors/index/', '<span class="glyphicon glyphicon-pencil"></span> '~tr('distributorsRetrieve'), 'title': tr('distributorsCreate')) }}</li>
-			
+			<li>{{ link_to(language~'/mailobjects/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('create'), 'title': tr('mailobjectsCreate')) }}</li>
+			<li>{{ link_to(language~'/mailobjects/index/', '<span class="glyphicon glyphicon-list"></span> '~tr('retrieve'), 'title': tr('mailobjectsRetrieve')) }}</li>
 			</ul>
 		</div>
-		<div class="module_el">
-			<h2>{{ link_to(language~'/report/', '<span class="glyphicon glyphicon-stats"></span> '~tr('report'), 'title': tr('report')) }}
-			</h2>
+		<div class="ceElement xs">
+			<h1>{{ link_to(language~'/campaignobjects/index/', tr('campaigns'), 'title': tr('campaign')) }}
+			</h1>
+			
+			<ul>
+			<li>{{ link_to(language~'/campaignobjects/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('create'), 'title': tr('campaignCreate')) }}</li>
+			<li>{{ link_to(language~'/campaignobjects/index/', '<span class="glyphicon glyphicon-list"></span> '~tr('retrieve'), 'title': tr('campaignRetrieve')) }}</li>
+			</ul>
+			
+		</div>
+		<div class="ceElement xs">
+			<h1>{{ link_to(language~'/report/', tr('report'), 'title': tr('report')) }}
+			</h1>
 			<ul>			
-			<li>{{ link_to(language~'/report/index/', '<span class="glyphicon glyphicon-eye-open"></span> '~tr('report'), 'title': tr('report')) }}</li>
+			<li>{{ link_to(language~'/report/index/', '<span class="glyphicon glyphicon-eye-open"></span> '~tr('create'), 'title': tr('report')) }}</li>
 			
 			</ul>
 		</div>

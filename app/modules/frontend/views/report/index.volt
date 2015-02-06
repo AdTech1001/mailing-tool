@@ -2,20 +2,23 @@
 {{ content() }}
 <div class="container">
 	{%- if session.get('auth') -%}
-	{%- if list -%}
+	<div class="ceElement medium">
 	<h1>{{tr('reports')}}</h1>
+	{%- if list -%}	
+	<h2>{{tr('campaigns')}}</h2>
 	<ul class="listviewList">
 		{% for campaignobject in campaignobjects %}
 		<li><a href='{{ path }}/{{ campaignobject.uid }}'>>> {{campaignobject.title}} | {{ date('d.m.Y',campaignobject.tstamp) }}</a></li>
 		{% endfor %}
 	</ul>
 	{% else %}
-	<h1>{{tr('report')}}</h1>
+	<h2>{{tr('campaign')~campaignobject.title}} - {{tr('mailobjects')}}</h2>
 	<ul class="listviewList">
 		{% for sendoutobject in sendoutobjects %}
 		<li><a href='{{ path }}/{{ sendoutobject.uid }}'>>> {{sendoutobject.subject}} | {{ date('d.m.Y',sendoutobject.tstamp) }}</a></li>
 		{% endfor %}
 	</ul>
 	{% endif %}
+	</div>
 	{% endif %}
 </div>

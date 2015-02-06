@@ -13,6 +13,7 @@ class ReviewController extends ControllerBase
 {
 	
 	function indexAction(){
+		$this->assets->addCss('css/jquery.dataTables.css');
 		$environment= $this->config['application']['debug'] ? 'development' : 'production';
 		$baseUri=$this->config['application'][$environment]['staticBaseUri'];
 		$path=$baseUri.$this->view->language.'/review/update/';

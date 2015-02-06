@@ -2,39 +2,40 @@
 {{ content() }}
 <div class="container">
 {%- if session.get('auth') -%}
-	<div id="menuWrapper" class="clearfix">
-	<div id="activityModeBar"  style="float:none"><h1 style="display:inline-block;">{{ tr('reviewUpdateLabel') }}</h1>
+	
+	<div class="ceElement large clearfix">
+	<h1>{{ tr('reviewUpdateLabel') }}</h1>
 		
-	</div>
+	
 <div id="fileToolBar">	
-	<div class="glyphicon glyphicon-envelope" id="testmail" data-controller="mailobject" data-action="update" title="{{ tr('testmail') }}"></div>
+	<div class="glyphicon glyphicon-envelope" id="testmail" data-controller="mailobject" data-action="update" title="{{ tr('testmailLabel') }}"></div><br>
 	<div class="glyphicon" style="font-size: 1em;top: -1px;">
 	{{ link_to(language~'/mailobjects/update/'~sendoutobject.mailobjectuid, '', 'title': tr('mailobjectsRetrieve'), 'id':'mailobjectEditMode', 'class':'glyphicon glyphicon-edit') }}
 	</div>
 	
 </div>	
 <div id="reviewControls" class="clearfix">
-			<table id="FreigabeTabelle" class="maintable" style="width:auto;min-width:0">
+			<table id="FreigabeTabelle" class="maintable" style="width:100%;min-width:0">
 				<thead>
-					<tr><th colspan='{{sendoutobject.configuration.authorities.count()}}'><h2>{{tr('authoritiesLabel')}}</h2></th>
+					<tr><th colspan='{{sendoutobject.configuration.authorities.count()}}'><h3>{{tr('authoritiesLabel')}}</h3></th>
 			<th><h1>{{tr('overallClearance')}}</h1></th>
 					</tr>
 					
 				</thead>
 				<tr>
 					{% for authority in sendoutobject.configuration.authorities %}
-					<td >{{authority.email}}</td>
+					<td ><h3>{{authority.email}}</h3></td>
 					{% endfor %}
 					
 				</tr>
-				<tr>
+				<tr class="even">
 				{% for authority in authorities %}
 
 				<td>
 					<div style="padding:20px;">
 						
 						<div>
-							<label>{{ tr('reviewed') }}</label>
+							<label for="markReviewed">{{ tr('reviewed') }}</label>
 							{% if authority.uid == userUid %}							
 							{{ check_field('review', 'checked':authority.reviewed, 'id':'markReviewed') }}
 							{% else %}
@@ -44,7 +45,7 @@
 						</div>
 						<br>
 						<div>
-							<label>{{ tr('cleared') }}</label>
+							<label for="markCleared">{{ tr('cleared') }}</label>
 							{% if authority.uid == userUid %}
 							{{ check_field('clear', 'checked':authority.cleared, 'id':'markCleared') }}
 							{% else %}
@@ -81,9 +82,11 @@
 				</tr>
 			</table>
 			
-		</div>		
+		</div>	
+		
 </div>
-
+<div class="ceElement large">
+	<h1>{{tr('mailConfiguration')}}</h1>
 	<div id="reviewConfiguration">
 		<div id='reviewConfigurationInfo'>
 			<label>{{tr('sendoutDateLabel')}}:</label><span>{{ date('d.m.Y',sendoutobject.tstamp) }}</span><br>
@@ -94,14 +97,14 @@
 			<label>{{tr('confReturnpathLabel')}}</label><span>{{ sendoutobject.configuration.returnpath }}</span>
 		</div>
 		<div id="distributor">
-			<label>{{tr('distributorTitleLabel')}}</label><br>
+			<label>{{tr('distributorTitleLabel')}}:</label><br>
 				<a href='{{baseurl}}{{ language }}/distributors/update/{{ sendoutobject.getDistributor().uid }}'>{{sendoutobject.getDistributor().title}}</a><br><br>
 				{{sendoutobject.getDistributor().countAddresses()~' '~tr('recipients')}}</div>
 		
 		<div class='clearfix'></div>
 	</div>
-
-	<div id="viewFrame" style="position:relative;overflow:hidden;">
+</div>
+	<div id="viewFrame" style="position:relative;overflow:hidden;" class="small">
 	
 	<div id="deviceSelectBar">
 			<ul>

@@ -21,8 +21,8 @@
 				<span class="mode inactive" data-mode="edit">{{ tr('mailUpdateModeEdit') }}</span>
 			</div>
 			<div id="fileToolBar">
-				<div id="mailobjectPreview" data-controller="mailobject" data-action="update" title="{{ tr('preview') }}" style="margin-bottom:5px;"><span class="glyphicon glyphicon-eye-open"></span> &nbsp;{{ tr('preview') }}</div> 
-				<div id="mailobjectUpdate" data-controller="mailobject" data-action="update" title="{{ tr('save') }}"><span class="glyphicon glyphicon-floppy-save"></span> &nbsp;{{ tr('save') }}</div>
+				<div id="mailobjectPreview" class="glyphicon glyphicon-eye-open" data-controller="mailobject" data-action="update" title="{{ tr('preview') }}" style="margin-bottom:5px;"></div> 
+				<div id="mailobjectUpdate" class="glyphicon glyphicon-floppy-save" data-controller="mailobject" data-action="update" title="{{ tr('save') }}"></div>
 			</div>				
 		</div>
 		<br>

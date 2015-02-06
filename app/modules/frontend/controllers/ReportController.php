@@ -38,7 +38,7 @@ class ReportController extends ControllerBase
 			$this->view->setVar('campaignobjects',$reportableCampaigns);
 			$this->view->setVar('list',true);
 		}else{
-			
+			$campaignobject=  Campaignobjects::findFirstByUid($this->dispatcher->getParam("uid"));
 			$sendoutobjects=  Sendoutobjects::find(array(
 				'conditions' => 'deleted=0 AND hidden=0 AND campaignuid=?1 AND (inprogress=1 OR sent = 1)',
 				'bind'=>array(
@@ -46,6 +46,7 @@ class ReportController extends ControllerBase
 				)
 			));
 			$this->view->setVar('sendoutobjects',$sendoutobjects);
+			$this->view->setVar('campaignobject',$campaignobject);
 			$this->view->setVar('list',false);	
 			$action='create';
 		}
@@ -53,10 +54,12 @@ class ReportController extends ControllerBase
 		$environment= $this->config['application']['debug'] ? 'development' : 'production';
 		$baseUri=$this->config['application'][$environment]['staticBaseUri'];
 		$path=$baseUri.$this->view->language.'/report/'.$action;
+		
 		$this->view->setVar('path',$path);
 	}
 	
 	public function createAction(){
+		$this->assets->addCss('css/jquery.dataTables.css');
 		$sendoutobject=  Sendoutobjects::findFirst(array(
 			'conditions'=>'uid=?1',
 			'bind'=>array(

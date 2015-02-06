@@ -2,7 +2,10 @@
 {{ content() }}
 <div class="container">
 	{%- if session.get('auth') -%}
+	<div class="ceElement medium">
+		
 	<h1>{{tr('report')}}</h1>
+	<div class="listelementContainer">
 	<h2>{{tr('general')}}</h2>
 	<label>{{tr('campaign')}}:</label> {{ sendoutobject.getCampaign().title}}<br>
 	<label>{{tr('sendoutSubject')}}:</label> {{sendoutobject.subject}}<br>
@@ -13,7 +16,9 @@
 	<label>{{tr('opened')}}:</label> {{ opened }} / {{ roundTwo((opened*100/sent)) }}%<br>
 	<label>{{tr('clicked')}}:</label> {{ clicked }} / {{ roundTwo((clicked*100/sent)) }}%<br>
 	<h2>{{tr('responseLinks')}}</h2>
-	<table class="maintable" style="width:auto;min-width:0">
+	<div class="dataTables_wrapper">
+
+	<table class="maintable" class="display dataTable" style="background:#fff;width:100%;">
 		<thead>
 			<tr>
 				<th>{{tr('linknumber')}}</th>
@@ -24,11 +29,11 @@
 					
 		</thead>
 		<tbody>
-			{% for linkclick in clicks %}
-			<tr>
+			{% for index,linkclick in clicks %}
+			<tr class='{% if index is even %}even{% else %}odd{%endif%}'>
 				
 					<td >{{linkclick.getLink().linknumber}}</td>
-					<td >{{linkclick.url}}</td>
+					<td ><a href="{{linkclick.url}}" target="_blank">{{linkclick.url}}</a></td>
 					<td>{{clickcounts[linkclick.linkuid]}}</td>
 				
 					
@@ -36,5 +41,8 @@
 			{% endfor %}
 		</tbody>
 	</table>
+	</div>
+	</div>
+	</div>
 	{% endif %}
 </div>

@@ -39,6 +39,7 @@ $messages = array(
 	"campaignTitle" => "campaign title",
 	"campaignCreate"=> "create new campaign",
 	"campaignRetrieve" => "manage campaigns",
+	"functions"=>"Funktionen",
 	"content"=>"Content",
 	"authoritiesLabel" =>"Authorities",
 	"contentCreate"=> "create new content",
@@ -225,7 +226,10 @@ $messages = array(
 	"preview" => "preview",
 	"contentElements" => "content elements",
 	"dynamicFields" => "dynamic fields",
-	"result" => "result"
+	"result" => "result",
+	"mailConfiguration" =>"mailing configuration",
+	"reports" => "reports",
+	"general" => "general"
 	
 );
 
