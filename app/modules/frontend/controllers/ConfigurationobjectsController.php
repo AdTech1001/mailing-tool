@@ -87,7 +87,10 @@ class ConfigurationobjectsController extends ControllerBase
 
 		}
 	$feusers=Feusers::find(array(
-			'conditions' =>'deleted=0 AND hidden=0'
+			'conditions' =>'deleted=0 AND hidden=0 AND usergroup = ?1',
+			'bind' => array(
+				1=>$this->session->get('auth')['usergroup']
+			)
 		 ));
 		 $this->view->setVar('feusers',$feusers);
 		 

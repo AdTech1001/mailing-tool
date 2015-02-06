@@ -3,9 +3,10 @@
 	{{ content() }}
 {%- if session.get('auth') -%}
 <div class="container">
+	<div class="ceElement large">
 <h1>{{tr('feusersIndexTitle')}}</h1>
-
-<table class="maintable">
+<div class="dataTables_wrapper">
+<table  class="display dataTable">
 	<thead>
 		<tr>
 			<th>{{ tr('feusers.username') }}</th>
@@ -25,8 +26,8 @@
 		</tr>
 	</thead>
 	<tbody>
-	{% for feuser in feusers %}
-	<tr>	
+	{% for index,feuser in feusers %}
+	<tr class='{% if index is even %}even{% else %}odd{%endif%}'>	
 	<td>{{feuser.username}}</td>
 	<td>{{feuser.last_name}}</td>
 	<td>{{feuser.first_name}}</td>
@@ -47,7 +48,8 @@
 	{% endfor %}
 	</tbody>
 </table>
-
+</div>
+</div>
 
 {%- endif -%}
 

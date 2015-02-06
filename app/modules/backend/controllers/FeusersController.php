@@ -15,6 +15,7 @@ class FeusersController extends ControllerBase
 
 {
 	public function indexAction(){
+		$this->assets->addCss('css/jquery.dataTables.css');
 		$feusers=Feusers::find(array(
 				'conditions' => 'deleted=0'
 			));
