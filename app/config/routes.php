@@ -301,6 +301,16 @@ $router->add(
 );
 
 $router->add(
+    '/clickconditions/:action[/]{0,1}',
+    array(
+       'controller' => 'clickconditions',
+       'action'     => 1,
+		'module'=>'frontend',
+		'namespace'  => 'nltool\Modules\Modules\Frontend\Controllers',
+    )
+);
+
+$router->add(
 	'/backend/{language:[a-z]{2}}/:controller[/]{0,1}', 
 	array(
 		'language' => 1,

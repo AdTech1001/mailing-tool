@@ -768,56 +768,98 @@ var addRowEvents=function(rowId, splitCond){
 	}
 };
 function pluginInit(){	
-jsPlumb.ready(function() {
-	jsPlumb.setContainer(jQuery("#automationWorkspace"));
-	
-	instance = jsPlumb.getInstance({
-			DragOptions : { cursor: 'pointer', zIndex:2000 },
-			PaintStyle : { strokeStyle:'#666' },
-			EndpointStyle : { width:20, height:16, strokeStyle:'#666' },
-			Endpoint : "Rectangle",
-			Anchors : ["TopCenter", "TopCenter"],
-			Container:"automationWorkspace"
-		});	
-	
-	instance.bind("connection", function(info) {
-		instance.repaintEverything();
-		
-			updateConnections(info.connection, false);
-		//jsPlumb.connect({source:info.source, target:info.target})
-   		
-   		
-	});
-	
-	instance.bind("connectionDetached", function(info, originalEvent) {
-				updateConnections(info.connection, true);
-			});
-			
-			instance.bind("connectionMoved", function(info, originalEvent) {
-				//  only remove here, because a 'connection' event is also fired.
-				// in a future release of jsplumb this extra connection event will not
-				// be fired.
-				updateConnections(info.connection, true);
-			});
-	
-	instance.addEndpoint(jQuery('#startpoint'),{uuid:'startpoint'}, mainflowConnector);
-	instance.draggable(jQuery('#startpoint'));
-	
-	if(jQuery('[name="campaignobjectuid"]').val()!='0'){
-		loadInitialize(jQuery('[name="campaignobjectuid"]').val());
-	}
-	
-});
+	jsPlumb.ready(function() {
+		jsPlumb.setContainer(jQuery("#automationWorkspace"));
 
+		instance = jsPlumb.getInstance({
+				DragOptions : { cursor: 'pointer', zIndex:2000 },
+				PaintStyle : { strokeStyle:'#666' },
+				EndpointStyle : { width:20, height:16, strokeStyle:'#666' },
+				Endpoint : "Rectangle",
+				Anchors : ["TopCenter", "TopCenter"],
+				Container:"automationWorkspace"
+			});	
+
+		instance.bind("connection", function(info) {
+			instance.repaintEverything();
+
+				updateConnections(info.connection, false);
+			//jsPlumb.connect({source:info.source, target:info.target})
+
+
+		});
+
+		instance.bind("connectionDetached", function(info, originalEvent) {
+					updateConnections(info.connection, true);
+				});
+
+				instance.bind("connectionMoved", function(info, originalEvent) {
+					//  only remove here, because a 'connection' event is also fired.
+					// in a future release of jsplumb this extra connection event will not
+					// be fired.
+					updateConnections(info.connection, true);
+				});
+
+		instance.addEndpoint(jQuery('#startpoint'),{uuid:'startpoint'}, mainflowConnector);
+		instance.draggable(jQuery('#startpoint'));
+
+		if(jQuery('[name="campaignobjectuid"]').val()!='0'){
+			loadInitialize(jQuery('[name="campaignobjectuid"]').val());
+		}
 	
-lang=jQuery('#language').val();
-jQuery('.window a').click(function(e){
-	e.preventDefault();
-});
-jQuery('#').delegate('div.info','hover',function(e){
-	
-});
-jQuery('.allPurposeLayer').draggable();
+	});
+
+
+	lang=jQuery('#language').val();
+	jQuery('.window a').click(function(e){
+		e.preventDefault();
+	});
+	jQuery('#').delegate('div.info','hover',function(e){
+		console.log('hovering');
+	});
+	jQuery('.allPurposeLayer').draggable();
+	jQuery('#automationWorkspace').delegate('div.delete','click',function(e){
+		var deleteElId=jQuery(this).parent().attr('id');
+		var elType=jQuery('#'+deleteElId).attr('data-controller');
+		switch(elType){
+			case 'sendoutobject':
+				ajaxIt('sendoutobjects','delete','&domid='+deleteElId,dummyEmpty);	
+				instance.removeAllEndpoints(deleteElId);				
+				jQuery('#'+deleteElId).remove();
+				break;
+			case 'automationbjects':
+				var automationbjectsTargets=instance.select({source:deleteElId,target:'*',});
+				
+					if(automationbjectsTargets.length>0){
+						var domids='';
+						automationbjectsTargets.each(function(conn){
+							domids+='&domid[]='+conn.targetId;
+							console.log(conn);
+						});
+						ajaxIt('clickconditions','delete','campaignobjectuid='+jQuery('#campaignobjectuid').val()+domids,dummyEmpty);	
+					}
+				
+				instance.removeAllEndpoints(deleteElId);				
+				jQuery('#'+deleteElId).remove();
+				break;
+			case 'conditionobjects':
+				var conditionobjectsTarget=instance.select({source:deleteElId,target:'*',});
+				
+					if(conditionobjectsTarget.length>0){
+						var domids='';
+						conditionobjectsTarget.each(function(conn){
+							domids+='&domid[]='+conn.targetId;
+							console.log(conn);
+						});
+						ajaxIt('addressconditions','delete',domids,dummyEmpty);	
+					}
+				
+				instance.removeAllEndpoints(deleteElId);				
+				jQuery('#'+deleteElId).remove();
+				break;
+		}
+		
+	});
 	
 }
 jQuery( "#campaignCreateElements .window" ).draggable({
@@ -851,7 +893,7 @@ jQuery( "#automationWorkspace" ).droppable({
 		var elController=jQuery(newElement).attr('data-controller');
 		instance.makeSource(newElement);
 		var newElementId=jQuery(newElement).attr('id');		
-		
+		jQuery(newElement).append('<div class="delete glyphicon glyphicon-remove"></div>');
 		switch(elController){
 			case 'sendoutobject':							
 			instance.addEndpoint(jQuery(newElement),{uuid:newElementId+'_split'}, splitConnectorSource);

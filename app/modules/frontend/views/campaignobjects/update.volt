@@ -207,7 +207,7 @@
 <form id="automationWorkflowForm">
 	
 	<label>&nbsp;{{tr('title')}}: </label> <input type="text" value="{{ campaignobjectTitle }}" name="title"><br><br>
-	<input type="hidden" value="{{ campaignobjectUid }}" name="campaignobjectuid">
+	<input type="hidden" value="{{ campaignobjectUid }}" id="campaignobjectuid" name="campaignobjectuid">
 </form>	
 <div class="demo flowchart-demo automationWorkspace" id="automationWorkspace">
 	        <div class="window jsplumbified" id="startpoint" data-controller="dummy" data-action="start"><div class="glyphicon glyphicon-play"><br><span class="itemLabel">{{ tr('startCampaign') }}</span></div></div>

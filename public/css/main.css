@@ -1353,7 +1353,17 @@ table.maintable tr.odd td{
 .sendoutobject .info{
 	position: absolute;
 	top: -2px;
-	right: -2px;
+	left: -2px;
+}
+.window.jsplumbified div.delete{
+	position: absolute;
+	top: 1px;
+	right: 1px;
+	z-index: 9999;
+}
+.window.jsplumbified div.delete:hover{
+	cursor:pointer;
+	color:#01994e;
 }
 .sendoutobject .info:hover{
 	cursor:pointer;
