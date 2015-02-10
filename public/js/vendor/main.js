@@ -30,6 +30,19 @@ function init(jQuery){
 		
 	});
 	
+	jQuery('.deleteListItem').click(function(e){		
+		var parent=jQuery(this).parent();
+		console.log(this);
+		var cnfrm = confirm(jQuery('#suredel').val());
+			if (cnfrm == true) {
+				ajaxIt(jQuery('#controller').val(),'delete','uid='+this.firstChild.value,
+				function(data){				
+					jQuery(parent).remove();
+				});
+			}
+		
+	});
+	
 }
 
 
@@ -67,20 +80,7 @@ var requireControllerPlugins=function(){
 	
 };
 
-var navigation=function(e)
-{
-	var userparam='';
-	count=jQuery.address.parameter('count');
-	if(jQuery.address.parameter('action') && jQuery.address.parameter('testid') && jQuery.address.parameter('count')){
-		testid=jQuery.address.parameter('testid');
-		if(jQuery('#tx_dfselfassessment_wrapper_'+testid+' [name="userid"]')){
-			userid=jQuery('#tx_dfselfassessment_wrapper_'+testid+' [name="userid"]').val();
-			userparam='&userid='+userid;
-		}
-		var startParams="action="+jQuery.address.parameter('action')+"&testid="+jQuery.address.parameter('testid')+"&count="+jQuery.address.parameter('count')+userparam;
-		ajaxIt(startParams,showQuestion);
-	}								
-};
+
 
 var dummyEmpty=function(){	
 };

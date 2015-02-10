@@ -2,6 +2,7 @@ var instance;
 var newElementCounter=0;
 var activeElement;
 var lang;
+var action;
 var exampleDropOptions = {
 				tolerance:"touch",
 				hoverClass:"dropHover",
@@ -361,10 +362,7 @@ function Save() {
 		connJson+='{"source":"'+connections[j].endpoints[0].getUuid()+'","target":"'+connections[j].endpoints[1].getUuid()+'"},';
 	}
 	connJson=connJson.substring(0,connJson.length-1)+']}';
-	var action='update';
-	if(jQuery("[name='campaignobjectuid']").val()==='0'){
-		action='create';
-	}
+	
 	
 	
 	ajaxIt('campaignobjects',action,campaignTitle+'&htmlobjects='+objects+sendoutobjectelements+'&connections='+connJson,campaignCreateCallback);	
@@ -768,6 +766,10 @@ var addRowEvents=function(rowId, splitCond){
 	}
 };
 function pluginInit(){	
+	action='update';
+	if(jQuery("[name='campaignobjectuid']").val()==='0'){
+		action='create';
+	}
 	jsPlumb.ready(function() {
 		jsPlumb.setContainer(jQuery("#automationWorkspace"));
 
@@ -821,44 +823,47 @@ function pluginInit(){
 	jQuery('#automationWorkspace').delegate('div.delete','click',function(e){
 		var deleteElId=jQuery(this).parent().attr('id');
 		var elType=jQuery('#'+deleteElId).attr('data-controller');
-		switch(elType){
-			case 'sendoutobject':
-				ajaxIt('sendoutobjects','delete','&domid='+deleteElId,dummyEmpty);	
-				instance.removeAllEndpoints(deleteElId);				
-				jQuery('#'+deleteElId).remove();
-				break;
-			case 'automationbjects':
-				var automationbjectsTargets=instance.select({source:deleteElId,target:'*',});
-				
-					if(automationbjectsTargets.length>0){
-						var domids='';
-						automationbjectsTargets.each(function(conn){
-							domids+='&domid[]='+conn.targetId;
-							console.log(conn);
-						});
-						ajaxIt('clickconditions','delete','campaignobjectuid='+jQuery('#campaignobjectuid').val()+domids,dummyEmpty);	
-					}
-				
-				instance.removeAllEndpoints(deleteElId);				
-				jQuery('#'+deleteElId).remove();
-				break;
-			case 'conditionobjects':
-				var conditionobjectsTarget=instance.select({source:deleteElId,target:'*',});
-				
-					if(conditionobjectsTarget.length>0){
-						var domids='';
-						conditionobjectsTarget.each(function(conn){
-							domids+='&domid[]='+conn.targetId;
-							console.log(conn);
-						});
-						ajaxIt('addressconditions','delete',domids,dummyEmpty);	
-					}
-				
-				instance.removeAllEndpoints(deleteElId);				
-				jQuery('#'+deleteElId).remove();
-				break;
+		if(action==='update'){
+			switch(elType){
+				case 'sendoutobject':
+					ajaxIt('sendoutobjects','delete','&domid='+deleteElId,dummyEmpty);	
+					instance.removeAllEndpoints(deleteElId);				
+					jQuery('#'+deleteElId).remove();
+					break;
+				case 'automationbjects':
+					var automationbjectsTargets=instance.select({source:deleteElId,target:'*',});
+
+						if(automationbjectsTargets.length>0){
+							var domids='';
+							automationbjectsTargets.each(function(conn){
+								domids+='&domid[]='+conn.targetId;							
+							});
+							ajaxIt('clickconditions','delete','campaignobjectuid='+jQuery('#campaignobjectuid').val()+domids,dummyEmpty);	
+						}
+
+					instance.removeAllEndpoints(deleteElId);				
+					jQuery('#'+deleteElId).remove();
+					break;
+				case 'conditionobjects':
+					var conditionobjectsTarget=instance.select({source:deleteElId,target:'*',});
+
+						if(conditionobjectsTarget.length>0){
+							var domids='';
+							conditionobjectsTarget.each(function(conn){
+								domids+='&domid='+conn.targetId;
+
+							});
+							ajaxIt('addressconditions','delete','campaignobjectuid='+jQuery('#campaignobjectuid').val()+domids,dummyEmpty);	
+						}
+
+					instance.removeAllEndpoints(deleteElId);				
+					jQuery('#'+deleteElId).remove();
+					break;
+			}
+		}else{
+			instance.removeAllEndpoints(deleteElId);				
+			jQuery('#'+deleteElId).remove();
 		}
-		
 	});
 	
 }

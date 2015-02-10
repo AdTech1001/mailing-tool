@@ -6,7 +6,16 @@ $router = new Phalcon\Mvc\Router(true);
 $router->setDefaultModule("frontend");
 $router->removeExtraSlashes(TRUE);
 
-
+$router->add(
+	'/:controller/:action[/]{0,1}', 
+	array(	
+		'module'=>'frontend',
+		'controller' => 1,
+		'action' => 2,
+		'module'=>'frontend',
+		'namespace'  => 'nltool\Modules\Modules\Frontend\Controllers',
+	)
+);
 $router->add(
 	'/{language:[a-z]{2}}/:controller[/]{0,1}', 
 	array(
@@ -231,6 +240,7 @@ $router->add(
 	)
 );
 
+
 $router->add(
 	'/{language:[a-z]{2}}/', 
 	array(
@@ -304,6 +314,16 @@ $router->add(
     '/clickconditions/:action[/]{0,1}',
     array(
        'controller' => 'clickconditions',
+       'action'     => 1,
+		'module'=>'frontend',
+		'namespace'  => 'nltool\Modules\Modules\Frontend\Controllers',
+    )
+);
+
+$router->add(
+    '/addressconditions/:action[/]{0,1}',
+    array(
+       'controller' => 'addressconditions',
        'action'     => 1,
 		'module'=>'frontend',
 		'namespace'  => 'nltool\Modules\Modules\Frontend\Controllers',

@@ -172,6 +172,22 @@ class DistributorsController extends ControllerBase
 		
 	}
 	
+	public function deleteAction(){
+		if($this->request->isPost()){
+			if($this->request->hasPost('uid')){
+				$object=  Distributors::findFirstByUid($this->request->getPost('uid'));
+				$object->assign(array(
+					'tstamp' => time(),
+					'deleted' =>1,
+					'hidden' =>1
+				));
+				$object->update();
+			}
+			die();
+		}
+	}
+	
+	
 	private function createRelations(){
 			$addressfolderArr=array();
 			$segmentsArr=array();

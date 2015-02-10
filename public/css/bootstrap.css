@@ -2949,28 +2949,7 @@ input[type="button"].btn-block {
 .dropdown-toggle:focus {
   outline: 0;
 }
-.dropdown-menu {
-  position: relative;
-  top:-1px;
-  max-width:120px;
-  margin-left:auto;
-  margin-right:auto;
-  background:#009149;
-  
-  z-index: 99;
-  display: none;  
-  text-align: center;
-  padding: 5px 0;
-  font-size: 14px;
-  list-style: none;
-  /*background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid #ccc;
-  border: 1px solid rgba(0, 0, 0, .15);
-  border-radius: 4px;
-  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
-   box-shadow: 0 6px 12px rgba(0, 0, 0, .175);*/
-}
+
 .dropdown-menu.pull-right {
   right: 0;
   left: auto;

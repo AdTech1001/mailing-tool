@@ -52,7 +52,7 @@
 <h1>{{tr('addressFolderSelectLabel')}}</h1>
 <ul class="listviewList">
 	{%- for addressfolder in addressfolders -%}
-	<li><a href='{{ path }}/addressfolders/index/{{ addressfolder.uid }}'>>> {{addressfolder.title}} | {{ date('d.m.Y',addressfolder.tstamp) }}</a></li>
+	<li><a href='{{ path }}/addressfolders/index/{{ addressfolder.uid }}'>>> {{addressfolder.title}} | {{ date('d.m.Y',addressfolder.tstamp) }}</a><span class="glyphicon glyphicon-remove deleteListItem" title="{{tr('delete')}}"><input type="hidden" value="{{addressfolder.uid}}"></span></li>
 	{%- endfor -%}
 </ul>
 </div>

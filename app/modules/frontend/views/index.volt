@@ -37,6 +37,8 @@
 		</div>
 		
        {%- if session.get('auth') -%}
+	   <input id="suredel" value="{{tr('suredel')}}" type="hidden">
+	   <input id="controller" value="{{controller}}" type="hidden">
 	   <input id="lang" value="{{language}}" type="hidden">
 		<input id="baseurl" value="{{baseurl}}" type="hidden">
 		{%- endif -%}

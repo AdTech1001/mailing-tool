@@ -1040,7 +1040,18 @@ nav ul li a{
 
 .ceElement a{
 	font-size: 14px;	
-	display:block;
+	/*display:block;*/
+}
+span.deleteListItem{
+	cursor:pointer;
+}
+.listviewList span.deleteListItem{
+	float:right;
+}
+.listelementContainer span.deleteListItem{
+	position:absolute;
+	top:2px;
+	right:2px;	
 }
 .ceElement h1{
 	background:#009149;
@@ -1056,6 +1067,7 @@ nav ul li a{
 	margin-left: auto;
 	margin-right: auto;	
 	margin-bottom: 20px;	
+	position:relative;
 	background: #e5e5e5;
 	padding: 10px;
 	border-radius: 0.5em;
@@ -1522,6 +1534,29 @@ table#mapTable{
 	header{
 		height:131px;
 	}
+	.dropdown-menu {
+		position: absolute;		
+		left:0;
+		right:0;
+		width:120px;
+		margin-left:auto;
+		margin-right:auto;
+		background:#009149;
+
+		z-index: 99;
+		display: none;  
+		text-align: center;
+		padding: 5px 0;
+		font-size: 14px;
+		list-style: none;
+		/*background-color: #fff;
+		background-clip: padding-box;
+		border: 1px solid #ccc;
+		border: 1px solid rgba(0, 0, 0, .15);
+		border-radius: 4px;
+		-webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+		 box-shadow: 0 6px 12px rgba(0, 0, 0, .175);*/
+	  }
 }
 
 @media (min-width: 1200px) {

@@ -42,7 +42,9 @@ class TriggersendController extends Triggerauth
 			));
 			
 			if($mailing){
-				$addressConditions=$mailing->getAddressconditions();
+				$addressConditions=$mailing->getAddressconditions(array(
+					'conditions' => 'deleted = 0 AND hidden = 0'
+				));
 				
 				$condStrng='';
 				if($addressConditions){
@@ -142,7 +144,9 @@ class TriggersendController extends Triggerauth
 
 					}
 				}
-				$clickconditions=$mailing->getClickconditions();
+				$clickconditions=$mailing->getClickconditions(array(
+					'conditions' => 'deleted =0 AND hidden = 0'
+				));
 				$clickcondstrng='';
 				$joinTables='';
 				if($clickconditions){

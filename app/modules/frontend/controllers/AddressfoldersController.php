@@ -271,6 +271,20 @@ class AddressfoldersController extends ControllerBase
 			$this->view->setVar('addressfolder',$addressfolderrecord);
 		}
 	}
+	public function deleteAction(){
+		if($this->request->isPost()){
+			if($this->request->hasPost('uid')){
+				$object= Addressfolders::findFirstByUid($this->request->getPost('uid'));
+				$object->assign(array(
+					'tstamp' => time(),
+					'deleted' =>1,
+					'hidden' =>1
+				));
+				$object->update();
+			}
+			die();
+		}
+	}
 	
 	private function getData(){
 		$bindArray=array();

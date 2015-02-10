@@ -129,6 +129,22 @@ class TemplateobjectsController extends ControllerBase
 		
 		
 	}
+	
+	public function deleteAction(){
+		if($this->request->isPost()){
+			if($this->request->hasPost('uid')){
+				$templateobject=Templateobjects::findFirstByUid($this->request->getPost('uid'));
+				$templateobject->assign(array(
+					'tstamp' => time(),
+					'deleted' =>1,
+					'hidden' =>1
+				));
+				$templateobject->update();
+			}
+			die();
+		}
+	}
+	
 	private function processSourcecode($uid){
 		
 		if($_POST['templatetype'] == 1){

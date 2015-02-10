@@ -40,10 +40,12 @@ class Distributors extends Model{
 		$segments=$this->getSegments();
 		$where='';
 		foreach($segments as $segment){
-			$conditions=$segment->getConditions();
-			if($conditions){
+			$conditions=$segment->getConditions();			
+			if(count($conditions) > 0){
 				$where.=' AND (';
+				
 				foreach($conditions as $condition){
+					
 					if($condition->field !== 'searchterm'  && $condition->field !== 'pid'){
 						switch($condition->field){
 							case 'firstname':
@@ -70,6 +72,7 @@ class Distributors extends Model{
 			}
 			
 		}
+		
 		if(count($pids)>0){
 			$where.= ' AND nltool\Models\Addresses.pid IN (';
 			$pidStrng='';

@@ -117,7 +117,11 @@ class CampaignobjectsController extends ControllerBase
 				$this->view->disable();                       
 				
 		 }elseif($this->request->isPost() && $this->request->getPost('campaignobjectuid')!=0 ){
-			 /*UPDATE FUNCTIONality*/
+			 $this->dispatcher->forward(array(
+					"controller" => "campaignobjects",
+					"action" => "update"
+				));
+			 
 		 }else{
 			$environment= $this->config['application']['debug'] ? 'development' : 'production';
 			$baseUri=$this->config['application'][$environment]['staticBaseUri'];
@@ -169,6 +173,21 @@ class CampaignobjectsController extends ControllerBase
 		}
 	}
 	
+	public function deleteAction(){
+		if($this->request->isPost()){
+			if($this->request->hasPost('uid')){
+				$object= Campaignobjects::findFirstByUid($this->request->getPost('uid'));
+				$object->assign(array(
+					'tstamp' => time(),
+					'deleted' =>1,
+					'hidden' =>1
+				));
+				$object->update();
+			}
+			die();
+		}
+	}
+	
 	private function removePreviousObjectsFromCampaign($campaignobjectUid){
 		$sendoutobjectRecords=  Sendoutobjects::find(array(
 				"conditions" => "deleted = 0 AND hidden =0 AND inprogress=0 AND cleared=0 AND sent=0 AND campaignuid = ?1",
@@ -208,7 +227,7 @@ class CampaignobjectsController extends ControllerBase
 					
 					$dateArr=explode(' ',$rawdate);
 					$senddate=0;
-					if(is_array($dateArr)){
+					if(count($dateArr)>1){
 					$dateTimeArr=explode(':',$dateArr[1]);
 					$dateDataArr=explode('/',$dateArr[0]);
 					$senddate=mktime($dateTimeArr[0],$dateTimeArr[1],0,$dateDataArr[1],$dateDataArr[2],$dateDataArr[0]);

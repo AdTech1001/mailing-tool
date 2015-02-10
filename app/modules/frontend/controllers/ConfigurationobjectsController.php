@@ -158,6 +158,21 @@ class ConfigurationobjectsController extends ControllerBase
 		
 	}
 	
+	public function deleteAction(){
+		if($this->request->isPost()){
+			if($this->request->hasPost('uid')){
+				$object=  Configurationobjects::findFirstByUid($this->request->getPost('uid'));
+				$object->assign(array(
+					'tstamp' => time(),
+					'deleted' =>1,
+					'hidden' =>1
+				));
+				$object->update();
+			}
+			die();
+		}
+	}
+	
 	private function removeRelations($uid){
 		$relations=Configurationobjects_feusers_lookup::find(array('conditions'=>'uid_local=?1','bind'=>array(1=>$uid)));
 		if($relations){
