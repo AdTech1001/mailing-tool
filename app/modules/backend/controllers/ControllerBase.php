@@ -21,7 +21,7 @@ class ControllerBase extends Controller
 		$this->config->languages=$languages;
 		
 	}
-	public function requestInitialize()
+	public function requestInitialize($controllerName)
 	{
 	
 		$this->view->setTemplateAfter('main');
@@ -60,10 +60,10 @@ class ControllerBase extends Controller
 			$languagesAvailable .= "<option value='{$href}'{$selected}>{$value}</option>";
 		}
 
+		$this->view->setVar('controller', $controllerName);
 		$this->view->setVar('language', $lang);
 		$this->view->setVar('baseurl', $baseUrl);
 		$this->view->setVar('languages_available', $languagesAvailable);
-		$this->view->setVar('docs_root', 'http://localhost/'.$baseUrl.$lang);
 		
 		
 		
@@ -128,7 +128,7 @@ class ControllerBase extends Controller
 
                 $returnVal= false;
 			}else{
-				$this->requestInitialize();
+				$this->requestInitialize($controllerName);
 			}
 		
 		

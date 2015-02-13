@@ -81,6 +81,7 @@ $messages = array(
 	"edit" => "Bearbeiten",
 	"save" => "Speichern",
 	"update"=>"Update",
+	"index"=>"Auflisten",
 	"mailUpdateModeArrange" => "Elemente per Drag & Drop anordnen",
 	"mailUpdateModeEdit" => "Inhalte bearbeiten",
 	"activeModeTitle" => "Bearbeitung",

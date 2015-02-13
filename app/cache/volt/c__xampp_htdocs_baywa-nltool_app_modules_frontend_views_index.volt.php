@@ -34,7 +34,7 @@
         
         <?php echo $this->getContent(); ?>
         
-		</div><?php if ($this->session->get('auth')) { ?><input id="suredel" value="<?php echo nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('suredel'); ?>" type="hidden">
+		</div><?php if ($this->session->get('auth')) { ?><input id="suredel" value="<?php echo nltool\Modules\Modules\Backend\Controllers\ControllerBase::translate('suredel'); ?>" type="hidden">
 	   <input id="controller" value="<?php echo $controller; ?>" type="hidden">
 	   <input id="lang" value="<?php echo $language; ?>" type="hidden">
 		<input id="baseurl" value="<?php echo $baseurl; ?>" type="hidden"><?php } ?></body>
