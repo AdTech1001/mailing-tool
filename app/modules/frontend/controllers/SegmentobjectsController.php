@@ -176,7 +176,7 @@ class SegmentobjectsController extends ControllerBase
 		}
 		
 		
-		$sWhere = "WHERE deleted=0 AND hidden=0".$insStrng.$filters;
+		$sWhere = "WHERE deleted=0 AND hidden=0 AND usergroup = ".$this->session->get('auth')['usergroup'].$insStrng.$filters;
 		if ( isset($_POST['sSearch']) && $_POST['sSearch'] != "" )
 		{
 			$filterFieldsArray['searchterm']=$_POST['sSearch'];

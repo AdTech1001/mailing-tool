@@ -81,7 +81,7 @@ class MailobjectsController extends ControllerBase
                 $this->flash->error($mailObject->getMessages());
             } else {
 				if($templateUid !=0){
-				$this->flash->success("successfully created");
+				//$this->flash->success("successfully created");
 				$mainTemplate='../app/modules/frontend/templates/main.volt';
 				$templateFile=  '../app/modules/frontend/templates/template_mail_'.$templateUid.'.volt';
 				$generatedMailFile='../public/mails/mailobject_'.$mailObject->uid.'.html';
@@ -119,15 +119,16 @@ class MailobjectsController extends ControllerBase
 				
             }
 			
-			
+			$this->view->disable(); 
 			
 			
 		}else{
 		
 		
 			$templateobjects = Templateobjects::find(array(
-				"conditions" => "templatetype = ?1",
-				"bind" => array(1 => '0')
+				"conditions" => "hidden=0 AND deleted=0 AND templatetype = ?1 AND usergroup =?2",
+				"bind" => array(1 => '0',
+								2=> $this->session->get('auth')['usergroup'])
 				));
 			$environment= $this->config['application']['debug'] ? 'development' : 'production';
 			$baseUri=$this->config['application'][$environment]['staticBaseUri'];

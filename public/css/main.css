@@ -1502,9 +1502,9 @@ table#mapTable{
 	}
 	#headerLeft{
 		height:130px;
-		background:#009149;
+		/*background:#009149;*/
 		float:left;
-		box-shadow: 2px -2px 3px 0px rgba(78,78,78,0.5);
+		/*box-shadow: 2px -2px 3px 0px rgba(78,78,78,0.5);*/
 	}
 	#logo,#pageTitle{
 		
