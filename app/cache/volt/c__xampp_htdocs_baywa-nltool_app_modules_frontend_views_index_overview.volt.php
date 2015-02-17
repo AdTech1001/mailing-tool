@@ -4,6 +4,7 @@
 	<div class="desktop">
 		
 		<h1><?php echo nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('actionTitle'); ?></h1><br>
+		<?php if (nltool\Acl\Acl::linkAllowed($this->session->get('auth'), 'templateobjects', 'index')) { ?>		
 		<div class="ceElement xs">
 			<h1><?php echo $this->tag->linkTo(array($language . '/templateobjects/index/', nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('templateobjects'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('templateobjects'))); ?>
 			</h1>
@@ -12,6 +13,8 @@
 			<li><?php echo $this->tag->linkTo(array($language . '/templateobjects/index/', '<span class="glyphicon glyphicon-list"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('retrieve'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('templateobjectsRetrieve'))); ?></li>
 			</ul>
 		</div>
+		<?php } ?>
+		<?php if (nltool\Acl\Acl::linkAllowed($this->session->get('auth'), 'configurationobjects', 'index')) { ?>		
 		<div class="ceElement xs">
 			<h1><?php echo $this->tag->linkTo(array($language . '/configurationobjects/index/', nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('configurationobjects'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('configurationobjects'))); ?>
 			</h1>
@@ -20,6 +23,8 @@
 			<li><?php echo $this->tag->linkTo(array($language . '/configurationobjects/index/', '<span class="glyphicon glyphicon-list"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('retrieve'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('configurationobjectsRetrieve'))); ?></li>
 			</ul>
 		</div>
+		<?php } ?>
+		<?php if (nltool\Acl\Acl::linkAllowed($this->session->get('auth'), 'addressfolders', 'index')) { ?>		
 		<div class="ceElement xs">
 			<h1><?php echo $this->tag->linkTo(array($language . '/addressfolders/', nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('addressfolders'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('addressfolders'))); ?>
 			</h1>
@@ -29,6 +34,8 @@
 			
 			</ul>
 		</div>
+		<?php } ?>
+		<?php if (nltool\Acl\Acl::linkAllowed($this->session->get('auth'), 'segmentobjects', 'index')) { ?>		
 		<div class="ceElement xs">
 			<h1><?php echo $this->tag->linkTo(array($language . '/segmentobjects/', nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('segmentobjects'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('segmentobjects'))); ?>
 			</h1>
@@ -38,6 +45,8 @@
 			
 			</ul>
 		</div>
+		<?php } ?>
+		<?php if (nltool\Acl\Acl::linkAllowed($this->session->get('auth'), 'distributors', 'index')) { ?>		
 		<div class="ceElement xs">
 			<h1><?php echo $this->tag->linkTo(array($language . '/distributors/', nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('distributors'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('distributors'))); ?>
 			</h1>
@@ -47,6 +56,8 @@
 			
 			</ul>
 		</div>
+		<?php } ?>
+		<?php if (nltool\Acl\Acl::linkAllowed($this->session->get('auth'), 'mailobjects', 'index')) { ?>		
 		<div class="ceElement xs">
 			<h1><?php echo $this->tag->linkTo(array($language . '/mailobjects/index/', nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('mailobjects'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('mailobjects'))); ?>
 			</h1>
@@ -55,6 +66,8 @@
 			<li><?php echo $this->tag->linkTo(array($language . '/mailobjects/index/', '<span class="glyphicon glyphicon-list"></span> ' . nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('retrieve'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('mailobjectsRetrieve'))); ?></li>
 			</ul>
 		</div>
+		<?php } ?>
+		<?php if (nltool\Acl\Acl::linkAllowed($this->session->get('auth'), 'campaignobjects', 'index')) { ?>		
 		<div class="ceElement xs">
 			<h1><?php echo $this->tag->linkTo(array($language . '/campaignobjects/index/', nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('campaigns'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('campaign'))); ?>
 			</h1>
@@ -65,6 +78,8 @@
 			</ul>
 			
 		</div>
+		<?php } ?>
+		<?php if (nltool\Acl\Acl::linkAllowed($this->session->get('auth'), 'report', 'index')) { ?>		
 		<div class="ceElement xs">
 			<h1><?php echo $this->tag->linkTo(array($language . '/report/', nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('report'), 'title' => nltool\Modules\Modules\Frontend\Controllers\ControllerBase::translate('report'))); ?>
 			</h1>
@@ -73,7 +88,7 @@
 			
 			</ul>
 		</div>
-		
+		<?php } ?>
 		
 	</div>
 </div>

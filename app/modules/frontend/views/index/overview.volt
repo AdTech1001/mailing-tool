@@ -4,6 +4,7 @@
 	<div class="desktop">
 		
 		<h1>{{tr('actionTitle')}}</h1><br>
+		{% if linkAllowed(session.get('auth'),'templateobjects','index') %}		
 		<div class="ceElement xs">
 			<h1>{{ link_to(language~'/templateobjects/index/', tr('templateobjects'), 'title': tr('templateobjects')) }}
 			</h1>
@@ -12,6 +13,8 @@
 			<li>{{ link_to(language~'/templateobjects/index/', '<span class="glyphicon glyphicon-list"></span> '~tr('retrieve'), 'title': tr('templateobjectsRetrieve')) }}</li>
 			</ul>
 		</div>
+		{% endif %}
+		{% if linkAllowed(session.get('auth'),'configurationobjects','index') %}		
 		<div class="ceElement xs">
 			<h1>{{ link_to(language~'/configurationobjects/index/',tr('configurationobjects'), 'title': tr('configurationobjects')) }}
 			</h1>
@@ -20,6 +23,8 @@
 			<li>{{ link_to(language~'/configurationobjects/index/', '<span class="glyphicon glyphicon-list"></span> '~tr('retrieve'), 'title': tr('configurationobjectsRetrieve')) }}</li>
 			</ul>
 		</div>
+		{% endif %}
+		{% if linkAllowed(session.get('auth'),'addressfolders','index') %}		
 		<div class="ceElement xs">
 			<h1>{{ link_to(language~'/addressfolders/', tr('addressfolders'), 'title': tr('addressfolders')) }}
 			</h1>
@@ -29,6 +34,8 @@
 			
 			</ul>
 		</div>
+		{% endif %}
+		{% if linkAllowed(session.get('auth'),'segmentobjects','index') %}		
 		<div class="ceElement xs">
 			<h1>{{ link_to(language~'/segmentobjects/', tr('segmentobjects'), 'title': tr('segmentobjects')) }}
 			</h1>
@@ -38,6 +45,8 @@
 			
 			</ul>
 		</div>
+		{% endif %}
+		{% if linkAllowed(session.get('auth'),'distributors','index') %}		
 		<div class="ceElement xs">
 			<h1>{{ link_to(language~'/distributors/', tr('distributors'), 'title': tr('distributors')) }}
 			</h1>
@@ -47,6 +56,8 @@
 			
 			</ul>
 		</div>
+		{% endif %}
+		{% if linkAllowed(session.get('auth'),'mailobjects','index') %}		
 		<div class="ceElement xs">
 			<h1>{{ link_to(language~'/mailobjects/index/', tr('mailobjects'), 'title': tr('mailobjects')) }}
 			</h1>
@@ -55,6 +66,8 @@
 			<li>{{ link_to(language~'/mailobjects/index/', '<span class="glyphicon glyphicon-list"></span> '~tr('retrieve'), 'title': tr('mailobjectsRetrieve')) }}</li>
 			</ul>
 		</div>
+		{% endif %}
+		{% if linkAllowed(session.get('auth'),'campaignobjects','index') %}		
 		<div class="ceElement xs">
 			<h1>{{ link_to(language~'/campaignobjects/index/', tr('campaigns'), 'title': tr('campaign')) }}
 			</h1>
@@ -65,6 +78,8 @@
 			</ul>
 			
 		</div>
+		{% endif %}
+		{% if linkAllowed(session.get('auth'),'report','index') %}		
 		<div class="ceElement xs">
 			<h1>{{ link_to(language~'/report/', tr('report'), 'title': tr('report')) }}
 			</h1>
@@ -73,7 +88,7 @@
 			
 			</ul>
 		</div>
-		
+		{% endif %}
 		
 	</div>
 </div>

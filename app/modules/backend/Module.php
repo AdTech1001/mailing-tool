@@ -89,6 +89,9 @@ $di->set(
         $volt->getCompiler()->addFunction('number_format', function($resolvedArgs) {
             return 'number_format(' . $resolvedArgs . ')';
         });
+		$volt->getCompiler()->addFunction('linkAllowed', function($args) {
+			return "nltool\Acl\Acl::linkAllowed({$args})";
+		});
 
         return $volt;
     },

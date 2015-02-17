@@ -1,13 +1,13 @@
 {% include 'partials/flash-messages.volt' %}
 {{ content() }}
 <div class="ceElement large">
-<h1>{{tr('profiles')}}</h1>
+<h1>{{tr('profile')}}</h1>
 <div class="dataTables_wrapper">
 <table  class="display dataTable">
 	
 		<tr>
 			
-			{% for profile in profiles %}
+			
 			<td>
 				<table>
 					<thead>
@@ -35,7 +35,7 @@
 					</tbody>				
 				</table>
 			</td>
-			{% endfor %}
+			
 		</tr>
 	
 	<tbody>
