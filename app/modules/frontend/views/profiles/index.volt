@@ -3,7 +3,7 @@
 <div class="ceElement large">
 <h1>{{tr('profiles')}}</h1>
 <div class="dataTables_wrapper">
-<table  class="display dataTable">
+<table  class="display dataTable multiple">
 	
 		<tr>
 			
@@ -38,8 +38,6 @@
 			{% endfor %}
 		</tr>
 	
-	<tbody>
 	
-	</tbody>
 </table>
 </div>

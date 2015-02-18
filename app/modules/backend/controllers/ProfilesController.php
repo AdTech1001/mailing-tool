@@ -18,6 +18,7 @@ class ProfilesController extends ControllerBase
 	public function indexAction(){
 		
 		$this->assets->addJs('js/vendor/profilesInit.js');
+		$this->assets->addCss('css/jquery.dataTables.css');
 		$profiles=  Profiles::find(array(
 			'conditions' => 'deleted=0 AND hidden =0'
 		));
@@ -100,6 +101,7 @@ class ProfilesController extends ControllerBase
 			die();
 		}else{
 			$this->assets->addJs('js/vendor/profilesInit.js');
+			$this->assets->addCss('css/jquery.dataTables.css');
 			$profileUid = $this->dispatcher->getParam("uid");
 			$profile = Profiles::findFirstByUid($profileUid);
 			
