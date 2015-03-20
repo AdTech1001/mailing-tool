@@ -78,6 +78,10 @@ class Acl extends Component
 			'update',
 			'delete'
 		),
+		'images' => array(
+			'index',
+			'create'
+		),
 		'session'=>array()
     );
 	
