@@ -83,11 +83,11 @@ var pollForTinymce=function(){
 			plugins: [
 				"customem advlist autolink lists link image charmap print preview anchor",
 				"searchreplace visualblocks code fullscreen",
-				"insertdatetime media table contextmenu paste"
+				"insertdatetime media table contextmenu paste jbimages"
 			],
 			extended_valid_elements : "dynamic",
 			custom_elements: "~dynamic",			
-			toolbar: "customem | insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | code"
+			toolbar: "customem | insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image jbimages | code"
 		});
 		
 		
