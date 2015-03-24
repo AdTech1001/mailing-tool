@@ -66,6 +66,7 @@ $messages = array(
 	"templateNameLabel" => "template title",
 	"templateSourceLabel" => "source code",
 	"templateFilepathLabel" => "add thumbnail",
+	"csv" => "select CSV file",
 	"selectTemplateLabel" => "Please select a template",
 	"nameLabel" => "title",
 	"dropImageText" => "drag & drop images",

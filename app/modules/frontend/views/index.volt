@@ -18,7 +18,7 @@
 		{{ stylesheet_link('css/jsplumb.css') }}
         {{ stylesheet_link('css/main.css') }}     
 		{{ assets.outputCss() }}
-		{{ javascript_include('js/vendor/modernizr-2.6.2.min.js') }}     
+		
 		<script data-main="{{ baseurl }}js/vendor/plugins" src="{{ baseurl }}js/require.js"></script>
 		{{ assets.outputJs() }}
 		

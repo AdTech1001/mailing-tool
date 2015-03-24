@@ -23,7 +23,7 @@
     {{ select_static('divider', [ '0' : '; ('~tr('semicolon')~')', '1' : ', ('~tr('comma')~')','2': ': ('~tr('colon')~')', '3':'	 ('~tr('tabs')~')']) }}
 	
 	<br><br>
-<label>{{ tr('templateFilepathLabel')}}</label><br>
+<label>{{ tr('csv')}}</label><br>
 {{ file_field("addresslistFile") }}
 <br><br>
 

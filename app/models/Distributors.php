@@ -41,12 +41,14 @@ class Distributors extends Model{
 		$where='';
 		foreach($segments as $segment){
 			$conditions=$segment->getConditions();			
+			
 			if(count($conditions) > 0){
-				$where.=' AND (';
+				
 				
 				foreach($conditions as $condition){
 					
 					if($condition->field !== 'searchterm'  && $condition->field !== 'pid'){
+						$where.=' AND (';
 						switch($condition->field){
 							case 'firstname':
 								$fieldname='first_name';
@@ -61,6 +63,7 @@ class Distributors extends Model{
 						$bindArray[$condition->field.$bindCounter]=$condition->searchvalue;
 						$where .=$fieldname.' LIKE :'.$condition->field.$bindCounter.':';
 						$bindCounter++;
+						$where.=')';
 					}elseif($condition->field === 'pid'){
 						$pids[]=$condition->searchvalue;
 					}elseif($condition->field === 'searchterm'){
@@ -68,7 +71,7 @@ class Distributors extends Model{
 					}
 					
 				}
-				$where.=')';
+				
 			}
 			
 		}

@@ -1,7 +1,8 @@
 var viewportW = Math.max(document.documentElement.clientWidth, window.innerWidth || 0)
 var viewportH = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
-var baseurl=document.getElementById('baseurl').value;
+var baseurl;
 function init(jQuery){
+	baseurl=document.getElementById('baseurl').value;
 	jQuery('body').append('<div id="loadingimg"><h3>Einen Moment bitte</h3><div><img src="'+baseurl+'public/images/ajax-loader.gif"></div></<div>');
 	jQuery('body').append('<div id="tooltipOverlay"></div>');
 	//jQuery.address.init().bind('change', navigation);
@@ -109,6 +110,7 @@ var ajaxIt=function(controller,action,formdata,successhandler, parameters){
 };
 
 $(document).ready(function(jQuery){
+	
 	init(jQuery);
 	
 });
