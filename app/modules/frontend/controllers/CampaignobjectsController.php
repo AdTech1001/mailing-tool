@@ -183,6 +183,7 @@ class CampaignobjectsController extends ControllerBase
 					'hidden' =>1
 				));
 				$object->update();
+				$this->removePreviousObjectsFromCampaign($object->uid);
 			}
 			die();
 		}
@@ -260,7 +261,7 @@ class CampaignobjectsController extends ControllerBase
 							'campaignuid'=>$campaignobjectRecord->uid,						
 							'mailobjectuid'=>intval($rawArray['mailobjectuid']),
 							'configurationuid'=>intval($rawArray['configurationuid']),
-							'subject'=>$rawArray['subject'],
+							'subject'=>$rawArray['subject'] ? $rawArray['subject'] : 'undefined',
 							'abtest'=>intval($rawArray['abtest']),
 							'distributoruid'=>intval($rawArray['distributoruid']),
 							'domid'=>$rawArray['id']
@@ -276,7 +277,7 @@ class CampaignobjectsController extends ControllerBase
 								'cruser_id' =>$this->session->get('auth')['uid'],														
 								'mailobjectuid'=>intval($rawArray['mailobjectuid']),
 								'configurationuid'=>intval($rawArray['configurationuid']),
-								'subject'=>$rawArray['subject'],
+								'subject'=>$rawArray['subject'] ? $rawArray['subject'] : 'undefined',
 								'abtest'=>intval($rawArray['abtest']),
 								'distributoruid'=>intval($rawArray['distributoruid'])							
 							));
