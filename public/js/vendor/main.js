@@ -22,11 +22,11 @@ function init(jQuery){
 		
 		if(jQuery(this).hasClass('active')){
 			jQuery(this).removeClass('active');
-			jQuery('[name="templateobject"').val(0);
+			jQuery('#templateobject').val(0);
 		}else{
 			var templateobject=jQuery(this).attr('data-uid');
 			jQuery(this).addClass('active');
-			jQuery('[name="templateobject"').val(templateobject);
+			jQuery('#templateobject').val(templateobject);
 		}
 		
 	});

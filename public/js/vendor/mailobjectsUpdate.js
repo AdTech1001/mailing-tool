@@ -104,6 +104,10 @@ function pluginInit(){
 	/*jQuery('.editable p, .editable a, .editable img, .editable h1, .editable h2, .editable h3, .editable h4, .editable h5, .editable h6').each(function(index,element){
 		jQuery(element).attr('contenteditable','true');
 	});*/
+	var cElementsOffset=jQuery('.tabsWrapper').offset();
+	var editFrameOffset=jQuery('#editFrame').offset();
+	jQuery('.tabsWrapper').height(jQuery(window).height()-cElementsOffset.top-40);	
+	jQuery('#editFrame').height(jQuery(window).height()-editFrameOffset.top-20);	
 	lang=jQuery('#lang').val();
 	var  arrangeMode=function(){
 		

@@ -1001,7 +1001,7 @@ nav ul li a{
 	background:#e3e3e3;
 	top:0px;
 	right:0px;
-	height:100%;	
+	
 	width:450px;		
 	box-shadow: 0px 0px 10px 2px rgba(78,78,78,1);
 	position:absolute;
@@ -1313,14 +1313,14 @@ table.maintable tr.odd td{
 }
 #desktop{
 	position:relative;
-	
+	top:-60px;
 }
 #editFrameWrapper{
 	float:left;
 	box-shadow: 0px 0px 10px 2px rgba(78,78,78,1);
 }
 #editFrame{
-	
+	overflow: scroll;
 	
 }
 .editable{
@@ -1336,7 +1336,7 @@ table.maintable tr.odd td{
 	width:100%;
 	box-shadow: 0px 2px 5px 0px rgba(0,0,0,1);
 	display:inline-block;
-	float:left;
+	
 	position: relative;
 	background:#01994e;
 	height:50px;

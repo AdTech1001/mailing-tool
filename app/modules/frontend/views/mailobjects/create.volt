@@ -25,7 +25,7 @@
 			</ul>			
 			</div>
 			<div class="clearfix"></div>
-		<input type="hidden" name="templateobject" value="0">
+		<input type="hidden" id="templateobject" name="templateobject" value="0">
 		<input type="submit" value="{{ tr('ok') }}">
 		</form>
 		{%- endif -%}

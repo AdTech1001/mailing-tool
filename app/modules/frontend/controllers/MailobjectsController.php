@@ -80,6 +80,7 @@ class MailobjectsController extends ControllerBase
 			 if (!$mailObject->save()) {
                 $this->flash->error($mailObject->getMessages());
             } else {
+				
 				if($templateUid !=0){
 				//$this->flash->success("successfully created");
 				$mainTemplate='../app/modules/frontend/templates/main.volt';

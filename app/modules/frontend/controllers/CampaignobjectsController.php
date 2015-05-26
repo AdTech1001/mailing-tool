@@ -261,7 +261,7 @@ class CampaignobjectsController extends ControllerBase
 							'campaignuid'=>$campaignobjectRecord->uid,						
 							'mailobjectuid'=>intval($rawArray['mailobjectuid']),
 							'configurationuid'=>intval($rawArray['configurationuid']),
-							'subject'=>$rawArray['subject'] ? $rawArray['subject'] : 'undefined',
+							'subject'=>$rawArray['subject'] ? urldecode($rawArray['subject']) : 'undefined',
 							'abtest'=>intval($rawArray['abtest']),
 							'distributoruid'=>intval($rawArray['distributoruid']),
 							'domid'=>$rawArray['id']
@@ -277,7 +277,7 @@ class CampaignobjectsController extends ControllerBase
 								'cruser_id' =>$this->session->get('auth')['uid'],														
 								'mailobjectuid'=>intval($rawArray['mailobjectuid']),
 								'configurationuid'=>intval($rawArray['configurationuid']),
-								'subject'=>$rawArray['subject'] ? $rawArray['subject'] : 'undefined',
+								'subject'=>$rawArray['subject'] ? urldecode($rawArray['subject']) : 'undefined',
 								'abtest'=>intval($rawArray['abtest']),
 								'distributoruid'=>intval($rawArray['distributoruid'])							
 							));
@@ -324,7 +324,7 @@ class CampaignobjectsController extends ControllerBase
 								'campaignuid'=>$campaignobjectRecord->uid,						
 								'mailobjectuid'=>$rawArray['mailobjectB'],
 								'configurationuid'=>$rawArray['configurationuidB'],
-								'subject'=>$rawArray['subjectB'],
+								'subject'=>urldecode($rawArray['subjectB']),
 								'abtest'=>1,
 								'distributoruid'=>$sendoutobject->distributoruid,
 								'domid'=>$rawArray['id']
@@ -340,7 +340,7 @@ class CampaignobjectsController extends ControllerBase
 									'cruser_id' =>$this->session->get('auth')['uid'],														
 									'mailobjectuid'=>intval($rawArray['mailobjectB']),
 									'configurationuid'=>intval($rawArray['configurationuidB']),
-									'subject'=>$rawArray['subjectB'],
+									'subject'=>urldecode($rawArray['subjectB']),
 									'abtest'=>1,
 									'distributoruid'=>intval($rawArray['distributoruid'])
 								));
