@@ -7,7 +7,7 @@ namespace nltool\Modules\Modules\Frontend\Controllers;
  *
  * @package baywa-nltool\Controllers
  */
-class ImagesController extends ControllerBase
+class FilesController extends ControllerBase
 {
 
 	public function indexAction(){
@@ -28,11 +28,17 @@ class ImagesController extends ControllerBase
 						$nameArray=explode('.',$file->getName());
 						$filetype=$nameArray[(count($nameArray)-1)];
 						$filename=$nameArray[0].'_'.time().'.'.$filetype;
-						$file->moveTo('../public/images/media/'.$filename);
+						$file->moveTo('../public/media/'.$filename);
 						
 						
               }
-			     
-		$this->view->setVar('filename','http://'.$_SERVER["SERVER_NAME"].$this->baseUri.'public/images/media/'.$filename);
+		
+		if(strlen($this->request->getPost("linktext"))>0){
+			$linktext=$this->request->getPost("linktext");
+		}else{
+			$linktext=$filename;
+		}
+		$this->view->setVar('linktext',$linktext);
+		$this->view->setVar('filename','http://'.$_SERVER["SERVER_NAME"].$this->baseUri.'public/media/'.$filename);
 	}
 }

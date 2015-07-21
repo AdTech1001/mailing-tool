@@ -82,6 +82,10 @@ class Acl extends Component
 			'index',
 			'create'
 		),
+		'files' => array(
+			'index',
+			'create'
+		),
 		'session'=>array()
     );
 	

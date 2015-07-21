@@ -42,7 +42,7 @@ tinymce.PluginManager.add('jbimages', function(editor, url) {
 
 	// Adds a menu item to the tools menu
 	editor.addMenuItem('jbimages', {
-		text: 'Upload image',
+		text: 'Bild hochladen',
 		icon : 'image',
 		context: 'insert',
 		onclick: jbBox
