@@ -10,8 +10,7 @@ require.config({
         // js/lib/jquery-1.9.0.js, relative to
         // the HTML page.
         jquery: 'jquery-1.11.1.min',//'jquery-1.10.2.min',
-		jqueryui:'jquery-ui.min',
-		jqueryaddress:'jquery.address',
+		jqueryui:'jquery-ui.min',		
 		main: 'main',
 		bootstrap: 'bootstrap.min',
 		jsplumb:'dom.jsPlumb-1.6.4',
@@ -22,15 +21,14 @@ require.config({
 		addresses:'addresses',
 		addressfolders:'addressfolders',
 		segmentobjects:'segmentobjects',
-		datatables:'jquery.dataTables'		
+		datatables:'jquery.dataTables',
+		profiles:'profiles'
     }
 });
 
 require(['jquery'], function( jQuery ) {
 	require(['jqueryui']);
-	require(['jqueryaddress'],function(){
-		require(['main']);
-	});
+	require(['main']);	
     
 	require(['bootstrap']);
 	

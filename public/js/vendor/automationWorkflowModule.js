@@ -350,7 +350,7 @@ function Save() {
 		var conditionsJson=getSendoutObjectConditions(elementsPathArr[i]);
 		var clickCondTrue=getSendoutObjectClickConditionsTrue(elementsPathArr[i]);
 		var clickCondFalse=getSendoutObjectClickConditionsFalse(elementsPathArr[i]);
-		var elementJson='{"id":"'+elementsPathArr[i]+'","mailobjectuid":'+jQuery(confValues[0]).val()+',"configurationuid":'+jQuery(confValues[1]).val()+',"tstamp":"'+jQuery(confValues[2]).val()+'","subject":"'+jQuery(confValues[3]).val()+'","configurationuidB":'+jQuery(confValues[4]).val()+',"tstampB":"'+jQuery(confValues[5]).val()+'","subjectB":"'+jQuery(confValues[6]).val()+'","abtest":'+jQuery(confValues[7]).val()+',"distributoruid":'+jQuery(confValues[8]).val()+',"mailobjectB":'+jQuery(confValues[9]).val()+',"position":{"left":'+jQuery('#'+elementsPathArr[i]).position().left+',"top":'+jQuery('#'+elementsPathArr[i]).position().top+'}, "conditions":'+conditionsJson+',"clickconditionstrue":'+clickCondTrue+',"conditionsfalse":'+clickCondFalse+'}';
+		var elementJson='{"id":"'+elementsPathArr[i]+'","mailobjectuid":'+jQuery(confValues[0]).val()+',"configurationuid":'+jQuery(confValues[1]).val()+',"tstamp":"'+jQuery(confValues[2]).val()+'","subject":"'+encodeURIComponent(jQuery(confValues[3]).val())+'","configurationuidB":'+jQuery(confValues[4]).val()+',"tstampB":"'+jQuery(confValues[5]).val()+'","subjectB":"'+encodeURIComponent(jQuery(confValues[6]).val())+'","abtest":'+jQuery(confValues[7]).val()+',"distributoruid":'+jQuery(confValues[8]).val()+',"mailobjectB":'+jQuery(confValues[9]).val()+',"position":{"left":'+jQuery('#'+elementsPathArr[i]).position().left+',"top":'+jQuery('#'+elementsPathArr[i]).position().top+'}, "conditions":'+conditionsJson+',"clickconditionstrue":'+clickCondTrue+',"conditionsfalse":'+clickCondFalse+'}';
 		sendoutobjectelements+='&sendoutobjectelements[]='+elementJson;
 		
 
@@ -530,10 +530,10 @@ jQuery('#mailobjectSelect button.ok').click(function(e){
 	jQuery(elementDefinition[0]).val(jQuery('#mailobjectSelectElements').val());
 	jQuery(elementDefinition[1]).val(jQuery('#configurationobjectSelect').val());
 	jQuery(elementDefinition[2]).val(jQuery('#datepicker').val());
-	jQuery(elementDefinition[3]).val(jQuery('#subject').val());
+	jQuery(elementDefinition[3]).val(encodeURIComponent(jQuery('#subject').val()));
 	jQuery(elementDefinition[4]).val(jQuery('#configurationobjectSelectB').val());
 	jQuery(elementDefinition[5]).val(jQuery('#datepickerB').val());
-	jQuery(elementDefinition[6]).val(jQuery('#subjectB').val());
+	jQuery(elementDefinition[6]).val(encodeURIComponent(jQuery('#subjectB').val()));
 	var abtest=0;
 	if(jQuery('#abtestChecker').is(':checked')){
 	abtest=1;
@@ -592,10 +592,10 @@ var selectConfigurationobject= function(data){
 		jQuery('#mailobjectSelectElements').val(jQuery(activeElCurState[0]).val());
 		jQuery('#configurationobjectSelect').val(jQuery(activeElCurState[1]).val());
 		jQuery('#datepicker').val(jQuery(activeElCurState[2]).val());
-		jQuery('#subject').val(jQuery(activeElCurState[3]).val());
+		jQuery('#subject').val(decodeURIComponent(jQuery(activeElCurState[3]).val()));
 		jQuery('#configurationobjectSelectB').val(jQuery(activeElCurState[4]).val());
 		jQuery('#datepickerB').val(jQuery(activeElCurState[5]).val());
-		jQuery('#subjectB').val(jQuery(activeElCurState[6]).val());
+		jQuery('#subjectB').val(decodeURIComponent(jQuery(activeElCurState[6]).val()));
 		if(jQuery(activeElCurState[7]).val()==1){
 			document.getElementById('abtestChecker').checked=true;
 			jQuery('#btestForm').removeClass('hidden');
@@ -865,6 +865,8 @@ function pluginInit(){
 			jQuery('#'+deleteElId).remove();
 		}
 	});
+	
+
 	
 }
 jQuery( "#campaignCreateElements .window" ).draggable({

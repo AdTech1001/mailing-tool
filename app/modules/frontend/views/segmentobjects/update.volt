@@ -2,12 +2,13 @@
 {{ content() }}
 <div class="container">
 	{%- if session.get('auth') -%}
-<div id="menuWrapper" class="clearfix">
-<div id="fileToolBar"><div class="glyphicon glyphicon-floppy-save" id="segmentUpdate" data-controller="campaign" data-action="update" title="{{ tr('save') }}"></div></div>
-</div>	
+
 
 <div class="ceElement medium">
 	<h1>{{tr('segmentobject')}}: {{segmentobject.title}}</h1>
+	<div id="menuWrapper" class="clearfix">
+<div id="fileToolBar"><div class="glyphicon glyphicon-floppy-save" id="segmentUpdate" data-controller="campaign" data-action="update" title="{{ tr('save') }}"></div></div>
+</div>	
 	<div class='listelementContainer'>
 		<div id="filters">
 			<label>{{ tr('title') }} </label>

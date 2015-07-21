@@ -77,6 +77,7 @@ function pluginInit(){
 			 "fnServerParams": function ( aoData ) {
 				 
 				 for(filter in filters){					 
+					 
 					 if(filters[filter] !=''){
 						 aoData.push( { "name": filter,"value":filters[filter]} );				 
 					 }
@@ -111,6 +112,7 @@ function pluginInit(){
 					 aoData.push({"name":"stateObject","value":stateObject});
 					 save=false;
 				 }
+				 
 				 if(update){
 					 					 
 					 aoData.push({"name":"update","value":1});
@@ -140,7 +142,7 @@ function pluginInit(){
 		dt.fnDraw();
 	});
 	
-	jQuery('#filterset input[type="text"]').change(function(){
+	jQuery('.filterSet input[type="text"]').change(function(){
 		var filtername=jQuery(this).attr('name');
 		filters[filtername]=jQuery(this).val()		
 		dt.fnDraw();

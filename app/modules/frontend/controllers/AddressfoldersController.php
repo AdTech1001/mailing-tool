@@ -232,7 +232,7 @@ class AddressfoldersController extends ControllerBase
 							
 						}
 						$this->response->redirect($this->view->language.'/addressfolders/update/'.$addressfolder->uid.'/'); 
-					
+					$this->view->disable(); 
 
 
 				}

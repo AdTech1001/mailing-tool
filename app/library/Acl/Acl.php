@@ -78,6 +78,14 @@ class Acl extends Component
 			'update',
 			'delete'
 		),
+		'images' => array(
+			'index',
+			'create'
+		),
+		'files' => array(
+			'index',
+			'create'
+		),
 		'session'=>array()
     );
 	
@@ -138,7 +146,14 @@ class Acl extends Component
 		
         return $this->getAcl()->isAllowed($profile, $controller, $action);
     }
-
+	
+	public static function linkAllowed($auth,$controller,$action){
+		
+		$acl=new Acl();
+		
+		return $acl->getAcl()->isAllowed($auth['profile'], $controller, $action);
+	}
+	
     /**
      * Returns the ACL list
      *

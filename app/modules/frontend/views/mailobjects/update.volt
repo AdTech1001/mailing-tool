@@ -36,6 +36,7 @@
 	</div>
 	</div>
 	<div id="right">
+		<div id="fixedCElementWrapper">
 		<h1>{{ tr('contentElements') }}</h1>
 	<div id="contentElements" >
 		<div class="desktopHeader">
@@ -80,6 +81,7 @@
 			</div>
 			{% endif %}
 			{% endfor %}
+		</div>
 		</div>
 		</div>
 	</div>	

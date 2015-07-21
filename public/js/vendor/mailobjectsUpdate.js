@@ -83,11 +83,21 @@ var pollForTinymce=function(){
 			plugins: [
 				"customem advlist autolink lists link image charmap print preview anchor",
 				"searchreplace visualblocks code fullscreen",
-				"insertdatetime media table contextmenu paste"
+				"insertdatetime media table contextmenu paste jbimages fileupload"
 			],
 			extended_valid_elements : "dynamic",
 			custom_elements: "~dynamic",			
-			toolbar: "customem | insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | code"
+			toolbar: "customem | insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link | code",
+			style_formats: [
+			{
+				title: 'Set Link Color',
+				selector: 'a',
+				styles: {
+					'color': '#01994e'
+					
+				}
+			 }
+]
 		});
 		
 		
@@ -104,6 +114,10 @@ function pluginInit(){
 	/*jQuery('.editable p, .editable a, .editable img, .editable h1, .editable h2, .editable h3, .editable h4, .editable h5, .editable h6').each(function(index,element){
 		jQuery(element).attr('contenteditable','true');
 	});*/
+	var cElementsOffset=jQuery('.tabsWrapper').offset();
+	var editFrameOffset=jQuery('#editFrame').offset();
+	jQuery('.tabsWrapper').height(jQuery(window).height()-cElementsOffset.top-40);	
+	jQuery('#editFrame').height(jQuery(window).height()-editFrameOffset.top-20);	
 	lang=jQuery('#lang').val();
 	var  arrangeMode=function(){
 		

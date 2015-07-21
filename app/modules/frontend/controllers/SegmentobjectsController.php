@@ -160,6 +160,7 @@ class SegmentobjectsController extends ControllerBase
 		foreach($aColumns as $filterKey => $filtername){
 			
 			if(null!==$this->request->getPost($filtername)){
+				
 			$filterArray=explode(',',$this->request->getPost($filtername));
 			
 			$filters.=' AND (';
@@ -175,8 +176,9 @@ class SegmentobjectsController extends ControllerBase
 		}
 		}
 		
+		$usergroup=$this->session->get('auth');
+		$sWhere = "WHERE deleted=0 AND hidden=0 AND usergroup = ".$usergroup['usergroup'].$insStrng.$filters;
 		
-		$sWhere = "WHERE deleted=0 AND hidden=0".$insStrng.$filters;
 		if ( isset($_POST['sSearch']) && $_POST['sSearch'] != "" )
 		{
 			$filterFieldsArray['searchterm']=$_POST['sSearch'];
