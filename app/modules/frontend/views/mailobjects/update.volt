@@ -17,7 +17,7 @@
 		
 		<div id="activityModeBar" class="desktopHeader">
 			<div class="modes">
-				<span class="mode active" data-mode="arrange" style="margin-right:50px;margin-left:10px;">{{ tr('mailUpdateModeArrange') }}</span>
+				<span class="mode active" data-mode="arrange" style="margin-right:1vw;margin-left:0.5vw;">{{ tr('mailUpdateModeArrange') }}</span>
 				<span class="mode inactive" data-mode="edit">{{ tr('mailUpdateModeEdit') }}</span>
 			</div>
 			<div id="fileToolBar">
@@ -41,8 +41,8 @@
 	<div id="contentElements" >
 		<div class="desktopHeader">
 			<div class="modes">
-				<span class="cemode active" data-mode="ce-template" style="margin-right:50px;margin-left:10px;">{{ tr('templatedCElementsTitle') }}</span>
-				<span class="cemode inactive" style="margin-right:50px;margin-left:10px;" data-mode="ce-dynamic">{{ tr('dynamicCElementsTitle') }}</span>
+				<span class="cemode active" data-mode="ce-template" style="margin-right:1vw;margin-left:0.1vw;">{{ tr('templatedCElementsTitle') }}</span>
+				<span class="cemode inactive" style="margin-right:1vw;margin-left:0.1vw;" data-mode="ce-dynamic">{{ tr('dynamicCElementsTitle') }}</span>
 				<span class="cemode inactive" data-mode="ce-recent">{{ tr('recentCElementsTitle') }}</span>
 			</div>
 		</div>
