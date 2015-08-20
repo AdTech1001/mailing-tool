@@ -161,7 +161,7 @@ class TemplateobjectsController extends ControllerBase
 				$counter=0;
 				foreach ($images as $image) {
 						$src=$image->getAttribute('src');
-						if(substr($src,0,7)=='http://'){
+						if(substr($src,0,4)=='http'){
 							$path='../public/images/templates/template_mail_'.$uid;
 							if (!is_dir($path)) {
 								// dir doesn't exist, make it

@@ -16,6 +16,7 @@ return new \Phalcon\Config(array(
 		'formsDir'     => APP_PATH . '/app/forms',
 		'backendDir'     => APP_PATH . '/app/modules/backend/',
 		'backendControllersDir'     => APP_PATH . '/app/modules/backend/controllers',
+		'backendViewsDir'       => APP_PATH . '/app/modules/backend/views/',
 		'appsDir' => APP_PATH.'/app/',
         'development'    => array(
             'staticBaseUri' => '/baywa-nltool/',

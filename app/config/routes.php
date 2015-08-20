@@ -363,7 +363,15 @@ $router->add(
 	)
 );
 
-
+$router->add(
+	'/backend', 
+	array(		
+		'controller' => 'index',
+		'action' => 'index',		
+		'module'=>'backend',
+		'namespace'  => 'nltool\Modules\Modules\Backend\Controllers',
+	)
+);
 
 
 $router->handle();

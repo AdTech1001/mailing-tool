@@ -15,7 +15,7 @@
 	
 	<br><br>	
 	<label>{{ tr('dateFieldsWrapped') }}</label><br>
-    {{ select_static('dataFieldWrap', [ '0' : '" ('~tr('quotesign')~")", '1' : "' ("~tr('invertedcomma')~")"]) }}
+    {{ select_static('dataFieldWrap', [ '0' : tr('none'), '1' : '" ('~tr('quotesign')~")", '2' : "' ("~tr('invertedcomma')~")"]) }}
 
 	
 	<br><br>

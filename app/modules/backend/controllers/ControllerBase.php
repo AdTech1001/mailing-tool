@@ -1,13 +1,19 @@
 <?php
 namespace nltool\Modules\Modules\Backend\Controllers;
+
 use Phalcon\Mvc\Controller as Controller,
 	Phalcon\Mvc\Dispatcher,
 	Phalcon\DI\FactoryDefault as PhDi,
+	Phalcon\Exception,
 	nltool\Models\Languages as Languages;
 
 class ControllerBase extends Controller
 {
 	public function initialize(){
+		
+		if(intval($this->session->get('auth')['superuser'])!==1){			
+			throw new Exception('Access denied');
+		}
 		$conditions = "deleted = :deleted: AND hidden = :hidden:";
 		$parameters = array(
 			"deleted" => 0,
