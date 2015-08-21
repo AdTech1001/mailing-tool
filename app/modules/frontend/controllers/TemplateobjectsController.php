@@ -1,8 +1,10 @@
 <?php
 namespace nltool\Modules\Modules\Frontend\Controllers;
 use nltool\Models\Templateobjects as Templateobjects,
+	nltool\Models\Usergroups as Usergroups,
 	nltool\Forms\TemplateobjectsForm as TemplateobjectsForm,			
 	Phalcon\Tag,
+	Phalcon\Image,
 	Phalcon\Image\Adapter\GD as GDAdapter,		
 	DOMDocument as DOMDocument;
 		
@@ -68,6 +70,8 @@ class TemplateobjectsController extends ControllerBase
 				'templatetype' => $_POST['templatetype'],
 			));
 			
+			$usergroupObj=Usergroups::findFirstByUid($this->session->get('auth')['usergroup']);
+			$templateObject->usergroups=$usergroupObj;
 			
 			 if (!$templateObject->save()) {
                 $this->flash->error($templateObject->getMessages());
@@ -204,10 +208,10 @@ class TemplateobjectsController extends ControllerBase
 						$saveFilename='public/images/templateThumbnails/template_'.$uid.'_S.'.$filetype;
 						
 						$imageS = new GDAdapter($tmpFile);
-						$imageS->resize(300);
+						$imageS->resize(300,10000);
 						$imageS->save($thumbFilenameS);
 						$imageL = new GDAdapter($tmpFile);
-						$imageL->resize(600);
+						$imageL->resize(600,10000);
 						$imageL->save($thumbFilenameL);
                       
 						 unlink($tmpFile);

@@ -1322,6 +1322,9 @@ table.maintable tr.odd td{
 	float:left;
 	box-shadow: 0px 0px 10px 2px rgba(78,78,78,1);
 }
+#editFrameWrapper a{
+	color:#0000EE;
+}
 #editFrame{
 	overflow: scroll;
 	width:39vw;

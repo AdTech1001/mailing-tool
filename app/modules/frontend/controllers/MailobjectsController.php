@@ -1,6 +1,7 @@
 <?php
 namespace nltool\Modules\Modules\Frontend\Controllers;
 use Phalcon\Tag,
+	nltool\Models\Usergroups as Usergroups,
 	nltool\Models\Templateobjects as Templateobjects,
 	nltool\Models\Mailobjects as Mailobjects,
 	nltool\Models\Contentobjects as Contentobjects,
@@ -124,18 +125,20 @@ class MailobjectsController extends ControllerBase
 			
 			
 		}else{
+			$usergroup=Usergroups::findFirstByUid($this->session->get('auth')['usergroup']);
 		
-		
-			$templateobjects = Templateobjects::find(array(
-				"conditions" => "hidden=0 AND deleted=0 AND templatetype = ?1 AND usergroup =?2",
-				"bind" => array(1 => '0',
-								2=> $this->session->get('auth')['usergroup'])
+			$templateobjects = $usergroup->getTemplateobjects(array(
+				"conditions" => "hidden=0 AND deleted=0 AND templatetype = ?1",
+				"bind" => array(1 => '0'
+					),
+				"group" => "uid_local"
 				));
 			$environment= $this->config['application']['debug'] ? 'development' : 'production';
 			$baseUri=$this->config['application'][$environment]['staticBaseUri'];
 			$this->view->setVar('httphost','http://'.$this->request->getHttpHost());
 			$thumbnailSm=array();
 			foreach($templateobjects as $templateobject){
+				
 				$thumbnailSmArray=explode('_',$templateobject->templatefilepath);
 				$fileType=explode('.',$thumbnailSmArray[2]);
 				
@@ -266,10 +269,16 @@ class MailobjectsController extends ControllerBase
 				"order" => "templateposition ASC, positionsorting ASC"
 				
 			));
-			$templatedContentObjects=  Templateobjects::find(array(
-					"conditions" => "deleted = 0 AND hidden=0 AND usergroup=?1 AND templatetype = 1",
-					"bind" => array(1 => $this->session->get('auth')['usergroup'])
-					));
+			
+			$usergroup=Usergroups::findFirstByUid($this->session->get('auth')['usergroup']);
+		
+			$templatedContentObjects = $usergroup->getTemplateobjects(array(
+				"conditions" => "hidden=0 AND deleted=0 AND templatetype = ?1",
+				"bind" => array(1 => '1'
+					),
+				"group" => "uid_local"
+				));
+			
 			
 			$availableContentObject=  Contentobjects::find(array(
 				"conditions" => "deleted = 0 AND hidden=0 AND contenttype=0 AND usergroup=?1",
