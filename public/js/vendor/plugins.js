@@ -13,7 +13,7 @@ require.config({
 		jqueryui:'jquery-ui.min',		
 		main: 'main',
 		bootstrap: 'bootstrap.min',
-		jsplumb:'dom.jsPlumb-1.6.4',
+		jsplumb:'dom.jsPlumb-1.7.8',
 		plumbscript:'automationWorkflowModule',
 		mailobjectsUpdate: 'mailobjectsUpdate',
 		tinymce:'tinymce.min',

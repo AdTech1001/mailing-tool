@@ -58,6 +58,8 @@ class Triggerauth extends Controller
 				return false;
 			}*/
 			
-			
+			$this->view->setVar('controller', '');
+		$this->view->setVar('language', '');
+		
 	}
 }

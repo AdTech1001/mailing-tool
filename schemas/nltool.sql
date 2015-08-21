@@ -541,6 +541,14 @@ CREATE TABLE configurationobjects_feusers_lookup (
   PRIMARY KEY (uid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+DROP TABLE IF EXISTS templateobjects_usergroups_lookup;
+CREATE TABLE templateobjects_usergroups_lookup (
+	uid int(11) NOT NULL auto_increment,		
+	uid_local int(11) DEFAULT '0' NOT NULL,
+	uid_foreign int(11) DEFAULT '0' NOT NULL,		
+  PRIMARY KEY (uid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
 DROP TABLE IF EXISTS addressfolders;
 CREATE TABLE addressfolders (
 	uid int(11) NOT NULL auto_increment,

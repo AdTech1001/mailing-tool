@@ -80,4 +80,8 @@ class Templateobjects extends Model
      * @var integer
      */
     public $templatetype;
+	
+	public function initialize(){
+		$this->hasManyToMany("uid", "nltool\Models\Templateobjects_usergroups_lookup", "uid_local", "uid_foreign", "nltool\Models\Usergroups", "uid",array('alias' => 'usergroups'));
+	}
 }

@@ -22,7 +22,7 @@ var mainflowConnector = {
 	anchor:"Right",
 	paintStyle:{ fillStyle:color1, opacity:0.5 },
 	isSource:true,
-	scope:'red',
+	scope:"red",
 	connectorStyle:{ strokeStyle:color1, lineWidth:3 },
 	connector : [ "Flowchart", { stub:[40, 60], gap:10, cornerRadius:5, alwaysRespectStubs:true } ],
 	isTarget:false,
@@ -40,7 +40,7 @@ var mainflowConnector2 = {
 	anchor:"Bottom",
 	paintStyle:{ fillStyle:color1, opacity:0.5 },
 	isSource:true,
-	scope:'red',
+	scope:"red",
 	connectorStyle:{ strokeStyle:color1, lineWidth:3 },
 	connector : [ "Flowchart", { stub:[40, 60], gap:10, cornerRadius:5, alwaysRespectStubs:true } ],
 	connectorOverlays : [
@@ -325,7 +325,8 @@ function Save() {
 	var campaignTitle=jQuery('#automationWorkflowForm').serialize();	
 	//var conditions=jQuery('#conditionsForm').serialize();
 	
-	var firstConn=instance.getConnections({scope:'red',source:'startpoint'});
+	var firstConn=instance.getConnections({scope:"red",source:'startpoint'});
+	console.log(firstConn);
 	elementsPathArr=[];
 	if(firstConn.length>0){
 	getPath(firstConn[0].targetId);		
@@ -783,10 +784,11 @@ function pluginInit(){
 			});	
 
 		instance.bind("connection", function(info) {
-			instance.repaintEverything();
-
-				updateConnections(info.connection, false);
-			//jsPlumb.connect({source:info.source, target:info.target})
+			info.connection.scope=info.sourceEndpoint.scope;
+			//instance.repaintEverything();			
+			updateConnections(info.connection, false);
+			
+			
 
 
 		});

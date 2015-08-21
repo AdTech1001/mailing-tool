@@ -10,5 +10,7 @@ use Phalcon\Mvc\Model;
 class Usergroups extends Model
 {
 
-  
+  public function initialize(){
+		$this->hasManyToMany("uid", "nltool\Models\Templateobjects_usergroups_lookup", "uid_foreign", "uid_local", "nltool\Models\Templateobjects", "uid",array('alias' => 'templateobjects'));
+	}
 }

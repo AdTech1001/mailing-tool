@@ -1,8 +1,10 @@
 <?php
 namespace nltool\Modules\Modules\Frontend\Controllers;
 use nltool\Models\Templateobjects as Templateobjects,
+	nltool\Models\Usergroups as Usergroups,
 	nltool\Forms\TemplateobjectsForm as TemplateobjectsForm,			
 	Phalcon\Tag,
+	Phalcon\Image,
 	Phalcon\Image\Adapter\GD as GDAdapter,		
 	DOMDocument as DOMDocument;
 		
@@ -15,17 +17,18 @@ class TemplateobjectsController extends ControllerBase
     public function indexAction()
     {
         
-        $pagetemplateobjects=Templateobjects::find(array(
-				"conditions" => "deleted=0 AND hidden=0 AND usergroup = ?1 AND templatetype=0",
-				"bind" => array(1 => $this->session->get('auth')['usergroup']),
+		$usergroup=Usergroups::findFirstByUid($this->session->get('auth')['usergroup']);
+        $pagetemplateobjects=$usergroup->getTemplateobjects(array(
+				"conditions" => "hidden=0 AND deleted=0 AND templatetype = 0",				
+				"group" => "nltool\Models\Templateobjects.uid",
 				"order" => "tstamp DESC"
-			));
+				));
 		
-		$contenttemplateobjects=Templateobjects::find(array(
-				"conditions" => "deleted=0 AND hidden=0 AND usergroup = ?1 AND templatetype=1",
-				"bind" => array(1 => $this->session->get('auth')['usergroup']),
+		$contenttemplateobjects= $usergroup->getTemplateobjects(array(
+				"conditions" => "hidden=0 AND deleted=0 AND templatetype = 1",				
+				"group" => "nltool\Models\Templateobjects.uid",
 				"order" => "tstamp DESC"
-			));
+				));
 		
 		$environment= $this->config['application']['debug'] ? 'development' : 'production';
 		$baseUri=$this->config['application'][$environment]['staticBaseUri'];
@@ -68,6 +71,8 @@ class TemplateobjectsController extends ControllerBase
 				'templatetype' => $_POST['templatetype'],
 			));
 			
+			$usergroupObj=Usergroups::findFirstByUid($this->session->get('auth')['usergroup']);
+			$templateObject->usergroups=$usergroupObj;
 			
 			 if (!$templateObject->save()) {
                 $this->flash->error($templateObject->getMessages());
@@ -204,10 +209,10 @@ class TemplateobjectsController extends ControllerBase
 						$saveFilename='public/images/templateThumbnails/template_'.$uid.'_S.'.$filetype;
 						
 						$imageS = new GDAdapter($tmpFile);
-						$imageS->resize(300);
+						$imageS->resize(300,10000);
 						$imageS->save($thumbFilenameS);
 						$imageL = new GDAdapter($tmpFile);
-						$imageL->resize(600);
+						$imageL->resize(600,10000);
 						$imageL->save($thumbFilenameL);
                       
 						 unlink($tmpFile);
