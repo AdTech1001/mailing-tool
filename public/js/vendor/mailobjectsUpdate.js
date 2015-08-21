@@ -88,6 +88,7 @@ var pollForTinymce=function(){
 			extended_valid_elements : "dynamic",
 			custom_elements: "~dynamic",			
 			toolbar: "customem | insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link | code",
+			style_formats_merge: true,
 			style_formats: [
 			{
 				title: 'Set Link Color',
