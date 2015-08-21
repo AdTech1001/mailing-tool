@@ -128,10 +128,7 @@ class MailobjectsController extends ControllerBase
 			$usergroup=Usergroups::findFirstByUid($this->session->get('auth')['usergroup']);
 		
 			$templateobjects = $usergroup->getTemplateobjects(array(
-				"conditions" => "hidden=0 AND deleted=0 AND templatetype = ?1",
-				"bind" => array(
-					1 => '0'
-					),
+				"conditions" => "hidden=0 AND deleted=0 AND templatetype = 0",				
 				"group" => "nltool\Models\Templateobjects.uid"
 				));
 			$environment= $this->config['application']['debug'] ? 'development' : 'production';
@@ -274,10 +271,8 @@ class MailobjectsController extends ControllerBase
 			$usergroup=Usergroups::findFirstByUid($this->session->get('auth')['usergroup']);
 		
 			$templatedContentObjects = $usergroup->getTemplateobjects(array(
-				"conditions" => "hidden=0 AND deleted=0 AND templatetype = ?1",
-				"bind" => array(1 => '1'
-					),
-				"group" => "uid_local"
+				"conditions" => "hidden=0 AND deleted=0 AND templatetype = 1",				
+				"group" => "nltool\Models\Templateobjects.uid"
 				));
 			
 			
