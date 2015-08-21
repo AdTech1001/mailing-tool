@@ -129,9 +129,10 @@ class MailobjectsController extends ControllerBase
 		
 			$templateobjects = $usergroup->getTemplateobjects(array(
 				"conditions" => "hidden=0 AND deleted=0 AND templatetype = ?1",
-				"bind" => array(1 => '0'
+				"bind" => array(
+					1 => '0'
 					),
-				"group" => "uid_local"
+				"group" => "nltool\Models\Templateobjects.uid"
 				));
 			$environment= $this->config['application']['debug'] ? 'development' : 'production';
 			$baseUri=$this->config['application'][$environment]['staticBaseUri'];
