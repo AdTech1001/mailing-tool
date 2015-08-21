@@ -21,14 +21,17 @@
 *{
 	margin:0;
 	padding:0;
-	font-family: "Arial";
+	font-family: Helvetica, Arial, sans-serif;
 	-webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
           box-sizing: border-box;
-		  font-size:12px;
+
 }
 body{
 	background:#e5e5e5;
+	font-size: 90%;
+    
+    line-height: 150%;
 }
 html,
 button,
@@ -45,7 +48,7 @@ textarea{
 	-ms-transition: all 0.2s ease-in-out;
 	-o-transition: all 0.2s ease-in-out;
 	transition: all 0.2s ease-in-out;
-	width:400px;
+	width:20vw;
 	padding:5px;
 	background: #f5f5f5;
 	border: 1px solid #ccc;		
@@ -979,7 +982,7 @@ border-radius: 4px;
 	position:relative;
 }
 nav ul li a{
-	font-size:1.3em;
+	font-size:1em;
 	color:#4e4e4e;
 }
 #left{
@@ -1002,12 +1005,12 @@ nav ul li a{
 	top:0px;
 	right:0px;
 	
-	width:450px;		
+	width:23vw;		
 	box-shadow: 0px 0px 10px 2px rgba(78,78,78,1);
 	position:absolute;
 }
 .ceElement{
-	margin-right:100px;
+	margin-right:5vw;
 	float:left;
 	position:relative;
 	background:#fff;
@@ -1024,10 +1027,10 @@ nav ul li a{
 	margin-bottom:10px;
 }
 .ceElement.small{
-	width:450px;
+	width:23vw;
 }
 .ceElement.medium{
-	width:750px;
+	width:39vw;
 }
 .ceElement.large{
 	width:90%;
@@ -1265,7 +1268,7 @@ table.maintable tr.odd td{
 	
 }
 #fileToolBar div{
-	font-size:1.5em;
+	font-size:1.3em;
 }
 #fileToolBar .glyphicon{
 	color:#fff;
@@ -1321,7 +1324,7 @@ table.maintable tr.odd td{
 }
 #editFrame{
 	overflow: scroll;
-	
+	width:39vw;
 }
 .editable{
 	width:auto;
@@ -1348,7 +1351,7 @@ table.maintable tr.odd td{
 }
 
 .modes span{
-	font-size: 1.2em;
+	font-size: 1em;
 	
 }
 .modes span:hover{
@@ -1501,7 +1504,7 @@ table#mapTable{
 		
 	}
 	#headerLeft{
-		height:130px;
+		/*height:130px;*/
 		/*background:#009149;*/
 		float:left;
 		/*box-shadow: 2px -2px 3px 0px rgba(78,78,78,0.5);*/
@@ -1525,14 +1528,14 @@ table#mapTable{
 	}
 	.navbar-nav{
 		float:none !important;
-		margin-left:135px;
+		margin-left:7vw;
 		margin-top:50px;
 	}
 	.container{
-		margin-left:130px;
+		margin-left:7vw;
 	}
 	header{
-		height:131px;
+		
 	}
 	.dropdown-menu {
 		position: absolute;		
@@ -1736,4 +1739,7 @@ table#mapTable{
     h3 {
         page-break-after: avoid;
     }
+}
+.dataTables_wrapper{
+	overflow-x:scroll;
 }

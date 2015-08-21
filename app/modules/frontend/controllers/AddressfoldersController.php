@@ -12,7 +12,11 @@ use nltool\Models\Addresses as Addresses,
 class AddressfoldersController extends ControllerBase
 {
 	public $_divider= array(';',',',':','	');
-	public $_dataWrap=array('"',"'");
+	public $_dataWrap=array(
+			0 => null,
+			1 => '"',
+			2 => "'"
+		);
 	public function indexAction(){
 		$environment= $this->config['application']['debug'] ? 'development' : 'production';
 			$baseUri=$this->config['application'][$environment]['staticBaseUri'];
@@ -77,18 +81,19 @@ class AddressfoldersController extends ControllerBase
 		$this->view->setVar('filehideshow','');
 		$this->view->setVar('maphideshow','hidden');
 		if($this->request->isPost()){			
+			
 			$this->view->setVar('filehideshow','hidden');
 			$this->view->setVar('maphideshow','');
 			
 			
 				if ($this->request->hasFiles() == true){
 					
-					$mimes = array('application/vnd.ms-excel','text/plain','text/csv','text/tsv');
+					$mimes = array('application/vnd.ms-excel','text/plain','text/csv','text/tsv','application/octet-stream');
 
 					$fileArray=$this->request->getUploadedFiles();
 					$file=$fileArray[0];
 					
-					if(in_array($file->getType(), $mimes)){
+					//if(in_array($file->getType(), $mimes)){
 						$nameArray=explode('.',$file->getName());
 						$filetype=$nameArray[(count($nameArray)-1)];
 						$tmpFile='../app/cache/tmp/'.$time.'_'.$file->getName();
@@ -98,13 +103,24 @@ class AddressfoldersController extends ControllerBase
 						if (($handle = fopen($tmpFile, "r")) !== FALSE) {
 							$fileRowField=array();
 							
-							if($this->request->hasPost('firstRowFieldNames')){
-								$data[$row] = fgetcsv($handle, 1000, $this->_divider[$this->request->getPost('divider')],$this->_dataWrap[$this->request->getPost('dataFieldWrap')]);
+							
+							
+							if($this->request->hasPost('firstRowFieldNames')){								
+								if($this->_dataWrap[$this->request->getPost('dataFieldWrap')]){
+									$data[$row] = fgetcsv($handle, 1000, $this->_divider[$this->request->getPost('divider')],$this->_dataWrap[$this->request->getPost('dataFieldWrap')]);
+								}else{
+									$data[$row] = fgetcsv($handle, 1000, $this->_divider[$this->request->getPost('divider')]);
+								}
 								$fileRowField=array_values($data[$row]);
 							}else{
 								
 								while($row < 3){
-									$data[$row] = fgetcsv($handle, 1000, $this->_divider[$this->request->getPost('divider')],$this->_dataWrap[$this->request->getPost('dataFieldWrap')]);																		
+									if($this->_dataWrap[$this->request->getPost('dataFieldWrap')]){
+										$data[$row] = fgetcsv($handle, 1000, $this->_divider[$this->request->getPost('divider')],$this->_dataWrap[$this->request->getPost('dataFieldWrap')]);
+									}else{
+										$data[$row] = fgetcsv($handle, 1000, $this->_divider[$this->request->getPost('divider')]);
+									}
+								
 									$row++;		
 								}
 								
@@ -121,7 +137,7 @@ class AddressfoldersController extends ControllerBase
 						}else{
 							die('Failed');
 						}					
-					}
+					//}
 					$this->view->setVar('divider',$this->request->getPost('divider'));
 					$this->view->setVar('dataFieldWrap',$this->request->getPost('dataFieldWrap'));
 					$this->view->setVar('tstamp',$time);

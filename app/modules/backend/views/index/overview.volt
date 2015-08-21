@@ -90,13 +90,5 @@
 		</div>
 		{% endif %}
 		
-		{% if session.get('auth')['superuser'] == 1 %}		
-		<div class="ceElement xs">
-			
-			<h1>{{ link_to('backend', tr('backend'), 'title': tr('backend')) }}
-			</h1>			
-			
-		</div>
-		{% endif %}
 	</div>
 </div>

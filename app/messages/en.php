@@ -233,7 +233,9 @@ $messages = array(
 	"mailConfiguration" =>"mailing configuration",
 	"reports" => "reports",
 	"general" => "general",
-	"suredel" => "Are you sure you want to delete the element?"
+	"suredel" => "Are you sure you want to delete the element?",
+	"backend" => "backend",
+	"none" => "none"
 	
 );
 

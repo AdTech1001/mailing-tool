@@ -83,7 +83,7 @@ class ReviewController extends ControllerBase
 			));
 			
 			if($this->session->get('auth')['superuser']==1){
-				if($this->request->getPost('reviewOverride')=='true'){
+				if($this->request->hasPost('reviewOverride')){
 					
 					$sendoutobject->assign(array(
 						'reviewed'=>$this->request->getPost('reviewOverride')=='true' ? 1 :0
@@ -96,7 +96,7 @@ class ReviewController extends ControllerBase
 					}
 				}
 
-				if($this->request->getPost('clearanceOverride')=='true'){
+				if($this->request->hasPost('clearanceOverride')=='true'){
 					$sendoutobject->assign(array(
 						'cleared'=>$this->request->getPost('clearanceOverride')=='true' ? 1 :0
 					));

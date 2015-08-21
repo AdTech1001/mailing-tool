@@ -237,6 +237,9 @@ $messages = array(
 	"mailConfiguration" =>"Mailing-Konfiguration",
 	"reports" => "Auswertung",
 	"general" => "Allgemein",
-	"suredel" => "Sind Sie sicher, dass Sie das Element endgültig löschen möchten?"
+	"suredel" => "Sind Sie sicher, dass Sie das Element endgültig löschen möchten?",
+	"backend" => "Backend",
+	"none" => "ohne"
+	
 );
 ?>
