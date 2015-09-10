@@ -163,7 +163,7 @@ class ReviewController extends ControllerBase
 				
 			}
 			
-			/*TODO das gleiche noch für clearance und dann checken, ob alle reviews versammelt sind und gegebenenfalls frei schalten*/
+			
 			
 			if($this->request->hasPost('cleared')){
 				$clearance=Review::findFirst(array(

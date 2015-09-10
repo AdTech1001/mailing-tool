@@ -221,7 +221,8 @@ class AddressfoldersController extends ControllerBase
 												$insStr.=','.$value;
 											}else{
 												$insStr.=',"'.$value.'"';
-											}								
+											}
+											
 										}
 									}
 

@@ -206,25 +206,25 @@ class TriggersendController extends Triggerauth
 				$insStr=array();
 				$counter=0;
 				foreach($addresses as $address){						
-										
-					if($mailing->abtest==0){
-						$insStr[]='('.$time.','.$address->uid.','.$mailing->campaignuid.','.$mailing->uid.','.$mailing->mailobjectuid.','.$mailing->configurationuid.',"'.$address->email.'","'.$mailing->subject.'","'.$configuration->sendermail.'","'.$configuration->sendername.'","'.$configuration->answermail.'","'.$configuration->answername.'","'.$configuration->returnpath.'","'.$configuration->organisation.'")';						
-					}else{
-						if($mailing->pid==0 && ($counter+1)%2!=0){
+					if(filter_var($address->email, FILTER_VALIDATE_EMAIL)){
+						if($mailing->abtest==0){
 							$insStr[]='('.$time.','.$address->uid.','.$mailing->campaignuid.','.$mailing->uid.','.$mailing->mailobjectuid.','.$mailing->configurationuid.',"'.$address->email.'","'.$mailing->subject.'","'.$configuration->sendermail.'","'.$configuration->sendername.'","'.$configuration->answermail.'","'.$configuration->answername.'","'.$configuration->returnpath.'","'.$configuration->organisation.'")';						
-						}elseif($mailing->pid!=0 && ($counter+1)%2==0){
-							$insStr[]='('.$time.','.$address->uid.','.$mailing->campaignuid.','.$mailing->uid.','.$mailing->mailobjectuid.','.$mailing->configurationuid.',"'.$address->email.'","'.$mailing->subject.'","'.$configuration->sendermail.'","'.$configuration->sendername.'","'.$configuration->answermail.'","'.$configuration->answername.'","'.$configuration->returnpath.'","'.$configuration->organisation.'")';						
+						}else{
+							if($mailing->pid==0 && ($counter+1)%2!=0){
+								$insStr[]='('.$time.','.$address->uid.','.$mailing->campaignuid.','.$mailing->uid.','.$mailing->mailobjectuid.','.$mailing->configurationuid.',"'.$address->email.'","'.$mailing->subject.'","'.$configuration->sendermail.'","'.$configuration->sendername.'","'.$configuration->answermail.'","'.$configuration->answername.'","'.$configuration->returnpath.'","'.$configuration->organisation.'")';						
+							}elseif($mailing->pid!=0 && ($counter+1)%2==0){
+								$insStr[]='('.$time.','.$address->uid.','.$mailing->campaignuid.','.$mailing->uid.','.$mailing->mailobjectuid.','.$mailing->configurationuid.',"'.$address->email.'","'.$mailing->subject.'","'.$configuration->sendermail.'","'.$configuration->sendername.'","'.$configuration->answermail.'","'.$configuration->answername.'","'.$configuration->returnpath.'","'.$configuration->organisation.'")';						
+							}
 						}
-					}
-					
-					if($counter%200==0 && $counter >0){
-														
-							$this->di->get('db')->query("INSERT INTO mailqueue ".$insField." VALUES ".implode(',',$insStr));
-							$insStr=array();
-					}
-					
-					$counter++;
 
+						if($counter%200==0 && $counter >0){
+
+								$this->di->get('db')->query("INSERT INTO mailqueue ".$insField." VALUES ".implode(',',$insStr));
+								$insStr=array();
+						}
+
+						$counter++;
+					}
 
 				}
 				
@@ -410,6 +410,8 @@ class TriggersendController extends Triggerauth
 			die('<img src="images/cowboy-shaking-head.gif" style="position:absolute;top:40%;left:40%;">');
 		}
 	}
+	
+	
 	
 	
 	
