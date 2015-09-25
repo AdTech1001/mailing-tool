@@ -4,6 +4,7 @@ use Phalcon\Forms\Form,
 Phalcon\Forms\Element\Text,
 Phalcon\Forms\Element\Password,
 Phalcon\Forms\Element\Submit,
+Phalcon\Forms\Element\Hidden,
 Phalcon\Validation\Validator\PresenceOf,
 Phalcon\Validation\Validator\StringLength;
 
@@ -28,6 +29,8 @@ $password->addValidator(new PresenceOf(array (
 )));
 
 $submit = new Submit('login', array('value' => 'Login'));
+
+$this->add(new Hidden("redirect", array('value'=>$this->request->getScheme().'://'.$this->request->getHttpHost().$this->request->getURI())));
 
 $this->add($username);       
 $this->add($password);

@@ -44,6 +44,10 @@ return new \Phalcon\Config(array(
 		'de' => 'Deutsch',
 		'en' => 'English'
 	),
+	'admin' => array(
+		'email' => 'baywa-tool.service@denkfabrik-group.com',
+		'name' => 'BayWa Newsletter Tool - Admin'
+	),
 	'database'=>array(
 		'production'=>array(
 			'adapter'  => 'Mysql',

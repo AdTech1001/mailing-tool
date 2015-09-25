@@ -4,7 +4,8 @@ namespace nltool\Modules\Modules\Frontend\Controllers;
 
 use nltool\Models\Campaignobjects,
 	nltool\Models\Sendoutobjects,
-	nltool\Models\Mailqueue;
+	nltool\Models\Mailqueue,
+	nltool\Models\Linkclicks;
 
 /**
  * Class IndexController
@@ -59,6 +60,10 @@ class ReportController extends ControllerBase
 	}
 	
 	public function createAction(){
+		$environment= $this->config['application']['debug'] ? 'development' : 'production';
+		$baseUri=$this->config['application'][$environment]['staticBaseUri'];
+		$path=$baseUri.$this->view->language;
+		if(!$this->dispatcher->getParam('linkuid')){
 		$this->assets->addCss('css/jquery.dataTables.css');
 		$sendoutobject=  Sendoutobjects::findFirst(array(
 			'conditions'=>'uid=?1',
@@ -94,5 +99,36 @@ class ReportController extends ControllerBase
 		$this->view->setVar('sendoutobject',$sendoutobject);
 		$this->view->setVar('sent',$sent);
 		$this->view->setVar('complete',count($mailqueue));
+		
+		
+		
+		$this->view->setVar('path',$path);
+		}else{
+			$csv="clickdate,email,lastname,firstname,salutation,title,city,zip,gender".PHP_EOL;
+			$linkClicks=Linkclicks::findByLinkuid($this->dispatcher->getParam('linkuid'));			
+			
+			foreach($linkClicks as $linkClick){
+				
+				$clickAddress=$linkClick->getAddress();						
+				$csvArray=array(
+					date('d.m.Y. H:i:s',$linkClick->crdate),
+					$clickAddress->email,
+					$clickAddress->last_name,
+					$clickAddress->first_name,
+					$clickAddress->salutation,
+					$clickAddress->title,
+					$clickAddress->city,
+					$clickAddress->zip,
+					$clickAddress->gender
+				);
+				$csv .= implode(',',$csvArray);
+				$csv.=PHP_EOL;
+			}
+			$time=time();
+			$filename=$this->dispatcher->getParam('linkuid').'_' .$time.'.csv';
+			var_dump($csv);
+			file_put_contents('../public/media/report-'.$filename,$csv);
+			$this->response->redirect($this->request->getScheme().'://'.$this->request->getHttpHost().$baseUri.'public/media/report-'.$filename);
+		}
 	}
 }

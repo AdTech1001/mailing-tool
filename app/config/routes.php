@@ -373,6 +373,18 @@ $router->add(
 	)
 );
 
+$router->add(
+	'/{language:[a-z]{2}}/report/create/:int/:int[/]{0,1}', 
+	array(
+		'language' => 1,
+		'controller' => "report",
+		'action' => "create",
+		'uid' => 2,
+		'linkuid' =>3,
+		'module'=>'frontend',
+		'namespace'  => 'nltool\Modules\Modules\Frontend\Controllers'
+	)
+);
 
 $router->handle();
 return $router;

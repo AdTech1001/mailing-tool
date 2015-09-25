@@ -4,6 +4,7 @@
 {{ content() }}
 {%- if session.get('auth') -%}
 <div class="container">
+	<div id="deleteOverlay" class="hidden" title="{{ tr('delete')}} "><span class="glyphicon glyphicon-remove"></span></div>
 <div id="menuWrapper" class="clearfix">
 	
 
@@ -104,7 +105,7 @@
 	</div>
 	<iframe id="mailobjectFrame" style="border:1px solid; background:#e3e3e3;width:100%;height:100%;" src="{{ source }}" ></iframe>
 </div>
-<div id="deleteOverlay" class="hidden" title="{{ tr('delete')}} "><span class='glyphicon glyphicon-remove'></span></div>
+
 <input type="hidden" id="salutationTitle" value="{{tr('salutation')}}">
 <input type="hidden" id="lastnameTitle" value="{{tr('lastname')}}">
 <input type="hidden" id="titleTitle" value="{{tr('title')}}">

@@ -13,7 +13,7 @@ class AddressfoldersController extends ControllerBase
 {
 	public $_divider= array(';',',',':','	');
 	public $_dataWrap=array(
-			0 => null,
+			0 => false,
 			1 => '"',
 			2 => "'"
 		);
@@ -106,21 +106,12 @@ class AddressfoldersController extends ControllerBase
 							
 							
 							if($this->request->hasPost('firstRowFieldNames')){								
-								if($this->_dataWrap[$this->request->getPost('dataFieldWrap')]){
-									$data[$row] = fgetcsv($handle, 1000, $this->_divider[$this->request->getPost('divider')],$this->_dataWrap[$this->request->getPost('dataFieldWrap')]);
-								}else{
-									$data[$row] = fgetcsv($handle, 1000, $this->_divider[$this->request->getPost('divider')]);
-								}
+								$data[$row] = $this->getCsvWrapper($handle, 1000, $this->_divider[$this->request->getPost('divider')],$this->_dataWrap[$this->request->getPost('dataFieldWrap')]);								
 								$fileRowField=array_values($data[$row]);
 							}else{
 								
 								while($row < 3){
-									if($this->_dataWrap[$this->request->getPost('dataFieldWrap')]){
-										$data[$row] = fgetcsv($handle, 1000, $this->_divider[$this->request->getPost('divider')],$this->_dataWrap[$this->request->getPost('dataFieldWrap')]);
-									}else{
-										$data[$row] = fgetcsv($handle, 1000, $this->_divider[$this->request->getPost('divider')]);
-									}
-								
+									$data[$row] = $this->getCsvWrapper($handle, 1000, $this->_divider[$this->request->getPost('divider')],$this->_dataWrap[$this->request->getPost('dataFieldWrap')]);																	
 									$row++;		
 								}
 								
@@ -208,12 +199,13 @@ class AddressfoldersController extends ControllerBase
 						$basicInsVals=$addressfolder->uid.','.$time.','.$time.','.$this->session->get('auth')['uid'].','.$this->session->get('auth')['usergroup'];
 						$tmpFile='../app/cache/tmp/'.$this->request->getPost('time').'_'.$this->request->getPost('filename');
 						if (($handle = fopen($tmpFile, "r")) !== FALSE) {
+							/*pretty nasty code redundancy*/
 							if($this->request->getPost('firstRowFieldNames')==1){
-								$data = fgetcsv($handle, 1000, $this->_divider[$this->request->getPost('divider')],$this->_dataWrap[$this->request->getPost('dataFieldWrap')]);
+								$data=$this->getCsvWrapper($handle, 1000, $this->_divider[$this->request->getPost('divider')],$this->_dataWrap[$this->request->getPost('dataFieldWrap')]);
+								
 							}
-							while(($data = fgetcsv($handle, 1000, $this->_divider[$this->request->getPost('divider')],$this->_dataWrap[$this->request->getPost('dataFieldWrap')])) !== FALSE){
-
-
+							
+							while(($data = $this->getCsvWrapper($handle, 1000, $this->_divider[$this->request->getPost('divider')],$this->_dataWrap[$this->request->getPost('dataFieldWrap')])) !== FALSE){
 									$insStr.='('.$basicInsVals;
 									foreach($data as $valueindex=> $value){
 										if(in_array($valueindex, $indexArray)){
@@ -222,7 +214,7 @@ class AddressfoldersController extends ControllerBase
 											}else{
 												$insStr.=',"'.$value.'"';
 											}
-											
+
 										}
 									}
 
@@ -235,7 +227,7 @@ class AddressfoldersController extends ControllerBase
 
 								$row++;
 							}
-						
+							
 							if($data==false && $insStr!=''){
 
 									$insStr=substr($insStr,0,-1);
@@ -260,6 +252,14 @@ class AddressfoldersController extends ControllerBase
 			$this->view->setVar('filename','');
 			$this->view->setVar('firstRowFieldNames','');
 			$this->view->setVar('uploadfields',array());
+		}
+	}
+	
+	private function getCsvWrapper($handle, $length, $divider,$wrap){
+		if($wrap){
+			return fgetcsv($handle, $length, $divider,$wrap);
+		}else{
+			return fgetcsv($handle, $length, $divider);
 		}
 	}
 	

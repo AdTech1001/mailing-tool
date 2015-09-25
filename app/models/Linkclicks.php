@@ -15,6 +15,9 @@ class Linkclicks extends Model{
 		$this->belongsTo('linkuid', 'nltool\Models\Linklookup', 'uid', 
             array('alias' => 'link')
         );
+		$this->belongsTo('addressuid', 'nltool\Models\Addresses', 'uid', 
+            array('alias' => 'address')
+        );
 	}
 	
 }

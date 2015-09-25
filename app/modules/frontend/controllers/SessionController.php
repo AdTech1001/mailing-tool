@@ -35,8 +35,12 @@ class SessionController extends ControllerBase
 					'password' => $this->request->getPost('password')
 
 				));
-				
-                $this->response->redirect(""); 
+				if($this->request->getPost('redirect') != ''){
+					$this->response->redirect($this->request->getPost('redirect')); 
+				}else{
+					$this->response->redirect(""); 
+				}
+                
 				$this->view->disable();                            
 			} catch (AuthException $e) {
 				$this->flash->error($e->getMessage());

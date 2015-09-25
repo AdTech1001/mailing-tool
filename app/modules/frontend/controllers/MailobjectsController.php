@@ -277,8 +277,8 @@ class MailobjectsController extends ControllerBase
 			
 			
 			$availableContentObject=  Contentobjects::find(array(
-				"conditions" => "deleted = 0 AND hidden=0 AND contenttype=0 AND usergroup=?1",
-				"bind" => array(1 => $this->session->get('auth')['usergroup'])
+				"conditions" => "deleted = 0 AND hidden=0 AND contenttype=0 AND usergroup=?1 AND crdate > ?2",
+				"bind" => array(1 => $this->session->get('auth')['usergroup'],2 => time()-2592000)
 				
 			));
 			

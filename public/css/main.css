@@ -1231,8 +1231,8 @@ table.maintable tr.odd td{
 	background:#e3e3e3;
 	height:20px;
 	width:20px;
-	padding-left:3px;
-	padding-top:2px;
+	padding-left:2px;
+	padding-top:1px;
 	font-weight:bold;
 	border:#01994e 1px solid;
 	border-radius:10px;
@@ -1327,7 +1327,7 @@ table.maintable tr.odd td{
 }
 #editFrame{
 	overflow: scroll;
-	width:39vw;
+	width:40vw;
 }
 .editable{
 	width:auto;

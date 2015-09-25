@@ -178,6 +178,7 @@ class TemplateobjectsController extends ControllerBase
 							$filename=$path.'/image_'.$counter.'.'.$extension;
 							$image->setAttribute('src',$this->host.$this->baseUri.substr($filename,3));
 							file_put_contents($filename,$file);
+							chmod($filename, 0755);  
 						}else{
 							$image->setAttribute('src',$dummyImage);
 						}

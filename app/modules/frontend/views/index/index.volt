@@ -12,7 +12,7 @@
 
     <label for="password">Password: </label><br>
     {{form.render('password')}}<br><br>
-    
+    {{form.render('redirect')}}
 
     {{form.render('login')}}
   </form>

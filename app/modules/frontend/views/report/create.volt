@@ -21,20 +21,23 @@
 	<table class="maintable" class="display dataTable" style="background:#fff;width:100%;">
 		<thead>
 			<tr>
-				<th>{{tr('linknumber')}}</th>
-				<th>{{tr('url')}}</th>
+				<th>{{tr('linknumber')}}</th>				
 				<th>{{tr('totalClicks')}}</th>
+				<th>{{tr('reportLinkListDownload')}}</th>
+				<th>{{tr('url')}}</th>
 					
 			</tr>
 					
 		</thead>
 		<tbody>
 			{% for index,linkclick in clicks %}
+			
 			<tr class='{% if index is even %}even{% else %}odd{%endif%}'>
 				
-					<td >{{linkclick.getLink().linknumber}}</td>
-					<td ><a href="{{linkclick.url}}" target="_blank">{{linkclick.url}}</a></td>
+					<td >{{linkclick.getLink().linknumber}}</td>					
 					<td>{{clickcounts[linkclick.linkuid]}}</td>
+					<td><a href="{{path}}/report/create/{{linkclick.sendoutobjectuid}}/{{linkclick.linkuid}}" class="downloadLink" target="_blank">{{tr('download')}}</a></td>
+					<td ><a href="{{linkclick.url}}" target="_blank">{{linkclick.url}}</a></td>
 				
 					
 			</tr>

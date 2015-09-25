@@ -118,12 +118,16 @@ class ControllerBase extends Controller
 
                 $this->flash->notice('You don\'t have access to this module: ' . $controllerName . ':' . $actionName);
 
-                if ($this->acl->isAllowed($identity['profile'], $controllerName, 'index')) {
+                /*if ($this->acl->isAllowed($identity['profile'], $controllerName, 'index')) {
                     $dispatcher->forward(array(
                         'controller' => $controllerName,
                         'action' => 'index'
                     ));
-                } 
+                }*/
+				$dispatcher->forward(array(
+                        'controller' => 'index',
+                        'action' => 'index'
+                    ));
 
                 $returnVal= false;
 			}else{

@@ -4,7 +4,9 @@ use nltool\Models\Mailobjects as Mailobjects,
 	nltool\Models\Campaignobjects as Campaignobjects,	
 	nltool\Models\Sendoutobjects as Sendoutobjects,
 	nltool\Models\Addressconditions	as Addressconditions,
+	nltool\Models\Configurationobjects	as Configurationobjects,
 	nltool\Models\Clickconditions;
+require_once '../app/library/Swiftmailer/swift_required.php';
 
 /**
  * Class IndexController
@@ -269,6 +271,8 @@ class CampaignobjectsController extends ControllerBase
 						));
 						if(!$sendoutobject->save()){
 							$this->flash->error($sendoutobject->getMessages());
+						}else{
+							$this->notify($sendoutobject);
 						}
 					}else{
 						if($sendoutobject->cleared!=1 || $sendoutobject->sent!=1 || $sendoutobject->inprogress!=1){
@@ -435,5 +439,56 @@ class CampaignobjectsController extends ControllerBase
 						}
 					}
 				}
+	}
+	
+	private function notify($sendoutobject){
+		$environment= $this->config['application']['debug'] ? 'development' : 'production';
+		$reviewPath='http://'.$_SERVER['SERVER_NAME'].$this->config['application'][$environment]['staticBaseUri'];
+		$getConf = Configurationobjects::findFirstByUid($sendoutobject->configurationuid);
+		$users = $getConf->getAuthorities();		
+		foreach($users as $user){
+		
+			if($user){
+				try{
+					
+					$userLang=$user->getUserlanguage();
+					
+					$body=$this->translate('newReviewNotify');
+					$bodyFinal=  str_replace(
+							array('#name#','#subject#','#senddate#','#reviewLink#'),
+							array(
+								$user->last_name,
+								$sendoutobject->subject,
+								date('d.m.Y',$sendoutobject->tstamp),
+								'<a href="'.$reviewPath.$userLang->shorttitle.'/review/update/'.$sendoutobject->uid.'">'.$reviewPath.$userLang->shorttitle.'/review/update/'.$sendoutobject->uid.'</a>'
+								),
+							$body);
+					
+					 $transport = \Swift_SmtpTransport::newInstance()
+							->setHost($this->config['smtp']['host'])
+							->setPort($this->config['smtp']['port'])
+							->setEncryption($this->config['smtp']['security'])
+							->setUsername($this->config['smtp']['username'])
+							->setPassword($this->config['smtp']['password']);
+					$mailer = \Swift_Mailer::newInstance($transport);
+					$mailer->registerPlugin(new \Swift_Plugins_AntiFloodPlugin(100,30));
+					$message = \Swift_Message::newInstance($this->translate('newReviewNotifySubject'))
+								->setSender(array($this->config['admin']['email'] => $this->config['admin']['name']))
+								->setFrom(array($this->config['admin']['email'] => $this->config['admin']['name']))
+								->setReplyTo($this->config['admin']['email'])
+								->setBcc($this->config['admin']['email'])
+								->setReturnPath($this->config['admin']['email']);
+					$message->setBody($bodyFinal, 'text/html');
+					$message->setTo(array($user->email => $user->first_name.' '.$user->last_name));
+					//pull the trigger
+					$mailer->send($message, $failures);	
+				}catch(\Swift_SwiftException $e){
+					echo($e->getMessage());
+				}catch(\Exception $e){
+					echo($e->getMessage());
+				}
+			}
+		}
+		
 	}
 }

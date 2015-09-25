@@ -111,6 +111,7 @@ var pollForTinymce=function(){
 	}
 }
 var lang;
+var deleteOverlay;
 function pluginInit(){
 	/*jQuery('.editable p, .editable a, .editable img, .editable h1, .editable h2, .editable h3, .editable h4, .editable h5, .editable h6').each(function(index,element){
 		jQuery(element).attr('contenteditable','true');
@@ -118,7 +119,11 @@ function pluginInit(){
 	var cElementsOffset=jQuery('.tabsWrapper').offset();
 	var editFrameOffset=jQuery('#editFrame').offset();
 	jQuery('.tabsWrapper').height(jQuery(window).height()-cElementsOffset.top-40);	
-	jQuery('#editFrame').height(jQuery(window).height()-editFrameOffset.top-20);	
+	jQuery('#editFrame').height(jQuery(window).height()-editFrameOffset.top-20);		
+	
+	deleteOverlay=jQuery('#deleteOverlay');
+	
+	jQuery('#deleteOverlay').remove();
 	lang=jQuery('#lang').val();
 	var  arrangeMode=function(){
 		
@@ -195,10 +200,10 @@ function pluginInit(){
 		jQuery('#editFrame .editable .cElement').mouseenter(function(e){		
 			var elementToDelete=jQuery(this);
 			var templateposition=jQuery('.editable').index(jQuery(this).parent());
-
+			console.log(deleteOverlay);
 			var positionsorting=jQuery(this).index();		
-			jQuery(this).append(jQuery('#deleteOverlay'));
-			jQuery('#deleteOverlay').removeClass('hidden').click(function(e){
+			jQuery(this).append(deleteOverlay);
+			jQuery(deleteOverlay).removeClass('hidden').click(function(e){
 
 				jQuery(elementToDelete).remove();
 			var formdata=jQuery('#editFrameForm').serialize();
@@ -209,8 +214,10 @@ function pluginInit(){
 		});
 
 		jQuery('#editFrame .cElement').mouseleave(function(e){
-			jQuery('body').append(jQuery('#deleteOverlay'));
-			jQuery('#deleteOverlay').addClass('hidden').off('click');
+			jQuery(deleteOverlay).addClass('hidden').off('click');
+			jQuery(deleteOverlay).remove();
+			
+			
 
 		});
 	
