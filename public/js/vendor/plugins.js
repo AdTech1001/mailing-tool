@@ -22,7 +22,8 @@ require.config({
 		addressfolders:'addressfolders',
 		segmentobjects:'segmentobjects',
 		datatables:'jquery.dataTables',
-		profiles:'profiles'
+		profiles:'profiles',
+		reports:'reports'
     }
 });
 

@@ -19,7 +19,7 @@ var pollForTinymce=function(){
 		tinymce.PluginManager.add('customem', function(editor, url) {
 			// Add a button that opens a window
 			editor.addButton('customem', {
-				type : 'menubutton',
+				type : 'menubutton',				
 				text: jQuery('#dynamicFields').val(),
 				icon: 'glyphicon-repeat',				
 				menu: [
@@ -79,7 +79,9 @@ var pollForTinymce=function(){
 			relative_urls: false,
 			remove_script_host: false,
 			statusbar: true,
-			menubar : "tools table format view insert edit",
+			menubar : "tools table format view insert edit",			
+			verify_html: false,
+			valid_child_elements : "+p[h1|h2|h3|h4|h5|h6|a|span|b|i|u|sup|sub|img|hr|#text],+span[a|b|i|u|sup|sub|img|#text],+a[h1|h2|h3|h4|h5|h6|span|b|i|u|sup|sub|img|#text]",			
 			plugins: [
 				"customem advlist autolink lists link image charmap print preview anchor",
 				"searchreplace visualblocks code fullscreen",
@@ -199,8 +201,7 @@ function pluginInit(){
 
 		jQuery('#editFrame .editable .cElement').mouseenter(function(e){		
 			var elementToDelete=jQuery(this);
-			var templateposition=jQuery('.editable').index(jQuery(this).parent());
-			console.log(deleteOverlay);
+			var templateposition=jQuery('.editable').index(jQuery(this).parent());			
 			var positionsorting=jQuery(this).index();		
 			jQuery(this).append(deleteOverlay);
 			jQuery(deleteOverlay).removeClass('hidden').click(function(e){
@@ -343,11 +344,13 @@ function pluginInit(){
 	function update(e,prev){
 		
 			var editElements='';
+			jQuery('#editFrame .editable a, #editFrame .editable div, #editFrame .editable td, #editFrame .editable table, #editFrame .editable img, #editFrame .editable p').removeAttr('data-mce-style  data-mce-href  data-mce-src data-mce-selected');
+			jQuery('#editFrame .editable p').removeAttr('style');
 			jQuery('#editFrame .editable').each(function(posIndex,posEl){
 				jQuery(posEl).children('.cElement').each(function(index,element){
 					var content=jQuery(element)[0].outerHTML;
 
-					content=content.replace(/position: relative;|left: 0px;|top: 0px;|contenteditable="true"|id="mce*"|mce-edit-focus|mce-content-body|mce-item-table|data-mce-selected="1"|ui-draggable-handle|ui-draggable/g,"");											
+					content=content.replace(/position: relative;|left: 0px;|top: 0px;|contenteditable="true"/g,"");											
 					
 					
 					

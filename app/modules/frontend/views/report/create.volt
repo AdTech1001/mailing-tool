@@ -18,7 +18,7 @@
 	<h2>{{tr('responseLinks')}}</h2>
 	<div class="dataTables_wrapper">
 
-	<table class="maintable" class="display dataTable" style="background:#fff;width:100%;">
+	<table class="display dataTable maintable" style="background:#fff;width:100%;">
 		<thead>
 			<tr>
 				<th>{{tr('linknumber')}}</th>				

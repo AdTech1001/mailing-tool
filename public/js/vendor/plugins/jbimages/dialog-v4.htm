@@ -12,7 +12,13 @@
 		
 		<div id="upload_in_progress" class="upload_infobar"><img src="img/spinner.gif" width="16" height="16" class="spinner">Upload in progress&hellip; <div id="upload_additional_info"></div></div>
 		<div id="upload_infobar" class="upload_infobar"></div>	
-		
+		<label for="alignment">Ausrichtung</label>
+		<select id="alignment">
+			<option value="0">none</option>
+			<option value="1">left</option>
+			<option value="2">right</option>
+			
+		</select>
 		<p id="upload_form_container">
 			<input id="uploader" name="userfile" type="file" class="jbFileBox" onChange="document.upl.submit(); jbImagesDialog.inProgress();">
 		</p>

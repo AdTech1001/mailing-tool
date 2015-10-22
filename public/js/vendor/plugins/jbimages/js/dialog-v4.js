@@ -16,12 +16,15 @@ var jbImagesDialog = {
 	resized : false,
 	iframeOpened : false,
 	timeoutStore : false,
+	alignment: false,
 	
 	inProgress : function() {
 		document.getElementById("upload_infobar").style.display = 'none';
 		document.getElementById("upload_additional_info").innerHTML = '';
 		document.getElementById("upload_form_container").style.display = 'none';
 		document.getElementById("upload_in_progress").style.display = 'block';
+		var e = document.getElementById("alignment");		
+		this.alignment = e.options[e.selectedIndex].value;
 		this.timeoutStore = window.setTimeout(function(){
 			document.getElementById("upload_additional_info").innerHTML = 'This is taking longer than usual.' + '<br />' + 'An error may have occurred.' + '<br /><a href="#" onClick="jbImagesDialog.showIframe()">' + 'View script\'s output' + '</a>';
 			// tinyMCEPopup.editor.windowManager.resizeBy(0, 30, tinyMCEPopup.id);
@@ -60,9 +63,14 @@ var jbImagesDialog = {
 			document.getElementById("upload_infobar").innerHTML = 'Upload Complete';
 			
 			var w = this.getWin();
+			var alignment='';
 			tinymce = w.tinymce;
-			console.log(result.filename);
-			tinymce.EditorManager.activeEditor.insertContent('<img border="0" src="' + result.filename +'">');
+			if(this.alignment == 1){
+				alignment='align="left"';
+			}else if(this.alignment==2){
+				alignment='align="right"';
+			}
+			tinymce.EditorManager.activeEditor.insertContent('<img border="0" src="' + result.filename +'" '+alignment+'>');
 			
 			this.close();
 		}

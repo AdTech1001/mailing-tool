@@ -60,6 +60,7 @@ class ReportController extends ControllerBase
 	}
 	
 	public function createAction(){
+		$this->assets->addJs('js/vendor/reportsInit.js');
 		$environment= $this->config['application']['debug'] ? 'development' : 'production';
 		$baseUri=$this->config['application'][$environment]['staticBaseUri'];
 		$path=$baseUri.$this->view->language;
@@ -91,6 +92,9 @@ class ReportController extends ControllerBase
 		foreach($linkClickCounts as $linkClickCount){
 			$clickArray[$linkClickCount->linkuid]=$linkClickCount->rowcount;
 		}
+		//arsort($clickArray);
+		
+		
 		
 		$this->view->setVar('clickcounts',$clickArray);
 		$this->view->setVar('opened',count($opened));
@@ -126,9 +130,11 @@ class ReportController extends ControllerBase
 			}
 			$time=time();
 			$filename=$this->dispatcher->getParam('linkuid').'_' .$time.'.csv';
-			var_dump($csv);
-			file_put_contents('../public/media/report-'.$filename,$csv);
-			$this->response->redirect($this->request->getScheme().'://'.$this->request->getHttpHost().$baseUri.'public/media/report-'.$filename);
+			
+			file_put_contents('../public/media/report-'.$filename,$csv);			
+			$this->response->redirect($this->request->getScheme().'://'.$this->request->getHttpHost().$baseUri.'public/media/report-'.$filename, true);
+			//$this->view->disable();
+			
 		}
 	}
 }

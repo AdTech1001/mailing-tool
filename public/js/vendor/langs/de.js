@@ -90,7 +90,7 @@ tinymce.addI18n('de',{
 "Image description": "Bildbeschreibung",
 "Style": "Stil",
 "Dimensions": "Abmessungen",
-"Insert image": "Bild einf\u00fcgen",
+"Insert image": "Bild einf\u00fcgen\/bearbeiten",
 "Insert date\/time": "Datum\/Uhrzeit einf\u00fcgen ",
 "Remove link": "Link entfernen",
 "Url": "URL",
