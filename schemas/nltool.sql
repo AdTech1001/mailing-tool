@@ -160,7 +160,12 @@ INSERT INTO permissions (uid, crdate, profileid, resourceid, resourceaction) VAL
 (97, NOW(), 1, 20, 'create'),
 (98, NOW(), 1, 20, 'retrieve'),
 (99, NOW(), 1, 20, 'update'),
-(100, NOW(), 1, 20, 'delete');
+(100, NOW(), 1, 20, 'delete'),
+(101, NOW(), 1, 21, 'index'),
+(102, NOW(), 1, 21, 'create'),
+(103, NOW(), 1, 21, 'retrieve'),
+(104, NOW(), 1, 21, 'update'),
+(105, NOW(), 1, 21, 'delete');
 UNLOCK TABLES;
 
 
@@ -179,7 +184,7 @@ CREATE TABLE IF NOT EXISTS resources(
 	hidden tinyint(4) DEFAULT '0' NOT NULL,
 	title varchar(255) NOT NULL,
 	PRIMARY KEY (uid)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 
 LOCK TABLES resources WRITE;
@@ -203,7 +208,8 @@ INSERT INTO resources (uid, crdate, title) VALUES
 (17, NOW(),'review'),
 (18, NOW(),'testmail'),
 (19, NOW(),'distributors'),
-(20, NOW(),'clickconditions');
+(20, NOW(),'clickconditions'),
+(21, NOW(),'triggerevents');
 UNLOCK TABLES;
 -- --------------------------------------------------------
 
@@ -722,6 +728,30 @@ CREATE TABLE openclicks(
 	PRIMARY KEY (uid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+
+DROP TABLE IF EXISTS triggerevents;
+CREATE TABLE triggerevents(
+	uid int(11) NOT NULL auto_increment,
+	pid int(11) DEFAULT '0' NOT NULL,	
+	tstamp int(11) DEFAULT '0' NOT NULL,
+	crdate int(11) DEFAULT '0' NOT NULL,	
+	deleted tinyint(4) DEFAULT '0' NOT NULL,
+	hidden tinyint(4) DEFAULT '0' NOT NULL,	
+	eventtype int(11) DEFAULT '0' NOT NULL,
+	title varchar(255) COLLATE utf8_general_ci NOT NULL,
+	repetitive tinyint(4) DEFAULT '0' NOT NULL,	
+	repeatcycle varchar(255) COLLATE utf8_general_ci NOT NULL,
+	repeatcycletime int(11) DEFAULT '0' NOT NULL,
+	reviewed tinyint(4) DEFAULT '0' NOT NULL,
+	cleared tinyint(4) DEFAULT '0' NOT NULL,
+	inprogress tinyint(4) DEFAULT '0' NOT NULL,
+	usergroup int(11) DEFAULT '0' NOT NULL,	
+	mailobjectuid int(11) DEFAULT '0' NOT NULL,
+	configurationuid int(11) DEFAULT '0' NOT NULL,
+	subject varchar(255) COLLATE utf8_general_ci NOT NULL,		
+	distributoruid int(11) DEFAULT '0' NOT NULL,	
+	PRIMARY KEY (uid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 
 
