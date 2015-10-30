@@ -1,7 +1,10 @@
 <?php
 namespace nltool\Modules\Modules\Frontend\Controllers;
 use nltool\Models\Sendoutobjects,
-	nltool\Models\Triggerevents;
+	nltool\Models\Triggerevents,
+	nltool\Models\Mailobjects,
+	nltool\Models\Configurationobjects,
+	nltool\Models\Distributors;
 
 /**
  * Class IndexController
@@ -10,6 +13,13 @@ use nltool\Models\Sendoutobjects,
  */
 class TriggereventsController extends ControllerBase
 {
+	private $events=array(
+		1 => 'date',
+		2 => 'recursive',
+		3 => 'birthday',
+		4 => 'subscribe',
+		5 => 'unsubscribe'
+	);
 	public function indexAction()
 	{
 		$environment= $this->config['application']['debug'] ? 'development' : 'production';
@@ -27,8 +37,35 @@ class TriggereventsController extends ControllerBase
 	}
 	
 	public function createAction()
-	{
+	{			
+		$mailobjects = Mailobjects::find(array(
+				"conditions" => "deleted=0 AND hidden=0 AND usergroup = ?1",
+				"bind" => array(1 => $this->session->get('auth')['usergroup']),
+				"order" => "tstamp DESC"
+			));
 		
+		$configurationsobjects = Configurationobjects::find(array(
+				"conditions" => "deleted=0 AND hidden=0 AND usergroup = ?1",
+				"bind" => array(1 => $this->session->get('auth')['usergroup']),
+				"order" => "tstamp DESC"
+			));
+		
+		$addresslistobjects = Distributors::find(array(
+				"conditions" => "deleted=0 AND hidden=0 AND usergroup = ?1",
+				"bind" => array(1 => $this->session->get('auth')['usergroup']),
+				"order" => "tstamp DESC"
+			));
+		
+		$this->view->setVar("eventtypes",$this->events);
+		$this->view->setVar("mailobjects",$mailobjects);
+		$this->view->setVar("configurationsobjects",$configurationsobjects);
+		$this->view->setVar("addresslistobjects",$addresslistobjects);
+		
+	}
+	
+	public function unsubscribeListener($event,$subscription)
+	{
+		var_dump($event);
 	}
 
 }

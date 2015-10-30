@@ -6,7 +6,7 @@
 		<h1>{{tr('triggereventsCreate')}}</h1>
 		<div class='listelementContainer'>
 			<div id="mailobjectSelect">
-				<form id="templateobjectCreateForm" action="{{path}}/triggerevents/create/" method="POST" >
+				<form id="templateobjectCreateForm" action="{{path}}/subscriptionsobjects/create/" method="POST" >
 				<label>{{ tr('selectMailobjectLabel')}}</label><br>
 				<select name="mailobject">
 					{% for mailobject in mailobjects %}

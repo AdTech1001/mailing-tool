@@ -201,19 +201,19 @@ class TriggersendController extends Triggerauth
 				$mailing->inprogress=1;
 				$mailing->sendstart=$time;
 				$mailing->update();
-				$insField='(crdate,addressuid,campaignuid,sendoutobjectuid,mailobjectuid,configurationuid,email,subject,sendermail,sendername,answermail,answername,returnpath,organisation)';
+				$insField='(crdate,distributoruid,addressuid,campaignuid,sendoutobjectuid,mailobjectuid,configurationuid,email,subject,sendermail,sendername,answermail,answername,returnpath,organisation)';
 				
 				$insStr=array();
 				$counter=0;
 				foreach($addresses as $address){						
 					if(filter_var($address->email, FILTER_VALIDATE_EMAIL)){
 						if($mailing->abtest==0){
-							$insStr[]='('.$time.','.$address->uid.','.$mailing->campaignuid.','.$mailing->uid.','.$mailing->mailobjectuid.','.$mailing->configurationuid.',"'.$address->email.'","'.$mailing->subject.'","'.$configuration->sendermail.'","'.$configuration->sendername.'","'.$configuration->answermail.'","'.$configuration->answername.'","'.$configuration->returnpath.'","'.$configuration->organisation.'")';						
+							$insStr[]='('.$time.','.$distributor->uid.','.$address->uid.','.$mailing->campaignuid.','.$mailing->uid.','.$mailing->mailobjectuid.','.$mailing->configurationuid.',"'.$address->email.'","'.$mailing->subject.'","'.$configuration->sendermail.'","'.$configuration->sendername.'","'.$configuration->answermail.'","'.$configuration->answername.'","'.$configuration->returnpath.'","'.$configuration->organisation.'")';						
 						}else{
 							if($mailing->pid==0 && ($counter+1)%2!=0){
-								$insStr[]='('.$time.','.$address->uid.','.$mailing->campaignuid.','.$mailing->uid.','.$mailing->mailobjectuid.','.$mailing->configurationuid.',"'.$address->email.'","'.$mailing->subject.'","'.$configuration->sendermail.'","'.$configuration->sendername.'","'.$configuration->answermail.'","'.$configuration->answername.'","'.$configuration->returnpath.'","'.$configuration->organisation.'")';						
+								$insStr[]='('.$time.','.$distributor->uid.','.$address->uid.','.$mailing->campaignuid.','.$mailing->uid.','.$mailing->mailobjectuid.','.$mailing->configurationuid.',"'.$address->email.'","'.$mailing->subject.'","'.$configuration->sendermail.'","'.$configuration->sendername.'","'.$configuration->answermail.'","'.$configuration->answername.'","'.$configuration->returnpath.'","'.$configuration->organisation.'")';						
 							}elseif($mailing->pid!=0 && ($counter+1)%2==0){
-								$insStr[]='('.$time.','.$address->uid.','.$mailing->campaignuid.','.$mailing->uid.','.$mailing->mailobjectuid.','.$mailing->configurationuid.',"'.$address->email.'","'.$mailing->subject.'","'.$configuration->sendermail.'","'.$configuration->sendername.'","'.$configuration->answermail.'","'.$configuration->answername.'","'.$configuration->returnpath.'","'.$configuration->organisation.'")';						
+								$insStr[]='('.$time.','.$distributor->uid.','.$address->uid.','.$mailing->campaignuid.','.$mailing->uid.','.$mailing->mailobjectuid.','.$mailing->configurationuid.',"'.$address->email.'","'.$mailing->subject.'","'.$configuration->sendermail.'","'.$configuration->sendername.'","'.$configuration->answermail.'","'.$configuration->answername.'","'.$configuration->returnpath.'","'.$configuration->organisation.'")';						
 							}
 						}
 

@@ -1,5 +1,6 @@
 <?php
 namespace nltool\Modules\Modules\Frontend\Controllers;
+use Phalcon\Events\EventsAwareInterface;
 use nltool\Models\Addresses as Addresses;
 use Phalcon\Mvc\Controller as Controller;
 /**
@@ -8,9 +9,11 @@ use Phalcon\Mvc\Controller as Controller;
  * @package baywa-nltool\Controllers
  */
 
-class SubscriptionController extends Controller
+class SubscriptionController extends Controller 
 
 {
+	
+	
 	public function indexAction(){
 		
 	}
@@ -20,6 +23,7 @@ class SubscriptionController extends Controller
 	}
 	
 	public function unsubscribeAction(){
+	
 		$this->view->setMainView('baywa');
 		
 		$mailaddress=$this->request->getQuery('email','email');
@@ -51,5 +55,17 @@ class SubscriptionController extends Controller
 			 }
 		}
 		
+		
+		
 	}
+	public function afterExecuteRoute($dispatcher)
+    {
+		
+		if($dispatcher->getActionName() === 'unsubscribe'){
+			$userMail=$this->request->get('email') ? $this->request->get('email'):'';
+			$userUid=$this->request->get('id') ? $this->request->get('id'):0;
+			
+			
+		}
+    }
 }

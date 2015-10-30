@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS permissions (
 	resourceaction varchar(55) NOT NULL,
   PRIMARY KEY (uid),
   KEY profilesid (profileid)
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=utf8;
 
 
 LOCK TABLES permissions WRITE;
@@ -165,7 +165,12 @@ INSERT INTO permissions (uid, crdate, profileid, resourceid, resourceaction) VAL
 (102, NOW(), 1, 21, 'create'),
 (103, NOW(), 1, 21, 'retrieve'),
 (104, NOW(), 1, 21, 'update'),
-(105, NOW(), 1, 21, 'delete');
+(105, NOW(), 1, 21, 'delete'),
+(106, NOW(), 1, 22, 'index'),
+(107, NOW(), 1, 22, 'create'),
+(108, NOW(), 1, 22, 'retrieve'),
+(109, NOW(), 1, 22, 'update'),
+(110, NOW(), 1, 22, 'delete');
 UNLOCK TABLES;
 
 
@@ -184,7 +189,7 @@ CREATE TABLE IF NOT EXISTS resources(
 	hidden tinyint(4) DEFAULT '0' NOT NULL,
 	title varchar(255) NOT NULL,
 	PRIMARY KEY (uid)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
 
 LOCK TABLES resources WRITE;
@@ -209,7 +214,8 @@ INSERT INTO resources (uid, crdate, title) VALUES
 (18, NOW(),'testmail'),
 (19, NOW(),'distributors'),
 (20, NOW(),'clickconditions'),
-(21, NOW(),'triggerevents');
+(21, NOW(),'triggerevents'),
+(22, NOW(),'subscriptionobjects');
 UNLOCK TABLES;
 -- --------------------------------------------------------
 
@@ -662,6 +668,7 @@ CREATE TABLE mailqueue (
 	deleted tinyint(4) DEFAULT '0' NOT NULL,
 	hidden tinyint(4) DEFAULT '0' NOT NULL,	
 	sent tinyint(4) DEFAULT '0' NOT NULL,	
+	distributoruid int(11) DEFAULT '0' NOT NULL,
 	addressuid int(11) DEFAULT '0' NOT NULL,
 	campaignuid int(11) DEFAULT '0' NOT NULL,
 	sendoutobjectuid int(11) DEFAULT '0' NOT NULL,
@@ -755,3 +762,24 @@ CREATE TABLE triggerevents(
 
 
 
+DROP TABLE IF EXISTS subscriptionobjects;
+CREATE TABLE subscriptionobjects(
+	uid int(11) NOT NULL auto_increment,
+	pid int(11) DEFAULT '0' NOT NULL,	
+	tstamp int(11) DEFAULT '0' NOT NULL,
+	crdate int(11) DEFAULT '0' NOT NULL,	
+	deleted tinyint(4) DEFAULT '0' NOT NULL,
+	hidden tinyint(4) DEFAULT '0' NOT NULL,	
+	title varchar(255) COLLATE utf8_general_ci NOT NULL,	
+	usergroup int(11) DEFAULT '0' NOT NULL,		
+	PRIMARY KEY (uid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+DROP TABLE IF EXISTS subscriptionobjects_addressfolders_lookup;
+CREATE TABLE subscriptionobjects_addressfolders_lookup (
+	uid int(11) NOT NULL auto_increment,	
+	deleted tinyint(4) DEFAULT '0' NOT NULL,	
+	uid_local int(11) DEFAULT '0' NOT NULL,
+	uid_foreign int(11) DEFAULT '0' NOT NULL,		
+  PRIMARY KEY (uid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
