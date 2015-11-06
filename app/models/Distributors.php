@@ -28,6 +28,7 @@ class Distributors extends Model{
 			'pid'=>''
 		);
 		$pids=array();
+		$cats=array();
 		
 		$folders=$this->getAddressfolders();
 		
@@ -47,7 +48,7 @@ class Distributors extends Model{
 				
 				foreach($conditions as $condition){
 					
-					if($condition->field !== 'searchterm'  && $condition->field !== 'pid'){
+					if($condition->field !== 'searchterm'  && $condition->field !== 'pid' && $condition->field !== 'uid_foreign'){
 						$where.=' AND (';
 						switch($condition->field){
 							case 'firstname':
@@ -68,6 +69,8 @@ class Distributors extends Model{
 						$pids[]=$condition->searchvalue;
 					}elseif($condition->field === 'searchterm'){
 						$searchTerms[] =$condition->searchvalue;
+					}elseif($condition->field === 'uid_foreign'){
+						$cats[]=$condition->uid_foreign;
 					}
 					
 				}
@@ -75,16 +78,28 @@ class Distributors extends Model{
 			}
 			
 		}
-		
+		$count=0;
 		if(count($pids)>0){
 			$where.= ' AND nltool\Models\Addresses.pid IN (';
 			$pidStrng='';
 			foreach($pids as $key => $value){
-				$pidStrng.='?'.$key.',';
+				$pidStrng.='?'.$count.',';
 				$bindArray[$key]=$value;
+				$count++;
 			}
 			$where.=substr($pidStrng,0,-1).')';
 		}
+		if(count($cats)>0){
+			$where.= ' AND nltool\Models\Addresses_feuserscategories_lookup.uid_foreign IN (';
+			$catStrng='';
+			foreach($cats as $key => $value){
+				$catStrng.='?'.$count.',';
+				$bindArray[$count]=$value;
+				$count++;
+			}
+			$where.=substr($catStrng,0,-1).')';
+		}
+		
 		$aColumnsFilter=array('email', 'last_name', 'first_name', 'salutation', 'title', 'company', 'phone', 'address', 'city', 'zip', 'userlanguage', 'gender' );
 		if(count($searchTerms) >0){
 			
@@ -110,7 +125,7 @@ class Distributors extends Model{
 		}
 		$groupBy=$config['application']['dontSendDuplicates'] ? " GROUP BY email" : "";
 		
-		$queryStrng="SELECT email, last_name AS lastname, first_name AS firstname, salutation, title, company, phone, address, city, zip, userlanguage, gender, nltool\Models\Addresses.uid FROM nltool\Models\Addresses".$joinTables." WHERE nltool\Models\Addresses.deleted=0 AND nltool\Models\Addresses.hidden=0 ".$where."".$groupBy;	
+		$queryStrng="SELECT email, last_name AS lastname, first_name AS firstname, salutation, title, company, phone, address, city, zip, userlanguage, gender, nltool\Models\Addresses.uid FROM nltool\Models\Addresses".$joinTables." LEFT JOIN nltool\Models\Addresses_feuserscategories_lookup ON nltool\Models\Addresses.uid = nltool\Models\Addresses_feuserscategories_lookup.uid_local WHERE nltool\Models\Addresses.deleted=0 AND nltool\Models\Addresses.hidden=0 ".$where."".$groupBy;	
 		
 		$sQuery=$modelsManager->createQuery($queryStrng);								
 		

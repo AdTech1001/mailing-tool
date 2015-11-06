@@ -17,7 +17,7 @@
 							<th>{{tr('index')}}</th>
 							<th>{{tr('create')}}</th>
 							<th>{{tr('retrieve')}}</th>
-							<th>{{tr('update')}}</td>
+							<th>{{tr('update')}}</th>
 							<th>{{tr('delete')}}</th>
 						</tr>
 					</thead>

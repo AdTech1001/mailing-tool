@@ -240,7 +240,16 @@ $messages = array(
 	"newReviewNotifySubject" => "Newsletter Tool - a new mailing is waiting for your review",
 	"download" => "download",
 	"reportLinkListDownload" => "download details",
-        "downloadUnsubscribes" => "download unsubscribes"
+    "downloadUnsubscribes" => "download unsubscribes",
+	"feuserscategoryIndexTitle" => "topic categories",
+	"catsTitle" => "add new topic category",
+	"mr" => "Mr",
+	"ms" => "Ms",
+	"salutation.male" => "Dear Mr",
+	"salutation.female" => "Dear Ms",
+	"thankyouSubscription" => "Your subscription has been added. Thank You."
+	
+
 	
 );
 

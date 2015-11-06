@@ -17,6 +17,8 @@
 			<h2>{{ tr('filtersTitle') }}</h2>
 			<label>{{ tr('addressfolders') }}</label>
 			{{ select('addressfolders[]',addressfolders,"using":['uid','title'],'multiple':true) }}<br><br>	
+			<label>{{ tr('feuserscategoryIndexTitle') }}</label>
+			{{ select('feuserscategories[]',feuserscategories,"using":['uid','title'],'multiple':true) }}<br><br>
 			{{ tr('commaseperatedList')}}<br>
 			<label>{{ tr('firstnames') }}</label>
 			{{ text_field('firstname')}}<br>

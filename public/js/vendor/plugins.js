@@ -23,7 +23,8 @@ require.config({
 		segmentobjects:'segmentobjects',
 		datatables:'jquery.dataTables',
 		profiles:'profiles',
-		reports:'reports'
+		reports:'reports',
+		subscriptionobjects:'subscriptionobjects'
     }
 });
 

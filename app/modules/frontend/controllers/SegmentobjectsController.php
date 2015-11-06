@@ -2,7 +2,8 @@
 namespace nltool\Modules\Modules\Frontend\Controllers;
 use nltool\Models\Segmentobjects as Segmentobjects,
 	nltool\Models\Segmentobjectsconditions,
-	nltool\Models\Addressfolders as Addressfolders;	
+	nltool\Models\Addressfolders as Addressfolders,
+	nltool\Models\Feuserscategories;	
 
 /**
  * Class SegmentobjectsController
@@ -44,8 +45,16 @@ class SegmentobjectsController extends ControllerBase
 				
 			)
 		));
-		$this->view->setVar('addressfolders',$addressfolders);
+		$feuserscategories = Feuserscategories::find(array(
+			'conditions' => "deleted=0 AND hidden=0 AND usergroup=?1",
+			'bind' => array(
+				1 => $this->session->get('auth')['usergroup']
+			)
+		));
 		
+		$this->view->setVar('addressfolders',$addressfolders);
+		$this->view->setVar('feuserscategories',$feuserscategories);
+				
 	}
 	
 	function updateAction(){
@@ -56,6 +65,12 @@ class SegmentobjectsController extends ControllerBase
 			'bind'=>array(
 				1 => $this->session->get('auth')['usergroup']
 				
+			)
+		));
+		$feuserscategories = Feuserscategories::find(array(
+			'conditions' => "deleted=0 AND hidden=0 AND usergroup=?1",
+			'bind' => array(
+				1 => $this->session->get('auth')['usergroup']
 			)
 		));
 		
@@ -69,6 +84,7 @@ class SegmentobjectsController extends ControllerBase
 		));
 		$this->view->setVar('segmentobject',$segmentobject);
 		$this->view->setVar('addressfolders',$addressfolders);
+		$this->view->setVar('feuserscategories',$feuserscategories);
 	}
 	
 	public function deleteAction(){
@@ -95,10 +111,10 @@ class SegmentobjectsController extends ControllerBase
         $aColumnsFilter=array('email', 'last_name', 'first_name', 'salutation', 'title', 'company', 'phone', 'address', 'city', 'zip', 'userlanguage', 'gender' );
 		$time=time();
 		/* Indexed column (used for fast and accurate table cardinality) */
-		$sIndexColumn = "uid";
+		$sIndexColumn = "addresses.uid";
 
 		/* DB table to use */
-		$sTable = "nltool\Models\Addresses";
+		$sTable = "nltool\Models\Addresses AS addresses LEFT JOIN nltool\Models\Addresses_feuserscategories_lookup AS cats ON addresses.uid = cats.uid_local";
 			/* 
 		 * Paging
 		 */
@@ -156,6 +172,18 @@ class SegmentobjectsController extends ControllerBase
 			$insStrng="";
 		}
 		
+		if(is_array($this->request->getPost('feuserscategories'))){
+			$insStrng=" AND uid_foreign IN (";
+			foreach($this->request->getPost('feuserscategories') as $key => $value){
+				$bindArray[$key]=$value;
+				$insStrng.='?'.$key.',';
+				$filterFieldsArray['uid_foreign'][]=$value;
+			}
+		$insStrng=substr($insStrng,0,-1).")";
+		}else{
+			$insStrng="";
+		}
+		
 		$filters='';
 		foreach($aColumns as $filterKey => $filtername){
 			
@@ -177,7 +205,7 @@ class SegmentobjectsController extends ControllerBase
 		}
 		
 		$usergroup=$this->session->get('auth');
-		$sWhere = "WHERE deleted=0 AND hidden=0 AND usergroup = ".$usergroup['usergroup'].$insStrng.$filters;
+		$sWhere = "WHERE addresses.deleted=0 AND hidden=0 AND usergroup = ".$usergroup['usergroup'].$insStrng.$filters;
 		
 		if ( isset($_POST['sSearch']) && $_POST['sSearch'] != "" )
 		{
@@ -218,7 +246,7 @@ class SegmentobjectsController extends ControllerBase
 		 * Get data to display
 		 */
 		
-		$phql = "SELECT ".str_replace(" , ", " ", implode(", ", $aColumnsSelect)).", uid FROM $sTable ".$sWhere." ".$sOrder." ".$sLimit;
+		$phql = "SELECT ".str_replace(" , ", " ", implode(", ", $aColumnsSelect)).", addresses.uid as userid FROM $sTable ".$sWhere." GROUP BY email ".$sOrder." ".$sLimit;
 		
 		
 		
@@ -246,7 +274,7 @@ class SegmentobjectsController extends ControllerBase
 				"hidden" => 0,
 				"title"	=> $this->request->getPost('segmenttitle')?:'no name',
 				"hashtags" => '',
-				"querystring" => "SELECT ".str_replace(" , ", " ", implode(", ", $aColumnsSelect)).", uid FROM $sTable ".$sWhere." GROUP BY email ".$sOrder,
+				"querystring" => "SELECT ".str_replace(" , ", " ", implode(", ", $aColumnsSelect)).", addresses.uid as userid FROM $sTable ".$sWhere." GROUP BY email ".$sOrder,
 				"wherestatement" => $sWhere,
 				"stateobject" => $this->request->getPost('stateObject'),
 				"bindarray" => json_encode($bindArray)
@@ -300,7 +328,7 @@ class SegmentobjectsController extends ControllerBase
 			$segmentRecord->assign(array(
 				'time' => time(),
 				"title"	=> $this->request->getPost('segmenttitle')?:'no name',
-				'querystring' => "SELECT ".str_replace(" , ", " ", implode(", ", $aColumnsSelect)).", uid FROM $sTable ".$sWhere." GROUP BY email ".$sOrder,
+				'querystring' => "SELECT ".str_replace(" , ", " ", implode(", ", $aColumnsSelect)).", addresses.uid as userid FROM $sTable ".$sWhere." GROUP BY email ".$sOrder,
 				'wherestatement' => $sWhere,
 				'stateobject' => $this->request->getPost('stateObject'),
 				'bindarray' => json_encode($bindArray)

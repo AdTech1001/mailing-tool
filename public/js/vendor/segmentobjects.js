@@ -1,5 +1,5 @@
 function pluginInit(){	
-	var filters={'folderuid':'','firstname':'','lastname':'','zip':'','company':'','address':''};
+	var filters={'folderuid':'','firstname':'','lastname':'','zip':'','company':'','address':'','feuserscategories':''};
 	var save=false;
 	var update=false;
 	var load=true;
@@ -20,7 +20,7 @@ function pluginInit(){
 			for(var i=0;i<filterKeys.length;i++){
 				if(segmentobjectState[key].name===filterKeys[i]){
 					filters[filterKeys[i]]=segmentobjectState[key].value;
-					/*TODO HIER*/															
+					
 					if(filterKeys[i]==='folderuid'){							
 						var folderUids=segmentobjectState[key].value;						
 						
@@ -30,7 +30,17 @@ function pluginInit(){
 									jQuery(this).attr('selected', 'selected');
 								}
 							}
-						});						
+						});			
+					}else if(filterKeys[i]==='feuserscategories'){
+						var feuserscategoriesUids=segmentobjectState[key].value;						
+						
+						jQuery('select[name="feuserscategories[]"] option').each(function(index,element){							
+							for(var j=0;j<folderUids.length;j++){																
+								if(parseInt(jQuery(element).val())===parseInt(feuserscategoriesUids[j])){
+									jQuery(this).attr('selected', 'selected');
+								}
+							}
+						});			
 					}else{						
 						jQuery('input[name="'+segmentobjectState[key].name+'"]').val(segmentobjectState[key].value);
 					}
@@ -139,6 +149,11 @@ function pluginInit(){
 	
 	jQuery('select[name="addressfolders[]"]').change(function(){
 		filters.folderuid=jQuery(this).val() || [];					
+		dt.fnDraw();
+	});
+	
+	jQuery('select[name="feuserscategories[]"]').change(function(){
+		filters.feuserscategories=jQuery(this).val() || [];					
 		dt.fnDraw();
 	});
 	

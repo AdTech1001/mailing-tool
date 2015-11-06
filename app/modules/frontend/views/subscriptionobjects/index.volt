@@ -10,7 +10,7 @@
 
 <ul class="listviewList">
 	{% for subscriptionobject in subscriptionobjects %}
-	<li><a href='{{ path }}{{ subscriptionobject.uid }}'>>> {{subscriptionobject.title}} | {{ date('d.m.Y',subscriptionobject.tstamp) }}</a><span class="glyphicon glyphicon-remove deleteListItem" title="{{tr('delete')}}"><input type="hidden" value="{{subscriptionobject.uid}}"></span></li>
+	<li><a href='{{ path }}/subscriptionobjects/update/{{ subscriptionobject.uid }}'>>> {{subscriptionobject.title}} | {{ date('d.m.Y',subscriptionobject.tstamp) }}</a><span class="glyphicon glyphicon-remove deleteListItem" title="{{tr('delete')}}"><input type="hidden" value="{{subscriptionobject.uid}}"></span></li>
 	{% endfor %}
 </ul>
 </div>

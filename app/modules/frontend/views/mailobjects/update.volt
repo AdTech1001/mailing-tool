@@ -16,7 +16,7 @@
 	<h1>{{ tr('activeModeTitle') }}</h1>
 	<div id="editFrameWrapper">
 		
-		<div id="activityModeBar" class="desktopHeader">
+		<div id="activityModeBar" class="desktopHeader" style="height:auto;min-height:50px;">
 			<div class="modes">
 				<span class="mode active" data-mode="arrange" style="margin-right:1vw;margin-left:0.5vw;">{{ tr('mailUpdateModeArrange') }}</span>
 				<span class="mode inactive" data-mode="edit">{{ tr('mailUpdateModeEdit') }}</span>
@@ -25,9 +25,13 @@
 				<div id="mailobjectPreview" class="glyphicon glyphicon-eye-open" data-controller="mailobject" data-action="update" title="{{ tr('preview') }}" style="margin-bottom:5px;"></div> 
 				<div id="mailobjectUpdate" class="glyphicon glyphicon-floppy-save" data-controller="mailobject" data-action="update" title="{{ tr('save') }}"></div>
 			</div>				
+			<div id="tinymceToolbar">
+				
+			</div>
 		</div>
 		<br>
 		<div id="editFrame">
+			
 			<form id="editFrameForm">
 			{{ compiledTemplatebodyRaw }} 
 			<input type="hidden" value="{{ mailobjectuid }}" name="mailobjectUid" id="mailobjectUid">

@@ -7,6 +7,10 @@ use Phalcon\Mvc\Controller as Controller,
 
 class ControllerBase extends Controller
 {
+	public $language=array(
+		'de' => 0,
+		'en' => 1
+	);
 	public function initialize(){
 		$conditions = "deleted = :deleted: AND hidden = :hidden:";
 		$parameters = array(

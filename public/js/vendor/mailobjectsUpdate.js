@@ -74,6 +74,7 @@ var pollForTinymce=function(){
 			theme: "modern",			
 			schema: "html5",
 			inline: true,
+			fixed_toolbar_container: "#tinymceToolbar",
 			language: lang,
 			keep_styles: true,	
 			table_default_styles: {"width":"100%", "fontSize":"12px","fontFamily":"Arial, sans-serif","color":"#4d4d4d"},

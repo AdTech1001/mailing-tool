@@ -101,6 +101,7 @@ class Acl extends Component
 			'index'
 		),
 		'subscription'=>array(
+			'subscribe',
 			'unsubscribe'
 			
 		)

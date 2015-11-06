@@ -244,8 +244,14 @@ $messages = array(
 	"newReviewNotifySubject" => "Newsletter Tool - Eine neue Freigabe wartet auf Sie",
 	"download" => "Download",
 	"reportLinkListDownload" => "Details runterladen",
-        "downloadUnsubscribes" => "Abmeldungen runterladen"
-	
+        "downloadUnsubscribes" => "Abmeldungen runterladen",
+	"feuserscategoryIndexTitle" => "Themenkategorien",
+	"catsTitle" => "neue Themenkategorie anlegen",
+	"mr" => "Herr",
+	"ms" => "Frau",	
+	"salutation.male" => "Sehr geehrter Herr",
+	"salutation.female" => "Sehr geehrte Frau",
+	"thankyouSubscription" => "Vielen Dank für Ihre Anmeldung zum Newsletter"
 	
 );
 ?>
