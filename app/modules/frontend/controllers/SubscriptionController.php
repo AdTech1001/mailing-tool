@@ -1,21 +1,31 @@
 <?php
 namespace nltool\Modules\Modules\Frontend\Controllers;
 use Phalcon\Events\EventsAwareInterface;
+use Phalcon\Events\ManagerInterface;
 use nltool\Models\Addresses as Addresses,
 	nltool\Models\Subscriptionobjects,
 	nltool\Models\Feusers,
 	nltool\Models\Addresses_feuserscategories_lookup;
-use Phalcon\Mvc\Controller as Controller;
 /**
  * Class SubscriptionController
  *
  * @package baywa-nltool\Controllers
  */
 
-class SubscriptionController extends ControllerBase
-
+class SubscriptionController extends ControllerBase implements EventsAwareInterface
 {
-	
+	protected $_eventsManager;
+
+    public function setEventsManager(ManagerInterface $eventsManager)
+    {
+        $this->_eventsManager = $eventsManager;
+    }
+
+    public function getEventsManager()
+    {
+        return $this->_eventsManager;
+    }
+
 	
 	public function indexAction(){
 		
@@ -55,7 +65,8 @@ class SubscriptionController extends ControllerBase
 			 $this->flash->error($address->getMessages());
 			 
 			 }else{
-				 $this->view->setVar('unsubscribe',true);
+				$this->view->setVar('unsubscribe',true);				
+				$this->triggerevents->fire("SubscriptionController:subscriptionEventHandler", $address);
 			 }
 		}
 		
@@ -106,6 +117,9 @@ class SubscriptionController extends ControllerBase
 			));
 			if (!$address->save()) {
                 $this->flash->error($subscriptionobject->getMessages());
+			}else{
+				
+				$this->triggerevents->fire("SubscriptionController:subscriptionEventHandler", $address);
 			}
 			if($this->request->hasPost('feusercategories')){
 				foreach($this->request->getPost('feusercategories') as $feusercategoryId){
@@ -141,14 +155,5 @@ class SubscriptionController extends ControllerBase
 		
 	}
 	
-	public function afterExecuteRoute($dispatcher)
-    {
-		
-		if($dispatcher->getActionName() === 'unsubscribe'){
-			$userMail=$this->request->get('email') ? $this->request->get('email'):'';
-			$userUid=$this->request->get('id') ? $this->request->get('id'):0;
-			
-			
-		}
-    }
+	
 }

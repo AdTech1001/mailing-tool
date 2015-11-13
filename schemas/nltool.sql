@@ -439,6 +439,7 @@ CREATE TABLE sendoutobjects (
 	abtest tinyint(4) DEFAULT '0' NOT NULL,
 	distributoruid int(11) DEFAULT '0' NOT NULL,
 	domid varchar(255) COLLATE utf8_general_ci NOT NULL,	
+	eventuid int(11) DEFAULT '0' NOT NULL,
 	PRIMARY KEY (uid),
 	KEY campaignuid (campaignuid),
 	KEY mailobjectuid (mailobjectuid)
@@ -459,6 +460,23 @@ CREATE TABLE review(
 	PRIMARY KEY (uid),
 	KEY pid (pid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+DROP TABLE IF EXISTS triggerreview;
+CREATE TABLE triggerreview(
+	uid int(11) NOT NULL auto_increment,
+	pid int(11) DEFAULT '0' NOT NULL,	
+	tstamp int(11) DEFAULT '0' NOT NULL,
+	crdate int(11) DEFAULT '0' NOT NULL,
+	cruser_id int(11) DEFAULT '0' NOT NULL,
+	deleted tinyint(4) DEFAULT '0' NOT NULL,
+	hidden tinyint(4) DEFAULT '0' NOT NULL,
+	reviewed tinyint(4) DEFAULT '0' NOT NULL,
+	cleared tinyint(4) DEFAULT '0' NOT NULL,
+	PRIMARY KEY (uid),
+	KEY pid (pid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+
 
 DROP TABLE IF EXISTS configurationobjects;
 CREATE TABLE configurationobjects (
@@ -620,6 +638,7 @@ CREATE TABLE addresses (
 	hashtags varchar(255) COLLATE utf8_general_ci NOT NULL,
 	itemsource  varchar(255) COLLATE utf8_general_ci NOT NULL,	
 	hasprofile tinyint(4) DEFAULT '1' NOT NULL,
+	birthday DATE NOT NULL,
   PRIMARY KEY (uid),
 	KEY pid (pid)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -755,7 +774,9 @@ CREATE TABLE triggerevents(
 	title varchar(255) COLLATE utf8_general_ci NOT NULL,
 	repetitive tinyint(4) DEFAULT '0' NOT NULL,	
 	repeatcycle varchar(255) COLLATE utf8_general_ci NOT NULL,
+	dayofweek tinyint(4) DEFAULT '0' NOT NULL,	
 	repeatcycletime int(11) DEFAULT '0' NOT NULL,
+	sendoutdate int(11) DEFAULT '0' NOT NULL,
 	reviewed tinyint(4) DEFAULT '0' NOT NULL,
 	cleared tinyint(4) DEFAULT '0' NOT NULL,
 	inprogress tinyint(4) DEFAULT '0' NOT NULL,
@@ -765,6 +786,7 @@ CREATE TABLE triggerevents(
 	subject varchar(255) COLLATE utf8_general_ci NOT NULL,		
 	distributoruid int(11) DEFAULT '0' NOT NULL,		
 	addressfolder int(11) DEFAULT '0' NOT NULL,
+	birthday DATE NOT NULL,	
 	PRIMARY KEY (uid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 

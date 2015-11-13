@@ -96,11 +96,21 @@
 			<label>{{tr('confAnswernameLabel')~' ('~tr('confAnswermailLabel')~')'}}:</label><span>{{ sendoutobject.configuration.answername }} ({{ sendoutobject.configuration.answermail }})</span><br>
 			<label>{{tr('confReturnpathLabel')}}</label><span>{{ sendoutobject.configuration.returnpath }}</span>
 		</div>
+		{%if !triggerevent %}
 		<div id="distributor">
+			
 			<label>{{tr('distributorTitleLabel')}}:</label><br>
-				<a href='{{baseurl}}{{ language }}/distributors/update/{{ sendoutobject.getDistributor().uid }}'>{{sendoutobject.getDistributor().title}}</a><br><br>
-				{{sendoutobject.getDistributor().countAddresses()~' '~tr('recipients')}}</div>
+				<a href='{{baseurl}}{{ language }}/distributors/update/{{ sendoutobject.distributoruid }}'>{{sendoutobject.getDistributor().title}}</a><br><br>
+				{{sendoutobject.getDistributor().countAddresses()~' '~tr('recipients')}}						
+		</div>
+		{%  else  %}
+		<div id="distributor">
+			<input id="triggerevent" value="{{sendoutobject.uid}}">
+			<label>{{tr('eventtype')}}:{{sendoutobject.title}}</label><br>
+		</div>
+		{% endif %}
 		
+			
 		<div class='clearfix'></div>
 	</div>
 </div>

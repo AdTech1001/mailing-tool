@@ -247,10 +247,31 @@ $messages = array(
 	"ms" => "Ms",
 	"salutation.male" => "Dear Mr",
 	"salutation.female" => "Dear Ms",
-	"thankyouSubscription" => "Your subscription has been added. Thank You."
-	
+	"thankyouSubscription" => "Your subscription has been added. Thank You.",
+	"date" => "sending one time on a specific date",
+	"recursive" => "sending recurringly",
+	"birthday" => "birthday of adressee",
+	"subscribe" => "subscription to an addresslist",
+	"unsubscribe" => "unsubscription from an addresslist",
+	"eventtype" => "Event",
+	"repeatcycle" => "cycle",
+	"daily" => "daily",
+	"weekly" => "weekly",
+	"biweekly" => "biweekly",
+	"monthly" => "monthly",
+	"quarterly" => "quarterly",
+	"yearly" => "yearly",
+	"dayofweek" => "day of week (if applicable)",
+	"monday" => "monday",
+	"tuesday" => "tuesday",
+	"wednesday" => "wednesday",
+	"thursday" => "thursday",
+	"friday" => "friday",
+	"saturday" => "saturday",
+	"sunday" => "sunday",
+	"timeofday" => "time of day",
+	"eventbased" => "event based"
 
-	
 );
 
 ?>

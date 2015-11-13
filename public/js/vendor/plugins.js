@@ -24,7 +24,8 @@ require.config({
 		datatables:'jquery.dataTables',
 		profiles:'profiles',
 		reports:'reports',
-		subscriptionobjects:'subscriptionobjects'
+		subscriptionobjects:'subscriptionobjects',
+		triggerevents:'triggerevents'
     }
 });
 

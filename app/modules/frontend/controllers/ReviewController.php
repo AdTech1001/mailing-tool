@@ -2,6 +2,7 @@
 namespace nltool\Modules\Modules\Frontend\Controllers;
 use nltool\Models\Campaignobjects,
 	nltool\Models\Sendoutobjects,
+	nltool\Models\Triggerevents,
 	nltool\Models\Review;	
 
 /**
@@ -18,32 +19,48 @@ class ReviewController extends ControllerBase
 		$baseUri=$this->config['application'][$environment]['staticBaseUri'];
 		$path=$baseUri.$this->view->language.'/review/update/';
 		$sendoutobjects=  Sendoutobjects::find(array(
-			'conditions'=>'deleted=0 AND hidden=0 AND usergroup=?1 AND sent=0 ',
+			'conditions'=>'deleted=0 AND hidden=0 AND usergroup=?1 AND sent=0 AND eventuid = 0',
 			'bind' =>array(
 				1 => $this->session->get('auth')['usergroup']
 			),
 			'order' => 'tstamp ASC'
 		));
-		
+		$triggerevents = Triggerevents::find(array(
+			'conditions'=>'deleted=0 AND hidden=0 AND usergroup=?1',
+			'bind' =>array(
+				1 => $this->session->get('auth')['usergroup']
+			),
+			'order' => 'tstamp ASC'
+		));
+		$this->view->setVar('triggerevents',$triggerevents);		
 		$this->view->setVar('sendoutobjects',$sendoutobjects);
 		$this->view->setVar('path',$path);
 	}
 	
 	function updateAction(){
 		$this->assets            
-            ->addJs('js/vendor/reviewInit.js');
-		if($this->dispatcher->getParam('uid') && !$this->request->isPost()){
-			
-			$sendoutobject=  Sendoutobjects::findFirst(array(
-				'conditions'=>'uid = ?1',
-				'bind' => array(
-					1 => $this->dispatcher->getParam('uid')
-				)
-			));
-			
+            ->addJs('js/vendor/reviewInit.js');		
+		
+		if(!$this->request->isPost() && $this->dispatcher->getParam('uid')){
+			if($this->request->getQuery('triggerevent')){
+				$sendoutobject= Triggerevents::findFirst(array(
+					'conditions'=>'uid = ?1',
+					'bind' => array(
+						1 => $this->dispatcher->getParam('uid')
+					)
+				));
+			}else{
+				$sendoutobject=  Sendoutobjects::findFirst(array(
+					'conditions'=>'uid = ?1',
+					'bind' => array(
+						1 => $this->dispatcher->getParam('uid')
+					)
+				));
+			}
 			$configuration=$sendoutobject->getConfiguration();
 			$authorities=$configuration->getAuthorities();
 			$reviews=$sendoutobject->getReview();
+			
 			$reviewArray=array();
 			foreach($reviews as $review){				
 					$reviewArray[$review->cruser_id]=$review;				
@@ -71,16 +88,29 @@ class ReviewController extends ControllerBase
 			$this->view->setVar('userUid',$this->session->get('auth')['uid']);
 			$this->view->setVar('reviewChecked',$sendoutobject->reviewed==1 ? 'checked':null);
 			$this->view->setVar('clearedChecked',$sendoutobject->cleared==1 ? 'checked':null);
+			if($this->request->getQuery('triggerevent')){
+				$this->view->setVar('triggerevent',true);
+			}
 			$this->view->setVar('sendoutobject',$sendoutobject);
+			
 			$this->view->setVar('disabled',$this->session->get('auth')['superuser']==1 ? false : true);
 		}else if($this->request->isPost()){
+			if($this->request->getQuery('triggerevent')){
+				$sendoutobject= Triggerevents::findFirst(array(
+					'conditions'=>'uid = ?1',
+					'bind' => array(
+						1 => $this->request->getPost('triggereventuid')
+					)
+				));
+			}else{
+				$sendoutobject=  Sendoutobjects::findFirst(array(
+					'conditions'=>'uid = ?1',
+					'bind' => array(
+						1 => $this->request->getPost('sendoutobjectuid')
+					)
+				));
+			}
 			
-			$sendoutobject=  Sendoutobjects::findFirst(array(
-				"conditions"=>"uid=?1",
-				"bind"=>array(
-					1=>$this->request->getPost('sendoutobjectuid')
-				)
-			));
 			
 			if($this->session->get('auth')['superuser']==1){
 				if($this->request->hasPost('reviewOverride')){

@@ -1,5 +1,6 @@
 <div class="container">
-	{{ content() }}
+	
+{{ content() }}
 
 
 <form action="{{path}}/subscription/subscribe/" method="POST" >				

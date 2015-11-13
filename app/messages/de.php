@@ -251,7 +251,30 @@ $messages = array(
 	"ms" => "Frau",	
 	"salutation.male" => "Sehr geehrter Herr",
 	"salutation.female" => "Sehr geehrte Frau",
-	"thankyouSubscription" => "Vielen Dank f�r Ihre Anmeldung zum Newsletter"
+	"thankyouSubscription" => "Vielen Dank f�r Ihre Anmeldung zum Newsletter",
+	"date" => "einmaliger terminierter Versand",
+	"recursive" => "wiederkehrender Versand",
+	"birthday" => "Geburtstag der Addressaten",
+	"subscribe" => "Anmeldung zu einer Adressliste",
+	"unsubscribe" => "Abmeldung von einer Adressliste",
+	"eventtype" => "Ereignis",
+	"repeatcycle" => "Zyklus",
+	"daily" => "täglich",
+	"weekly" => "wöchentlich",
+	"biweekly" => "zweiwöchentlich",
+	"monthly" => "monatlich",
+	"quarterly" => "quartalsweise",
+	"yearly" => "jährlich",
+	"dayofweek" => "Wochentag (falls zutreffend)",
+	"monday" => "Montag",
+	"tuesday" => "Dienstag",
+	"wednesday" => "Mittwoch",
+	"thursday" => "Donnerstag",
+	"friday" => "Freitag",
+	"saturday" => "Samstag",
+	"sunday" => "Sonntag",
+	"timeofday" => "Tageszeit des Versands",
+	"eventbased" => "ereignisgesteuert"
 	
 );
 ?>

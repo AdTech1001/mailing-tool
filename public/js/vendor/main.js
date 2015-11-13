@@ -67,8 +67,12 @@ var requireControllerPlugins=function(){
 				
 				require([requirePlugins[1]],letsRoll);
 			});
-	}
-	else{
+	}else if(requirePlugins[0]=='datetimepicker'){
+		require([requirePlugins[0]],function(datetimepicker){				
+				
+				require([requirePlugins[1]],letsRoll);
+			});
+	}else{
 		for(var i=0; i<requirePlugins.length; i++){
 			if(i==requirePlugins.length-1){
 				require([requirePlugins[i]],letsRoll);

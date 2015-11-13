@@ -253,6 +253,19 @@ $di->set('mailrenderer', function(){
 	return new Mailrenderer();
 });
 
+
+$di->set('triggerevents',function(){
+	$eventsManager = new EventsManager();
+	$subscriptioneEvents = new \nltool\Modules\Modules\Frontend\Controllers\SubscriptionController();
+	$subscriptioneEvents->setEventsManager($eventsManager);
+	$eventsManager->attach('SubscriptionController', new \nltool\Modules\Modules\Frontend\Controllers\TriggereventsController());
+	$timebasedEvents=new \nltool\Modules\Modules\Frontend\Controllers\PolleventsController();
+	$timebasedEvents->setEventsManager($eventsManager);
+	$eventsManager->attach('PolleventsController', new \nltool\Modules\Modules\Frontend\Controllers\TriggereventsController());
+	return $eventsManager;
+	
+});
+
 /*$di->set('oauth', function() use ($config) {
 		$oauthdb = new Phalcon\Db\Adapter\Pdo\Mysql($config->database->oauth->toArray());
 		

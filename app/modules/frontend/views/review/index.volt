@@ -21,7 +21,7 @@
 			<tr class='{% if index is even %}odd{% else %}even{%endif%}'>
 				<td>{{ date('d.m.Y',sendoutobject.tstamp)}}</td>
 				<td><a href='{{ path }}{{ sendoutobject.uid }}'>>> {{sendoutobject.subject}}</a></td>
-				<td>{{sendoutobject.getCampaign().title}}</td>
+				<td>{%if sendoutobject.getCampaign() %}{{sendoutobject.getCampaign().title}}{% else %}{{tr('eventbased')}}{% endif %}</td>
 				<td> 
 					{% if sendoutobject.reviewed == 1 %}    
 						{{tr('yes')}}
@@ -44,6 +44,43 @@
 					{% endif %}
 					
 				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	</div>
+	<br>
+	</div>
+	<div class="ceElement medium">
+	<h1>{{tr('eventClearingTasks')}}</h1>
+	<div class="dataTables_wrapper">
+	<table class="display dataTable">
+		<thead>
+		<tr>
+		<th>{{tr('sendoutDateLabel')}}</th>
+		<th>{{tr('mailobjects')}}</th>
+		<th>{{tr('reviewed')}}</th>
+		<th>{{tr('cleared')}}</th>		
+		</tr>
+		</thead>
+		<tbody>
+			{% for index,triggerobject in triggerevents	 %}
+			<tr class='{% if index is even %}odd{% else %}even{%endif%}'>
+				<td>{{ date('d.m.Y',triggerobject.tstamp)}}</td>
+				<td><a href='{{ path }}{{ triggerobject.uid }}/?triggerevent=1'>>> {{triggerobject.subject}}</a></td>				
+				<td> 
+					{% if triggerobject.reviewed == 1 %}    
+						{{tr('yes')}}
+					{% else %}
+						{{tr('no')}}
+					{% endif %}
+				</td>
+				<td> {% if triggerobject.cleared == 1 %}    
+						{{tr('yes')}}
+					{% else %}
+						{{tr('no')}}
+					{% endif %}</td>
+				
 			</tr>
 			{% endfor %}
 		</tbody>

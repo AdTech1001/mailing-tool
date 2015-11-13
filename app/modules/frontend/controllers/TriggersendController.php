@@ -270,16 +270,9 @@ class TriggersendController extends Triggerauth
 			$configuration=$mailing->getConfiguration();
 			$modelsManager=$this->getDi()->getShared('modelsManager');					
 			$mailqueueQueryStrng="SELECT m.*, a.* FROM nltool\Models\Mailqueue AS m LEFT JOIN nltool\Models\Addresses AS a ON m.addressuid=a.uid WHERE m.sent=0 AND m.deleted=0 AND m.hidden=0 AND m.sendoutobjectuid=".$mailing->uid." LIMIT ".$this->config['smtp']['mailcycle'];			
-			$mailqueue=$modelsManager->executeQuery($mailqueueQueryStrng);										
+			$mailqueue=$modelsManager->executeQuery($mailqueueQueryStrng);																			
 			
-			
-			
-			
-			$bodyRaw=file_get_contents('../public/mails/mailobject_'.$mailing->mailobjectuid.'.html');
-			
-			
-			
-			
+			$bodyRaw=file_get_contents('../public/mails/mailobject_'.$mailing->mailobjectuid.'.html');												
 			
 			if($configuration->clicktracking==1){
 				
