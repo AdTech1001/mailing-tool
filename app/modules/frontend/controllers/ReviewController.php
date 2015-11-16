@@ -3,7 +3,8 @@ namespace nltool\Modules\Modules\Frontend\Controllers;
 use nltool\Models\Campaignobjects,
 	nltool\Models\Sendoutobjects,
 	nltool\Models\Triggerevents,
-	nltool\Models\Review;	
+	nltool\Models\Review,
+	nltool\Models\Triggerreview;	
 
 /**
  * Class ReviewController
@@ -12,7 +13,7 @@ use nltool\Models\Campaignobjects,
  */
 class ReviewController extends ControllerBase
 {
-	
+	private $trigger=false;
 	function indexAction(){
 		$this->assets->addCss('css/jquery.dataTables.css');
 		$environment= $this->config['application']['debug'] ? 'development' : 'production';
@@ -41,8 +42,12 @@ class ReviewController extends ControllerBase
 		$this->assets            
             ->addJs('js/vendor/reviewInit.js');		
 		
+		if($this->request->hasPost('triggerevent') || $this->request->getQuery('triggerevent')==1){
+			$this->trigger=true;
+		}
+		
 		if(!$this->request->isPost() && $this->dispatcher->getParam('uid')){
-			if($this->request->getQuery('triggerevent')){
+			if($this->trigger){
 				$sendoutobject= Triggerevents::findFirst(array(
 					'conditions'=>'uid = ?1',
 					'bind' => array(
@@ -88,18 +93,18 @@ class ReviewController extends ControllerBase
 			$this->view->setVar('userUid',$this->session->get('auth')['uid']);
 			$this->view->setVar('reviewChecked',$sendoutobject->reviewed==1 ? 'checked':null);
 			$this->view->setVar('clearedChecked',$sendoutobject->cleared==1 ? 'checked':null);
-			if($this->request->getQuery('triggerevent')){
+			if($this->trigger){
 				$this->view->setVar('triggerevent',true);
 			}
 			$this->view->setVar('sendoutobject',$sendoutobject);
 			
 			$this->view->setVar('disabled',$this->session->get('auth')['superuser']==1 ? false : true);
 		}else if($this->request->isPost()){
-			if($this->request->getQuery('triggerevent')){
+			if($this->trigger){
 				$sendoutobject= Triggerevents::findFirst(array(
 					'conditions'=>'uid = ?1',
 					'bind' => array(
-						1 => $this->request->getPost('triggereventuid')
+						1 => $this->request->getPost('sendoutobjectuid')
 					)
 				));
 			}else{
@@ -140,15 +145,29 @@ class ReviewController extends ControllerBase
 			}
 			
 			if($this->request->hasPost('reviewed')){
-				$review=Review::findFirst(array(
-					'conditions' =>'deleted=0 AND hidden=0 AND cruser_id = ?1 AND pid =?2',
-					'bind' =>array(
-						1=>$this->session->get('auth')['uid'],
-						2=>$sendoutobject->uid
-					)
-				));
+				if($this->trigger){
+					$review=  Triggerreview::findFirst(array(
+						'conditions' =>'deleted=0 AND hidden=0 AND cruser_id = ?1 AND pid =?2',
+						'bind' =>array(
+							1=>$this->session->get('auth')['uid'],
+							2=>$sendoutobject->uid
+						)
+					));
+				}else{
+					$review=Review::findFirst(array(
+						'conditions' =>'deleted=0 AND hidden=0 AND cruser_id = ?1 AND pid =?2',
+						'bind' =>array(
+							1=>$this->session->get('auth')['uid'],
+							2=>$sendoutobject->uid
+						)
+					));
+				}
 				if(!$review){
-					$newReview=new Review();
+					if($this->trigger){
+						$newReview=new Triggerreview();
+					}else{
+						$newReview=new Review();
+					}
 					$newReview->assign(array(
 						'pid' => $sendoutobject->uid,
 						'tstamp'=>time(),
@@ -177,6 +196,10 @@ class ReviewController extends ControllerBase
 						'tstamp'=> time(),												
 						'reviewed' => $this->request->getPost('reviewed')=='true' ? 1 : 0
 					));
+					if($this->request->getPost('reviewed')=='false'){
+						$sendoutobject->reviewed=0;
+						$sendoutobject->update();
+					}
 					if(!$review->update()){
 						$this->flash->error($review->getMessages());						
 						die();
@@ -189,23 +212,39 @@ class ReviewController extends ControllerBase
 							die(1);
 						}
 					}
-				}
-				
+				}				
 			}
 			
 			
 			
 			if($this->request->hasPost('cleared')){
-				$clearance=Review::findFirst(array(
-					'conditions' => 'deleted=0 AND hidden=0 AND cruser_id=?1 AND pid =?2',
-					'bind'=> array(
-						1=>$this->session->get('auth')['uid'],
-						2=>$sendoutobject->uid
-						
-					)
-				));
+				if($this->trigger){
+					$clearance=Triggerreview::findFirst(array(
+						'conditions' => 'deleted=0 AND hidden=0 AND cruser_id=?1 AND pid =?2',
+						'bind'=> array(
+							1=>$this->session->get('auth')['uid'],
+							2=>$sendoutobject->uid
+
+						)
+					));
+				}else{
+					$clearance=Review::findFirst(array(
+						'conditions' => 'deleted=0 AND hidden=0 AND cruser_id=?1 AND pid =?2',
+						'bind'=> array(
+							1=>$this->session->get('auth')['uid'],
+							2=>$sendoutobject->uid
+
+						)
+					));
+				}
+				
 				if(!$clearance){
-					$newReview=new Review();
+					if($this->trigger){
+						$newReview=new Triggerreview();
+					}else{
+						$newReview=new Review();
+					}
+					
 					$newReview->assign(array(
 						'pid' => $sendoutobject->uid,
 						'tstamp'=>time(),
@@ -216,6 +255,7 @@ class ReviewController extends ControllerBase
 						'reviewed' => 0,
 						'cleared' => $this->request->getPost('cleared')=='true' ? 1 : 0
 					));
+					
 					if(!$newReview->save()){
 						$this->flash->error($newReview->getMessages());
 						die();
@@ -235,6 +275,10 @@ class ReviewController extends ControllerBase
 						'cleared' => $this->request->getPost('cleared')=='true' ? 1 : 0
 					));
 					
+					if($this->request->getPost('cleared')=='false'){
+						$sendoutobject->cleared=0;
+						$sendoutobject->update();
+					}
 					if(!$clearance->update()){
 						$this->flash->error($clearance->getMessages());												
 						die();
@@ -274,8 +318,8 @@ class ReviewController extends ControllerBase
 		$returnVal=true;
 		$configuration=$sendoutobject->getConfiguration();
 		$authorities=$configuration->getAuthorities();
-		
 		$reviews=$sendoutobject->getReview();
+		
 		$userArray=array();
 		foreach($reviews as $review){
 			if($review->reviewed==1){
@@ -295,8 +339,9 @@ class ReviewController extends ControllerBase
 		$returnVal=true;
 		$configuration=$sendoutobject->getConfiguration();
 		$authorities=$configuration->getAuthorities();
-		
+			
 		$reviews=$sendoutobject->getReview();
+		
 		$userArray=array();
 		foreach($reviews as $review){
 			if($review->reviewed==1 && $review->cleared==1){

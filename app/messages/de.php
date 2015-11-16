@@ -239,6 +239,7 @@ $messages = array(
 	"general" => "Allgemein",
 	"suredel" => "Sind Sie sicher, dass Sie das Element endgültig löschen möchten?",
 	"backend" => "Backend",
+	"frontend" => "frontend",
 	"none" => "ohne",
 	"newReviewNotify" => "<body style=\"font-family:sans-serif;\">Sehr geehrte(r) Herr/Frau #name#, <br> soeben wurde das neue Mailing mit Betreff '#subject#' (Versanddatum: #senddate#) erstellt und wartet auf Ihre Freigabe:<br> #reviewLink#</body>",
 	"newReviewNotifySubject" => "Newsletter Tool - Eine neue Freigabe wartet auf Sie",
@@ -274,7 +275,10 @@ $messages = array(
 	"saturday" => "Samstag",
 	"sunday" => "Sonntag",
 	"timeofday" => "Tageszeit des Versands",
-	"eventbased" => "ereignisgesteuert"
+	"eventbased" => "ereignisgesteuert",
+	"profiles" => "Profile",
+	"subscriptionobjects" => "Anmeldeseite",
+	"triggerevents" => "Event gesteuerter Versand"
 	
 );
 ?>

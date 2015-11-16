@@ -266,9 +266,8 @@ class CampaignobjectsController extends ControllerBase
 							'subject'=>$rawArray['subject'] ? urldecode($rawArray['subject']) : 'undefined',
 							'abtest'=>intval($rawArray['abtest']),
 							'distributoruid'=>intval($rawArray['distributoruid']),
-							'domid'=>isset($rawArray['id']) ? $rawArray['id'] : ''
-						
-
+							'domid'=>isset($rawArray['id']) ? $rawArray['id'] : '',							
+							'eventuid' => 0
 						));
 						if(!$sendoutobject->save()){
 							$this->flash->error($sendoutobject->getMessages());

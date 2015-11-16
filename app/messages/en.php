@@ -235,6 +235,7 @@ $messages = array(
 	"general" => "general",
 	"suredel" => "Are you sure you want to delete the element?",
 	"backend" => "backend",
+	"frontend" => "frontend",
 	"none" => "none",
 	"newReviewNotify" => "<body style=\"font-family:sans-serif;\">Hi #name#, <br> there is a new mailing with subject '#subject#' (senddate: #senddate#) waiting for your review and clearance:<br> #reviewLink#</body>",
 	"newReviewNotifySubject" => "Newsletter Tool - a new mailing is waiting for your review",
@@ -270,8 +271,10 @@ $messages = array(
 	"saturday" => "saturday",
 	"sunday" => "sunday",
 	"timeofday" => "time of day",
-	"eventbased" => "event based"
-
+	"eventbased" => "event based",
+	"profiles" => "profiles",
+	"subscriptionobjects" => "subscription page",
+	"triggerevents" => "event triggered mail"
 );
 
 ?>

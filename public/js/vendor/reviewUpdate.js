@@ -32,23 +32,33 @@ function pluginInit(){
 	});
 	
 	jQuery('#markReviewed').click(function(e){
+		var triggerevent='';
 		
-		ajaxIt('review','update','sendoutobjectuid='+sendoutobjectuid+'&reviewed='+jQuery(this).context.checked,oksent);	
+		if(jQuery('#triggerevent').length){
+			triggerevent='&triggerevent='+jQuery('#triggerevent').val();
+		}
+		ajaxIt('review','update','sendoutobjectuid='+sendoutobjectuid+'&reviewed='+jQuery(this).context.checked+triggerevent,oksent);	
 	});
 	
 	jQuery('#markCleared').click(function(e){
+		var triggerevent='';
+		
+		if(jQuery('#triggerevent').length){
+			triggerevent='&triggerevent='+jQuery('#triggerevent').val();			
+		}
+		
 		
 		if(jQuery('#markReviewed').prop('checked')===true){		
-		if(jQuery(this).context.checked==true){
-			var cnfrm = confirm(jQuery('#sureclear').val());
-			if (cnfrm == true) {
-				ajaxIt('review','update','sendoutobjectuid='+sendoutobjectuid+'&cleared='+jQuery(this).context.checked,oksent);	
+			if(jQuery(this).context.checked==true){
+				var cnfrm = confirm(jQuery('#sureclear').val());
+				if (cnfrm == true) {
+					ajaxIt('review','update','sendoutobjectuid='+sendoutobjectuid+'&cleared='+jQuery(this).context.checked+triggerevent,oksent);	
+				}else{
+					jQuery(this).context.checked=false;
+				}
 			}else{
-				jQuery(this).context.checked=false;
+				ajaxIt('review','update','sendoutobjectuid='+sendoutobjectuid+'&cleared='+jQuery(this).context.checked+triggerevent,oksent);	
 			}
-		}else{
-			ajaxIt('review','update','sendoutobjectuid='+sendoutobjectuid+'&cleared='+jQuery(this).context.checked,oksent);	
-		}
 		}else{
 			alert(jQuery('#reviewFirst').val());
 			jQuery(this).context.checked=false;

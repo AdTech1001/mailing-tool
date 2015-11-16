@@ -89,6 +89,30 @@
 			</ul>
 		</div>
 		{% endif %}
+		{% if linkAllowed(session.get('auth'),'subscriptionobjects','index') %}		
+		<div class="ceElement xs">
+			<h1>{{ link_to(language~'/subscriptionobjects/index/', tr('subscriptionobjects'), 'title': tr('subscriptionobjects')) }}
+			</h1>
+			
+			<ul>
+			<li>{{ link_to(language~'/subscriptionobjects/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('create'), 'title': tr('create')) }}</li>
+			<li>{{ link_to(language~'/subscriptionobjects/index/', '<span class="glyphicon glyphicon-list"></span> '~tr('retrieve'), 'title': tr('retrieve')) }}</li>
+			</ul>
+			
+		</div>
+		{% endif %}
+		{% if linkAllowed(session.get('auth'),'triggerevents','index') %}		
+		<div class="ceElement xs">
+			<h1>{{ link_to(language~'/triggerevents/index/', tr('triggerevents'), 'title': tr('triggerevents')) }}
+			</h1>
+			
+			<ul>
+			<li>{{ link_to(language~'/triggerevents/create/', '<span class="glyphicon glyphicon-edit"></span> '~tr('create'), 'title': tr('create')) }}</li>
+			<li>{{ link_to(language~'/triggerevents/index/', '<span class="glyphicon glyphicon-list"></span> '~tr('retrieve'), 'title': tr('retrieve')) }}</li>
+			</ul>
+			
+		</div>
+		{% endif %}
 		
 		{% if session.get('auth')['superuser'] == 1 %}		
 		<div class="ceElement xs">

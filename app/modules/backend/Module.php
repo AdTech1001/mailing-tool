@@ -53,7 +53,7 @@ $di->set(
 
         $view = new View();
 
-        $view->setViewsDir($config->application->frontendViewsDir);
+        $view->setViewsDir($config->application->backendViewsDir);
 
         $view->registerEngines(
             array(
