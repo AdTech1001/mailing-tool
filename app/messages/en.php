@@ -274,7 +274,10 @@ $messages = array(
 	"eventbased" => "event based",
 	"profiles" => "profiles",
 	"subscriptionobjects" => "subscription page",
-	"triggerevents" => "event triggered mail"
+	"triggerevents" => "event triggered mail",
+	"subscriptionURL" => "subscription page URL",
+	"subscriptionEmbed" => "HTML-code for embedding the subscription page"
+	
 );
 
 ?>

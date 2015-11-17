@@ -31,6 +31,12 @@
 				{{ hidden_field('uid',"value":subscriptionobject.uid) }}
 				<br><input type="submit" class="ok" value="{{ tr('ok') }}">
 				</form>
+				<br><br>
+				<label>{{tr('subscriptionURL')}}</label>
+				<pre>{{source}}{{path}}/subscription/subscribe/{{subscriptionobject.uid}}</pre><br>
+				<label>{{tr('subscriptionEmbed')}}</label>
+				<pre>&lt;iframe src="{{source}}{{path}}/subscription/subscribe/{{subscriptionobject.uid}}"&gt;&lt;/iframe&gt;</pre>
+				
 			</div>
 		</div>
 	</div>

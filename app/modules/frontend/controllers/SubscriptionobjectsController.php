@@ -211,7 +211,7 @@ class SubscriptionobjectsController extends ControllerBase
 
 		}
 		
-					
+		$this->view->setVar('source','http://'.$this->request->getHttpHost());
 		$this->view->setVar('feuserscategoryArray',$feuserscategoryArray);
 		$this->view->setVar('subscriptionobject',$subscriptionobj);
 		$this->view->setVar('feuserscategories',$feuserscategories);

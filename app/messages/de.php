@@ -278,7 +278,9 @@ $messages = array(
 	"eventbased" => "ereignisgesteuert",
 	"profiles" => "Profile",
 	"subscriptionobjects" => "Anmeldeseite",
-	"triggerevents" => "Event gesteuerter Versand"
+	"triggerevents" => "Event gesteuerter Versand",
+	"subscriptionURL" => "URL der Anmeldeseite",
+	"subscriptionEmbed" => "HTML-Code zum Einbetten der Anmeldeseite"
 	
 );
 ?>
