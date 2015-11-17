@@ -34,9 +34,9 @@
 			
 			<tr class='{% if index is even %}even{% else %}odd{%endif%}'>
 				
-					<td >{{linkclick.getLink().linknumber}}</td>					
+					<td >{{linkclick.linknumber}}</td>					
 					<td>{{clickcounts[linkclick.linkuid]}}</td>
-					<td><a href="{{path}}/report/create/{{linkclick.sendoutobjectuid}}/{{linkclick.linkuid}}" class="downloadLink" target="_blank">{{tr('download')}}</a></td>
+					<td><a href="{{path}}/report/create/?sendoutobjectuid={{linkclick.sendoutobjectuid}}&linknumber={{linkclick.linknumber}}" class="downloadLink" target="_blank">{{tr('download')}}</a></td>
 					<td ><a href="{{linkclick.url}}" target="_blank">{{linkclick.url}}</a></td>
 				
 					

@@ -5,7 +5,8 @@ namespace nltool\Modules\Modules\Frontend\Controllers;
 use nltool\Models\Campaignobjects,
 	nltool\Models\Sendoutobjects,
 	nltool\Models\Mailqueue,
-	nltool\Models\Linkclicks;
+	nltool\Models\Linkclicks,
+	nltool\Models\Addresses;
 
 /**
  * Class IndexController
@@ -64,7 +65,8 @@ class ReportController extends ControllerBase
 		$environment= $this->config['application']['debug'] ? 'development' : 'production';
 		$baseUri=$this->config['application'][$environment]['staticBaseUri'];
 		$path=$baseUri.$this->view->language;
-		if(!$this->dispatcher->getParam('linkuid')){
+		
+		if(!$this->request->getQuery('linknumber')){
 		$this->assets->addCss('css/jquery.dataTables.css');
 		$sendoutobject=  Sendoutobjects::findFirst(array(
 			'conditions'=>'uid=?1',
@@ -85,20 +87,22 @@ class ReportController extends ControllerBase
 			}
 		}
 		$opened=$sendoutobject->countOpenclicks(array('group'=>'addressuid'));
-		$clicked=$sendoutobject->countLinkclicks(array('group'=>'addressuid'));
-		$linkClickCounts=$sendoutobject->countLinkclicks(array('group'=>'linkuid'));
-		$clicks=$sendoutobject->getLinkclicks(array('group'=>'linkuid'));
+		$clicked=$sendoutobject->countLinkclicks();
+		$linkClickCounts=$sendoutobject->countLinkclicks();
+		$clicks=$sendoutobject->getLinkclicks();
 		$clickArray=array();
 		foreach($linkClickCounts as $linkClickCount){
 			$clickArray[$linkClickCount->linkuid]=$linkClickCount->rowcount;
 		}
 		//arsort($clickArray);
-		
-		
+		$totalclicks=0;
+		foreach($clicked as $clickRow){
+			$totalclicks+=$clickRow->rowcount;
+		}
 		
 		$this->view->setVar('clickcounts',$clickArray);
 		$this->view->setVar('opened',count($opened));
-		$this->view->setVar('clicked',count($clicked));
+		$this->view->setVar('clicked',$totalclicks);
 		$this->view->setVar('clicks',$clicks);
 		$this->view->setVar('sendoutobject',$sendoutobject);
 		$this->view->setVar('sent',$sent);
@@ -109,11 +113,24 @@ class ReportController extends ControllerBase
 		$this->view->setVar('path',$path);
 		}else{
 			$csv="clickdate,email,lastname,firstname,salutation,title,city,zip,gender".PHP_EOL;
-			$linkClicks=Linkclicks::findByLinkuid($this->dispatcher->getParam('linkuid'));			
-			
-			foreach($linkClicks as $linkClick){
+			$modelsManager=$this->getDi()->getShared('modelsManager');		
 				
-				$clickAddress=$linkClick->getAddress();						
+		$queryStrng="SELECT nltool\Models\Linklookup.linknumber,nltool\Models\Linkclicks.uid, nltool\Models\Linkclicks.pid, nltool\Models\Linkclicks.tstamp, nltool\Models\Linkclicks.crdate, nltool\Models\Linkclicks.deleted, nltool\Models\Linkclicks.hidden, nltool\Models\Linkclicks.campaignuid, nltool\Models\Linkclicks.mailobjectuid, nltool\Models\Linkclicks.sendoutobjectuid, nltool\Models\Linkclicks.url, nltool\Models\Linkclicks.linkuid, nltool\Models\Linkclicks.addressuid FROM nltool\Models\Linkclicks LEFT JOIN nltool\Models\Linklookup ON nltool\Models\Linkclicks.linkuid = nltool\Models\Linklookup.uid WHERE nltool\Models\Linkclicks.sendoutobjectuid = ?1 AND nltool\Models\Linklookup.linknumber = ?2";	
+		
+		$sQuery=$modelsManager->createQuery($queryStrng);								
+		
+		$linkClicks = $sQuery->execute(array(
+			1 => $this->request->getQuery('sendoutobjectuid'),
+			2 => $this->request->getQuery('linknumber')
+		));		
+		
+		
+		
+			
+			//$linkClicks=Linkclicks::find($this->request->getQuery('linkuid'));			
+			
+			foreach($linkClicks as $linkClick){				
+				$clickAddress=Addresses::findFirstByUid($linkClick->uid);						
 				$csvArray=array(
 					date('d.m.Y. H:i:s',$linkClick->crdate),
 					$clickAddress->email,
@@ -129,11 +146,11 @@ class ReportController extends ControllerBase
 				$csv.=PHP_EOL;
 			}
 			$time=time();
-			$filename=$this->dispatcher->getParam('linkuid').'_' .$time.'.csv';
+			$filename=$this->request->getQuery('linkuid').'_' .$time.'.csv';
 			
 			file_put_contents('../public/media/report-'.$filename,$csv);			
 			$this->response->redirect($this->request->getScheme().'://'.$this->request->getHttpHost().$baseUri.'public/media/report-'.$filename, true);
-			//$this->view->disable();
+			$this->view->disable();
 			
 		}
 	}
