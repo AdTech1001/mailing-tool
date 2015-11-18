@@ -193,7 +193,7 @@ class CampaignobjectsController extends ControllerBase
 	
 	private function removePreviousObjectsFromCampaign($campaignobjectUid){
 		$sendoutobjectRecords=  Sendoutobjects::find(array(
-				"conditions" => "deleted = 0 AND hidden =0 AND inprogress=0 AND cleared=0 AND sent=0 AND campaignuid = ?1",
+				"conditions" => "deleted = 0 AND hidden =0  AND campaignuid = ?1",
 							"bind" => array(
 								1 => $campaignobjectUid																
 								)
@@ -202,6 +202,8 @@ class CampaignobjectsController extends ControllerBase
 			if($sendoutobjectRecord){
 				$sendoutobjectRecord->deleted=1;
 				$sendoutobjectRecord->hidden=1;				
+				$sendoutobjectRecord->cleared=0;
+				$sendoutobjectRecord->reviewed=0;
 				$sendoutobjectRecord->update();
 				$addressconditions=$sendoutobjectRecord->getAddressconditions();
 				if($addressconditions){
@@ -269,6 +271,7 @@ class CampaignobjectsController extends ControllerBase
 							'domid'=>isset($rawArray['id']) ? $rawArray['id'] : '',							
 							'eventuid' => 0
 						));
+						
 						if(!$sendoutobject->save()){
 							$this->flash->error($sendoutobject->getMessages());
 						}else{

@@ -7,7 +7,7 @@ use nltool\Models\Templateobjects as Templateobjects,
 	Phalcon\Image,
 	Phalcon\Image\Adapter\GD as GDAdapter,		
 	DOMDocument as DOMDocument;
-		
+
 
 class TemplateobjectsController extends ControllerBase
 {
@@ -36,12 +36,11 @@ class TemplateobjectsController extends ControllerBase
 		
 		$this->view->setVar('contenttemplateobjects',$contenttemplateobjects);
 		$this->view->setVar('pagetemplateobjects',$pagetemplateobjects);
-		$this->view->setVar('path',$path);
-		
-		
+		$this->view->setVar('path',$path);				
     }
+	
 	public function createAction(){
-
+		
 		/*$file=  file_get_contents('../app/modules/frontend/templates/newsletterMainTemplate.volt');
 		$compiled= $compiler->parse($file);*/
 		//echo('<iframe src="http://localhost/baywa-nltool/public/templates/newsletterMainTemplate.volt.php"></iframe>');

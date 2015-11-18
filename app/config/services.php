@@ -15,7 +15,8 @@ use nltool\Notifications\Checker as NotificationsChecker;
 //use Sum\Oauth2 AS Oauth2;
 use nltool\Auth\Auth;
 use nltool\Acl\Acl;
-use nltool\Helper\Mailrenderer;
+use nltool\Helper\Mailrenderer,
+	nltool\Helper\Domrenderer;
 
 
 
@@ -253,6 +254,9 @@ $di->set('mailrenderer', function(){
 	return new Mailrenderer();
 });
 
+$di->set('domparser', function(){
+	return new Domrenderer();
+});
 
 $di->set('triggerevents',function(){
 	$eventsManager = new EventsManager();
