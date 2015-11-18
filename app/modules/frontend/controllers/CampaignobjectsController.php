@@ -266,7 +266,8 @@ class CampaignobjectsController extends ControllerBase
 							'subject'=>$rawArray['subject'] ? urldecode($rawArray['subject']) : 'undefined',
 							'abtest'=>intval($rawArray['abtest']),
 							'distributoruid'=>intval($rawArray['distributoruid']),
-							'domid'=>$rawArray['id']
+							'domid'=>isset($rawArray['id']) ? $rawArray['id'] : ''
+						
 
 						));
 						if(!$sendoutobject->save()){

@@ -40,7 +40,7 @@ class Segmentobjects extends Model{
 		return $emails;
 	}
 	
-	public function countAddresses(){		
+	public function countAddresses(){			
 		$modelsManager=$this->getDi()->getShared('modelsManager');		
 		$sQuery=$modelsManager->createQuery($this->querystring);								
 		$bindArray=json_decode($this->bindarray,true);				
