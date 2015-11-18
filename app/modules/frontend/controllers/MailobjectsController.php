@@ -271,10 +271,20 @@ class MailobjectsController extends ControllerBase
 			$usergroup=Usergroups::findFirstByUid($this->session->get('auth')['usergroup']);
 		
 			$templatedContentObjects = $usergroup->getTemplateobjects(array(
-				"conditions" => "hidden=0 AND deleted=0 AND templatetype = 1",				
+				"conditions" => "hidden=0 AND deleted=0 AND templatetype = 1 AND usergroup = ?1",				
+				"bind" => array(
+					1 => $this->session->get('auth')['usergroup']
+				),
 				"group" => "nltool\Models\Templateobjects.uid"
 				));
 			
+			$templatedContentDynamicObjects = $usergroup->getTemplateobjects(array(
+				"conditions" => "hidden=0 AND deleted=0 AND templatetype = 2 AND usergroup = ?1",				
+				"bind" => array(
+					1 => $this->session->get('auth')['usergroup']
+				),
+				"group" => "nltool\Models\Templateobjects.uid"
+				));
 			
 			$availableContentObject=  Contentobjects::find(array(
 				"conditions" => "deleted = 0 AND hidden=0 AND contenttype=0 AND usergroup=?1 AND crdate > ?2",
@@ -293,6 +303,7 @@ class MailobjectsController extends ControllerBase
 			$bodyRaw=file_get_contents($templateFile);
 			$body=$this->writeContentElements($bodyRaw, $contentObjects);
 			$this->view->templatedCElements =$templatedContentObjects;
+			$this->view->templatedDyElements=	$templatedContentDynamicObjects;
 			$this->view->cElements=$availableContentObject;
 			$this->view->setVar('compiledTemplatebodyRaw',$body);				
 			$this->view->setVar('mailobjectuid',$mailObjectUid);

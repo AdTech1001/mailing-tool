@@ -3,6 +3,21 @@
 {% include 'partials/flash-messages.volt' %}
 {{ content() }}
 {%- if session.get('auth') -%}
+<div id="templatetype_2_wraooer" style="display:none">
+	<form id="templatetype_2">
+		<label>{{tr('columns')}}</label>
+		<select name="columns">
+			<option>{{tr('pleaseSelect')}}</option>			
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+		</select>
+		<div id="dynamicUrls">
+			<label>{{tr('articleURLs')}}</label>
+		</div>
+	</form>
+	
+</div>
 <div class="container">
 	<div id="deleteOverlay" class="hidden" title="{{ tr('delete')}} "><span class="glyphicon glyphicon-remove"></span></div>
 <div id="menuWrapper" class="clearfix">
@@ -70,9 +85,18 @@
 		<div id="dynamicCElements"  class="tabs ce-dynamic hidden">
 			
 			
-			<div class="cElementThumbWrapper"><span>Gegenwärtig nicht verfügbar</span>
-				
+			{% for templatedDyElement in templatedDyElements %}
+			{%- if templatedDyElement.sourcecode != '' -%}
+			<div class="cElementThumbWrapper"><h3>{{ templatedDyElement.title }}</h3>
+				<div class="cElementThumb">					
+					{{ image(templatedDyElement.templatefilepath) }}
+					
+					{{ templatedDyElement.sourcecode }}
+					
+				</div>
 			</div>
+			{% endif %}
+			{% endfor %}
 			
 		</div>
 		<div id="recentCElements" class="hidden tabs ce-recent">

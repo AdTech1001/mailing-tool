@@ -280,7 +280,8 @@ $messages = array(
 	"subscriptionobjects" => "Anmeldeseite",
 	"triggerevents" => "Event gesteuerter Versand",
 	"subscriptionURL" => "URL der Anmeldeseite",
-	"subscriptionEmbed" => "HTML-Code zum Einbetten der Anmeldeseite"
+	"subscriptionEmbed" => "HTML-Code zum Einbetten der Anmeldeseite",
+	"templateTypeContentDynamic" => "dynamisches Inhaltselement Tecparts Shop (hybris Api basiert)"
 	
 );
 ?>

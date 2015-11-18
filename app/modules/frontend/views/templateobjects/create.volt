@@ -13,6 +13,7 @@
 			<select name="templatetype">
 				<option value="0">{{ tr('templateTypeMail') }}</option>
 				<option value="1">{{ tr('templateTypeContent') }}</option>
+				<option value="2">{{ tr('templateTypeContentDynamic') }}</option>
 			</select>
 			<br><br>
 			<label>{{ tr('templateSourceLabel')}}</label><br>
