@@ -33,6 +33,21 @@
 	</div>
 </div>
 
+<div class="ceElement small">
+	<h1>{{tr('templateTypeContentDynamic')}}</h1>
+	<div class="ceElementsWrapper">
+		{% for dynamictemplateobject in dynamictemplateobjects %}
+		<div class="listelementContainer">
+			<a href='{{ path }}{{ dynamictemplateobject.uid }}'>>> {{dynamictemplateobject.title}} | {{ date('d.m.Y',dynamictemplateobject.tstamp) }}</a><br>
+			<span class="glyphicon glyphicon-remove deleteListItem" title="{{tr('delete')}}"><input type="hidden" value="{{dynamictemplateobject.uid}}"></span>
+			<div class="thumb">
+				<img src="{{baseurl}}{{dynamictemplateobject.templatefilepath}}">
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+</div>
+
 {%- endif -%}
 
 </div>

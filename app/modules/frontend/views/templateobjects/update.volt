@@ -13,6 +13,7 @@
 			<select name="templatetype" >
 				<option value="0" {% if templateobject.templatetype==0 %}selected{% endif %}>{{ tr('templateTypeMail') }}</option>
 				<option value="1" {% if templateobject.templatetype==1 %}selected{% endif %}>{{ tr('templateTypeContent') }}</option>
+				<option value="2" {% if templateobject.templatetype==2 %}selected{% endif %}>{{ tr('templateTypeContentDynamic') }}</option>				
 			</select>
 			<br><br>
 			<label>{{ tr('templateSourceLabel')}}</label><br>

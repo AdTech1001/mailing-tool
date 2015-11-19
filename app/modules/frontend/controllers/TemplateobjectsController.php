@@ -29,11 +29,17 @@ class TemplateobjectsController extends ControllerBase
 				"group" => "nltool\Models\Templateobjects.uid",
 				"order" => "tstamp DESC"
 				));
+		$dynamictemplateobjects=$usergroup->getTemplateobjects(array(
+				"conditions" => "hidden=0 AND deleted=0 AND templatetype = 2",				
+				"group" => "nltool\Models\Templateobjects.uid",
+				"order" => "tstamp DESC"
+				));
 		
 		$environment= $this->config['application']['debug'] ? 'development' : 'production';
 		$baseUri=$this->config['application'][$environment]['staticBaseUri'];
 		$path=$baseUri.$this->view->language.'/templateobjects/update/';
 		
+		$this->view->setVar('dynamictemplateobjects',$dynamictemplateobjects);
 		$this->view->setVar('contenttemplateobjects',$contenttemplateobjects);
 		$this->view->setVar('pagetemplateobjects',$pagetemplateobjects);
 		$this->view->setVar('path',$path);				
@@ -185,8 +191,11 @@ class TemplateobjectsController extends ControllerBase
 				}
 				
 				
-				if($_POST['templatetype'] == 1){
+				if($_POST['templatetype'] > 0){
 					$html=preg_replace('~<(?:!DOCTYPE|/?(?:html|body))[^>]*>\s*~i', '', $dom->saveHTML($dom->documentElement));
+					if($_POST['templatetype'] > 1){
+						$html=preg_replace('/{{content}}/', '<div class="dyContentPlaceholder"></div>', $html);
+					}
 					$html='<div class="cElement">'.$html.'</div>';
 				}else{
 					$html=preg_replace('~<(?:!DOCTYPE|/?(?:html))[^>]*>\s*~i', '', $dom->saveHTML($dom->documentElement));

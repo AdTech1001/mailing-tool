@@ -3,7 +3,7 @@
 {% include 'partials/flash-messages.volt' %}
 {{ content() }}
 {%- if session.get('auth') -%}
-<div id="templatetype_2_wraooer" style="display:none">
+<div id="templatetype_2_wrapper" style="display:none">
 	<form id="templatetype_2">
 		<label>{{tr('columns')}}</label>
 		<select name="columns">
@@ -87,7 +87,7 @@
 			
 			{% for templatedDyElement in templatedDyElements %}
 			{%- if templatedDyElement.sourcecode != '' -%}
-			<div class="cElementThumbWrapper"><h3>{{ templatedDyElement.title }}</h3>
+			<div class="dyElementThumbWrapper"><h3>{{ templatedDyElement.title }}</h3>
 				<div class="cElementThumb">					
 					{{ image(templatedDyElement.templatefilepath) }}
 					

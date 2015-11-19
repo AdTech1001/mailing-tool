@@ -1115,7 +1115,7 @@ span.deleteListItem{
 	margin:0px auto 15px auto;
 	position:relative;
 }
-.cElementThumbWrapper{
+.cElementThumbWrapper,.dyElementThumbWrapper{
 	
 	margin-left:auto;
 	margin-right:auto;

@@ -177,7 +177,7 @@ function pluginInit(){
 				 }
 			});
 		});
-		jQuery('#dynamicCElements .dynamicCElement').each(function(index,element){
+		jQuery('#dynamicCElements .dyElementThumbWrapper').each(function(index,element){
 			jQuery(element).draggable({
 				appendTo: "#desktop",			
 				scroll: false,
@@ -189,6 +189,8 @@ function pluginInit(){
 				start: function(event,ui) {
 
 					jQuery(ui.helper).addClass("clone");
+					var cElement=jQuery(ui.helper).find('.cElement');
+					jQuery(cElement).addClass('hidden');
 
 				 }
 			});
@@ -279,6 +281,15 @@ function pluginInit(){
 					var helper=jQuery(ui.helper).find('.cElementThumb');					
 					newElement=jQuery(helper[0].lastElementChild).clone();
 					jQuery(newElement).removeClass('hidden');
+				}else if(jQuery(ui.helper).hasClass('dyElementThumbWrapper')){
+					var helper=jQuery(ui.helper).find('.cElementThumb');										
+					newElement=jQuery(helper[0].lastElementChild).clone();
+					jQuery(newElement).find('.dyContentPlaceholder').append(jQuery('#templatetype_2_wrapper'));					
+					jQuery(newElement).removeClass('hidden');
+					jQuery('#templatetype_2_wrapper').show();
+					
+					
+					
 				}else{
 					newElement=jQuery(ui.draggable).clone();
 				}
