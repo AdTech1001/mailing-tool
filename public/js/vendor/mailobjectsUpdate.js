@@ -14,6 +14,8 @@ var reloadFrameDelete=function(data){
 	}
 };
 
+var templatetype_2_wrapper;
+
 var pollForTinymce=function(){
 	if(typeof(tinymce) != 'undefined'){
 		tinymce.PluginManager.add('customem', function(editor, url) {
@@ -114,6 +116,39 @@ var pollForTinymce=function(){
 		window.setTimeout(pollForTinymce,10);
 	}
 }
+var newTable;
+function loadTemplatetype2(cont){		
+	newTable=document.createElement('table');	
+	var elCount=jQuery('input[name="urls[]"]').length;
+	var imgRow=newTable.insertRow();
+	var descRow=newTable.insertRow();
+	if(elCount==1){
+		descRow=imgRow;
+	}
+	
+	for(var i=0; i<elCount;i++){
+		var val=jQuery('input[name="urls[]"]')[i].value.split('-');	
+		var code=val[val.length-1];
+		var imgCell = imgRow.insertCell();
+		var descCell = descRow.insertCell();
+		imgCell.setAttribute("id",'img_'+code);
+		descCell.setAttribute("id",'desc_'+code);
+		ajaxIt('mailobjects','update','dycont=1&templatetype=2&code='+code,writeDyCont);						
+	};	
+	var parentCell=jQuery('.dyContentPlaceholder').parent();
+	jQuery('.dyContentPlaceholder').remove();
+	jQuery(parentCell).append(newTable);
+};
+
+function writeDyCont(result){
+	var resultJson=JSON.parse(result);
+	var code=resultJson.code;
+	var article=resultJson.article;
+	
+	jQuery('#img_'+code).html('<img src="http://www.tecparts.com'+article.product.images[0].mediumUrl+'">');
+	jQuery('#desc_'+code).html('<h1>'+article.product.name+'</h1><p>'+article.product.metaDescription+'</p><a href="http://www.tecparts.com/'+article.product.url+'">Zum Produkt</a>');
+};
+
 var lang;
 var deleteOverlay;
 function pluginInit(){
@@ -125,6 +160,9 @@ function pluginInit(){
 	jQuery('.tabsWrapper').height(jQuery(window).height()-cElementsOffset.top-40);	
 	jQuery('#editFrame').height(jQuery(window).height()-editFrameOffset.top-20);		
 	
+	
+	templatetype_2_wrapper =jQuery('#templatetype_2_wrapper');
+	jQuery('#templatetype_2_wrapper').remove();
 	deleteOverlay=jQuery('#deleteOverlay');
 	
 	jQuery('#deleteOverlay').remove();
@@ -281,15 +319,24 @@ function pluginInit(){
 					var helper=jQuery(ui.helper).find('.cElementThumb');					
 					newElement=jQuery(helper[0].lastElementChild).clone();
 					jQuery(newElement).removeClass('hidden');
-				}else if(jQuery(ui.helper).hasClass('dyElementThumbWrapper')){
+				}else if(jQuery(ui.helper).hasClass('dyElementThumbWrapper')){					
 					var helper=jQuery(ui.helper).find('.cElementThumb');										
 					newElement=jQuery(helper[0].lastElementChild).clone();
-					jQuery(newElement).find('.dyContentPlaceholder').append(jQuery('#templatetype_2_wrapper'));					
-					jQuery(newElement).removeClass('hidden');
-					jQuery('#templatetype_2_wrapper').show();
-					
-					
-					
+					jQuery(newElement).find('.dyContentPlaceholder').append(jQuery(templatetype_2_wrapper));					
+					jQuery(newElement).removeClass('hidden');					
+					jQuery(templatetype_2_wrapper).show();															
+					jQuery(templatetype_2_wrapper).find('select').change(function(){
+							var inputsNumber=jQuery(this)[0].selectedIndex;							
+							jQuery('#dynamicUrls input').remove();
+							for(var i=0;i<inputsNumber;i++){
+								jQuery('#dynamicUrls').append('<input type="text" name="urls[]"><br><br>');
+							}							
+							jQuery('#templatetype_2_wrapper input[type="submit"]').removeClass('hidden');
+							jQuery('#templatetype_2').submit(function(e){
+								e.preventDefault();
+								loadTemplatetype2(this);
+							});
+						});					
 				}else{
 					newElement=jQuery(ui.draggable).clone();
 				}

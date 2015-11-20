@@ -277,7 +277,9 @@ $messages = array(
 	"triggerevents" => "event triggered mail",
 	"subscriptionURL" => "subscription page URL",
 	"subscriptionEmbed" => "HTML-code for embedding the subscription page",
-	"templateTypeContentDynamic" => "dynamic content element Tecparts shop (hybris api based)"
+	"templateTypeContentDynamic" => "dynamic content element Tecparts shop (hybris api based)",
+	"articelnumber" => "number of articels",
+	"articleURLs" => "article URLs"
 	
 );
 

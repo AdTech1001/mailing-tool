@@ -256,6 +256,8 @@ class MailobjectsController extends ControllerBase
 			$this->view->setVar('source',$baseUri.'mails/mailobject_'.$mailObjectUid.'.html');
 			$this->view->disable();
 			
+		}elseif($this->request->isPost() && !$this->dispatcher->getParam("uid") && $this->request->hasPost('dycont')==1){
+			$this->dycontAction();
 		}else{			
 			$mailObjectUid = $this->dispatcher->getParam("uid");
 			$mailobjectRecord = Mailobjects::findFirst(array(
@@ -333,7 +335,18 @@ class MailobjectsController extends ControllerBase
 		}
 	}
 	
-	
+	private function dycontAction(){
+		$chlead = curl_init();
+		curl_setopt($chlead, CURLOPT_URL, 'https://www.tecparts.com/api/rest/article/getArticle?code='.$this->request->getPost('code'));
+		curl_setopt($chlead, CURLOPT_PUT, true);		
+		curl_setopt($chlead, CURLOPT_RETURNTRANSFER, true);		
+		curl_setopt($chlead, CURLOPT_SSL_VERIFYPEER, 0);
+		$chleadresult = curl_exec($chlead);		
+		curl_close($chlead);
+		echo('{"article":'.$chleadresult.',"code":"'.$this->request->getPost('code').'"}');
+		$this->view->disable(); 
+		die();
+	}
 	
 	function writeContentElements($bodyRaw,$contentObjects){
 		$contentPerPosition=array();

@@ -5,16 +5,18 @@
 {%- if session.get('auth') -%}
 <div id="templatetype_2_wrapper" style="display:none">
 	<form id="templatetype_2">
-		<label>{{tr('columns')}}</label>
-		<select name="columns">
+		<label>{{tr('articelnumber')}}</label><br>
+		<select name="columns" id="templatetype_2_columnSelect">
 			<option>{{tr('pleaseSelect')}}</option>			
 			<option value="1">1</option>
 			<option value="2">2</option>
 			<option value="3">3</option>
-		</select>
+		</select><br>
 		<div id="dynamicUrls">
-			<label>{{tr('articleURLs')}}</label>
+			<label>{{tr('articleURLs')}}</label><br>
 		</div>
+		
+		<input type="submit" value="{{tr('ok')}}" class="hidden">
 	</form>
 	
 </div>
