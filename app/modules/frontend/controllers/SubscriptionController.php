@@ -39,6 +39,7 @@ class SubscriptionController extends Controller
 		
 		$this->view->setVar('unsubscribe',false);
 		if($address){
+                        $address->tstamp=time();
 			 $address->deleted=1;
 			 $address->hidden =1;
 					
