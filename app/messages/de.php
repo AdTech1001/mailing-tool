@@ -243,7 +243,8 @@ $messages = array(
 	"newReviewNotify" => "<body style=\"font-family:sans-serif;\">Sehr geehrte(r) Herr/Frau #name#, <br> soeben wurde das neue Mailing mit Betreff '#subject#' (Versanddatum: #senddate#) erstellt und wartet auf Ihre Freigabe:<br> #reviewLink#</body>",
 	"newReviewNotifySubject" => "Newsletter Tool - Eine neue Freigabe wartet auf Sie",
 	"download" => "Download",
-	"reportLinkListDownload" => "Details runterladen"
+	"reportLinkListDownload" => "Details runterladen",
+        "downloadUnsubscribes" => "Abmeldungen runterladen"
 	
 	
 );

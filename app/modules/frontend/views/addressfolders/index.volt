@@ -6,7 +6,7 @@
 
 {%- if detail -%}
 <div class="ceElement large">
-<h1>{{tr('addressFolderSelectLabel')}}: {{foldertitle}}</h1>
+<h1>{{tr('addressFolderSelectLabel')}}: {{foldertitle}} <a href="{{path}}/addressfolders/index/{{folderuid}}/?downloadunsubscribes=1" style="float: right;color:#fff" target="_blank">{{tr('downloadUnsubscribes')}}</a></h1>
 
 
 <table id="adressfolderTable" class="display" cellspacing="0" width="100%">

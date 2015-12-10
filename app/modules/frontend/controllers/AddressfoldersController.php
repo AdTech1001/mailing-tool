@@ -43,6 +43,7 @@ class AddressfoldersController extends ControllerBase
 			die();
 		}else{
 			if($this->dispatcher->getParam('uid')){
+                            
 				$this->assets->addCss('css/jquery.dataTables.css');
 				$this->assets->addJs('js/vendor/addressfoldersInit.js');
 				$addressfolder=Addressfolders::findFirst(array(
@@ -55,6 +56,7 @@ class AddressfoldersController extends ControllerBase
 				$this->view->setVar('foldertitle',$addressfolder->title);
 				$this->view->setVar('folderuid',$addressfolder->uid);
 				$this->view->setVar('detail',true);
+                                $this->view->setVar('path',$path);
 			}else{
 				$addressfolders = Addressfolders::find(array(
 					"conditions"=>"deleted=0 AND hidden=0 AND usergroup =?1",
