@@ -345,6 +345,7 @@ class TriggersendController extends Triggerauth
 				
 				 				 
 				$message->setBody($bodyFinal, 'text/html');
+                                $message->addPart($this->config['defaults']['plaintextFallbackText'], 'text/plain');
 				$to=array($mailqueueElement->m->email => $mailqueueElement->a->first_name.' '.$mailqueueElement->a->last_name);
 				$message->setTo($to);
 				

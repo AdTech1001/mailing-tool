@@ -3,7 +3,7 @@
 return new \Phalcon\Config(array(
 
     
-    'application' => array(
+    'application' => array(        
         'controllersDir' => APP_PATH . '/app/controllers/',
         'modelsDir'      => APP_PATH . '/app/models/',
         'viewsDir'       => APP_PATH . '/app/views/',
@@ -19,8 +19,8 @@ return new \Phalcon\Config(array(
 		'backendViewsDir'       => APP_PATH . '/app/modules/backend/views/',
 		'appsDir' => APP_PATH.'/app/',
         'development'    => array(
-            'staticBaseUri' => '/baywa-nltool/',
-            'baseUri'       => '/baywa-nltool/'
+            'staticBaseUri' => '/mailing-tool/',
+            'baseUri'       => '/mailing-tool/'
         ),
         'production'     => array(
             'staticBaseUri' => '/',
@@ -31,6 +31,9 @@ return new \Phalcon\Config(array(
 		'dontSendDuplicates' => true,
 		'version' => '1.1 beta'
     ),    
+    'defaults' => array(
+        'plaintextFallbackText' => 'Bitte wechseln Sie in den HTML-Modus, um diese Mail korrekt betrachten zu können. Vielen Dank für Ihr Verständnis.'
+    ),
     'smtp'        => array(
         'host'     => "smtp.iq-pi.org",
         'port'     => 25,
@@ -62,7 +65,7 @@ return new \Phalcon\Config(array(
 			'host'     => 'localhost',
 			'username' => 'root',
 			'password' => '',
-			'dbname'   => 'bayw-nltool',
+			'dbname'   => 'nltool',
 			'charset'  => 'utf8'
 		)
 		
