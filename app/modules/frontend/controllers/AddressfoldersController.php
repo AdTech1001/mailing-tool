@@ -42,7 +42,7 @@ class AddressfoldersController extends ControllerBase
 			echo($returnJson);
 			die();
 		}else{
-			if($this->dispatcher->getParam('uid')){
+			if($this->dispatcher->getParam('uid') && !$this->request->getQuery('downloadunsubscribes')){
                             
 				$this->assets->addCss('css/jquery.dataTables.css');
 				$this->assets->addJs('js/vendor/addressfoldersInit.js');
@@ -57,7 +57,26 @@ class AddressfoldersController extends ControllerBase
 				$this->view->setVar('folderuid',$addressfolder->uid);
 				$this->view->setVar('detail',true);
                                 $this->view->setVar('path',$path);
-			}else{
+                        }elseif($this->dispatcher->getParam('uid') && $this->request->getQuery('downloadunsubscribes')){
+                            $unsubscribeAddresses=  Addresses::find(array(
+                               "conditions" => "deleted=1 AND hidden = 1 AND pid = ?1",
+                                "bind" => array(
+                                    1 => $this->dispatcher->getParam('uid')
+                                )
+                            ));
+                            $csv='';
+                            foreach($unsubscribeAddresses as $address){
+                                $csv.= date('d.m.Y. H:i:s',$address->tstamp).','.$address->email.PHP_EOL;
+                            }
+                            $time=time();
+                            $filename=$this->request->getQuery('linkuid').'_' .$time.'.csv';
+
+                            file_put_contents('../public/media/unsubscribes-'.$filename,$csv);			
+                            $this->response->redirect($this->request->getScheme().'://'.$this->request->getHttpHost().$baseUri.'public/media/unsubscribes-'.$filename, true);                            
+                            $this->view->disable();
+                            //unlink('../public/media/unsubscribes-'.$filename);
+                        }
+                        else{
 				$addressfolders = Addressfolders::find(array(
 					"conditions"=>"deleted=0 AND hidden=0 AND usergroup =?1",
 					"bind" => array(1=>$this->session->get('auth')['usergroup']),
