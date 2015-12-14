@@ -66,7 +66,7 @@ class AddressfoldersController extends ControllerBase
                             ));
                             $csv='';
                             foreach($unsubscribeAddresses as $address){
-                                $csv.= date('d.m.Y. H:i:s',$address->tstamp).','.$address->email.PHP_EOL;
+                                $csv.= date('d.m.Y. H:i:s',$address->tstamp).';'.$address->email.PHP_EOL;
                             }
                             $time=time();
                             $filename=$this->request->getQuery('linkuid').'_' .$time.'.csv';
