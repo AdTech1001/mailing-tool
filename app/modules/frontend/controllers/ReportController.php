@@ -66,7 +66,7 @@ class ReportController extends ControllerBase
 		$baseUri=$this->config['application'][$environment]['staticBaseUri'];
 		$path=$baseUri.$this->view->language;
 		
-		if(!$this->request->getQuery('linknumber')){
+		if(!$this->request->getQuery('linknumber') && !$this->request->getQuery('sendoutobjectuid')){
 		$this->assets->addCss('css/jquery.dataTables.css');
 		$sendoutobject=  Sendoutobjects::findFirst(array(
 			'conditions'=>'uid=?1',
@@ -129,8 +129,9 @@ class ReportController extends ControllerBase
 			
 			//$linkClicks=Linkclicks::find($this->request->getQuery('linkuid'));			
 			
-			foreach($linkClicks as $linkClick){				
-				$clickAddress=Addresses::findFirstByUid($linkClick->uid);						
+			foreach($linkClicks as $linkClick){	
+                            
+				$clickAddress=Addresses::findFirstByUid($linkClick->addressuid);						
 				$csvArray=array(
 					date('d.m.Y. H:i:s',$linkClick->crdate),
 					$clickAddress->email,
