@@ -133,14 +133,14 @@ function loadTemplatetype2(cont){
 		var descCell = descRow.insertCell();
 		imgCell.setAttribute("id",'img_'+code);
 		descCell.setAttribute("id",'desc_'+code);
-		ajaxIt('mailobjects','update','dycont=1&templatetype=2&code='+code,writeDyCont);						
+		ajaxIt('mailobjects','update','dycont=1&templatetype=2&code='+code,writeDyContType2);						
 	};	
 	var parentCell=jQuery('.dyContentPlaceholder').parent();
 	jQuery('.dyContentPlaceholder').remove();
 	jQuery(parentCell).append(newTable);
 };
 
-function writeDyCont(result){
+function writeDyContType2(result){
 	var resultJson=JSON.parse(result);
 	var code=resultJson.code;
 	var article=resultJson.article;
