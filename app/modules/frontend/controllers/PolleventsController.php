@@ -61,9 +61,9 @@ class PolleventsController extends Triggerauth implements EventsAwareInterface
 	}
 	
 	private function birthdayEvents(){
-		$date = date('Y-m-d');
+		$date = date('m-d');
 		$events=  \nltool\Models\Triggerevents::find(array(
-			'conditions' => 'deleted = 0 AND hidden = 0 AND cleared = 1 AND reviewed = 1 AND eventtype = 3 AND birthday LIKE ?1',
+			'conditions' => 'deleted = 0 AND hidden = 0 AND cleared = 1 AND reviewed = 1 AND eventtype = 3 AND DATE_FORMAT(birthday, "%m-%d") LIKE ?1',
 			'bind' => array(
 				1 => $date
 			)

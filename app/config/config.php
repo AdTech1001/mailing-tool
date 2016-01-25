@@ -19,8 +19,8 @@ return new \Phalcon\Config(array(
 		'backendViewsDir'       => APP_PATH . '/app/modules/backend/views/',
 		'appsDir' => APP_PATH.'/app/',
         'development'    => array(
-            'staticBaseUri' => '/mailing-tool/',
-            'baseUri'       => '/mailing-tool/'
+            'staticBaseUri' => '/baywa-nltool/',
+            'baseUri'       => '/baywa-nltool/'
         ),
         'production'     => array(
             'staticBaseUri' => '/',
@@ -29,7 +29,7 @@ return new \Phalcon\Config(array(
         'debug'          => true,
 		'dontSendReally' => false,
 		'dontSendDuplicates' => true,
-		'version' => '1.1 beta'
+		'version' => '2.0 RC'
     ),    
     'defaults' => array(
         'plaintextFallbackText' => 'Bitte wechseln Sie in den HTML-Modus, um diese Mail korrekt betrachten zu können. Vielen Dank für Ihr Verständnis.'
@@ -65,7 +65,7 @@ return new \Phalcon\Config(array(
 			'host'     => 'localhost',
 			'username' => 'root',
 			'password' => '',
-			'dbname'   => 'nltool',
+			'dbname'   => 'bayw-nltool',
 			'charset'  => 'utf8'
 		)
 		

@@ -42,6 +42,7 @@ class MailobjectsController extends ControllerBase
         $environment= $this->config['application']['debug'] ? 'development' : 'production';
 		$baseUri=$this->config['application'][$environment]['staticBaseUri'];
 		$path=$baseUri.$this->view->language.'/mailobjects/update/';
+		
 		$mailobjects=Mailobjects::find(array(
 				"conditions" => "deleted=0 AND hidden=0 AND usergroup = ?1",
 				"bind" => array(1 => $this->session->get('auth')['usergroup']),
@@ -260,30 +261,34 @@ class MailobjectsController extends ControllerBase
 			$this->dycontAction();
 		}else{			
 			$mailObjectUid = $this->dispatcher->getParam("uid");
+			
 			$mailobjectRecord = Mailobjects::findFirst(array(
 			"conditions" => "uid = ?1",
 			"bind" => array(1 => $mailObjectUid)
 			));
+			
 			$contentObjects=$mailobjectRecord->getContentobjects(array(
 				"conditions" => "deleted = 0 AND hidden =0",
 				"order" => "templateposition ASC, positionsorting ASC"
 				
 			));
-			
-			$usergroup=Usergroups::findFirstByUid($this->session->get('auth')['usergroup']);
 		
-			$templatedContentObjects = $usergroup->getTemplateobjects(array(
-				"conditions" => "hidden=0 AND deleted=0 AND templatetype = 1 AND usergroup = ?1",				
+			//$usergroup=Usergroups::findFirstByUid($this->session->get('auth')['usergroup']);
+			
+			$templatedContentObjects = Templateobjects::find(array(
+				"conditions" => "hidden=0 AND deleted=0 AND templatetype = ?2 AND usergroup = ?1",				
 				"bind" => array(
-					1 => $this->session->get('auth')['usergroup']
+					1 => $this->session->get('auth')['usergroup'],
+					2 => 1
 				),
 				"group" => "nltool\Models\Templateobjects.uid"
 				));
 			
-			$templatedContentDynamicObjects = $usergroup->getTemplateobjects(array(
-				"conditions" => "hidden=0 AND deleted=0 AND templatetype = 2 AND usergroup = ?1",				
+			$templatedContentDynamicObjects = Templateobjects::find(array(
+				"conditions" => "hidden=0 AND deleted=0 AND templatetype = ?2 AND usergroup = ?1",				
 				"bind" => array(
-					1 => $this->session->get('auth')['usergroup']
+					1 => $this->session->get('auth')['usergroup'],
+					2 => 2
 				),
 				"group" => "nltool\Models\Templateobjects.uid"
 				));

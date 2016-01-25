@@ -52,7 +52,7 @@
 	<br>
 	</div>
 	<div class="ceElement medium">
-	<h1>{{tr('eventClearingTasks')}}</h1>
+	<h1>{{tr('eventbased')}}</h1>
 	<div class="dataTables_wrapper">
 	<table class="display dataTable">
 		<thead>
