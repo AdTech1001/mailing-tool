@@ -133,7 +133,7 @@
 				<li><img src="{{baseurl}}public/images/device-icon-smartphone-hor.png"></li>
 			</ul>
 	</div>
-	<iframe id="mailobjectFrame" style="border:1px solid; background:#e3e3e3;width:100%;height:100%;" src="{{ baseurl }}" ></iframe>
+	<iframe id="mailobjectFrame" style="border:1px solid; background:#e3e3e3;width:100%;height:100%;" src="{{ source }}" ></iframe>
 </div>
 
 <input type="hidden" id="salutationTitle" value="{{tr('salutation')}}">
