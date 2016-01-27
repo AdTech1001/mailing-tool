@@ -707,7 +707,7 @@ CREATE TABLE mailqueue (
 	answername varchar(255) COLLATE utf8_general_ci NOT NULL,	
 	returnpath varchar(255) COLLATE utf8_general_ci NOT NULL,	
 	organisation varchar(255) COLLATE utf8_general_ci NOT NULL,	
-	mailbody mediumtext,
+	mailbody mediumtext,        
 	PRIMARY KEY (uid)
 	
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
