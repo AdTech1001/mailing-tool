@@ -283,7 +283,8 @@ $messages = array(
 	"subscriptionEmbed" => "HTML-Code zum Einbetten der Anmeldeseite",
 	"templateTypeContentDynamic" => "dynamisches Inhaltselement Tecparts Shop (hybris Api basiert)",
 	"articelnumber" => "Anzahl der Artikel",
-	"articleURLs" => "Artikel URLs"
+	"articleURLs" => "Artikel URLs",
+        "mailLink" => "Direktlink zur Mail"
 	
 );
 ?>

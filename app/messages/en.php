@@ -279,7 +279,8 @@ $messages = array(
 	"subscriptionEmbed" => "HTML-code for embedding the subscription page",
 	"templateTypeContentDynamic" => "dynamic content element Tecparts shop (hybris api based)",
 	"articelnumber" => "number of articels",
-	"articleURLs" => "article URLs"
+	"articleURLs" => "article URLs",
+        "mailLink" => "direct link to mail"
 	
 );
 

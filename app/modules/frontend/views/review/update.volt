@@ -89,12 +89,13 @@
 	<h1>{{tr('mailConfiguration')}}</h1>
 	<div id="reviewConfiguration">
 		<div id='reviewConfigurationInfo'>
-			<label>{{tr('sendoutDateLabel')}}:</label><span>{{ date('d.m.Y',sendoutobject.tstamp) }}</span><br>
+			<label>{{tr('sendoutDateLabel')}}:</label><span>{{ date('d.m.Y H:i',sendoutobject.tstamp) }}</span><br>
 			<label>{{tr('sendoutSubject')}}: </label><span>{{ sendoutobject.subject }}</span><br><br>
 			<h4>{{tr('addConfigurationobject')}}</h4><br>
 			<label>{{tr('confSendernameLabel')~' ('~tr('confSendermailLabel')~')'}}:</label><span>{{ sendoutobject.configuration.sendername }} ({{ sendoutobject.configuration.sendermail }})</span><br>
 			<label>{{tr('confAnswernameLabel')~' ('~tr('confAnswermailLabel')~')'}}:</label><span>{{ sendoutobject.configuration.answername }} ({{ sendoutobject.configuration.answermail }})</span><br>
-			<label>{{tr('confReturnpathLabel')}}</label><span>{{ sendoutobject.configuration.returnpath }}</span>
+			<label>{{tr('confReturnpathLabel')}}</label><span>{{ sendoutobject.configuration.returnpath }}</span><br><br>
+<label>{{tr('mailLink')}}:</label><input type="text" onClick="this.select();" readonly value="{{fullpath}}{{source}}">
 		</div>
 		{%if triggerevent is defined %}
 		<div id="distributor">
@@ -126,6 +127,9 @@
 				<li><img src="{{baseurl}}public/images/device-icon-smartphone-vert.png"></li>
 				<li><img src="{{baseurl}}public/images/device-icon-smartphone-hor.png"></li>
 			</ul>
+
+                    
+
 	</div>
 	<iframe id="mailobjectFrame" style="border:1px solid; background:#e3e3e3;width:100%;height:100%;" src="{{ source }}" ></iframe>
 </div>

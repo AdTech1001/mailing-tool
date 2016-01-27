@@ -87,12 +87,14 @@ class ReviewController extends ControllerBase
 			}
 			$environment= $this->config['application']['debug'] ? 'development' : 'production';
 			$baseUri=$this->config['application'][$environment]['staticBaseUri'];
+                        $fullpath='http://'.$this->request->getHttpHost().$baseUri;
 			$this->view->setVar('source',$baseUri.'mails/mailobject_'.$sendoutobject->mailobjectuid.'.html');
 			$this->view->setVar('authorities',$authorityArray);
 			$this->view->setVar('reviews',$reviewArray);
 			$this->view->setVar('userUid',$this->session->get('auth')['uid']);
 			$this->view->setVar('reviewChecked',$sendoutobject->reviewed==1 ? 'checked':null);
 			$this->view->setVar('clearedChecked',$sendoutobject->cleared==1 ? 'checked':null);
+                        $this->view->setVar('fullpath',$fullpath);
 			if($this->trigger){
 				$this->view->setVar('triggerevent',true);
 			}
