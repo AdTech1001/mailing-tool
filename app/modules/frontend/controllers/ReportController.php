@@ -112,7 +112,7 @@ class ReportController extends ControllerBase
 		
 		$this->view->setVar('path',$path);
 		}else{
-			$csv="clickdate,email,lastname,firstname,salutation,title,city,zip,gender".PHP_EOL;
+			$csv="clickdate;email;lastname;firstname;salutation;title;city;zip;gender;uid".PHP_EOL;
 			$modelsManager=$this->getDi()->getShared('modelsManager');		
 				
 		$queryStrng="SELECT nltool\Models\Linklookup.linknumber,nltool\Models\Linkclicks.uid, nltool\Models\Linkclicks.pid, nltool\Models\Linkclicks.tstamp, nltool\Models\Linkclicks.crdate, nltool\Models\Linkclicks.deleted, nltool\Models\Linkclicks.hidden, nltool\Models\Linkclicks.campaignuid, nltool\Models\Linkclicks.mailobjectuid, nltool\Models\Linkclicks.sendoutobjectuid, nltool\Models\Linkclicks.url, nltool\Models\Linkclicks.linkuid, nltool\Models\Linkclicks.addressuid FROM nltool\Models\Linkclicks LEFT JOIN nltool\Models\Linklookup ON nltool\Models\Linkclicks.linkuid = nltool\Models\Linklookup.uid WHERE nltool\Models\Linkclicks.sendoutobjectuid = ?1 AND nltool\Models\Linklookup.linknumber = ?2";	
@@ -141,9 +141,10 @@ class ReportController extends ControllerBase
 					$clickAddress->title,
 					$clickAddress->city,
 					$clickAddress->zip,
-					$clickAddress->gender
+					$clickAddress->gender,
+                                        $clickAddress->uid
 				);
-				$csv .= implode(',',$csvArray);
+				$csv .= implode(';',$csvArray);
 				$csv.=PHP_EOL;
 			}
 			$time=time();

@@ -18,7 +18,7 @@ class PolleventsController extends Triggerauth implements EventsAwareInterface
 		3 => 'birthdayEvents'
 	);
 	
-    public function setEventsManager(ManagerInterface $eventsManager)
+    public function setEventsManager(Phalcon\Events\ManagerInterface $eventsManager)
     {
         $this->_eventsManager = $eventsManager;
     }
