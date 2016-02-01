@@ -182,7 +182,9 @@ class AddressfoldersController extends ControllerBase
 								1=>$this->request->getPost('addressFoldersUid')
 							)
 						));
-						
+                                                if($this->request->hasPost('deleteallexisting')){
+                                                    $this->eraseFoldAdd($addressfolder->uid);
+                                                }
 						$addressfolder->assign(array(
 								'tstamp'=>$time
 								));
@@ -276,6 +278,10 @@ class AddressfoldersController extends ControllerBase
 		}
 	}
 	
+        private function eraseFoldAdd($folderUid){
+            Addresses::findByPid($folderUid)->delete();
+        }
+        
 	private function getCsvWrapper($handle, $length, $divider,$wrap){
 		if($wrap){
 			return fgetcsv($handle, $length, $divider,$wrap);

@@ -117,7 +117,7 @@ class ControllerBase extends Controller
 		 // Check if the user have permission to the current option
             $actionName = $dispatcher->getActionName();
 		
-			
+		
             if (!$this->acl->isAllowed($role, $controllerName, $actionName)) {
 
                 $this->flash->notice('You don\'t have access to this module: ' . $controllerName . ':' . $actionName);
@@ -128,7 +128,7 @@ class ControllerBase extends Controller
                         'action' => 'index'
                     ));
                 }*/
-				$dispatcher->forward(array(
+                    $dispatcher->forward(array(
                         'controller' => 'index',
                         'action' => 'index'
                     ));

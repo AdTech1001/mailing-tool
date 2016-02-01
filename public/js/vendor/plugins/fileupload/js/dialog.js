@@ -22,7 +22,7 @@ var fileuploadDialog = {
 		this.timeoutStore = window.setTimeout(function(){
 			document.getElementById("upload_additional_info").innerHTML = 'This is taking longer than usual.' + '<br />' + 'An error may have occurred.' + '<br /><a href="#" onClick="jbImagesDialog.showIframe()">' + 'View script\'s output' + '</a>';
 			// tinyMCEPopup.editor.windowManager.resizeBy(0, 30, tinyMCEPopup.id);
-		}, 20000);
+		}, 60000);
 	},
 	
 	showIframe : function() {
