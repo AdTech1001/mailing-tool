@@ -85,7 +85,11 @@ class MailobjectsController extends ControllerBase
 				
 				if($templateUid !=0){
 				//$this->flash->success("successfully created");
-				$mainTemplate='../app/modules/frontend/templates/main.volt';
+                                $mainTemplate='../app/modules/frontend/templates/main.volt';
+                                if(file_exists('../app/modules/frontend/templates/main_'.$this->session->get('auth')['usergroup'].'.volt')){
+                                    $mainTemplate='../app/modules/frontend/templates/main_'.$this->session->get('auth')['usergroup'].'.volt';
+                                }
+				
 				$templateFile=  '../app/modules/frontend/templates/template_mail_'.$templateUid.'.volt';
 				$generatedMailFile='../public/mails/mailobject_'.$mailObject->uid.'.html';
 				$bodyRaw=file_get_contents($templateFile);
@@ -155,6 +159,8 @@ class MailobjectsController extends ControllerBase
 	
 	function updateAction()
 	{
+            
+            
 		$this->assets            
             ->addJs('js/vendor/mailobjectsInit.js');
 		
@@ -171,7 +177,11 @@ class MailobjectsController extends ControllerBase
 			
 			$generatedMailformFile='../public/mails/mailobject_'.$mailObjectUid.'.html';
 			$templateFile=  '../app/modules/frontend/templates/template_mail_'.$mailobjectRecord->templateuid.'.volt';
-			$mainTemplateFile='../app/modules/frontend/templates/main.volt';
+			$mainTemplateFile='../app/modules/frontend/templates/main.volt';                         
+                        if(file_exists('../app/modules/frontend/templates/main_'.$this->session->get('auth')['usergroup'].'.volt')){
+                             $mainTemplateFile='../app/modules/frontend/templates/main_'.$this->session->get('auth')['usergroup'].'.volt';
+                         }
+                         
 			$bodyRaw=file_get_contents($templateFile);
 			
 			if(is_array($contentElements)){
@@ -247,7 +257,7 @@ class MailobjectsController extends ControllerBase
 			));
 			$mailBody=$this->writeContentElements($bodyRaw, $contentObjects);
 			$mainTemplate=  file_get_contents($mainTemplateFile);
-			$mail=$this->renderMain($mainTemplate,$mailBody);			
+			$mail=$this->renderMain($mainTemplate,$mailBody,$mailObjectUid);			
 			file_put_contents($generatedMailformFile, $mail);
 			$this->view->setVar('compiledTemplatebodyRaw',$bodyRaw);
 			$this->view->setVar('mailobjectuid',$mailObjectUid);
@@ -410,9 +420,9 @@ class MailobjectsController extends ControllerBase
 		return $subject;
 	}
 	
-	function renderMain($subject, $body){
-		$search=array('{{compiledTemplatebody}}');
-		$replace=array($body);
+	function renderMain($subject, $body, $mailobjectuid){
+                $search=array('{{compiledTemplatebody}}','{{mailobjectuid}}');
+		$replace=array($body,$mailobjectuid);
 		$renderMain=str_replace($search, $replace, $subject);
 		return $renderMain;
 	}

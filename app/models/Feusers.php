@@ -21,10 +21,10 @@ class Feusers extends \Phalcon\Mvc\Model{
             'field' => 'email'
         )));
 		
-        $this->validate(new UniquenessValidator(array(
+        /*$this->validate(new UniquenessValidator(array(
             'field' => 'email',
             'message' => 'Sorry, The email was registered by another user'
-        )));
+        )));*/
         $this->validate(new UniquenessValidator(array(
             'field' => 'username',
             'message' => 'Sorry, That username is already taken'

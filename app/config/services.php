@@ -175,7 +175,9 @@ $di->set('security', function(){
 
 
 $di->set('session', function() {
-    $session = new Phalcon\Session\Adapter\Files();
+    $session = new Phalcon\Session\Adapter\Files(array(
+                'uniqueId' => 'newslettertool-'
+              ));
     $session->start();
     return $session;
 });
