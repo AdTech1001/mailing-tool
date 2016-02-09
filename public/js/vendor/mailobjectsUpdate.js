@@ -88,13 +88,23 @@ var pollForTinymce=function(){
 			valid_child_elements : "+p[h1|h2|h3|h4|h5|h6|a|span|b|i|u|sup|sub|img|hr|#text],+span[a|b|i|u|sup|sub|img|#text],+a[h1|h2|h3|h4|h5|h6|span|b|i|u|sup|sub|img|#text]",			
 			plugins: [
 				"customem advlist autolink lists link image charmap print preview anchor",
-				"searchreplace visualblocks code fullscreen",
+				"searchreplace visualblocks code fullscreen textcolor",
 				"insertdatetime media table contextmenu paste jbimages fileupload"
 			],
+                        
 			extended_valid_elements : "dynamic",
 			custom_elements: "~dynamic",			
-			toolbar: "customem | insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link | code",
-			style_formats_merge: true,
+			toolbar: "customem | insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link | forecolor backcolor |code",
+                         textcolor_map: [
+    "000000", "Black",    
+    "727272", "BayWa Gray",    
+    "009650", "BayWa Green",
+    "095763", "Tectrol Gray",
+    "17B6BA", "Tectrol light Green/Blue",
+    "20AA55", "Tectrol Green",
+    "88C75F", "Tectrol Yellow/Green"
+  ],
+			style_formats_merge: true/*,
 			style_formats: [
 			{
 				title: 'Set Link Color',
@@ -104,7 +114,7 @@ var pollForTinymce=function(){
 					
 				}
 			 }
-]
+                        ] */  
 		});
 		
 		
