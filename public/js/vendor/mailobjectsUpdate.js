@@ -102,7 +102,13 @@ var pollForTinymce=function(){
     "095763", "Tectrol Gray",
     "17B6BA", "Tectrol light Green/Blue",
     "20AA55", "Tectrol Green",
-    "88C75F", "Tectrol Yellow/Green"
+    "88C75F", "Tectrol Yellow/Green",
+    "b2d23e", "Planterra Yellow/Green",
+    "57b6dd", "Planterra Blue",
+    "f5821f", "Planterra Orange",
+    "ffd430", "Planterra Yellow",
+    "4bb85f", "Planterra light Green",
+    "b2815a", "Planterra light Red"
   ],
 			style_formats_merge: true/*,
 			style_formats: [
