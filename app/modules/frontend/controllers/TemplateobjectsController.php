@@ -129,9 +129,11 @@ class TemplateobjectsController extends ControllerBase
 			}
 			$processedSourceCode=$this->processSourcecode($templateObject->uid);
 			$templateObject->sourcecode=$processedSourceCode;
-			$templateObject->update();
+                         if (!$templateObject->update()) {
+                             $this->flash->success("Template was updated successfully: ");
+                         }
 				
-            $this->flash->success("Template was updated successfully: ");
+            
 			
 		}
 		$this->view->setVar('templateobject',$templateObject);
