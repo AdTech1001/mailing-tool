@@ -324,9 +324,8 @@ function pluginInit(){
       hoverClass: "ui-state-hover",
 	  
       drop: function( event, ui ) {		  
-		  
-		  var elOffsetTop=event.pageY - $(this).offset().top;
-		  
+		                    
+		  var elOffsetTop= ui.offset.top;		 
 		  var cElementsOnPosition=jQuery(this).find('.cElement');
 		  var newElement;
 		  
@@ -376,8 +375,8 @@ function pluginInit(){
 				var inserted=false;
 				
 				for(var i=0; i<cElementsOnPosition.length; i++){				  
-				
-					if(elOffsetTop <= cElementsOnPosition[i].offsetTop){					 					  											  
+				console.log(jQuery(cElementsOnPosition[i]).offset().top);
+					if(elOffsetTop <= jQuery(cElementsOnPosition[i]).offset().top){					 					  											  
 					  jQuery(newElement).insertBefore(jQuery(cElementsOnPosition[i]));
 					  inserted=true;
 					  break;
