@@ -220,10 +220,10 @@ class TemplateobjectsController extends ControllerBase
 						$saveFilename='public/images/templateThumbnails/template_'.$uid.'_S.'.$filetype;
 						
 						$imageS = new GDAdapter($tmpFile);
-						$imageS->resize(300,10000);
+						$imageS->resize(300,1000);
 						$imageS->save($thumbFilenameS);
 						$imageL = new GDAdapter($tmpFile);
-						$imageL->resize(600,10000);
+						$imageL->resize(600,1000);
 						$imageL->save($thumbFilenameL);
                       
 						 unlink($tmpFile);
