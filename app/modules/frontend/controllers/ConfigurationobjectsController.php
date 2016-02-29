@@ -82,7 +82,29 @@ class ConfigurationobjectsController extends ControllerBase
 
 			 if (!$configurationobject->save()) {
 				  $this->flash->error($configurationobject->getMessages());
-			 } 
+                        }else{
+                            $folderInStrng='';
+                            $folderBindArray=array();
+                            if($this->request->hasPost('authorities')){
+                                    foreach($this->request->getPost('authorities') as $key=>$value){
+                                            $folderInStrng.='?'.$key.',';
+                                            $folderBindArray[$key]=$value;
+                                    }
+                                    $authorities=  Feusers::find(array(
+                                            'conditions' => 'uid IN ('.substr($folderInStrng,0,-1).')',
+                                            'bind' => $folderBindArray
+
+                                    ));
+
+
+                                    foreach ($authorities as $authority){								
+                                            $authoritiesArr[]=$authority;				
+                                    }
+                                $configurationobject->authorities=$authoritiesArr;
+                                $configurationobject->update();
+                            }
+                           
+                        } 
 
 
 		}

@@ -118,7 +118,7 @@ class ConfigurationobjectsForm extends Form
         ));
 
         $this->add($organisation);
-		$authorities=new Select("authorities[]", Feusers::find(array('conditions'=>'deleted=0 AND hidden=0')), array(
+		$authorities=new Select("authorities[]", Feusers::find(array('conditions'=>'deleted=0 AND hidden=0 AND usergroup = ?1','bind'=> array(1=>$this->session->get('auth')['usergroup']))), array(
             'using' => array('uid', 'email'),			 
 			'multiple'=>'multiple'		
         ));

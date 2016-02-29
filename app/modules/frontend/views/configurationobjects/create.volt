@@ -12,7 +12,7 @@
     {{ text_field("title", "size": 32) }}
 	<br><br>	
 	<label>{{ tr('authorities') }}</label><br>
-{{ select("feusers[]", feusers, 'using': ['uid', 'email'],'multiple':'multiple') }}
+{{ select("authorities[]", feusers, 'using': ['uid', 'email'],'multiple':'multiple') }}
 <br><br>
     <label>{{ tr('confSendermailLabel') }}</label><br>
     {{ text_field("sendermail", "size": 32) }}
