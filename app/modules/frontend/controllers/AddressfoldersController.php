@@ -229,7 +229,8 @@ class AddressfoldersController extends ControllerBase
 							}
 							
 							while(($data = $this->getCsvWrapper($handle, 1000, $this->_divider[$this->request->getPost('divider')],$this->_dataWrap[$this->request->getPost('dataFieldWrap')])) !== FALSE){
-									$insStr.='('.$basicInsVals;
+                                                                if(count($data)>0){
+                                                                        $insStr.='('.$basicInsVals;
 									foreach($data as $valueindex=> $value){
 										if(in_array($valueindex, $indexArray)){
 											if(is_numeric($value)){
@@ -249,6 +250,7 @@ class AddressfoldersController extends ControllerBase
 									}							
 
 								$row++;
+                                                                }
 							}
 							
 							if($data==false && $insStr!=''){
@@ -284,12 +286,44 @@ class AddressfoldersController extends ControllerBase
         
 	private function getCsvWrapper($handle, $length, $divider,$wrap){
 		if($wrap){
-			return fgetcsv($handle, $length, $divider,$wrap);
+                    $row = fgetcsv($handle, $length, $divider,$wrap);
+                     $finalRow=array();
+                    if($row){
+                    $finalRow = array_map( 
+                            function($output){
+                                                if(!mb_check_encoding($output, 'UTF-8') OR !($output === mb_convert_encoding(mb_convert_encoding($output, 'UTF-32', 'UTF-8' ), 'UTF-8', 'UTF-32'))) {
+
+                                    $output = mb_convert_encoding($output, 'UTF-8', 'pass'); 
+                                }
+                                return $output;
+                            }
+                            , $row );
+                    }
+                    else{
+                        $finalRow=$row;
+                    }
+                    return $finalRow;
 		}else{
-			return fgetcsv($handle, $length, $divider);
+                    $row = fgetcsv($handle, $length, $divider);
+                    $finalRow=array();
+                    if($row){
+                    $finalRow = array_map( 
+                            function($output){
+                                                if(!mb_check_encoding($output, 'UTF-8') OR !($output === mb_convert_encoding(mb_convert_encoding($output, 'UTF-32', 'UTF-8' ), 'UTF-8', 'UTF-32'))) {
+
+                                    $output = mb_convert_encoding($output, 'UTF-8', 'pass'); 
+                                }
+                                return $output;
+                            }
+                            , $row );
+                    
+                    }else{
+                        $finalRow=$row;
+                    }
+                    return $finalRow;        
 		}
 	}
-	
+        
 	
 	public function updateAction()
 	{
