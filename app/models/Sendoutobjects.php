@@ -46,7 +46,7 @@ class Sendoutobjects extends Model{
 		
 		$modelsManager=$this->getDi()->getShared('modelsManager');		
 				
-		$queryStrng="SELECT nltool\Models\Linkclicks.linkuid, COUNT(nltool\Models\Linkclicks.addressuid) AS rowcount FROM nltool\Models\Linkclicks LEFT JOIN nltool\Models\Linklookup ON nltool\Models\Linkclicks.linkuid = nltool\Models\Linklookup.uid WHERE nltool\Models\Linkclicks.sendoutobjectuid = ?1 GROUP BY nltool\Models\Linklookup.linknumber,nltool\Models\Linkclicks.addressuid";	
+		$queryStrng="SELECT nltool\Models\Linkclicks.linkuid, COUNT(*) AS rowcount FROM nltool\Models\Linkclicks LEFT JOIN nltool\Models\Linklookup ON nltool\Models\Linkclicks.linkuid = nltool\Models\Linklookup.uid WHERE nltool\Models\Linkclicks.sendoutobjectuid = ?1 GROUP BY nltool\Models\Linklookup.linknumber";	
 		
 		$sQuery=$modelsManager->createQuery($queryStrng);								
 		

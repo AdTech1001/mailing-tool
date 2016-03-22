@@ -400,7 +400,8 @@ class TriggersendController extends Triggerauth
 			}
 			unlink($lockFile);
 			$overallEnd=  microtime(1)-$overallStart;
-			echo($overallEnd);
+			echo($overallEnd.' <-> '.$counter);
+                        die();
 		}else{
 			die('<img src="images/cowboy-shaking-head.gif" style="position:absolute;top:40%;left:40%;">');
 		}
