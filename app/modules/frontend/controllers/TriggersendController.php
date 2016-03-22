@@ -301,14 +301,15 @@ class TriggersendController extends Triggerauth
 					//Mailqueue abarbeiten
 					$transport = \Swift_SmtpTransport::newInstance()
 							->setHost($this->config['smtp']['host'])
-							->setPort($this->config['smtp']['port'])
-							->setEncryption($this->config['smtp']['security'])
+							->setPort($this->config['smtp']['port'])					
 							->setUsername($this->config['smtp']['username'])
 							->setPassword($this->config['smtp']['password']);
-
+                                        if($this->config['smtp']['security'] != ""){
+                                            $transport->setEncryption($this->config['smtp']['security']);
+                                        }
 					$mailer = \Swift_Mailer::newInstance($transport);
 					if($counter>0){						
-						sleep(5);
+						sleep(1);
 					}
 				}
 				
@@ -366,7 +367,7 @@ class TriggersendController extends Triggerauth
 					$timeused=$endtime-$checktime;
 					
 					//echo('pid: '.getmypid().' numsent: '.$numSent.' : counter'.$counter.' : '.$address->uid.' <-> '.$timeused.'<br>');
-					file_put_contents('../app/logs/debuggerSend.csv',getmypid().' <--PID '.$timeused.' <-> '.$counter.$mailqueueElement->a->uid.PHP_EOL,FILE_APPEND);
+					//file_put_contents('../app/logs/debuggerSend.csv',getmypid().' <--PID '.$timeused.' <-> '.$counter.$mailqueueElement->a->uid.PHP_EOL,FILE_APPEND);
 				}
 				if($counter>0 && count($sentArray)>0 && $counter%20==0){
 					$queryStrng="UPDATE mailqueue SET tstamp=".time().",sent=1 WHERE uid IN(".implode(',',$sentArray).")";			

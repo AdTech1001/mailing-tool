@@ -87,18 +87,18 @@ class ReportController extends ControllerBase
 			}
 		}
 		$opened=$sendoutobject->countOpenclicks(array('group'=>'addressuid'));
-		$clicked=$sendoutobject->countLinkclicks();
+		//$clicked=$sendoutobject->countLinkclicks();
 		$linkClickCounts=$sendoutobject->countLinkclicks();
 		$clicks=$sendoutobject->getLinkclicks();
 		$clickArray=array();
+                $totalclicks=0;
 		foreach($linkClickCounts as $linkClickCount){
 			$clickArray[$linkClickCount->linkuid]=$linkClickCount->rowcount;
+                        $totalclicks+=$linkClickCount->rowcount;
 		}
 		//arsort($clickArray);
-		$totalclicks=0;
-		foreach($clicked as $clickRow){
-			$totalclicks+=$clickRow->rowcount;
-		}
+		
+		
 		
 		$this->view->setVar('clickcounts',$clickArray);
 		$this->view->setVar('opened',count($opened));

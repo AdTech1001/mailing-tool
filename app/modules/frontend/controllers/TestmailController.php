@@ -46,10 +46,12 @@ class TestmailController extends ControllerBase
 
 			 $transport = \Swift_SmtpTransport::newInstance()
 							->setHost($this->config['smtp']['host'])
-							->setPort($this->config['smtp']['port'])
-							->setEncryption($this->config['smtp']['security'])
+							->setPort($this->config['smtp']['port'])							
 							->setUsername($this->config['smtp']['username'])
 							->setPassword($this->config['smtp']['password']);
+                         if($this->config['smtp']['security'] != ""){
+                             $transport->setEncryption($this->config['smtp']['security']);
+                         }
 			$mailer = \Swift_Mailer::newInstance($transport);
 			$mailer->registerPlugin(new \Swift_Plugins_AntiFloodPlugin(100,30));
 			$message = \Swift_Message::newInstance($mailing->subject)
