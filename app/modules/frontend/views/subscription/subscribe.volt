@@ -15,16 +15,7 @@
 				<input type="text" name="firstname"><br><br>
 				<label>{{ tr('lastname') }}</label><br>
 				<input type="text" name="lastname"><br><br>
-				<label>{{ tr('phone') }}</label><br>
-				<input type="text" name="phone"><br><br>
-				<label>{{ tr('address') }}</label><br>
-				<input type="text" name="address"><br><br>
-				<label>{{ tr('place') }}</label><br>
-				<input type="text" name="city"><br><br>
-				<label>{{ tr('zip') }}</label><br>
-				<input type="text" name="zip"><br><br>
-				<label>{{ tr('company') }}</label><br>
-				<input type="text" name="company"><br><br>
+				
 				<label>{{ tr('email')}}</label><br>
 				<input type="text" name="email"><br><br>
                                 {% if feuserscategories.length > 0  %}
