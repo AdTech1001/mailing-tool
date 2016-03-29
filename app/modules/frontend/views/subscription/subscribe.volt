@@ -1,4 +1,4 @@
-<div class="container">
+
 	
 {{ content() }}
 
@@ -39,4 +39,3 @@
 				</form>
 
 
-</div>
