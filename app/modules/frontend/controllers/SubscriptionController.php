@@ -16,7 +16,7 @@ class SubscriptionController extends ControllerBase implements EventsAwareInterf
 {
 	protected $_eventsManager;
 
-    public function setEventsManager(Phalcon\Events\ManagerInterface $eventsManager)
+    public function setEventsManager($eventsManager)
     {
         $this->_eventsManager = $eventsManager;
     }
@@ -74,7 +74,7 @@ class SubscriptionController extends ControllerBase implements EventsAwareInterf
 		
 	}
 	public function subscribeAction(){
-		
+		$this->view->setMainView('basic');
 		$this->view->setTemplateAfter('subscribe');
 		
 		
@@ -113,6 +113,7 @@ class SubscriptionController extends ControllerBase implements EventsAwareInterf
 				'formal' => 1,
 				'hashtags' => '',
 				'itemsource' => 'tool',
+                                'birthday' => $this->request->hasPost('birthday') ? $this->request->getPost('birthday') : 0,
 				'hasprofile' => 0
 			));
 			if (!$address->save()) {

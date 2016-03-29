@@ -58,6 +58,7 @@ class SubscriptionobjectsController extends ControllerBase
 			$time=time();
 			$subscriptionobject=new Subscriptionobjects();
 			$subscriptionobject->assign(array(
+                                'pid' => 0,
 				'tstamp' => $time,
 				'crdate' => $time,
 				'deleted' => 0,
@@ -68,7 +69,7 @@ class SubscriptionobjectsController extends ControllerBase
 				'addressfolder' => $this->request->hasPost('addressfolder') ? $this->request->getPost('addressfolder') : 0,
 			));
 			if (!$subscriptionobject->save()) {
-                $this->flash->error($subscriptionobject->getMessages());
+                $this->flashSession->error($subscriptionobject->getMessages());
 			}else{
 				if($this->request->hasPost('feuserscategories')){
 					foreach($this->request->getPost('feuserscategories') as $addressfolderUid){

@@ -19,20 +19,21 @@
 				<input type="text" name="phone"><br><br>
 				<label>{{ tr('address') }}</label><br>
 				<input type="text" name="address"><br><br>
-				<label>{{ tr('city') }}</label><br>
+				<label>{{ tr('place') }}</label><br>
 				<input type="text" name="city"><br><br>
 				<label>{{ tr('zip') }}</label><br>
 				<input type="text" name="zip"><br><br>
 				<label>{{ tr('company') }}</label><br>
 				<input type="text" name="company"><br><br>
 				<label>{{ tr('email')}}</label><br>
-				<input type="text" name="email"><br><br>				
+				<input type="text" name="email"><br><br>
+                                {% if feuserscategories.length > 0  %}
 				<label>{{ tr('feuserscategoryIndexTitle')}}</label><br>
 				
 				{% for feuserscategory in feuserscategories %}
 				<label><input type="checkbox" name="feusercategories[]" value="{{feuserscategory.uid}}"> {{feuserscategory.title}}</label><br>
 				{% endfor %}
-								
+                                {% endif %}
 				{{ hidden_field('addressfolder',"value":subscriptionobject.addressfolder) }}
 				<br><input type="submit" class="ok" value="{{ tr('ok') }}">
 				</form>
