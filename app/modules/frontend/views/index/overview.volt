@@ -89,6 +89,7 @@
 			</ul>
 		</div>
 		{% endif %}
+                {% if session.get('auth')['username'] == 'denkfabrik' %}		
 		{% if linkAllowed(session.get('auth'),'subscriptionobjects','index') %}		
 		<div class="ceElement xs">
 			<h1>{{ link_to(language~'/subscriptionobjects/index/', tr('subscriptionobjects'), 'title': tr('subscriptionobjects')) }}
@@ -114,7 +115,7 @@
 		</div>
 		{% endif %}
 		
-		{% if session.get('auth')['superuser'] == 1 %}		
+		
 		<div class="ceElement xs">
 			
 			<h1>{{ link_to('backend', tr('backend'), 'title': tr('backend')) }}

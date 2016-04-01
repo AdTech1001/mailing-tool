@@ -23,11 +23,16 @@
 					{% endfor %}
 				</select>
 				<br><br>
+                                <label>{{tr('subscriptionAddressFields')}}</label><br>
+                                    {% for fieldindex,addressfield in addressfields %}
+                                    <label for="{{addressfield}}"><input id="{{addressfield}}" name="addressfields[{{fieldindex}}]" type="checkbox" value="{{fieldindex}}">{{tr(addressfield)}}</label> <br>
+                                    {% endfor %}
+                                <br><br>
 				<label>{{ tr('catsTitle')}}</label><br>
 				<div id="newAddressfolders">
 					<input type="text" name="newfeuserscategories[]"> <button title="{{ tr('catsTitle') }}" id="addfolderinput"><span class="glyphicon glyphicon-plus-sign"></span></button>
 				</div>
-				</div>
+				
 				<br><input type="submit" class="ok" value="{{ tr('ok') }}">
 				</form>
 			</div>

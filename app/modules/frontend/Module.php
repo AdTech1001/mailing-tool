@@ -90,6 +90,14 @@ $di->set(
                         return 'nltool\Helper\Tag::roundTwo(' . $resolvedArgs . ')';
                     }
                 );
+                $volt->getCompiler()->addFunction(
+                    'in_array',
+                    'in_array'
+                );
+                $volt->getCompiler()->addFunction(
+                    'is_empty',
+                    'empty'
+                );
         $volt->getCompiler()->addFunction('number_format', function($resolvedArgs) {
             return 'number_format(' . $resolvedArgs . ')';
         });

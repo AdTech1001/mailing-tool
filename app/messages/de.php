@@ -137,6 +137,8 @@ $messages = array(
 	"zip" => "PLZ",
 	"region" => "Region",
 	"place" => "Ort",
+        "city" => "Ort",
+        "province" => "Bundesland",
 	"state" => "Bundesland",	
 	"address"=> "Adresse",
 	"phone" => "Telefon",
@@ -284,7 +286,8 @@ $messages = array(
 	"templateTypeContentDynamic" => "dynamisches Inhaltselement Tecparts Shop (hybris Api basiert)",
 	"articelnumber" => "Anzahl der Artikel",
 	"articleURLs" => "Artikel URLs",
-        "mailLink" => "Direktlink zur Mail"
+        "mailLink" => "Direktlink zur Mail",
+        "subscriptionAddressFields" => "einzubindende Adressfelder"
 	
 );
 ?>

@@ -16,7 +16,7 @@ class SubscriptionController extends ControllerBase implements EventsAwareInterf
 {
 	protected $_eventsManager;
 
-    public function setEventsManager($eventsManager)
+    public function setEventsManager(Phalcon\Events\ManagerInterface $eventsManager)
     {
         $this->_eventsManager = $eventsManager;
     }
@@ -117,7 +117,7 @@ class SubscriptionController extends ControllerBase implements EventsAwareInterf
 				'hasprofile' => 0
 			));
 			if (!$address->save()) {
-                $this->flash->error($subscriptionobject->getMessages());
+                            $this->flash->error($subscriptionobject->getMessages());
 			}else{
 				
 				$this->triggerevents->fire("SubscriptionController:subscriptionEventHandler", $address);
@@ -140,16 +140,14 @@ class SubscriptionController extends ControllerBase implements EventsAwareInterf
 			$path=$baseUri.$this->view->language;			
 
 
-			$subscriptionobject=  Subscriptionobjects::find(array(
-				'conditions' => 'deleted=0 AND hidden =0 AND uid = ?1',
-				'bind' => array(1=>$this->dispatcher->getParam('uid'))
-			));
+			$subscriptionobject=  Subscriptionobjects::findFirstByUid($this->dispatcher->getParam('uid'));
 
-			$feuserscategories=$subscriptionobject[0]->getFeuserscategories();
-
+			$feuserscategories=$subscriptionobject->getFeuserscategories();
+                        
 			$this->view->setVar('path',$path);
 			$this->view->setVar('feuserscategories',$feuserscategories);
-			$this->view->setVar('subscriptionobject',$subscriptionobject[0]);
+			$this->view->setVar('subscriptionobject',$subscriptionobject);
+                        $this->view->setVar('addressfields',explode(',',$subscriptionobject->addressfields));
 			
 			
 		}
