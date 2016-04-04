@@ -68,6 +68,7 @@ class ReportController extends ControllerBase
 		
 		if(!$this->request->getQuery('linknumber') && !$this->request->getQuery('sendoutobjectuid')){
 		$this->assets->addCss('css/jquery.dataTables.css');
+                $this->assets->addCss('css/buttons.dataTables.min.css');
 		$sendoutobject=  Sendoutobjects::findFirst(array(
 			'conditions'=>'uid=?1',
 			'bind'=>array(

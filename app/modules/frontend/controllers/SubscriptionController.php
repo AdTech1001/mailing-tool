@@ -16,7 +16,7 @@ class SubscriptionController extends ControllerBase implements EventsAwareInterf
 {
 	protected $_eventsManager;
 
-    public function setEventsManager(Phalcon\Events\ManagerInterface $eventsManager)
+    public function setEventsManager( $eventsManager)
     {
         $this->_eventsManager = $eventsManager;
     }
@@ -84,21 +84,21 @@ class SubscriptionController extends ControllerBase implements EventsAwareInterf
 			$time=time();
 			$salutation='';
 			if($this->request->hasPost('salutation')){
-				$salution=$this->request->getPost('salutation')==0 ? $this->translate('salutation.female') : $this->translate('salutation.male');
-			}
+				$salutation=$this->request->getPost('salutation')==0 ? $this->translate('salutation.female') : $this->translate('salutation.male');
+                        }
 			
 			$address = new Addresses();			
 			$address->assign(array(
 				'pid' => $this->request->hasPost('addressfolder') ? $this->request->getPost('addressfolder') : 0,
 				'crdate' => $time,
 				'tstamp' => $time,
-				'cruser_id' =>$this->session->get('auth')['uid'],
+				'cruser_id' =>0,
 				'deleted' => 0,
 				'hidden' => 0,
-				'usergroup' =>$this->session->get('auth')['usergroup'],
+				'usergroup' =>0,
 				'first_name' => $this->request->hasPost('firstname') ? $this->request->getPost('firstname') : '',
 				'last_name' => $this->request->hasPost('lastname') ? $this->request->getPost('lastname') : '',
-				'salutation' => $salution,
+				'salutation' => $salutation,
 				'title' => $this->request->hasPost('title') ? $this->request->getPost('title') : '',
 				'email' => $this->request->hasPost('email') ? $this->request->getPost('email') : '',
 				'phone' => $this->request->hasPost('phone') ? $this->request->getPost('phone') : '',
@@ -143,7 +143,7 @@ class SubscriptionController extends ControllerBase implements EventsAwareInterf
 			$subscriptionobject=  Subscriptionobjects::findFirstByUid($this->dispatcher->getParam('uid'));
 
 			$feuserscategories=$subscriptionobject->getFeuserscategories();
-                        
+                        $this->view->setVar('css',$subscriptionobject->css);
 			$this->view->setVar('path',$path);
 			$this->view->setVar('feuserscategories',$feuserscategories);
 			$this->view->setVar('subscriptionobject',$subscriptionobject);

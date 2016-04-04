@@ -17,9 +17,9 @@
 		{{ stylesheet_link('css/bootstrap.css') }}
 		
         {{ stylesheet_link('css/main.css') }}     
-		
-		
-	
+        <style>
+        {{css}}		
+	</style>
     </head>
     <body style="background-color:rgba(255,255,255,0)">
         <!--[if lt IE 7]>
