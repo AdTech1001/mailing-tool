@@ -32,8 +32,15 @@
 				<div id="newAddressfolders">
 					<input type="text" name="newfeuserscategories[]"> <button title="{{ tr('catsTitle') }}" id="addfolderinput"><span class="glyphicon glyphicon-plus-sign"></span></button>
 				</div>
-				
-				<br><input type="submit" class="ok" value="{{ tr('ok') }}">
+				<label>CSS</label><br>
+                                <textarea name="css"></textarea><br><br>
+                                <label>Placeholder?</label><br>
+                                <select name="placeholder">
+                                    <option value="0">{{tr('no')}}</option>
+                                    <option value="0">{{tr('yes')}}</option>
+                                </select>
+                                
+				<input type="submit" class="ok" value="{{ tr('ok') }}">
 				</form>
 			</div>
 		</div>
