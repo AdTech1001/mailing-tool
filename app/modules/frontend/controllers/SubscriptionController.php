@@ -141,9 +141,11 @@ class SubscriptionController extends ControllerBase implements EventsAwareInterf
 
 
 			$subscriptionobject=  Subscriptionobjects::findFirstByUid($this->dispatcher->getParam('uid'));
-
+                        
 			$feuserscategories=$subscriptionobject->getFeuserscategories();
-                        $this->view->setVar('css',$subscriptionobject->css);
+                        
+                        $css= $subscriptionobject->placeholder == 1 ? 'label{display:none;}'.PHP_EOL : '';
+                        $this->view->setVar('css',$css.$subscriptionobject->css);
 			$this->view->setVar('path',$path);
 			$this->view->setVar('feuserscategories',$feuserscategories);
 			$this->view->setVar('subscriptionobject',$subscriptionobject);

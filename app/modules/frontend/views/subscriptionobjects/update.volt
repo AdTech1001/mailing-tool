@@ -32,7 +32,13 @@
 				<div id="newAddressfolders">
 					<input type="text" name="newfeuserscategories[]"> <button title="{{ tr('catsTitle') }}" id="addfolderinput"><span class="glyphicon glyphicon-plus-sign"></span></button>
 				</div>
-				</div>
+                                <br><br>
+				<label>CSS</label><br>
+                                {{ text_area("css", "value":subscriptionobject.css, "cols": "6", "rows": 10) }}
+                                <br><br>
+                                <label>Placeholder?</label><br>
+                                {{ select("placeholder", [ '0' : tr('no'), '1' : tr('yes')], 'value':subscriptionobject.placeholder) }}
+                                <br><br>				
 				{{ hidden_field('uid',"value":subscriptionobject.uid) }}
 				<br><input type="submit" class="ok" value="{{ tr('ok') }}">
 				</form>

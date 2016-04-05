@@ -94,8 +94,8 @@ class SubscriptionobjectsController extends ControllerBase
 				'addressfolder' => $this->request->hasPost('addressfolder') ? $this->request->getPost('addressfolder') : 0,
                                 'addressfields' => $addressfields,
                                 'css' => $this->request->hasPost('css') ? $this->request->getPost('css') : '',
-                                'placeholder' => $this->request->hasPost('placeholder') ? $this->request->getPost('placeholder') : ''
-			));//TODO formularfelder einfügen, testen, bei update ergänzen
+                                'placeholder' => $this->request->hasPost('placeholder') ? $this->request->getPost('placeholder') : 0
+			));
 			if (!$subscriptionobject->save()) {
                             $this->flashSession->error($subscriptionobject->getMessages());
 			}else{
@@ -201,7 +201,9 @@ class SubscriptionobjectsController extends ControllerBase
 				'cruser_id' => $this->session->get('auth')['uid'],
 				'title' => $this->request->hasPost('title') ? $this->request->getPost('title') : '',
 				'addressfolder' => $this->request->hasPost('addressfolder') ? $this->request->getPost('addressfolder') : 0,
-                                'addressfields' => $addressfields
+                                'addressfields' => $addressfields,
+                            'css' => $this->request->hasPost('css') ? $this->request->getPost('css') : '',
+                                'placeholder' => $this->request->hasPost('placeholder') ? $this->request->getPost('placeholder') : 0
 			));
 			if (!$subscriptionobj->update()) {
                 $this->flash->error($subscriptionobj->getMessages());

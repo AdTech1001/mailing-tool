@@ -5,67 +5,68 @@
 
 <form action="{{path}}/subscription/subscribe/" method="POST" >				
     {% if in_array(2,addressfields) %}
-    <label>{{ tr('salutation') }}</label><br>
+    <label>{{ tr('salutation') }}<br></label>
     <select name="salutation">
             <option value="0">{{tr('ms')}}</option>
             <option value="1">{{tr('mr')}}</option>
     </select><br><br>
     {% endif %}
     {% if in_array(3,addressfields) %}
-    <label>{{ tr('title') }}</label><br>
-    <input type="text" name="title"><br><br>
+    
+    <label>{{ tr('title') }}<br></label>
+    <input type="text" name="title" {{ subscriptionobject.placeholder ? 'placeholder="'~tr('title')~'"' : '' }}><br><br>
     {% endif %}
     {% if in_array(0,addressfields) %}
-    <label>{{ tr('firstname') }}</label><br>
-    <input type="text" name="firstname"><br><br>
+    <label>{{ tr('firstname') }}<br></label>
+    <input type="text" name="firstname"  {{ subscriptionobject.placeholder ? 'placeholder="'~tr('firstname')~'"' : '' }}><br><br>
     {% endif %}
     {% if in_array(1,addressfields) %}
-    <label>{{ tr('lastname') }}</label><br>
-    <input type="text" name="lastname"><br><br>
+    <label>{{ tr('lastname') }}<br></label>
+    <input type="text" name="lastname"  {{ subscriptionobject.placeholder ? 'placeholder="'~tr('lastname')~'"' : '' }}><br><br>
     {% endif %}
     {% if in_array(5,addressfields) %}
-    <label>{{ tr('phone') }}</label><br>
-    <input type="text" name="phone"><br><br>
+    <label>{{ tr('phone') }}<br></label>
+    <input type="text" name="phone"  {{ subscriptionobject.placeholder ? 'placeholder="'~tr('phone')~'"' : '' }}><br><br>
     {% endif %}
     {% if in_array(6,addressfields) %}
-    <label>{{ tr('address') }}</label><br>
-    <input type="text" name="address"><br><br>
+    <label>{{ tr('address') }}<br></label>
+    <input type="text" name="address"  {{ subscriptionobject.placeholder ? 'placeholder="'~tr('address')~'"' : '' }}><br><br>
     {% endif %}
     {% if in_array(7,addressfields) %}
-    <label>{{ tr('place') }}</label><br>
-    <input type="text" name="city"><br><br>
+    <label>{{ tr('place') }}<br></label>
+    <input type="text" name="city"  {{ subscriptionobject.placeholder ? 'placeholder="'~tr('city')~'"' : '' }}><br><br>
     {% endif %}
     {% if in_array(9,addressfields) %}
-    <label>{{ tr('zip') }}</label><br>
-    <input type="text" name="zip"><br><br>
+    <label>{{ tr('zip') }}<br></label>
+    <input type="text" name="zip"  {{ subscriptionobject.placeholder ? 'placeholder="'~tr('zip')~'"' : '' }}><br><br>
     {% endif %}
     {% if in_array(8,addressfields) %}
-    <label>{{ tr('company') }}</label><br>    
-    <input type="text" name="company"><br><br>
+    <label>{{ tr('company') }}<br></label>    
+    <input type="text" name="company"  {{ subscriptionobject.placeholder ? 'placeholder="'~tr('company')~'"' : '' }}><br><br>
     {% endif %}
     {% if in_array(4,addressfields) %}
-    <label>{{ tr('email')}}</label><br>
-    <input type="text" name="email"><br><br>
+    <label>{{ tr('email')}}<br></label>
+    <input type="text" name="email"  {{ subscriptionobject.placeholder ? 'placeholder="'~tr('email')~'"' : '' }}><br><br>
     {% endif %}
     {% if in_array(10,addressfields) %}
-    <label>{{ tr('region')}}</label><br>
-    <input type="text" name="region"><br><br>
+    <label>{{ tr('region')}}<br></label>
+    <input type="text" name="region"  {{ subscriptionobject.placeholder ? 'placeholder="'~tr('region')~'"' : '' }}><br><br>
     {% endif %}
     {% if in_array(11,addressfields) %}
-    <label>{{ tr('province')}}</label><br>
-    <input type="text" name="province"><br><br>
+    <label>{{ tr('province')}}<br></label>
+    <input type="text" name="province"  {{ subscriptionobject.placeholder ? 'placeholder="'~tr('province')~'"' : '' }}><br><br>
     {% endif %}
     {% if in_array(12,addressfields) %}
-    <label>{{ tr('language')}}</label><br>
-    <input type="text" name="language"><br><br>
+    <label>{{ tr('language')}}<br></label>
+    <input type="text" name="language"  {{ subscriptionobject.placeholder ? 'placeholder="'~tr('language')~'"' : '' }}><br><br>
     {% endif %}
     {% if in_array(13,addressfields) %}
-    <label>{{ tr('gender')}}</label><br>
-    <input type="text" name="salutation"><br><br>
+    <label>{{ tr('gender')}}<br></label>
+    <input type="text" name="salutation"  {{ subscriptionobject.placeholder ? 'placeholder="'~tr('salutation')~'"' : '' }}><br><br>
     {% endif %}
     {% if in_array(14,addressfields) %}
-    <label>{{ tr('birthday')}}</label><br>
-    <input type="text" name="birthday"><br><br>
+    <label>{{ tr('birthday')}}<br></label>
+    <input type="text" name="birthday"  {{ subscriptionobject.placeholder ? 'placeholder="'~tr('birthday')~'"' : '' }}><br><br>
     {% endif %}
     {% if feuserscategories.count() > 0 %}
     <label>{{ tr('feuserscategoryIndexTitle')}}</label><br>
