@@ -362,21 +362,7 @@ class MailobjectsController extends ControllerBase
             
 		
 	}
-        
-        private function dyTrackingtool(){
-            /* TODO ans Trackingtool anpassen */
-            $chlead = curl_init();
-		curl_setopt($chlead, CURLOPT_URL, 'https://www.tecparts.com/api/rest/article/getArticle?code='.$this->request->getPost('code'));
-		curl_setopt($chlead, CURLOPT_PUT, true);		
-		curl_setopt($chlead, CURLOPT_RETURNTRANSFER, true);		
-		curl_setopt($chlead, CURLOPT_SSL_VERIFYPEER, 0);
-		$chleadresult = curl_exec($chlead);		
-		curl_close($chlead);
-		echo('{"article":'.$chleadresult.',"code":"'.$this->request->getPost('code').'"}');
-		$this->view->disable(); 
-		die();
-        }
-        
+                       
         private function dyTecparts(){
             $chlead = curl_init();
 		curl_setopt($chlead, CURLOPT_URL, 'https://www.tecparts.com/api/rest/article/getArticle?code='.$this->request->getPost('code'));
@@ -390,6 +376,20 @@ class MailobjectsController extends ControllerBase
 		die();
         }
 	
+         private function dyTrackingtool(){
+            /* TODO ans Trackingtool anpassen */
+            $chlead = curl_init();
+		curl_setopt($chlead, CURLOPT_URL, 'https://www.tecparts.com/api/rest/article/getArticle?code='.$this->request->getPost('code'));
+		curl_setopt($chlead, CURLOPT_PUT, true);		
+		curl_setopt($chlead, CURLOPT_RETURNTRANSFER, true);		
+		curl_setopt($chlead, CURLOPT_SSL_VERIFYPEER, 0);
+		$chleadresult = curl_exec($chlead);		
+		curl_close($chlead);
+		echo('{"article":'.$chleadresult.',"code":"'.$this->request->getPost('code').'"}');
+		$this->view->disable(); 
+		die();
+        }
+        
 	function writeContentElements($bodyRaw,$contentObjects){
 		$contentPerPosition=array();
 		foreach($contentObjects as $contentObject){
