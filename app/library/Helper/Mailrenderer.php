@@ -45,23 +45,7 @@ class Mailrenderer extends Component{
 		
 	}
 	
-	public function writeDynamicContent($mailing){
 		
-	}
-	
-	private function getDynamicContent(){
-		$chlead = curl_init();
-		curl_setopt($chlead, CURLOPT_URL, 'https://www.tecparts.com/api/rest/article/getArticle?code=630658&lastUrl=');
-		curl_setopt($chlead, CURLOPT_PUT, true);		
-		curl_setopt($chlead, CURLOPT_RETURNTRANSFER, true);		
-		curl_setopt($chlead, CURLOPT_SSL_VERIFYPEER, 0);
-		$chleadresult = curl_exec($chlead);
-		$chleadapierr = curl_errno($chlead);
-		$chleaderrmsg = curl_error($chlead);		
-		curl_close($chlead);
-		
-	}
-	
 	public function renderFinal($body,$addressuid,$mailinguid, $linkKeyMap){
 				
 		$this->currentaddressuid=$addressuid;
