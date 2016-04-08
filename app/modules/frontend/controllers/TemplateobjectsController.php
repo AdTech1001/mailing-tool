@@ -74,6 +74,8 @@ class TemplateobjectsController extends ControllerBase
 				'sourcecode' => ' ',
 				'templatefilepath' => ' ',
 				'templatetype' => $_POST['templatetype'],
+                                'api' => $this->request->hasPost('api') ? $this->request->getPost('api') : 0,
+                                'dytype' => $this->request->hasPost('dytype') ? $this->request->getPost('dytype') :0
 			));
 			
 			$usergroupObj=Usergroups::findFirstByUid($this->session->get('auth')['usergroup']);

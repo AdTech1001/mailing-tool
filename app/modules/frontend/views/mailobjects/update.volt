@@ -94,7 +94,8 @@
 					{{ image(templatedDyElement.templatefilepath) }}
 					
 					{{ templatedDyElement.sourcecode }}
-					
+                                        <input type="hidden" name="api" value="{{templatedDyElement.api}}">
+                                        <input type="hidden" name="dytype" value="{{templatedDyElement.dytype}}">
 				</div>
 			</div>
 			{% endif %}
